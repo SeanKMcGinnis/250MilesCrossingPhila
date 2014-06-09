@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Safari iOS - apps only -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- Chrome for Android - NEW! -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="../images/brand.png">
+    <link rel="shortcut icon" href="../images/favicon.ico">
+
+    <title>250 Miles Crossing Philadelphia</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="lib/css/style.css" rel="stylesheet">
+
+    <!-- Bootstrap-map-js -->
+    <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.9/js/esri/css/esri.css">   
+    <link rel="stylesheet" type="text/css" href="lib/css/bootstrapmap.css">   
+
+    <style type="text/css">
+
+      #mapDiv {
+        min-height: 100%; 
+        max-height: 100%; 
+      }
+
+    </style>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../bootstrap_v3/docs-assets/js/html5shiv.js"></script>
+      <script src="../bootstrap_v3/docs-assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="http://www.250miles.net/">250 Miles Crossing Philadelphia</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap-map-js -->
+    <div id="mapDiv"></div>
+    <script type="text/javascript">
+        var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
+        var dojoConfig = {
+            //The location.pathname.replace() logic below may look confusing but all its doing is
+            // enabling us to load the api from a CDN and load local modules from the correct location.
+            packages: [{
+                name: "application",
+                location: package_path + '/lib/js'
+            }, {
+                name: "bootstrap",
+                location: "//rawgit.com/xsokev/Dojo-Bootstrap/master"
+            }]
+        };
+    </script>
+    <script src="http://js.arcgis.com/3.9compact"></script>
+    <script>
+        require(["esri/map", "esri/dijit/Scalebar",
+        		"esri/symbols/SimpleLineSymbol",
+        		"esri/renderers/SimpleRenderer",
+        		"esri/Color",
+				"esri/layers/FeatureLayer", "esri/layers/ArcGISTiledMapServiceLayer",
+        		"application/bootstrapmap", "dojo/query",
+				"dojo/touch", "bootstrap/Collapse", "bootstrap/Dropdown", "dojo/domReady!"], 
+          function( Map, Scalebar,
+          			SimpleLineSymbol,
+          			SimpleRenderer,
+          			Color,
+          			FeatureLayer, ArcGISTiledMapServiceLayer,
+					BootstrapMap, query, touch) {
+            // <!-- Get a reference to the ArcGIS Map class -->
+            var map = BootstrapMap.create("mapDiv",{
+              center:[-75.137,40.005],
+              zoom:11
+            });
+            var basemap = new ArcGISTiledMapServiceLayer("http://gis.phila.gov/arcgis/rest/services/BaseMaps/GrayBase_WM/MapServer");
+            map.addLayer(basemap);
+            var sym = new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([80,80,80]), 2)
+            var grid = new FeatureLayer("http://services2.arcgis.com/XVOqAjTOJ5P6ngMu/arcgis/rest/services/Philadelphia_Grid/FeatureServer/0",{
+            	
+            })
+            var rend = new SimpleRenderer(sym);
+            grid.renderer = rend;
+            map.addLayer(grid);
+
+            var scalebar = new Scalebar({
+              map: map,
+              scalebarUnit: "dual"
+            });
+        });
+    </script>
+  </body>
+</html>

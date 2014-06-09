@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<metadata>
+	<idinfo>
+		<citation>
+			<citeinfo>
+				<origin>City of Philadelphia</origin>
+				<pubdate>Unknown</pubdate>
+				<pubtime>Unknown</pubtime>
+				<title>STREETS: City Plan Boundaries</title>
+				<edition>1.0</edition>
+				<geoform>vector digital data</geoform>
+				<serinfo>
+					<sername></sername>
+					<issue></issue>
+				</serinfo>
+				<pubinfo>
+					<pubplace>Philadelphia, PA</pubplace>
+					<publish>City of Philadelphia</publish>
+				</pubinfo>
+				<othercit></othercit>
+				<onlink>http://www.phila.gov</onlink>
+				<lworkcit></lworkcit>
+			</citeinfo>
+		</citation>
+		<descript>
+			<abstract>This coverage shows the boundaries of the City Plans</abstract>
+			<purpose></purpose>
+			<supplinf>OPTIONAL</supplinf>
+		</descript>
+		<timeperd>
+			<timeinfo>
+				<sngdate>
+					<caldate>Unknown</caldate>
+					<time>
+Unknown
+</time>
+				</sngdate>
+			</timeinfo>
+			<current>publication date</current>
+		</timeperd>
+		<status>
+			<progress>Complete</progress>
+			<update>Unknown</update>
+		</status>
+		<spdom>
+			<bounding>
+				<westbc>-75.28</westbc>
+				<eastbc>-74.96</eastbc>
+				<northbc>40.14</northbc>
+				<southbc>39.87</southbc>
+			</bounding>
+			<dsgpoly>
+				<dsgpolyo>
+					<gring></gring>
+				</dsgpolyo>
+				<dsgpolyx>
+					<gring></gring>
+				</dsgpolyx>
+			</dsgpoly>
+		</spdom>
+		<keywords>
+			<theme>
+				<themekt>City of Philadelphia</themekt>
+				<themekey></themekey>
+			</theme>
+			<place>
+				<placekt>None</placekt>
+				<placekey>Philadelphia</placekey>
+				<placekey>City of Philadelphia</placekey>
+			</place>
+			<stratum>
+				<stratkt></stratkt>
+				<stratkey></stratkey>
+			</stratum>
+			<temporal>
+				<tempkt>None</tempkt>
+				<tempkey></tempkey>
+			</temporal>
+		</keywords>
+		<accconst>City of Philadelphia employees only - see City of Philadelphia Spatial Data Distribution Policy</accconst>
+		<useconst>None</useconst>
+		<ptcontac>
+			<cntinfo>
+				<cntperp>
+					<cntper>Marion Storey</cntper>
+					<cntorg>Streets Department</cntorg>
+				</cntperp>
+				<cntpos>Information Technology Applications Program Manager</cntpos>
+				<cntaddr>
+					<addrtype>mailing and physical</addrtype>
+					<address></address>
+					<city>
+of Philadelphia
+Streets Department
+1401 JFK Blvd. Room 900
+</city>
+					<city>Philadelphia</city>
+					<state>PA</state>
+					<postal>19102</postal>
+					<country>US</country>
+				</cntaddr>
+				<cntvoice>(215) 686-5031</cntvoice>
+				<cnttdd></cnttdd>
+				<cntfax></cntfax>
+				<cntemail>marion.storey@phila.gov</cntemail>
+				<hours>8:30 AM - 5:00 PM Monday - Friday</hours>
+				<cntinst></cntinst>
+			</cntinfo>
+		</ptcontac>
+		<browse>
+			<browsen></browsen>
+			<browsed></browsed>
+			<browset></browset>
+		</browse>
+		<datacred></datacred>
+		<secinfo>
+			<secsys>No security considerations</secsys>
+			<secclass>Unclassified</secclass>
+			<sechandl>N/A</sechandl>
+		</secinfo>
+		<native></native>
+		<crossref></crossref>
+	</idinfo>
+	<dataqual>
+		<attracc>
+			<attraccr>MANDATORY</attraccr>
+			<qattracc>
+				<attraccv></attraccv>
+				<attracce></attracce>
+			</qattracc>
+		</attracc>
+		<logic>None performed</logic>
+		<complete>Entire City</complete>
+		<posacc>
+			<horizpa>
+				<horizpar>MANDATORY</horizpar>
+				<qhorizpa>
+					<horizpav></horizpav>
+					<horizpae></horizpae>
+				</qhorizpa>
+			</horizpa>
+			<vertacc>
+				<vertaccr>OPTIONAL</vertaccr>
+				<qvertpa>
+					<vertaccv></vertaccv>
+					<vertacce></vertacce>
+				</qvertpa>
+			</vertacc>
+		</posacc>
+		<lineage>
+			<srcinfo>
+				<srccite></srccite>
+				<srcscale></srcscale>
+				<typesrc></typesrc>
+				<srctime>
+					<timeinfo>
+						<sngdate>
+							<caldate></caldate>
+							<time></time>
+						</sngdate>
+					</timeinfo>
+					<srccurr></srccurr>
+				</srctime>
+				<srccitea></srccitea>
+				<srccontr></srccontr>
+			</srcinfo>
+			<procstep>
+				<procdesc>MANDATORY</procdesc>
+				<srcused></srcused>
+				<procdate>Unknown</procdate>
+				<proctime></proctime>
+				<srcprod></srcprod>
+				<proccont>
+					<cntinfo>
+						<cntperp>
+							<cntper></cntper>
+							<cntorg></cntorg>
+						</cntperp>
+						<cntpos></cntpos>
+						<cntaddr>
+							<addrtype></addrtype>
+							<address></address>
+							<city></city>
+							<state></state>
+							<postal></postal>
+							<country></country>
+						</cntaddr>
+						<cntvoice></cntvoice>
+						<cnttdd></cnttdd>
+						<cntfax></cntfax>
+						<cntemail></cntemail>
+						<hours></hours>
+						<cntinst></cntinst>
+					</cntinfo>
+				</proccont>
+			</procstep>
+			<procstep><procdesc Sync="TRUE">Metadata imported.</procdesc><srcused Sync="TRUE">C:\work\phila\metadata1\CityBoundary.xml</srcused><date Sync="TRUE">20031005</date><time Sync="TRUE">12183900</time></procstep></lineage>
+		<cloud>
+0
+</cloud>
+	</dataqual>
+	<spdoinfo>
+		<indspref></indspref>
+		<direct>Vector</direct>
+		<ptvctinf>
+			<sdtsterm>
+				<sdtstype>Complete chain</sdtstype>
+				<ptvctcnt>
+286
+</ptvctcnt>
+			</sdtsterm>
+		</ptvctinf>
+	</spdoinfo>
+	<spref>
+		<horizsys>
+			<planar>
+				<gridsys>
+					<gridsysn>State Plane Coordinate System 1983</gridsysn>
+					<spcs>
+						<spcszone>3702</spcszone>
+						<lambertc>
+							<stdparll>39.93333333</stdparll>
+							<stdparll>40.96666667</stdparll>
+							<longcm>-77.75</longcm>
+							<latprjo>39.33333333</latprjo>
+							<feast>600000</feast>
+							<fnorth>
+0
+</fnorth>
+						</lambertc>
+					</spcs>
+				</gridsys>
+				<planci>
+					<plance>Coordinate Pair</plance>
+					<coordrep>
+						<absres>0.01</absres>
+						<ordres>0.01</ordres>
+					</coordrep>
+					<plandu></plandu>
+				</planci>
+			</planar>
+			<geodetic>
+				<horizdn>North American Datum of 1983</horizdn>
+				<ellips>Geodetic Reference System 80</ellips>
+				<semiaxis>6378206</semiaxis>
+				<denflat>
+294.9786982
+</denflat>
+			</geodetic>
+		</horizsys>
+		<vertdef>
+			<altsys>
+				<altdatum></altdatum>
+				<altres></altres>
+				<altunits></altunits>
+				<altenc></altenc>
+			</altsys>
+			<depthsys>
+				<depthdn></depthdn>
+				<depthres></depthres>
+				<depthdu></depthdu>
+				<depthem></depthem>
+			</depthsys>
+		</vertdef>
+	</spref>
+	<eainfo>
+		<detailed>
+			<enttyp>
+				<enttypl>MANDATORY [name of the attribute table]</enttypl>
+				<enttypd></enttypd>
+				<enttypds></enttypds>
+			</enttyp>
+			<attr>
+				<attrlabl>AREA</attrlabl>
+				<attrdef>Calculated Area of entity polygon</attrdef>
+				<attrdefs></attrdefs>
+				<attrdomv>
+					<rdom>
+						<rdommin></rdommin>
+						<rdommax></rdommax>
+						<attrunit>feet</attrunit>
+						<attrmres></attrmres>
+					</rdom>
+				</attrdomv>
+				<begdatea></begdatea>
+				<enddatea></enddatea>
+				<attrvai>
+					<attrva></attrva>
+					<attrvae></attrvae>
+				</attrvai>
+				<attrmfrq></attrmfrq>
+			</attr>
+			<attr>
+				<attrlabl>CITYPLANBND_</attrlabl>
+				<attrdef>ArcInfo assigned</attrdef>
+				<attrdefs></attrdefs>
+				<attrdomv>
+					<edom>
+						<edomv></edomv>
+						<edomvd></edomvd>
+						<edomvds></edomvds>
+					</edom>
+				</attrdomv>
+				<begdatea></begdatea>
+				<enddatea></enddatea>
+				<attrvai>
+					<attrva></attrva>
+					<attrvae></attrvae>
+				</attrvai>
+				<attrmfrq></attrmfrq>
+			</attr>
+			<attr>
+				<attrlabl>CITYPLANBND_ID</attrlabl>
+				<attrdef>ArcInfo ID</attrdef>
+				<attrdefs></attrdefs>
+				<attrdomv>
+					<edom>
+						<edomv></edomv>
+						<edomvd></edomvd>
+						<edomvds></edomvds>
+					</edom>
+				</attrdomv>
+				<begdatea></begdatea>
+				<enddatea></enddatea>
+				<attrvai>
+					<attrva></attrva>
+					<attrvae></attrvae>
+				</attrvai>
+				<attrmfrq></attrmfrq>
+			</attr>
+			<attr>
+				<attrlabl>Geometry</attrlabl>
+				<attrdef></attrdef>
+				<attrdefs></attrdefs>
+				<attrdomv>
+					<edom>
+						<edomv></edomv>
+						<edomvd></edomvd>
+						<edomvds></edomvds>
+					</edom>
+				</attrdomv>
+				<begdatea></begdatea>
+				<enddatea></enddatea>
+				<attrvai>
+					<attrva></attrva>
+					<attrvae></attrvae>
+				</attrvai>
+				<attrmfrq></attrmfrq>
+			</attr>
+			<attr>
+				<attrlabl>PERIMETER</attrlabl>
+				<attrdef>Calculated perimiter length</attrdef>
+				<attrdefs></attrdefs>
+				<attrdomv>
+					<rdom>
+						<rdommin></rdommin>
+						<rdommax></rdommax>
+						<attrunit>feet</attrunit>
+						<attrmres></attrmres>
+					</rdom>
+				</attrdomv>
+				<begdatea></begdatea>
+				<enddatea></enddatea>
+				<attrvai>
+					<attrva></attrva>
+					<attrvae></attrvae>
+				</attrvai>
+				<attrmfrq></attrmfrq>
+			</attr>
+			<attr>
+				<attrlabl>PLAN_NUMBER</attrlabl>
+				<attrdef>Plan Number</attrdef>
+				<attrdefs></attrdefs>
+				<attrdomv>
+					<udom>Values represent plan numbers and are used to join data tables to the coverage.</udom>
+				</attrdomv>
+				<begdatea></begdatea>
+				<enddatea></enddatea>
+				<attrvai>
+					<attrva></attrva>
+					<attrvae></attrvae>
+				</attrvai>
+				<attrmfrq></attrmfrq>
+			</attr>
+		</detailed>
+		<overview>
+			<eaover>The primary attribute is the Plan Number which is used to join data tables to the coverage.</eaover>
+			<eadetcit>
+OPTIONAL
+</eadetcit>
+		</overview>
+	</eainfo>
+	<distinfo>
+		<distrib>
+			<cntinfo>
+				<cntorgp>
+					<cntorg>City of Philadelphia - Non-Commercial Data Distribution Committee</cntorg>
+					<cntper></cntper>
+				</cntorgp>
+				<cntpos></cntpos>
+				<cntaddr>
+					<addrtype></addrtype>
+					<address></address>
+					<city></city>
+					<state></state>
+					<postal></postal>
+					<country></country>
+				</cntaddr>
+				<cntvoice></cntvoice>
+				<cnttdd></cnttdd>
+				<cntfax></cntfax>
+				<cntemail></cntemail>
+				<hours></hours>
+				<cntinst></cntinst>
+			</cntinfo>
+		</distrib>
+		<resdesc></resdesc>
+		<distliab>This dataset contains errors that are an artifact of the interpretation, source material and conversion process. The data and documentation are provided "as is." The City of Philadelphia (CITY) makes no warranty or representation, either express or implied, with respect to the data or accompanying documentation, including its quality, performance or accuracy. The CITY will not be liable for any direct, indirect, special, incidental, or consequential damages arising out of the use or inability to use the data or any accompanying documentation. The CITY is working to correct errors found in its datasets. Users discovering errors or making corrections to the data are requested to report such errors to the CITY at 215-686-5031 or e-mail to marion.storey@phila.gov</distliab>
+		<stdorder>
+			<digform>
+				<digtinfo>
+					<formname>ESRI Shapefile/ArcInfo Export File</formname>
+					<formvern>2D</formvern>
+					<formspec></formspec>
+					<formcont></formcont>
+					<filedec>PKzipped using WinZip by Nico Mak computing.</filedec>
+					<transize>0.9</transize>
+				</digtinfo>
+				<digtopt>
+					<onlinopt>
+						<computer>
+							<networka>
+								<networkr>
+http://policehq.phila.gov/
+</networkr>
+							</networka>
+						</computer>
+						<accinstr>Will e-mail or FTP to a City agency upon request.</accinstr>
+						<oncomp>
+Windows OS
+</oncomp>
+					</onlinopt>
+				</digtopt>
+			</digform>
+			<fees>none</fees>
+			<ordering>Please contact the Paul Reisner at 215-686-5071 for access to this data set.</ordering>
+			<turnarnd></turnarnd>
+		</stdorder>
+		<custom></custom>
+		<techpreq></techpreq>
+		<availabl>
+			<timeinfo>
+				<sngdate>
+					<caldate>4/13/2000</caldate>
+					<time></time>
+				</sngdate>
+			</timeinfo>
+		</availabl>
+	</distinfo>
+	<distinfo>
+		<distrib>
+			<cntinfo>
+				<cntorgp>
+					<cntorg>City of Philadelphia - GIS Working Group</cntorg>
+					<cntper></cntper>
+				</cntorgp>
+				<cntpos></cntpos>
+				<cntaddr>
+					<addrtype></addrtype>
+					<address></address>
+					<city></city>
+					<state></state>
+					<postal></postal>
+					<country></country>
+				</cntaddr>
+				<cntvoice></cntvoice>
+				<cnttdd></cnttdd>
+				<cntfax></cntfax>
+				<cntemail></cntemail>
+				<hours></hours>
+				<cntinst></cntinst>
+			</cntinfo>
+		</distrib>
+		<resdesc></resdesc>
+		<distliab>This dataset contains errors that are an artifact of the interpretation, source material and conversion process. The data and documentation are provided "as is." The City of Philadelphia (CITY) makes no warranty or representation, either express or implied, with respect to the data or accompanying documentation, including its quality, performance or accuracy. The CITY will not be liable for any direct, indirect, special, incidental, or consequential damages arising out of the use or inability to use the data or any accompanying documentation. The CITY is working to correct errors found in its datasets. Users discovering errors or making corrections to the data are requested to report such errors to the CITY at 215-686-XXXX</distliab>
+		<stdorder>
+			<digform>
+				<digtinfo>
+					<formname></formname>
+					<formvern></formvern>
+					<formspec></formspec>
+					<formcont></formcont>
+					<filedec></filedec>
+					<transize></transize>
+				</digtinfo>
+				<digtopt>
+					<onlinopt>
+						<computer>
+							<networka>
+								<networkr></networkr>
+							</networka>
+						</computer>
+						<accinstr></accinstr>
+						<oncomp></oncomp>
+					</onlinopt>
+				</digtopt>
+			</digform>
+			<fees>N/A</fees>
+			<ordering>N/A</ordering>
+			<turnarnd>N/A</turnarnd>
+		</stdorder>
+		<stdorder>
+			<nondig>N/A</nondig>
+			<fees>N/A</fees>
+			<ordering>N/A</ordering>
+			<turnarnd>N/A</turnarnd>
+		</stdorder>
+		<custom>THE CITY OF PHILADELPHIA DOES NOT CURRENTLY HAVE A COMMERCIAL DISTRIBUTION POLICY.</custom>
+		<techpreq></techpreq>
+		<availabl>
+			<timeinfo>
+				<sngdate>
+					<caldate>4/13/2000</caldate>
+					<time>
+Unknown
+</time>
+				</sngdate>
+			</timeinfo>
+		</availabl>
+	</distinfo>
+	<metainfo>
+		<metd>4/27/2000</metd>
+		<metrd></metrd>
+		<metfrd>4/27/2001</metfrd>
+		<metc>
+			<cntinfo>
+				<cntorgp>
+					<cntorg>Water Department - Geographic Information Systems Unit</cntorg>
+					<cntper>Carmen Carnicero</cntper>
+				</cntorgp>
+				<cntpos>GIS Coordinator</cntpos>
+				<cntaddr>
+					<addrtype>mailing and physical</addrtype>
+					<address></address>
+					<city>
+of Philadelphia Water Department
+Information Systems &amp; Technology Division
+1101 Market St., 4th Floor
+</city>
+					<city>Philadelphia</city>
+					<state>PA</state>
+					<postal>19107</postal>
+					<country>US</country>
+				</cntaddr>
+				<cntvoice>(215) 685-6333</cntvoice>
+				<cnttdd></cnttdd>
+				<cntfax>(215) 685-6207</cntfax>
+				<cntemail>carmen.carnicero@phila.gov</cntemail>
+				<hours>8:00 am to 4:00 pm</hours>
+				<cntinst></cntinst>
+			</cntinfo>
+		</metc>
+		<metstdn>Content Standard for Digital Geospatial Metadata</metstdn>
+		<metstdv>FGDC-STD-001-1998</metstdv>
+		<mettc>local time</mettc>
+		<metac>City of Philadelphia employees</metac>
+		<metuc>City of Philadelphia use only.</metuc>
+		<metsi>
+			<metscs>No security considerations</metscs>
+			<metsc>Unclassified</metsc>
+			<metshd>N/A</metshd>
+		</metsi>
+		<metextns>
+			<onlink></onlink>
+			<metprof></metprof>
+		</metextns>
+	</metainfo>
+	<Esri><MetaID>{F9C8F32D-F1B3-4E20-9219-F93AEB279521}</MetaID><CreaDate>20031005</CreaDate><CreaTime>12183900</CreaTime><SyncOnce>TRUE</SyncOnce></Esri></metadata>
