@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/plugins/milkmachine" >
+        <file>icon.png</file>
+		<file>Import.png</file>
+		<file>Export.png</file>
+		<file>pencil.png</file>
+    </qresource>
+</RCC>
