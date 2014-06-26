@@ -29,45 +29,13 @@ import resources_rc
 # Import the code for the dialog
 from milkmachinedialog import MilkMachineDialog
 import os, sys, traceback
+os.sys.path.append(os.path.dirname(__file__))
 
 import gpxpy
 import gpxpy.gpx
 import simplekml
-
-
-class mmGPX(object):
-    outfile = None
-    def __init__(self, gpxfilepath):
-        self.filepath = gpxfilepath
-        self.kml = simplekml.Kml()
-        self.gpx_file = open(self.filepath)
-        self.gpx = gpxpy.parse(self.gpx_file)
-
-    def tokml(self, path=None):
-        for waypoint in self.gpx.waypoints:
-        	#print 'waypoint {0} -> ({1},{2})'.format(waypoint.name, , )
-        	#kml.newpoint(name="Red Button", coords=[(waypoint.latitude, waypoint.longitude)])
-        	self.kml.newpoint(name="Red Button", coords=[(waypoint.longitude, waypoint.latitude)])
-        self.track_counter = 0
-        for track in self.gpx.tracks:
-        	self.track_counter = self.track_counter + 1
-        	for segment in track.segments:
-        		points = []
-        		for point in segment.points:
-        			coord = (point.longitude, point.latitude)
-        			pnt = self.kml.newpoint(coords=[coord])
-        			pnt.style.iconstyle.icon.href= 'http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png'
-        			points.append(coord)
-        			#print 'Point at ({0},{1}) -> {2}'.format(point.latitude, point.longitude, point.elevation)
-
-        self.lin = self.kml.newlinestring(name="Test", description="Test", coords=points)
-
-        if not path:
-            self.kml.save(self.filepath.split(".")[0] + ".kml")
-            mmGPX.outfile = self.filepath.split(".")[0] + ".kml"
-        else:
-            self.kml.save(path)
-            mmGPX.outfile = path
+import time
+import TeatDip
 
 #--------------------------------------------------------------------------------
 
@@ -115,6 +83,12 @@ class MilkMachine:
         self.iface.addToolBarIcon(self.action)
         self.iface.addPluginToMenu(u"&Milk Machine", self.action)
 
+        # Audio Counters - Audio 1
+        self.lcd1_C = self.dlg.ui.lcdNumber_Audio1_C
+        self.lcd1_C.display('00:00:00')
+        self.lcd1_D = self.dlg.ui.lcdNumber_Audio1_D
+        self.lcd1_D.display('00:00:00')
+
 
         QObject.connect(self.dlg.ui.chkActivate,SIGNAL("stateChanged(int)"),self.changeActive)
         QObject.connect(self.dlg.ui.buttonImportGPS, SIGNAL("clicked()"), self.browseOpen)
@@ -122,6 +96,12 @@ class MilkMachine:
         QObject.connect(self.dlg.ui.buttonExportTrack, SIGNAL("clicked()"), self.exportToFile)
         QObject.connect(self.iface.legendInterface(), SIGNAL("itemRemoved()"), self.removeCombo)  #currentIndexChanged(int)
         QObject.connect(self.iface.legendInterface(), SIGNAL("itemAdded(QModelIndex)"), self.addedCombo)
+        QObject.connect(self.dlg.ui.buttonImport_audio, SIGNAL("clicked()"), self.browseOpenAudio)
+        QObject.connect(self.dlg.ui.pushButton_clearAudio1, SIGNAL("clicked()"), self.clearaudio1)
+        QObject.connect(self.dlg.ui.pushButton_Audio1, SIGNAL("clicked()"), self.playAudio1)
+        QObject.connect(self.dlg.ui.pushButton_stop1, SIGNAL("clicked()"), self.stopAudio1)
+    ############################################################################
+    ## SLOTS
 
     def addedCombo(self):
         #QMessageBox.information( self.iface.mainWindow(),"Info", 'You added' )
@@ -130,6 +110,7 @@ class MilkMachine:
             if layer.type() == QgsMapLayer.VectorLayer:
                 self.dlg.ui.comboBox_export.addItem(layer.name())
 
+
     def removeCombo(self):
         #QMessageBox.information( self.iface.mainWindow(),"Info", 'You removed' )
         self.dlg.ui.comboBox_export.clear()
@@ -137,20 +118,53 @@ class MilkMachine:
             if layer.type() == QgsMapLayer.VectorLayer:
                 self.dlg.ui.comboBox_export.addItem(layer.name())
 
-
     def browseOpen(self):
         #QMessageBox.information( self.iface.mainWindow(),"Info", "You clicked browse" )
         #QFileDialog.getOpenFileName(QWidget parent=None, QString caption=QString(), QString directory=QString(), QString filter=QString(), QString selectedFilter=None, QFileDialog.Options options=0)
-        self.gpsfile = QFileDialog.getOpenFileName(caption="Import Raw GPS File",filter="*.gpx")
+        self.gpsfile = QFileDialog.getOpenFileName(None, "Import Raw GPS File", "", "(*.gpx)")
+
+
         try:
             if self.gpsfile:
-                gpx = mmGPX(self.gpsfile)  # make the gpx class object
-                gpx.tokml()  # convert the gpx to kml
-                self.dlg.ui.lineEdit_ImportGPS.setText(gpx.outfile) # set the text in the lineedit to the kml path
-                self.gpx_to_kml = gpx.outfile # make a self variable for the path to the kml
-                self.iface.messageBar().pushMessage("Success", "GPX converted to KML and saved as: {0}".format(gpx.outfile), level=QgsMessageBar.INFO, duration=10)
+                ftype = self.gpsfile.split(".")[-1]
+                if ftype == 'gpx':
+                    gpx = TeatDip.mmGPX(self.gpsfile)  # make the gpx class object
+                    gpx.tokml()  # convert the gpx to kml
+                    self.dlg.ui.lineEdit_ImportGPS.setText(gpx.outfile) # set the text in the lineedit to the kml path
+                    self.gpx_to_kml = gpx.outfile # make a self variable for the path to the kml
+                    self.iface.messageBar().pushMessage("Success", "GPX converted to KML and saved as: {0}".format(gpx.outfile), level=QgsMessageBar.INFO, duration=10)
+                elif ftype == 'kml':
+                    self.dlg.ui.lineEdit_ImportGPS.setText(gpx.outfile)
+                    self.iface.messageBar().pushMessage("Success", "KML file imported: {0}".format(gpx.outfile), level=QgsMessageBar.INFO, duration=10)
         except:
             self.iface.messageBar().pushMessage("Error", "Failed to import specified file. Loser", level=QgsMessageBar.ERROR, duration=10)
+
+    def browseOpenAudio(self):
+        #QMessageBox.information( self.iface.mainWindow(),"Info", "You clicked browse" )
+        #QFileDialog.getOpenFileName(QWidget parent=None, QString caption=QString(), QString directory=QString(), QString filter=QString(), QString selectedFilter=None, QFileDialog.Options options=0)
+        self.audiopath = QFileDialog.getOpenFileName(caption="Import Raw .wav Audio File",filter="*.wav")
+        try:
+            if self.audiopath:
+                self.dlg.ui.lineEdit_InAudio1.setText(self.audiopath)
+                self.iface.messageBar().pushMessage("Success", ".wav file imported and ready to play: {0}".format(self.audiopath), level=QgsMessageBar.INFO, duration=5)
+        except:
+            self.iface.messageBar().pushMessage("Error", "Failed to import specified file", level=QgsMessageBar.ERROR, duration=5)
+
+    def clearaudio1(self):
+        self.dlg.ui.lineEdit_InAudio1.setText(None)
+        if self.audiopath:
+            self.audiopath = None
+
+    def playAudio1(self):
+        if self.audiopath:
+            self.Sound1 = QSound(self.audiopath)
+            self.Sound1.play()
+            #time.sleep(5)
+            #self.Sound.stop()
+
+    def stopAudio1(self):
+        if self.audiopath and self.Sound1:
+            self.Sound1.stop()
 
     def drawtrack(self):
         try:
