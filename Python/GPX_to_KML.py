@@ -4,7 +4,7 @@ import simplekml
 ## Variables to be transferred to inputs in UI script
 tour_name = 'Test'
 gpx = 'SampleData/140606.gpx'
-flyto_duration = 2
+flyto_duration = .5
 
 # Create the output KML File
 kml = simplekml.Kml()
@@ -26,13 +26,15 @@ for track in gpx.tracks:
 		points = []
 		for point in segment.points:
 			coord = (point.longitude, point.latitude)
-			#print(point.time)
 			pnt = kml.newpoint(coords=[coord])
 			pnt.timestamp.when = point.time
 			pnt.style.iconstyle.icon.href= 'http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png'
 			points.append(coord)
 			flyto = playlist.newgxflyto(gxduration=flyto_duration)
-			
+			flyto.camera.longitude = point.longitude
+			flyto.camera.latitude = point.latitude
+			flyto.camera.altitude = 100
+			flyto.camera.tilt = 45
 
-lin = kml.newlinestring(name="Test", description="Test", coords=points)
+line = kml.newlinestring(name="Test", description="Test", coords=points)
 kml.save("test.kml")
