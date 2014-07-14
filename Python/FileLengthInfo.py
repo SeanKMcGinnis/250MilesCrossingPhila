@@ -1,12 +1,12 @@
 """
 	Sample code to estimate file length in time by referencing the framerate and number of frames
-	
+
 """
 
 import os.path, time, wave
 
 # Sample File to Test
-sample = 'SampleData/Nagra01-0003.WAV'
+sample = 'C:/Users/Edward/Documents/Philly250/Scratch/NAG10038.wav'
 # Last Modified Time
 mtime = time.ctime(os.path.getmtime(sample))
 # File Creation Time
@@ -20,7 +20,7 @@ frames = w.getnframes()
 # Estimate length of the file by dividing frames/framerate
 length = frames/framerate
 
-# Display the information 
+# Display the information
 print  "last modified: %s" % mtime
 print  "created: %s" % ctime
 print "frames: %s" % frames
