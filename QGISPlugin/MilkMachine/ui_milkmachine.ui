@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>674</width>
-    <height>433</height>
+    <width>533</width>
+    <height>218</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>260</x>
-     <y>380</y>
+     <y>360</y>
      <width>171</width>
      <height>32</height>
     </rect>
@@ -75,10 +75,10 @@
   <widget class="Line" name="line">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>10</x>
      <y>220</y>
-     <width>431</width>
-     <height>16</height>
+     <width>511</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="orientation">
@@ -95,7 +95,7 @@
     </rect>
    </property>
    <property name="toolTip">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Browse to .gpx file. This will convert the .gpx to a .kml, then import the kml.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Browse to .gpx file. This will convert the .gpx to a .kml, then import the kml. Additionally, a GeoJSON file will also be created in the same directory.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="text">
     <string>Import GPS</string>
@@ -106,6 +106,9 @@
    </property>
   </widget>
   <widget class="QPushButton" name="buttonDrawTrack">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>40</x>
@@ -115,7 +118,7 @@
     </rect>
    </property>
    <property name="toolTip">
-    <string>Draw the imported GPS track on the map</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the imported GPS track on the map. This will draw the .kml file that was imported.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="text">
     <string>Draw Track</string>
@@ -165,7 +168,7 @@
     </rect>
    </property>
    <property name="toolTip">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Browse to .gpx file. This will convert the .gpx to a .kml, then import the kml.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Browse to the .wav file that matches one of the GPS tracks in the table of contents. Once the .wav file is imported, select the point in the track (using the select tool) where the audio file should start to play.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="text">
     <string>Import Audio 1</string>
@@ -186,6 +189,9 @@
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_clearAudio1">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>440</x>
@@ -193,6 +199,9 @@
      <width>31</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Clear the audio input box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="text">
     <string/>
@@ -203,13 +212,19 @@
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_Audio1">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
-     <x>480</x>
-     <y>120</y>
+     <x>40</x>
+     <y>170</y>
      <width>31</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;After selecting a point in the GPS track that matches the .WAV audio file, click play.  The VLC media player will launch, starting at the time within the audio file that matches the time within the point file (.kml). &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="icon">
     <iconset resource="resources.qrc">
@@ -219,11 +234,14 @@
   <widget class="QLCDNumber" name="lcdNumber_Audio1_C">
    <property name="geometry">
     <rect>
-     <x>160</x>
+     <x>120</x>
      <y>170</y>
      <width>131</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Local time as recorded by the audio device&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="smallDecimalPoint">
     <bool>false</bool>
@@ -235,21 +253,27 @@
   <widget class="QLCDNumber" name="lcdNumber_Audio1_P">
    <property name="geometry">
     <rect>
-     <x>440</x>
+     <x>400</x>
      <y>170</y>
      <width>81</width>
      <height>31</height>
     </rect>
    </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Position in the track that the audio file is currently playing at (seconds). This corresponds to the feature (point) ID.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
   </widget>
   <widget class="QLCDNumber" name="lcdNumber_Audio1_D">
    <property name="geometry">
     <rect>
-     <x>300</x>
+     <x>260</x>
      <y>170</y>
      <width>131</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Duration that the audio has been playing. hh:mm:ss&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="digitCount">
     <number>8</number>
@@ -258,50 +282,65 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>200</x>
+     <x>145</x>
      <y>153</y>
-     <width>61</width>
+     <width>101</width>
      <height>16</height>
     </rect>
    </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The clock time stamp on the audio file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
    <property name="text">
-    <string>Clock Time</string>
+    <string>Audio Clock Time</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>460</x>
+     <x>401</x>
      <y>153</y>
-     <width>61</width>
+     <width>81</width>
      <height>16</height>
     </rect>
    </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Feature ID (FID) number. For point data layers, this is a automatic number that is generated by QGIS to indicate sequential point number from the &amp;quot;starting point&amp;quot; of the track. The numbering starts at 0&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
    <property name="text">
-    <string>Position</string>
+    <string>Feature ID (FID)</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>340</x>
+     <x>280</x>
      <y>153</y>
-     <width>51</width>
+     <width>111</width>
      <height>16</height>
     </rect>
    </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The duration into the audio file that is currently playing.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
    <property name="text">
-    <string>Duration</string>
+    <string>Duration Into Audio</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_stop1">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
-     <x>520</x>
-     <y>120</y>
+     <x>80</x>
+     <y>170</y>
      <width>31</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Stops and closes the VLC media player and audio file&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="text">
     <string/>
@@ -309,6 +348,35 @@
    <property name="icon">
     <iconset resource="resources.qrc">
      <normaloff>:/plugins/milkmachine/stop.png</normaloff>:/plugins/milkmachine/stop.png</iconset>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_Audio1info">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>480</x>
+     <y>120</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click for information about the current audio track&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/plugins/milkmachine/question.png</normaloff>:/plugins/milkmachine/question.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>24</width>
+     <height>24</height>
+    </size>
    </property>
   </widget>
  </widget>

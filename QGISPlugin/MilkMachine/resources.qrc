@@ -8,5 +8,6 @@
 		<file>Sound_alt.png</file>
 		<file>stop.png</file>
 		<file>play.png</file>
+		<file>question.png</file>
     </qresource>
 </RCC>
