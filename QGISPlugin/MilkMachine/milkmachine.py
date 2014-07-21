@@ -38,6 +38,8 @@ import time, datetime, wave
 import TeatDip
 import subprocess
 import logging
+import platform
+import re
 
 #--------------------------------------------------------------------------------
 NOW = None
@@ -373,7 +375,12 @@ class MilkMachine:
                         lan_vlc_path = "C:\Program Files (x86)\VideoLAN\VLC\vlc.exe"
                         #startupinfo = subprocess.STARTUPINFO()
                         #startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-                        self.pp = subprocess.Popen(["C:/Program Files (x86)/VideoLAN/VLC/vlc.exe", wav_path, "--start-time", str(jumptime)], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                        UserOs = platform.platform()
+                        WindOs = re.search('Windows', UserOs, re.I)
+                        if WindOs.group() == 'Windows':
+                            self.pp = subprocess.Popen(["C:/Program Files (x86)/VideoLAN/VLC/vlc.exe", wav_path, "--start-time", str(jumptime)], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                        else:
+                            self.pp = subprocess.Popen(["/Applications/VLC.app/Contents/MacOS/VLC", self.line_audiopath, "--start-time", str(jumptime)], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                         NOW = datetime.datetime.now()
                         self.dlg.timer.start(1000)
 
