@@ -377,7 +377,7 @@ class MilkMachine:
                         #startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
                         UserOs = platform.platform()
                         WindOs = re.search('Windows', UserOs, re.I)
-                        if WindOs.group() == 'Windows':
+                        if WindOs.group():
                             self.pp = subprocess.Popen(["C:/Program Files (x86)/VideoLAN/VLC/vlc.exe", wav_path, "--start-time", str(jumptime)], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                         else:
                             self.pp = subprocess.Popen(["/Applications/VLC.app/Contents/MacOS/VLC", self.line_audiopath, "--start-time", str(jumptime)], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
