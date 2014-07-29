@@ -9,5 +9,8 @@
 		<file>stop.png</file>
 		<file>play.png</file>
 		<file>question.png</file>
+		<file>synchronize.png</file>
+		<file>earth.png</file>
+		<file>triangle.png</file>		
     </qresource>
 </RCC>

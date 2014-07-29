@@ -82,6 +82,9 @@ class MilkMachine:
         self.dlg.timer = QTimer()
         self.dlg.timer.timeout.connect(self.Time)
 
+        self.lastdirectory = ''
+
+
     def initGui(self):
         global Scratch
         self.Scratch = os.path.dirname(__file__)  #     r'C:\Users\Edward\Documents\Philly250\Scratch'
@@ -101,8 +104,9 @@ class MilkMachine:
         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         self.handler.setFormatter(formatter)
         self.logger.addHandler(self.handler)
-
-        self.logger.info('-----------------------------------------------------------------------------------------------')
+        self.logger.info('-----------------------------------------------------------------------------------------------------------------------------------------------')
+        self.logger.info('-----------------------------------------------------------------------------------------------------------------------------------------------')
+        self.logger.info('-----------------------------------------------------------------------------------------------------------------------------------------------')
         self.logger.info('Milk Machine plugin initialized')
 
         #####################################
@@ -137,70 +141,196 @@ class MilkMachine:
         QObject.connect(self.dlg.ui.pushButton_Audio1, SIGNAL("clicked()"), self.playAudio1)
         QObject.connect(self.dlg.ui.pushButton_stop1, SIGNAL("clicked()"), self.stopAudio1)
         QObject.connect(self.dlg.ui.pushButton_Audio1info, SIGNAL("clicked()"), self.info_Audio1)
+        QObject.connect(self.dlg.ui.pushButton_sync, SIGNAL("clicked()"), self.sync)
+        QObject.connect(self.iface, SIGNAL("currentLayerChanged(QgsMapLayer *)"), self.active_layer)
+        QObject.connect(self.dlg.ui.checkBox_visualization_edit,SIGNAL("stateChanged(int)"),self.vischeck)
+        QObject.connect(self.dlg.ui.pushButton_camera_apply, SIGNAL("clicked()"), self.camera_apply)
     ############################################################################
     ## SLOTS
 
-    def Time(self):
-        global NOW, pointid, ClockDateTime
 
-        if NOW and pointid and ClockDateTime:
+    ############################################################################
+    ############################################################################
+    ## Visualization
+    ############################################################################
+
+    def active_layer(self):
+        try:
+            self.dlg.ui.checkBox_visualization_edit.setChecked(False)  # uncheck the box everytime
+            # get the active layer and populate the combo boxes
+            self.ActiveLayer = self.iface.activeLayer()
+            if self.ActiveLayer:
+                self.ActiveLayer_name = self.ActiveLayer.name()
+                self.dlg.ui.lineEdit_visualization_active.setText(self.ActiveLayer_name)
+                self.dlg.ui.lineEdit_export_active.setText(self.ActiveLayer_name)
+
+                # enable the checkBox_visualization_edit
+                # Get the curretly selected feature
+
+                if self.ActiveLayer.type() == 0: # is the active layer a vector layer?
+                    self.dlg.ui.checkBox_visualization_edit.setEnabled(True)
+
+                    # export
+                    if self.ActiveLayer.storageType() == 'ESRI Shapefile' and self.ActiveLayer.geometryType() == 0:
+                        self.dlg.ui.buttonExportTrack.setEnabled(True)
+                        self.dlg.ui.pushButton_TrackInfo.setEnabled(True)
+                        self.dlg.ui.pushButton_google_earth.setEnabled(True)
+                    else:
+                        self.dlg.ui.buttonExportTrack.setEnabled(False)
+                        self.dlg.ui.pushButton_TrackInfo.setEnabled(False)
+                        self.dlg.ui.pushButton_google_earth.setEnabled(False)
+                else:
+                    self.dlg.ui.buttonExportTrack.setEnabled(False)
+                    self.dlg.ui.pushButton_TrackInfo.setEnabled(False)
+                    self.dlg.ui.pushButton_google_earth.setEnabled(False)
+
+
+            else:
+                self.dlg.ui.lineEdit_visualization_active.setText(None)
+                self.dlg.ui.lineEdit_export_active.setText(None)
+                self.dlg.ui.lineEdit_visualization_camera_longitude.setText(None)
+                self.dlg.ui.lineEdit_visualization_camera_latitude.setText(None)
+                self.dlg.ui.lineEdit_visualization_camera_altitude.setText(None)
+                self.dlg.ui.lineEdit__visualization_camera_gxhoriz.setText(None)
+                self.dlg.ui.lineEdit__visualization_camera_heading.setText(None)
+                self.dlg.ui.lineEdit__visualization_camera_roll.setText(None)
+                self.dlg.ui.lineEdit__visualization_camera_tilt.setText(None)
+                self.dlg.ui.checkBox_visualization_edit.setChecked(False)
+                self.dlg.ui.checkBox_visualization_edit.setEnabled(False)
+                self.dlg.ui.pushButton_camera_apply.setEnabled(False)
+
+                #export
+                self.dlg.ui.buttonExportTrack.setEnabled(False)
+                self.dlg.ui.pushButton_TrackInfo.setEnabled(False)
+                self.dlg.ui.pushButton_google_earth.setEnabled(False)
+        except:
+            global NOW, pointid, ClockDateTime
+            NOW = None; pointid = None; ClockDateTime = None
+            trace = traceback.format_exc()
+            if self.logging == True:
+                self.logger.error('active_layer function error')
+                self.logger.exception(trace)
+            self.iface.messageBar().pushMessage("Error", "Failed to update after the current layer was changed. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+
+    def vischeck(self,state):  # the checkbox is checked or unchecked for vis Editing
+        if self.dlg.ui.checkBox_visualization_edit.isChecked():  # the checkbox is check for vis Editing
+
+            if not self.ActiveLayer.isEditable():  # the layer is not editable
+                QMessageBox.information(self.iface.mainWindow(),"Visualization Error", 'The currently active layer is not in an "Edit Session".' )
+                self.dlg.ui.checkBox_visualization_edit.setChecked(False)
+                #iface.actionToggleEditing.trigger()
+            else:  # cleared for editing...
+
+                # Get the curretly selected feature
+                self.cLayer = self.iface.mapCanvas().currentLayer()
+                self.selectList = []
+                features = self.cLayer.selectedFeatures()
+                for f in features:
+                    self.selectList.append(f.id())  #[u'689',u'2014-06-06 13:30:54']  #[u'2014/06/06 10:30:10', u'Time:10:30:10, Latitude: 39.966531, Longitude: -75.172003, Speed: 3.382047, Altitude: 1.596764']
+
+                if len(self.selectList) >= 1:
+                    # enable everything
+                    self.dlg.ui.lineEdit_visualization_camera_longitude.setEnabled(True)
+                    self.dlg.ui.lineEdit_visualization_camera_latitude.setEnabled(True)
+                    self.dlg.ui.lineEdit_visualization_camera_altitude.setEnabled(True)
+                    self.dlg.ui.comboBox_altitudemode.setEnabled(True)
+                    self.dlg.ui.comboBox_gxaltitudemode.setEnabled(True)
+                    self.dlg.ui.lineEdit__visualization_camera_gxhoriz.setEnabled(True)
+                    self.dlg.ui.lineEdit__visualization_camera_heading.setEnabled(True)
+                    self.dlg.ui.lineEdit__visualization_camera_roll.setEnabled(True)
+                    self.dlg.ui.lineEdit__visualization_camera_tilt.setEnabled(True)
+                    self.dlg.ui.pushButton_camera_apply.setEnabled(True)
+                else:
+                    QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "Please select points in the active layer to be edited." )
+
+
+
+        else:  # checkbox is false, clear shit out
+            self.dlg.ui.lineEdit_visualization_camera_longitude.setEnabled(False)
+            self.dlg.ui.lineEdit_visualization_camera_latitude.setEnabled(False)
+            self.dlg.ui.lineEdit_visualization_camera_altitude.setEnabled(False)
+            self.dlg.ui.comboBox_altitudemode.setEnabled(False)
+            self.dlg.ui.comboBox_gxaltitudemode.setEnabled(False)
+            self.dlg.ui.lineEdit__visualization_camera_gxhoriz.setEnabled(False)
+            self.dlg.ui.lineEdit__visualization_camera_heading.setEnabled(False)
+            self.dlg.ui.lineEdit__visualization_camera_roll.setEnabled(False)
+            self.dlg.ui.lineEdit__visualization_camera_tilt.setEnabled(False)
+            self.dlg.ui.pushButton_camera_apply.setEnabled(False)
+
+    def camera_apply(self):
+
+        try:
+            # make a dictionary of all of the camera parameters
+            camera = {'longitude': None, 'latitude': None,'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'gxhoriz' : None,'heading' : None,'roll' : None,'tilt' : None}
+            camera['longitude'] = self.dlg.ui.lineEdit_visualization_camera_longitude.text()
+            camera['latitude'] = self.dlg.ui.lineEdit_visualization_camera_latitude.text()
+            camera['altitude'] = self.dlg.ui.lineEdit_visualization_camera_altitude.text()
+            camera['altitudemode'] = self.dlg.ui.comboBox_altitudemode.currentText()
+            camera['gxaltitudemode'] = self.dlg.ui.comboBox_gxaltitudemode.currentText()
+            camera['gxhoriz'] = self.dlg.ui.lineEdit__visualization_camera_gxhoriz.text()
+            camera['heading'] = self.dlg.ui.lineEdit__visualization_camera_heading.text()
+            camera['roll'] = self.dlg.ui.lineEdit__visualization_camera_roll.text()
+            camera['tilt'] = self.dlg.ui.lineEdit__visualization_camera_tilt.text()
+            QMessageBox.information(self.iface.mainWindow(),"Camera dict", str(camera) )
+
+##            # Populate the Visualization Camera Combo boxes
+##            self.dlg.ui.comboBox_altitudemode.clear()
+##            altitudemode = [None, 'absolute', 'clampToGround', 'relativeToGround']
+##            for alt in altitudemode:
+##                self.dlg.ui.comboBox_altitudemode.addItem(alt)
+##            self.dlg.ui.comboBox_gxaltitudemode.clear()
+##            gxaltitudemode = [None, 'clampToSeaFloor', 'relativeToSeaFloor']
+##            for gxalt in gxaltitudemode:
+##                self.dlg.ui.comboBox_gxaltitudemode.addItem(gxalt)
+
+            # Get the curretly selected feature
+            self.cLayer = self.iface.mapCanvas().currentLayer()
+            self.selectList = []
+            features = self.cLayer.selectedFeatures()
+            for f in features:
+                self.selectList.append(f.id())  #[u'689',u'2014-06-06 13:30:54']  #[u'2014/06/06 10:30:10', u'Time:10:30:10, Latitude: 39.966531, Longitude: -75.172003, Speed: 3.382047, Altitude: 1.596764']
+
+
             try:
-
-                # Clock Time
-
-
-                ClockTime_delta = ClockDateTime + datetime.timedelta(seconds=1)
-                diff_sec = ClockDateTime - self.audio_start
-                faker = datetime.datetime(2014,1,1,0,0,0) + datetime.timedelta(seconds=diff_sec.seconds)
-                self.lcd1_C.display(ClockTime_delta.strftime("%H:%M:%S"))
-                self.lcd1_D.display(faker.strftime("%H:%M:%S"))
-                ClockDateTime = ClockTime_delta
-
-##                # Durationinto audio
-##
-##                nn = datetime.datetime.now() - NOW
-##                self.lcd1_D.display(str(nn).split('.')[0])
-
-                # Point ID
-                pointid += 1
-                self.lcd1_P.display(str(pointid))
-                self.cLayer.setSelectedFeatures([pointid])
-
-
+                self.ActiveLayer.beginEditCommand("Camera Editing")
+                if len(self.selectList) >= 1:
+                    self.ActiveLayer.beginEditCommand("Camera Editing")
+                    for f in self.selectList:
+                        #self.ActiveLayer.dataProvider().changeAttributeValues({ f : {2: str(camera)} })
+                        self.ActiveLayer.changeAttributeValue(f, 2, str(camera))
+                    #self.ActiveLayer.updateFields()
+                    self.ActiveLayer.endEditCommand()
+                else:
+                    QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "Please select points in the active layer to be edited." )
             except:
+                self.ActiveLayer.destroyEditCommand()
+                self.logger.error('camera_apply destroy edit session')
+                self.logger.exception(traceback.format_exc())
+                self.iface.messageBar().pushMessage("Error", "Failed to apply camera view parameters. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
 
-                NOW = None; pointid = None; ClockDateTime = None
-                if self.pp:
-                    self.pp.terminate()
-                    self.dlg.timer.stop()
-                trace = traceback.format_exc()
-                if self.logging == True:
-                    self.logger.error('Time function error')
-                    self.logger.exception(trace)
-                self.iface.messageBar().pushMessage("Error", "Error in Time function. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
 
-    def addedCombo(self):
-        #QMessageBox.information( self.iface.mainWindow(),"Info", 'You added' )
-        self.dlg.ui.comboBox_export.clear()
-        for layer in self.iface.legendInterface().layers():
-            self.dlg.ui.comboBox_export.addItem(layer.name())
-##            lty = layer.type()
-##            if lty is not None:
-##                if layer.type() == 0:#QgsMapLayer.VectorLayer:
-##                    self.dlg.ui.comboBox_export.addItem(layer.name())
 
-    def removeCombo(self):
-        #QMessageBox.information( self.iface.mainWindow(),"Info", 'You removed' )
-        self.dlg.ui.comboBox_export.clear()
-        for layer in self.iface.legendInterface().layers():
-            self.dlg.ui.comboBox_export.addItem(layer.name())
-##            lty = layer.type()
-##            if lty is not None:
-##                if layer.type() == 0:#QgsMapLayer.VectorLayer:
-##                    self.dlg.ui.comboBox_export.addItem(layer.name())
+        except:
+            global NOW, pointid, ClockDateTime
+            NOW = None; pointid = None; ClockDateTime = None
+            trace = traceback.format_exc()
+            if self.logging == True:
+                self.logger.error('camera_apply function error')
+                self.logger.exception(trace)
+            self.iface.messageBar().pushMessage("Error", "Failed to apply camera view parameters. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+
+    ############################################################################
+    ############################################################################
+    ## Import and Sync
+    ############################################################################
+
 
     def browseOpen(self):
-        self.gpsfile = QFileDialog.getOpenFileName(None, "Import Raw GPS File", "", "*.kml")  #C:\Users\Edward\Documents\Philly250\Scratch
+        self.gpsfile = QFileDialog.getOpenFileName(None, "Import Raw GPS File", self.lastdirectory, "*.kml")  #C:\Users\Edward\Documents\Philly250\Scratch
+        self.lastdirectory = os.path.dirname(self.gpsfile)
+
         try:
             if self.gpsfile:
                 ftype = self.gpsfile.split(".")[-1]
@@ -212,7 +342,8 @@ class MilkMachine:
                     #gpx.toGeoJSON()
                     self.dlg.ui.lineEdit_ImportGPS.setText(self.gpsfile)
                     self.dlg.ui.buttonDrawTrack.setEnabled(True)
-                    self.iface.messageBar().pushMessage("Success", "kml file imported: {0}".format(self.gpsfile), level=QgsMessageBar.INFO, duration=5)
+                    self.dlg.ui.checkBox_headoftrack.setEnabled(True)
+                    self.iface.messageBar().pushMessage("Success", "kml file imported into Milk Machine: {0}".format(self.gpsfile), level=QgsMessageBar.INFO, duration=5)
         except:
             global NOW, pointid, ClockDateTime
             NOW = None; pointid = None; ClockDateTime = None
@@ -225,13 +356,65 @@ class MilkMachine:
     def drawtrack(self):
         try:
             if self.gpsfile:
-                self.dlg.ui.lineEdit_ImportGPS.setText("")
-                kmlinpath = self.gpsfile + '|layername=WayPoints'
-                kmllayer = self.iface.addVectorLayer(self.gpsfile, 'testkml', "ogr")
+                self.dlg.ui.lineEdit_ImportGPS.setText("")  # clear the text of the input
+
+                # make a qgs layer out of the kml, in memory. Then save it as a shapefile. The name of the shapefile will be the same as the kml
+                layername = self.gpsfile.split(".")[0].split('/')[-1]
+                kmllayer = QgsVectorLayer(self.gpsfile, layername, "ogr")
+                # save the kml layer as
+                shapepath = self.gpsfile.split(".")[0] + '.shp'
+                shapepath_dup = self.gpsfile.split(".")[0] + '_duplicate.shp'
+                QgsVectorFileWriter.writeAsVectorFormat(kmllayer, shapepath, "utf-8", None, "ESRI Shapefile")  # working copy
+                QgsVectorFileWriter.writeAsVectorFormat(kmllayer, shapepath_dup, "utf-8", None, "ESRI Shapefile")  # duplicate of original
+                #bring the shapefile back in, and render it on the map
+                shaper = QgsVectorLayer(shapepath, layername, "ogr")
+                shaper.dataProvider().addAttributes( [ QgsField("camera",QVariant.String), QgsField("pointsize", QVariant.Int) ] )
+                shaper.updateFields()
+                QgsMapLayerRegistry.instance().addMapLayer(shaper)
+                #kmllayer2 = self.iface.addVectorLayer(shapepath, layername, "ogr")
+
+
+                #kmlinpath = self.gpsfile + '|layername=WayPoints'
+                #kmllayer = self.iface.addVectorLayer(self.gpsfile, 'testkml', "ogr")
                 self.dlg.ui.buttonDrawTrack.setEnabled(False)
+                self.dlg.ui.checkBox_headoftrack.setEnabled(False)
                 #self.iface.QgsMapLayerRegistry.instance().addMapLayer(layer)
                 self.iface.messageBar().pushMessage("Track Rendering Success", "The track: {0} has been drawn.".format(self.gpsfile.split("/")[-1]), level=QgsMessageBar.INFO, duration=5)
                 self.gpsfile = None
+
+                if self.dlg.ui.checkBox_headoftrack.isChecked(): # draw the head of track
+                    QMessageBox.information(self.iface.mainWindow(),"Head of track", 'head of track yo' )
+                    headof = {}
+                    cc = 0
+                    for f in kmllayer2.getFeatures():
+                        if cc == 0:
+                            geom = f.geometry()
+                            if geom.type() == QGis.Point:
+                                headof['coordinates'] = geom.asPoint()
+                        cc += 1
+                        break
+
+                    # create layer
+                    lname = layername + '_head'
+                    head = QgsVectorLayer("Point?crs=EPSG:4326", lname, "memory")
+                    pr = head.dataProvider()
+                    # add a feature
+                    fet = QgsFeature()
+                    fet.setGeometry( QgsGeometry.fromPoint(QgsPoint(headof['coordinates'][0],headof['coordinates'][1])) )
+                    pr.addFeatures([fet])
+
+                    # define the layer properties as a dict
+                    properties = {'size': '4.0', 'color': '0,255,0,255'}
+
+                    # initalise a new symbol layer with those properties
+                    symbol_layer = QgsSimpleMarkerSymbolLayerV2.create(properties)
+
+                    # replace the default symbol layer with the new symbol layer
+                    head.rendererV2().symbols()[0].changeSymbolLayer(0, symbol_layer)
+                    head.setLayerTransparency(30)
+                    head.commitChanges()
+                    QgsMapLayerRegistry.instance().addMapLayer(head)
+
             else:
                 self.iface.messageBar().pushMessage("No Input Track", "Please import a .gpx file or provide a file path (above)", level=QgsMessageBar.WARNING, duration=5)
         except:
@@ -247,7 +430,8 @@ class MilkMachine:
     def browseOpenAudio(self):
         #QMessageBox.information( self.iface.mainWindow(),"Info", "You clicked browse" )
         #QFileDialog.getOpenFileName(QWidget parent=None, QString caption=QString(), QString directory=QString(), QString filter=QString(), QString selectedFilter=None, QFileDialog.Options options=0)
-        self.audiopath = QFileDialog.getOpenFileName(None, "Import Raw .wav Audio File","", "*.wav")
+        self.audiopath = QFileDialog.getOpenFileName(None, "Import Raw .wav Audio File",self.lastdirectory, "*.wav")
+        self.lastdirectory = os.path.dirname(self.audiopath)
         try:
             if self.audiopath:
                 self.dlg.ui.lineEdit_InAudio1.setText(self.audiopath)
@@ -256,6 +440,25 @@ class MilkMachine:
                 self.dlg.ui.pushButton_Audio1info.setEnabled(True)
                 self.dlg.ui.pushButton_Audio1.setEnabled(True)
                 self.dlg.ui.pushButton_stop1.setEnabled(True)
+                self.dlg.ui.pushButton_sync.setEnabled(True)
+
+                self.line_audiopath = self.dlg.ui.lineEdit_InAudio1.text()
+                audioname_ext = self.line_audiopath.split('/')[-1]
+                audioname = audioname_ext.split('.')[0]
+                # Audio start date and time
+
+                w = wave.open(self.line_audiopath)
+                # Frame Rate of the Wave File
+                framerate = w.getframerate()
+                # Number of Frames in the File
+                frames = w.getnframes()
+                # Estimate length of the file by dividing frames/framerate
+                length = frames/framerate # seconds
+
+
+                self.audio_start = datetime.datetime(int(audioname[0:4]), int(audioname[4:6]), int(audioname[6:8]), int(audioname[8:10]), int(audioname[10:12]), int(audioname[12:14]))
+                # Audio end time. Add seconds to the start time
+                self.audio_end = self.audio_start + datetime.timedelta(seconds=length)
 
                 self.iface.messageBar().pushMessage("Success", ".wav file imported and ready to play: {0}".format(self.audiopath), level=QgsMessageBar.INFO, duration=5)
         except:
@@ -280,8 +483,11 @@ class MilkMachine:
                 self.dlg.ui.pushButton_Audio1info.setEnabled(False)
                 self.dlg.ui.pushButton_Audio1.setEnabled(False)
                 self.dlg.ui.pushButton_stop1.setEnabled(False)
+                self.dlg.ui.pushButton_sync.setEnabled(False)
                 global NOW, pointid, ClockDateTime
                 NOW = None; pointid = None; ClockDateTime = None
+                self.audio_start = None
+                self.audio_end = None
         except:
             global NOW, pointid, ClockDateTime
             NOW = None; pointid = None; ClockDateTime = None
@@ -291,12 +497,44 @@ class MilkMachine:
                 self.logger.exception(trace)
             self.iface.messageBar().pushMessage("Error", "Failed to import specified file. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
 
+    def Time(self):
+        global NOW, pointid, ClockDateTime
+
+        if NOW and pointid and ClockDateTime:
+            try:
+
+                # Clock Time and Duration
+                ClockTime_delta = ClockDateTime + datetime.timedelta(seconds=1)
+                diff_sec = ClockDateTime - self.audio_start
+                faker = datetime.datetime(2014,1,1,0,0,0) + datetime.timedelta(seconds=diff_sec.seconds)
+                self.lcd1_C.display(ClockTime_delta.strftime("%H:%M:%S"))
+                self.lcd1_D.display(faker.strftime("%H:%M:%S"))
+                ClockDateTime = ClockTime_delta
+
+                # Point ID
+                pointid += 1
+                self.lcd1_P.display(str(pointid))
+                self.cLayer.setSelectedFeatures([pointid])
+
+            except:
+
+                NOW = None; pointid = None; ClockDateTime = None
+                if self.pp:
+                    self.pp.terminate()
+                    self.dlg.timer.stop()
+                trace = traceback.format_exc()
+                if self.logging == True:
+                    self.logger.error('Time function error')
+                    self.logger.exception(trace)
+                self.iface.messageBar().pushMessage("Error", "Error in Time function. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+
     def playAudio1(self):
         try:
             self.line_audiopath = self.dlg.ui.lineEdit_InAudio1.text()
             if self.audiopath and self.line_audiopath:
-                self.audio_start = None
-                self.audio_end = None
+                #self.audio_start = None
+                #self.audio_end = None
                 global NOW, pointid, ClockDateTime
 
 
@@ -341,32 +579,22 @@ class MilkMachine:
                     # Estimate length of the file by dividing frames/framerate
                     length = frames/framerate # seconds
 
-
-                    audioname_ext = self.line_audiopath.split('/')[-1]
-                    audioname = audioname_ext.split('.')[0]
-                    # Audio start date and time
-                    audio_start_dt = datetime.datetime(int(audioname[0:4]), int(audioname[4:6]), int(audioname[6:8]), int(audioname[8:10]), int(audioname[10:12]), int(audioname[12:14]))
-                    self.audio_start = audio_start_dt
-                    # Audio end time. Add seconds to the start time
-                    audio_end_dt = audio_start_dt + datetime.timedelta(seconds=length)
-                    self.audio_end = audio_end_dt
-
                     jumptime = None
                     # if the start of the audio is before the start of the gps track
-                    if selected_dt >= audio_start_dt and selected_dt < audio_end_dt: # if the selected time is larger than the audio start and less than the audio end
+                    if selected_dt >= self.audio_start and selected_dt < self.audio_end: # if the selected time is larger than the audio start and less than the audio end
                         # how many seconds does the audio have jump ahead to match
-                        timediff = selected_dt - audio_start_dt # a timedelta object
+                        timediff = selected_dt - self.audio_start # a timedelta object
                         jumptime = timediff.seconds
 
-                    if selected_dt < audio_start_dt: # if the selected time is less than audio start
+                    if selected_dt < self.audio_start: # if the selected time is less than audio start
                         global NOW, pointid, ClockDateTime
                         NOW = None; pointid = None; ClockDateTime = None
                         QMessageBox.warning( self.iface.mainWindow(),"Audio Sync Warning", "The selected point occurs before the start of the audio" )
 
-                    if selected_dt > audio_end_dt:# if the selected time is greater than audio start
+                    if selected_dt > self.audio_end:# if the selected time is greater than audio start
                         global NOW, pointid, ClockDateTime
                         NOW = None; pointid = None; ClockDateTime = None
-                        QMessageBox.warning( self.iface.mainWindow(),"Audio Sync Warning", "The selected point occurs after the end of the audio\nThe selected date/time is:{0}\nThe end of the audio is: {1}".format(selected_dt.strftime("%H:%M:%S"), audio_end_dt.strftime("%H:%M:%S")) )
+                        QMessageBox.warning( self.iface.mainWindow(),"Audio Sync Warning", "The selected point occurs after the end of the audio\nThe selected date/time is:{0}\nThe end of the audio is: {1}".format(selected_dt.strftime("%H:%M:%S"), self.audio_end.strftime("%H:%M:%S")) )
 
                     if jumptime and ClockDateTime:
                         # "C:\Program Files (x86)\VideoLAN\VLC\vlc.exe" file:///C:/Users/Edward/Documents/Philly250/Scratch/Nagra01-0003.WAV --start-time 5
@@ -377,7 +605,7 @@ class MilkMachine:
                         #startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
                         UserOs = platform.platform()
                         WindOs = re.search('Windows', UserOs, re.I)
-                        if WindOs.group():
+                        if WindOs == 'Windows':
                             self.pp = subprocess.Popen(["C:/Program Files (x86)/VideoLAN/VLC/vlc.exe", wav_path, "--start-time", str(jumptime)], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                         else:
                             self.pp = subprocess.Popen(["/Applications/VLC.app/Contents/MacOS/VLC", self.line_audiopath, "--start-time", str(jumptime)], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -422,41 +650,23 @@ class MilkMachine:
                 self.logger.exception(trace)
             self.iface.messageBar().pushMessage("Error", "Failed stop audio properly. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
 
-            #self.Sound1.stop()
-
-    def exportToFile(self):
-        #QMessageBox.information( self.iface.mainWindow(),"Info", "You clicked browse" )
-        #QFileDialog.getOpenFileName(QWidget parent=None, QString caption=QString(), QString directory=QString(), QString filter=QString(), QString selectedFilter=None, QFileDialog.Options options=0)
-        self.gpsfile = QFileDialog.getOpenFileName(caption="Import Raw GPS File")
-
     def info_Audio1(self):
         try:
             if self.audiopath and self.dlg.ui.lineEdit_InAudio1.text():
                 iwave = TeatDip.Wave(self.audiopath)
                 wavinfo = iwave.wav_info()
 
-
-
-
-                audio_start_dt = None; audio_end_dt = None
-                line_audiopath = self.dlg.ui.lineEdit_InAudio1.text()
-                audioname_ext = line_audiopath.split('/')[-1]
-                audioname = audioname_ext.split('.')[0]
-                # Audio start date and time
-                audio_start_dt = datetime.datetime(int(audioname[0:4]), int(audioname[4:6]), int(audioname[6:8]), int(audioname[8:10]), int(audioname[10:12]), int(audioname[12:14]))
-                # Audio end time. Add seconds to the start time
-                audio_end_dt = audio_start_dt + datetime.timedelta(seconds=wavinfo['file length'])
-
                 message = ''
-                if audio_start_dt:
-                    wavinfo['Audio Start Header'] = audio_start_dt.strftime("%H:%M:%S")
-                if audio_end_dt:
-                    wavinfo['Audio End Header'] = audio_end_dt.strftime("%H:%M:%S")
+                if self.audio_start:
+                    wavinfo['Audio Start Header'] = self.audio_start.strftime("%x %X")
+                if self.audio_end:
+                    wavinfo['Audio End Header'] = self.audio_end.strftime("%x %X")
 
+                message = message + 'Audio Start: \t' + wavinfo['Audio Start Header'] + '\n'
+                message = message + 'Audio End: \t' + wavinfo['Audio End Header'] + '\n'
+                message = message + 'File length: \t' + str(wavinfo['file length']) + ' seconds\n'
+                message = message + 'Frames: \t' + str(wavinfo['frames']) + '\n'
 
-                for key,value in wavinfo.iteritems():
-                    message = message + str(key) + ': ' + str(value) + '\n'
-                #QMessageBox.information(self.iface.mainWindow(),"Info", str(wavinfo) )
                 QMessageBox.information(self.iface.mainWindow(),"Audio File Info", message )
         except:
             global NOW, pointid, ClockDateTime
@@ -466,6 +676,221 @@ class MilkMachine:
                 self.logger.error('audioInfo function error')
                 self.logger.exception(trace)
             self.iface.messageBar().pushMessage("Error", "Audio info error. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+    def sync(self):
+        try:
+            if self.audiopath and self.dlg.ui.lineEdit_InAudio1.text():
+                # iterate through the selected shapefile until you find the matching date/time
+
+                # Get the curretly selected feature
+                self.aLayer = self.iface.activeLayer()  #selected layer in TOC. QgsVectorLayer
+                matchdict = {}
+                cc = 0
+                try:
+                    for f in self.aLayer.getFeatures(): #  QgsFeatureIterator #[u'2014/06/06 10:38:48', u'Time:10:38:48, Latitude: 39.965949, Longitude: -75.172239, Speed: 0.102851, Altitude: -3.756733']
+                        currentatt = f.attributes()
+                        pointdate = currentatt[0].split(" ")[0]  #2014/06/06
+                        pointtime = currentatt[0].split(" ")[1]
+                        current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
+                        if cc == 0:
+                            track_start_dt = current_dt
+                            if current_dt > self.audio_start: # if it is the first attribute and there is no match and the track time is larger than the start of the audio.
+                                diff = current_dt - self.audio_start
+                                QMessageBox.information(self.iface.mainWindow(),"Audio File Sync Info", 'Audio starts before the begining of the track by {0}'.format(diff) )
+                                break
+                        elif current_dt == self.audio_start: # the track time and the audio start match
+                            matchdict['fid'] = f.id()
+                            matchdict['attributes'] = currentatt
+                            geom = f.geometry()  # QgsGeometry object, get the geometry
+                            if geom.type() == QGis.Point:
+                                matchdict['coordinates'] = geom.asPoint() #(-75.1722,39.9659)
+                            break
+                        cc += 1
+
+
+                except AttributeError:
+                    QMessageBox.warning( self.iface.mainWindow(),"Selected Layer Warning", "Please select the layer that matches the audio track." )
+
+                if matchdict:
+                    #make a marker in memory
+
+                    QMessageBox.information(self.iface.mainWindow(),"Audio File Sync Info", 'The audio starts at {0}\nStarting point in track is FID: {1}\nCoordinates: {2}\n\nTrack starts at: {3}'.format(self.audio_start.strftime("%x %X"), matchdict['fid'], str(matchdict['coordinates']),track_start_dt.strftime("%x %X") ) )
+
+                    # create layer
+                    lname = self.aLayer.name() + '_audio_start'
+                    vl = QgsVectorLayer("Point?crs=EPSG:4326", lname, "memory")
+                    pr = vl.dataProvider()
+
+                    # add fields
+                    pr.addAttributes( [ QgsField("name", QVariant.String),
+                                        QgsField("age",  QVariant.Int),
+                                        QgsField("size", QVariant.Double) ] )
+
+                    # add a feature
+                    fet = QgsFeature()
+                    fet.setGeometry( QgsGeometry.fromPoint(QgsPoint(matchdict['coordinates'][0],matchdict['coordinates'][1])) )
+                    fet.setAttributes(["Johny", 2, 0.3])
+                    pr.addFeatures([fet])
+
+
+                    # get the symbol layer
+                    symbol_layerq = self.iface.activeLayer().rendererV2().symbols()[0].symbolLayer(0)
+
+                    # get the properties of the symbol layer
+                    self.logger.info('Size: {0}'.format( symbol_layerq.size()))
+                    self.logger.info('Color: {0}'.format(symbol_layerq.color().name()))
+
+
+                    # define the layer properties as a dict
+                    size2 = float(symbol_layerq.size()) * 2
+                    properties = {'size': str(size2), 'color': '255,0,0,255'}
+
+                    # initalise a new symbol layer with those properties
+                    symbol_layer = QgsSimpleMarkerSymbolLayerV2.create(properties)
+
+                    # replace the default symbol layer with the new symbol layer
+                    vl.rendererV2().symbols()[0].changeSymbolLayer(0, symbol_layer)
+                    vl.setLayerTransparency(30)
+
+
+
+                    vl.commitChanges()
+                    # update layer's extent when new features have been added
+                    # because change of extent in provider is not propagated to the layer
+                    vl.updateExtents()
+
+                    #starting_point_marker = self.iface.addVectorLayer('memory/' + vl)
+                    #self.iface.QgsMapLayerRegistry.instance().addMapLayer(vl)
+
+                    #starting_point_marker = self.iface.addVectorLayer(vl, 'layername', "ogr")
+                    QgsMapLayerRegistry.instance().addMapLayer(vl)
+
+                #QMessageBox.information(self.iface.mainWindow(),"Audio File Info", str(self.audio_start) )
+        except:
+            trace = traceback.format_exc()
+            if self.logging == True:
+                self.logger.error('sync function error')
+                self.logger.exception(trace)
+            self.iface.messageBar().pushMessage("Error", "Sync button error. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+
+
+    ############################################################################
+    ############################################################################
+    ## Export and Details
+    ############################################################################
+
+    def addedCombo(self):
+        #QMessageBox.information( self.iface.mainWindow(),"Info", 'You added' )
+        self.dlg.ui.comboBox_export.clear()
+        #self.dlg.ui.comboBox_visualization_active.clear()
+        self.layerX = {}
+        ii = 0
+        for layer in self.iface.legendInterface().layers():
+            self.dlg.ui.comboBox_export.addItem(layer.name())
+            #self.dlg.ui.comboBox_visualization_active.addItem(layer.name())
+            self.layerX[layer.name()] = {'layer source': layer.source()}
+            self.layerX[layer.name()] = {'index': ii}
+            ii += 1
+##            lty = layer.type()
+##            if lty is not None:
+##                if layer.type() == 0:#QgsMapLayer.VectorLayer:
+##                    self.dlg.ui.comboBox_export.addItem(layer.name())
+
+    def removeCombo(self):
+        #QMessageBox.information( self.iface.mainWindow(),"Info", 'You removed' )
+        self.dlg.ui.comboBox_export.clear()
+        #self.dlg.ui.comboBox_visualization_active.clear()
+        self.layerX = {}
+        ii = 0
+        for layer in self.iface.legendInterface().layers():
+            self.dlg.ui.comboBox_export.addItem(layer.name())
+            #self.dlg.ui.comboBox_visualization_active.addItem(layer.name())
+            self.layerX[layer.name()] = {'layer source': layer.source()}
+            self.layerX[layer.name()] = {'index': ii}
+            ii += 1
+##            lty = layer.type()
+##            if lty is not None:
+##                if layer.type() == 0:#QgsMapLayer.VectorLayer:
+##                    self.dlg.ui.comboBox_export.addItem(layer.name())
+
+
+
+    def exportToFile(self):
+
+        try:
+            cc = 0
+            kml = simplekml.Kml()
+            for f in self.ActiveLayer.getFeatures(): #  QgsFeatureIterator #[u'2014/06/06 10:38:48', u'Time:10:38:48, Latitude: 39.965949, Longitude: -75.172239, Speed: 0.102851, Altitude: -3.756733']
+                geom = f.geometry()
+                coords = geom.asPoint() #(-75.1722,39.9659)
+                currentatt = f.attributes()
+
+                pointdate = currentatt[0].split(" ")[0]  #2014/06/06
+                pointtime = currentatt[0].split(" ")[1] #10:38:48
+                current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
+
+
+                pnt = kml.newpoint(name=str(cc), coords=[(coords[0], coords[1])], description=str(currentatt[1]))
+                pnt.timestamp.when = current_dt.strftime('%Y-%m-%dT%XZ')
+                if currentatt[2]:
+                    cameradict = eval(currentatt[2])
+                    if cameradict['longitude']:
+                        pnt.camera.longitude = cameradict['longitude']
+                    if cameradict['latitude']:
+                        pnt.camera.latitude = cameradict['latitude']
+                    if cameradict['altitude']:
+                        pnt.camera.altitude = cameradict['altitude']
+                    if cameradict['altitudemode']:
+                        if cameradict['altitudemode'] == 'absolute':
+                            pnt.camera.altitudemode = simplekml.AltitudeMode.absolute
+                        if cameradict['altitudemode'] == 'clampToGround':
+                            pnt.camera.altitudemode = simplekml.AltitudeMode.clamptoground
+                        if cameradict['altitudemode'] == 'relativeToGround':
+                            pnt.camera.altitudemode = simplekml.AltitudeMode.relativetoground
+                    if cameradict['gxaltitudemode']:
+                        if cameradict['gxaltitudemode'] == 'clampToSeaFloor':
+                            pnt.camera.gxaltitudemode = simplekml.GxAltitudeMode.clampToSeaFloor
+                        if cameradict['gxaltitudemode'] == 'relativeToSeaFloor':
+                            pnt.camera.gxaltitudemode = simplekml.GxAltitudeMode.relativetoseafloor
+                    if cameradict['gxhoriz']:
+                        pnt.camera.gxhoriz = cameradict['gxhoriz']
+                    if cameradict['heading']:
+                        pnt.camera.heading = cameradict['heading']
+                    if cameradict['roll']:
+                        pnt.camera.roll = cameradict['roll']
+                    if cameradict['tilt']:
+                        pnt.camera.tilt = cameradict['tilt']
+
+
+                    #pnt.camera.altitudemode = simplekml.AltitudeMode.relativetoground
+
+
+
+                cc += 1
+
+            exportpath = QFileDialog.getSaveFileName(None, "Save Track", self.lastdirectory, "*.kml")
+            kml.save(exportpath)
+            self.iface.messageBar().pushMessage("Success", "kml file exported to: {0}".format(exportpath), level=QgsMessageBar.INFO, duration=5)
+        except:
+            if self.logging == True:
+                self.logger.error('sync function error')
+                self.logger.exception(traceback.format_exc())
+            self.iface.messageBar().pushMessage("Error", "exportToFile error. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+
+
+##        #QMessageBox.information( self.iface.mainWindow(),"Info", "You clicked browse" )
+##        #QFileDialog.getOpenFileName(QWidget parent=None, QString caption=QString(), QString directory=QString(), QString filter=QString(), QString selectedFilter=None, QFileDialog.Options options=0)
+##
+##        # get the current layername in the TOC
+##        exportlayername = self.dlg.ui.comboBox_export.currentText()
+##        exportlayersource = self.layerX[exportlayername]
+##        #QMessageBox.information( self.iface.mainWindow(),"Info", exportlayersource )
+##
+##        self.iface.actionLayerSaveAs()
+##        #exportpath = QFileDialog.getSaveFileName(caption="Import Raw GPS File")
+
 
     def changeActive(self,state):
         if (state==Qt.Checked):
@@ -479,14 +904,6 @@ class MilkMachine:
             # disconnect our select function to the canvasClicked signal
             QObject.disconnect(self.clickTool, SIGNAL("canvasClicked(const QgsPoint &, Qt::MouseButton)"), self.selectFeature)
 
-    def unload(self):  # tear down
-        # Remove the plugin menu item and icon
-        global NOW, pointid, ClockDateTime
-        NOW = None; pointid = None; ClockDateTime = None
-        self.logger.info('Quit Milk Machine')
-        self.logger.removeHandler(self.handler)
-        self.iface.removePluginMenu(u"&Milk Machine", self.action)
-        self.iface.removeToolBarIcon(self.action)
 
     def handleMouseDown(self, point, button):
         self.dlg.clearTextBrowser()
@@ -526,24 +943,111 @@ class MilkMachine:
 ##        else:
 ##            QMessageBox.information( self.iface.mainWindow(),"Info", "No layer currently selected in TOC" )
 
+    ############################################################################
+    ############################################################################
+    ## Top Level Functions
+    ############################################################################
+    def unload(self):  # tear down
+        # Remove the plugin menu item and icon
+        global NOW, pointid, ClockDateTime
+        NOW = None; pointid = None; ClockDateTime = None
+        self.logger.info('Quit Milk Machine')
+        self.logger.removeHandler(self.handler)
+        self.iface.removePluginMenu(u"&Milk Machine", self.action)
+        self.iface.removeToolBarIcon(self.action)
+        self.dlg.ui.lineEdit_InAudio1.setText(None)
+        self.dlg.ui.lineEdit_ImportGPS.setText(None)
+        self.dlg.ui.lineEdit_visualization_active.setText(None)
+        self.dlg.ui.lineEdit_export_active.setText(None)
+
+        try: self.ActiveLayer_name = None
+        except: pass
+        try: self.ActiveLayer = None
+        except: pass
 
     # run method that performs all the real work
     def run(self):
+        global NOW, pointid, ClockDateTime
         # make our clickTool the tool that we'll use for now
         self.canvas.setMapTool(self.clickTool)
         # show the dialog
         self.dlg.show()
 
+        #if a layer is active, put it in the viz entry
+        self.active_layer()
+
+        # Populate the Export combo box
+        self.layerX = {}
+        ii = 0
         self.dlg.ui.comboBox_export.clear()
+        #self.dlg.ui.comboBox_visualization_active.clear()
         for layer in self.iface.legendInterface().layers():
             if layer.type() == QgsMapLayer.VectorLayer:
                 self.dlg.ui.comboBox_export.addItem(layer.name())
+                #self.dlg.ui.comboBox_visualization_active.addItem(layer.name())
+                self.layerX[layer.name()] = {'layer source': layer.source()}
+                self.layerX[layer.name()] = {'index': ii}
+                ii += 1
 
+        # Populate the Visualization Camera Combo boxes
+        self.dlg.ui.comboBox_altitudemode.clear()
+        altitudemode = [None, 'absolute', 'clampToGround', 'relativeToGround']
+        for alt in altitudemode:
+            self.dlg.ui.comboBox_altitudemode.addItem(alt)
+        self.dlg.ui.comboBox_gxaltitudemode.clear()
+        gxaltitudemode = [None, 'clampToSeaFloor', 'relativeToSeaFloor']
+        for gxalt in gxaltitudemode:
+            self.dlg.ui.comboBox_gxaltitudemode.addItem(gxalt)
 
         # Run the dialog event loop
         result = self.dlg.exec_()
+        #QMessageBox.information(self.iface.mainWindow(),"result", str(result) )
         # See if OK was pressed
         if result == 1:
             # do something useful (delete the line containing pass and
             # substitute with your code)
-            pass
+            QMessageBox.information(self.iface.mainWindow(),"ok", 'you clicked ok' )
+            self.logger.info('Clicked OK')
+            self.logger.removeHandler(self.handler)
+
+        if result == 0:
+
+            self.logger.info('Clicked Cancel')
+            self.logger.removeHandler(self.handler)
+
+        self.dlg.ui.lineEdit_InAudio1.setText(None)
+        self.dlg.ui.lineEdit_ImportGPS.setText(None)
+        NOW = None; pointid = None; ClockDateTime = None
+        self.dlg.ui.lineEdit_InAudio1.setText(None)
+        self.dlg.ui.lineEdit_ImportGPS.setText(None)
+
+        # Export
+        self.dlg.ui.lineEdit_export_active.setText(None)
+
+        # Viz
+        self.dlg.ui.lineEdit_visualization_active.setText(None)
+        try: self.ActiveLayer_name = None
+        except: pass
+        try: self.ActiveLayer = None
+        except: pass
+        self.dlg.ui.lineEdit_visualization_active.setText(None)
+        self.dlg.ui.checkBox_visualization_edit.setEnabled(False)
+
+        self.dlg.ui.lineEdit_visualization_camera_longitude.setText(None)
+        self.dlg.ui.lineEdit_visualization_camera_latitude.setText(None)
+        self.dlg.ui.lineEdit_visualization_camera_altitude.setText(None)
+        self.dlg.ui.lineEdit__visualization_camera_gxhoriz.setText(None)
+        self.dlg.ui.lineEdit__visualization_camera_heading.setText(None)
+        self.dlg.ui.lineEdit__visualization_camera_roll.setText(None)
+        self.dlg.ui.lineEdit__visualization_camera_tilt.setText(None)
+
+        self.dlg.ui.lineEdit_visualization_camera_longitude.setEnabled(False)
+        self.dlg.ui.lineEdit_visualization_camera_latitude.setEnabled(False)
+        self.dlg.ui.lineEdit_visualization_camera_altitude.setEnabled(False)
+        self.dlg.ui.comboBox_altitudemode.setEnabled(False)
+        self.dlg.ui.comboBox_gxaltitudemode.setEnabled(False)
+        self.dlg.ui.lineEdit__visualization_camera_gxhoriz.setEnabled(False)
+        self.dlg.ui.lineEdit__visualization_camera_heading.setEnabled(False)
+        self.dlg.ui.lineEdit__visualization_camera_roll.setEnabled(False)
+        self.dlg.ui.lineEdit__visualization_camera_tilt.setEnabled(False)
+        self.dlg.ui.checkBox_visualization_edit.setChecked(False)

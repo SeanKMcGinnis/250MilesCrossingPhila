@@ -6,378 +6,916 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>533</width>
-    <height>218</height>
+    <width>604</width>
+    <height>339</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MilkMachine</string>
   </property>
-  <widget class="QDialogButtonBox" name="buttonboxOkCancel">
-   <property name="geometry">
-    <rect>
-     <x>260</x>
-     <y>360</y>
-     <width>171</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="txtFeedback">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
-     <y>320</y>
-     <width>171</width>
-     <height>31</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="chkActivate">
-   <property name="geometry">
-    <rect>
-     <x>360</x>
-     <y>320</y>
-     <width>171</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Activate
-(check)</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_ImportGPS">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
-     <y>40</y>
-     <width>271</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="toolTip">
-    <string>Raw GPS input file (from GPS unit)</string>
-   </property>
-   <property name="autoFillBackground">
-    <bool>false</bool>
-   </property>
-   <property name="dragEnabled">
+  <widget class="QTabWidget" name="tabWidget">
+   <property name="enabled">
     <bool>true</bool>
    </property>
-  </widget>
-  <widget class="Line" name="line">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>220</y>
-     <width>511</width>
-     <height>20</height>
+     <y>10</y>
+     <width>541</width>
+     <height>321</height>
     </rect>
    </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
+   <property name="tabShape">
+    <enum>QTabWidget::Rounded</enum>
    </property>
-  </widget>
-  <widget class="QPushButton" name="buttonImportGPS">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>40</y>
-     <width>101</width>
-     <height>31</height>
-    </rect>
+   <property name="currentIndex">
+    <number>0</number>
    </property>
-   <property name="toolTip">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Browse to .gpx file. This will convert the .gpx to a .kml, then import the kml. Additionally, a GeoJSON file will also be created in the same directory.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   <property name="elideMode">
+    <enum>Qt::ElideNone</enum>
    </property>
-   <property name="text">
-    <string>Import GPS</string>
-   </property>
-   <property name="icon">
-    <iconset resource="resources.qrc">
-     <normaloff>:/plugins/milkmachine/Import.png</normaloff>:/plugins/milkmachine/Import.png</iconset>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="buttonDrawTrack">
-   <property name="enabled">
+   <property name="documentMode">
     <bool>false</bool>
    </property>
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>80</y>
-     <width>101</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="toolTip">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the imported GPS track on the map. This will draw the .kml file that was imported.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-   <property name="text">
-    <string>Draw Track</string>
-   </property>
-   <property name="icon">
-    <iconset resource="resources.qrc">
-     <normaloff>:/plugins/milkmachine/pencil.png</normaloff>:/plugins/milkmachine/pencil.png</iconset>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="buttonExportTrack">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>270</y>
-     <width>101</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="toolTip">
-    <string>Export the selected track to any supported format</string>
-   </property>
-   <property name="text">
-    <string>Export Track</string>
-   </property>
-   <property name="icon">
-    <iconset resource="resources.qrc">
-     <normaloff>:/plugins/milkmachine/Export.png</normaloff>:/plugins/milkmachine/Export.png</iconset>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="comboBox_export">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
-     <y>270</y>
-     <width>271</width>
-     <height>31</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="buttonImport_audio">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>120</y>
-     <width>101</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="toolTip">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Browse to the .wav file that matches one of the GPS tracks in the table of contents. Once the .wav file is imported, select the point in the track (using the select tool) where the audio file should start to play.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-   <property name="text">
-    <string>Import Audio 1</string>
-   </property>
-   <property name="icon">
-    <iconset resource="resources.qrc">
-     <normaloff>:/plugins/milkmachine/Import.png</normaloff>:/plugins/milkmachine/Import.png</iconset>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_InAudio1">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
-     <y>119</y>
-     <width>271</width>
-     <height>31</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_clearAudio1">
-   <property name="enabled">
+   <property name="tabsClosable">
     <bool>false</bool>
    </property>
-   <property name="geometry">
-    <rect>
-     <x>440</x>
-     <y>120</y>
-     <width>31</width>
-     <height>31</height>
-    </rect>
+   <property name="movable">
+    <bool>true</bool>
    </property>
-   <property name="toolTip">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Clear the audio input box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="icon">
-    <iconset resource="resources.qrc">
-     <normaloff>:/plugins/milkmachine/delete.png</normaloff>:/plugins/milkmachine/delete.png</iconset>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_Audio1">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>170</y>
-     <width>31</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="toolTip">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;After selecting a point in the GPS track that matches the .WAV audio file, click play.  The VLC media player will launch, starting at the time within the audio file that matches the time within the point file (.kml). &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-   <property name="icon">
-    <iconset resource="resources.qrc">
-     <normaloff>:/plugins/milkmachine/play.png</normaloff>:/plugins/milkmachine/play.png</iconset>
-   </property>
-  </widget>
-  <widget class="QLCDNumber" name="lcdNumber_Audio1_C">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>170</y>
-     <width>131</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="toolTip">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Local time as recorded by the audio device&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-   <property name="smallDecimalPoint">
-    <bool>false</bool>
-   </property>
-   <property name="digitCount">
-    <number>8</number>
-   </property>
-  </widget>
-  <widget class="QLCDNumber" name="lcdNumber_Audio1_P">
-   <property name="geometry">
-    <rect>
-     <x>400</x>
-     <y>170</y>
-     <width>81</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="toolTip">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Position in the track that the audio file is currently playing at (seconds). This corresponds to the feature (point) ID.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-  </widget>
-  <widget class="QLCDNumber" name="lcdNumber_Audio1_D">
-   <property name="geometry">
-    <rect>
-     <x>260</x>
-     <y>170</y>
-     <width>131</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="toolTip">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Duration that the audio has been playing. hh:mm:ss&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-   <property name="digitCount">
-    <number>8</number>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>145</x>
-     <y>153</y>
-     <width>101</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="toolTip">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The clock time stamp on the audio file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-   <property name="text">
-    <string>Audio Clock Time</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>401</x>
-     <y>153</y>
-     <width>81</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="toolTip">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Feature ID (FID) number. For point data layers, this is a automatic number that is generated by QGIS to indicate sequential point number from the &amp;quot;starting point&amp;quot; of the track. The numbering starts at 0&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-   <property name="text">
-    <string>Feature ID (FID)</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>280</x>
-     <y>153</y>
-     <width>111</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="toolTip">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The duration into the audio file that is currently playing.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-   <property name="text">
-    <string>Duration Into Audio</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_stop1">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>80</x>
-     <y>170</y>
-     <width>31</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="toolTip">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Stops and closes the VLC media player and audio file&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="icon">
-    <iconset resource="resources.qrc">
-     <normaloff>:/plugins/milkmachine/stop.png</normaloff>:/plugins/milkmachine/stop.png</iconset>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_Audio1info">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>480</x>
-     <y>120</y>
-     <width>31</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="toolTip">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click for information about the current audio track&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="icon">
-    <iconset resource="resources.qrc">
-     <normaloff>:/plugins/milkmachine/question.png</normaloff>:/plugins/milkmachine/question.png</iconset>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>24</width>
-     <height>24</height>
-    </size>
-   </property>
+   <widget class="QWidget" name="tab_import">
+    <attribute name="title">
+     <string>Import and Sync</string>
+    </attribute>
+    <attribute name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Import raw .kml files and render as an ESRI shapefile for editing, and import audio files for interactive time syncronization.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </attribute>
+    <widget class="QPushButton" name="pushButton_Audio1info">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>100</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click for information about the current audio track&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/plugins/milkmachine/question.png</normaloff>:/plugins/milkmachine/question.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="buttonImportGPS">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>101</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Browse to .gpx file. This will convert the .gpx to a .kml, then import the kml. Additionally, a GeoJSON file will also be created in the same directory.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Import GPS</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/plugins/milkmachine/Import.png</normaloff>:/plugins/milkmachine/Import.png</iconset>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>381</x>
+       <y>133</y>
+       <width>81</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Feature ID (FID) number. For point data layers, this is a automatic number that is generated by QGIS to indicate sequential point number from the &amp;quot;starting point&amp;quot; of the track. The numbering starts at 0&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Feature ID (FID)</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_clearAudio1">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>420</x>
+       <y>100</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Clear the audio input box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/plugins/milkmachine/delete.png</normaloff>:/plugins/milkmachine/delete.png</iconset>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="buttonDrawTrack">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>60</y>
+       <width>101</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the imported GPS track on the map. This will draw the .kml file that was imported (above) as a &amp;quot;shapefile&amp;quot; with the same name as the .kml. Two shapefiles will be produced from the original .kml; 1) one with the same name as the .kml which is rendered on the map and added to the table of contents, 2) another with &amp;quot;_duplicate&amp;quot; appended to the name, just to have a backup copy of the original.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Draw Track</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/plugins/milkmachine/pencil.png</normaloff>:/plugins/milkmachine/pencil.png</iconset>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_ImportGPS">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>20</y>
+       <width>271</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>Raw GPS input file (from GPS unit)</string>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="dragEnabled">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_Audio1">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>150</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;After selecting a point in the GPS track that matches the .WAV audio file, click play. The VLC media player will launch, starting at the time within the audio file that matches the time within the point file. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/plugins/milkmachine/play.png</normaloff>:/plugins/milkmachine/play.png</iconset>
+     </property>
+    </widget>
+    <widget class="QLCDNumber" name="lcdNumber_Audio1_C">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>150</y>
+       <width>131</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The clock time stamp on the audio file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="smallDecimalPoint">
+      <bool>false</bool>
+     </property>
+     <property name="digitCount">
+      <number>8</number>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_stop1">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>150</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Stops and closes the VLC media player and audio file&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/plugins/milkmachine/stop.png</normaloff>:/plugins/milkmachine/stop.png</iconset>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>133</y>
+       <width>111</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The duration into the audio file that is currently playing.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Duration Into Audio</string>
+     </property>
+    </widget>
+    <widget class="QLCDNumber" name="lcdNumber_Audio1_D">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>150</y>
+       <width>131</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The duration into the audio file that is currently playing.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="digitCount">
+      <number>8</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>125</x>
+       <y>133</y>
+       <width>101</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The clock time stamp on the audio file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Audio Clock Time</string>
+     </property>
+    </widget>
+    <widget class="QLCDNumber" name="lcdNumber_Audio1_P">
+     <property name="geometry">
+      <rect>
+       <x>380</x>
+       <y>150</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Feature ID (FID) number. For point data layers, this is a automatic number that is generated by QGIS to indicate sequential point number from the &amp;quot;starting point&amp;quot; of the track. The numbering starts at 0&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="buttonImport_audio">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>100</y>
+       <width>101</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Browse to the .wav file that matches one of the GPS tracks in the table of contents. Once the .wav file is imported, select the point in the track (using the select tool) where the audio file should start to play.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Import Audio 1</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/plugins/milkmachine/Import.png</normaloff>:/plugins/milkmachine/Import.png</iconset>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_InAudio1">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>99</y>
+       <width>271</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_sync">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>500</x>
+       <y>100</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Syncronize the audio with the GPS track. Press the button while a track is selected that matches the audio file and a marker will be produced that shows where the audio starts in the GPS track.&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/plugins/milkmachine/synchronize.png</normaloff>:/plugins/milkmachine/synchronize.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_headoftrack">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>68</y>
+       <width>131</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, a green marker is drawn when the &amp;quot;Draw Track&amp;quot; button is pressed to indicate where the track starts.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Draw &quot;Head of Track&quot;</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_export">
+    <attribute name="title">
+     <string>Export and Details</string>
+    </attribute>
+    <widget class="QPushButton" name="buttonExportTrack">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>14</y>
+       <width>101</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Export the selected track to .kml. If the active track is an ESRI shapefile point layer, the user will be able to export.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Export Track</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/plugins/milkmachine/Export.png</normaloff>:/plugins/milkmachine/Export.png</iconset>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_TrackInfo">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>14</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click for information about the current audio track&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/plugins/milkmachine/question.png</normaloff>:/plugins/milkmachine/question.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_google_earth">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>14</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;View selected track in Google Earth&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/plugins/milkmachine/earth.png</normaloff>:/plugins/milkmachine/earth.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>36</width>
+       <height>36</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_visualization_active_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>81</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Active Track:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_export_active">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>18</y>
+       <width>131</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_visualization">
+    <attribute name="title">
+     <string>Visualization</string>
+    </attribute>
+    <widget class="QLabel" name="label_visualization_active">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>81</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Active Track:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_visualization_active">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>18</y>
+       <width>131</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_visualization_edit">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>21</y>
+       <width>111</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Checking this box will enable the &amp;quot;Camera&amp;quot; fields for editing. The user must select a layer in the table of contents, have editing &amp;quot;on&amp;quot;, and have at least one selected point.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Edit Visualization</string>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_cameraview">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>231</width>
+       <height>241</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Introduced with KML 2.2, &lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;&amp;lt;Camera&amp;gt;&lt;/span&gt; provides an additional way to specify the observer's viewpoint and associated view parameters. &lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;&amp;lt;Camera&amp;gt;&lt;/span&gt; is similar to &lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;&amp;lt;LookAt&amp;gt;&lt;/span&gt;, since both elements define the placement and orientation of a virtual camera that is viewing the Earth. The difference is that LookAt specifies the view in terms of the point of interest that is being viewed. Camera, in contrast, specifies the view in terms of the viewer's position and orientation. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="title">
+      <string>Camera</string>
+     </property>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>60</y>
+        <width>81</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>altitude:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>81</y>
+        <width>91</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>altitudemode:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>102</y>
+        <width>91</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>gxaltitudemode:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>123</y>
+        <width>91</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>gxhorizfov:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_8">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>144</y>
+        <width>91</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>heading:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_9">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>165</y>
+        <width>91</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>roll:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_10">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>186</y>
+        <width>91</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>tilt:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_visualization_camera_altitude">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>60</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Distance of the camera from the earth's surface, in meters. Interpreted according to the Camera's &amp;lt;altitudeMode&amp;gt; or &amp;lt;gx:altitudeMode&amp;gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit__visualization_camera_gxhoriz">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>123</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Rotation about the x axis. &lt;float&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit__visualization_camera_heading">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>144</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Direction (azimuth) of the camera, in degrees. Default=0 (true North). (&lt;a href=&quot;https://developers.google.com/kml/documentation/kmlreference#headingdiagram&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;See diagram&lt;/span&gt;&lt;/a&gt;.) Values range from 0 to 360 degrees. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit__visualization_camera_roll">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>165</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rotation, in degrees, of the camera around the Z axis. Values range from −180 to +180 degrees. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox_altitudemode">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>81</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Specifies how the &amp;lt;altitude&amp;gt; specified for the Camera is interpreted. Possible values are as follows: &lt;/p&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;relativeToGround&lt;/span&gt; - (default) Interprets the &amp;lt;altitude&amp;gt; as a value in meters above the ground. If the point is over water, the &amp;lt;altitude&amp;gt; will be interpreted as a value in meters above sea level. See &lt;a href=&quot;https://developers.google.com/kml/documentation/kmlreference#gxaltitudemode&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;&amp;lt;gx:altitudeMode&amp;gt;&lt;/span&gt;&lt;/a&gt; below to specify points relative to the sea floor. &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;clampToGround &lt;/span&gt;- For a camera, this setting also places the camera &lt;span style=&quot; font-weight:600;&quot;&gt;relativeToGround&lt;/span&gt;, since putting the camera exactly at terrain height would mean that the eye would intersect the terrain (and the view would be blocked). &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;absolute &lt;/span&gt;- Interprets the &amp;lt;altitude&amp;gt; as a value in meters above sea level. &lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox_gxaltitudemode">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>102</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A KML extension in the &lt;a href=&quot;https://developers.google.com/kml/documentation/kmlreference#kmlextensions&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Google extension namespace&lt;/span&gt;&lt;/a&gt;, allowing altitudes relative to the sea floor. Values are: &lt;/p&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;relativeToSeaFloor&lt;/span&gt; - Interprets the &amp;lt;altitude&amp;gt; as a value in meters above the sea floor. If the point is above land rather than sea, the &amp;lt;altitude&amp;gt; will be interpreted as being above the ground. &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;clampToSeaFloor&lt;/span&gt; - The &amp;lt;altitude&amp;gt; specification is ignored, and the Camera will be positioned on the sea floor. If the point is on land rather than at sea, the Camera will be positioned on the ground. &lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_camera_apply">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>210</y>
+        <width>61</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Apply the camera view changes to the selected points in the active layer. To roll back these edits, select &amp;quot;Cancel for selected layer&amp;quot; in the editor options.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Apply</string>
+      </property>
+      <property name="icon">
+       <iconset resource="resources.qrc">
+        <normaloff>:/plugins/milkmachine/triangle.png</normaloff>:/plugins/milkmachine/triangle.png</iconset>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit__visualization_camera_tilt">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>186</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rotation, in degrees, of the camera around the &lt;span style=&quot; font-style:italic;&quot;&gt;X&lt;/span&gt; axis. A value of 0 indicates that the view is aimed straight down toward the earth (the most common case). A value for 90 for &amp;lt;tilt&amp;gt; indicates that the view is aimed toward the horizon. Values greater than 90 indicate that the view is pointed up into the sky. Values for &amp;lt;tilt&amp;gt; are clamped at +180 degrees. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_11">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>39</y>
+        <width>81</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>latitude:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_12">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>18</y>
+        <width>81</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>longitude:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_visualization_camera_latitude">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>39</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Latitude of the virtual camera. Degrees north or south of the Equator (0 degrees). Values range from −90 degrees to 90 degrees.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_visualization_camera_longitude">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>18</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Longitude of the virtual camera (eye point). Angular distance in degrees, relative to the Prime Meridian. Values west of the Meridian range from −180 to 0 degrees. Values east of the Meridian range from 0 to 180 degrees.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_rendering">
+    <attribute name="title">
+     <string>Rendering</string>
+    </attribute>
+   </widget>
+   <widget class="QWidget" name="tab">
+    <attribute name="title">
+     <string>Development</string>
+    </attribute>
+    <widget class="QTextEdit" name="txtFeedback">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>90</y>
+       <width>171</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="chkActivate">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>40</y>
+       <width>171</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Activate
+(check)</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_export">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>190</y>
+       <width>271</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QDialogButtonBox" name="buttonboxOkCancel">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>140</y>
+       <width>171</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </widget>
   </widget>
  </widget>
  <resources>
