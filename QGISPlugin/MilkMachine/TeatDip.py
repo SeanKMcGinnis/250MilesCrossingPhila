@@ -73,4 +73,6 @@ class mmGPX(object):
             Qkml = QgsVectorLayer(mmGPX.outfile, 'importkml', "ogr")
             error = QgsVectorFileWriter.writeAsVectorFormat(Qkml, path, "utf-8", None, "GeoJSON")
 
-
+class Shape:
+    def __init__(self, ActiveLayer):
+        self.activelayer = ActiveLayer
