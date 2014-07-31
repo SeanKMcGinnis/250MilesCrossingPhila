@@ -173,8 +173,8 @@ class MilkMachine:
                     # export
                     if self.ActiveLayer.storageType() == 'ESRI Shapefile' and self.ActiveLayer.geometryType() == 0:
                         self.dlg.ui.buttonExportTrack.setEnabled(True)
-                        self.dlg.ui.pushButton_TrackInfo.setEnabled(True)
-                        self.dlg.ui.pushButton_google_earth.setEnabled(True)
+                        #self.dlg.ui.pushButton_TrackInfo.setEnabled(True)
+                        #self.dlg.ui.pushButton_google_earth.setEnabled(True)
                     else:
                         self.dlg.ui.buttonExportTrack.setEnabled(False)
                         self.dlg.ui.pushButton_TrackInfo.setEnabled(False)
@@ -186,6 +186,8 @@ class MilkMachine:
 
 
             else:
+                self.dlg.ui.lineEdit_tourname.setText(None)
+                self.dlg.ui.lineEdit_flyto_duration.setText(None)
                 self.dlg.ui.lineEdit_visualization_active.setText(None)
                 self.dlg.ui.lineEdit_export_active.setText(None)
                 self.dlg.ui.lineEdit_visualization_camera_longitude.setText(None)
@@ -231,6 +233,10 @@ class MilkMachine:
 
                 if len(self.selectList) >= 1:
                     # enable everything
+
+                    self.dlg.ui.lineEdit_tourname.setEnabled(True)
+                    self.dlg.ui.comboBox_flyto_mode.setEnabled(True)
+                    self.dlg.ui.lineEdit_flyto_duration.setEnabled(True)
                     self.dlg.ui.lineEdit_visualization_camera_longitude.setEnabled(True)
                     self.dlg.ui.lineEdit_visualization_camera_latitude.setEnabled(True)
                     self.dlg.ui.lineEdit_visualization_camera_altitude.setEnabled(True)
@@ -247,6 +253,10 @@ class MilkMachine:
 
 
         else:  # checkbox is false, clear shit out
+            self.dlg.ui.lineEdit_tourname.setEnabled(False)
+            self.dlg.ui.comboBox_flyto_mode.setEnabled(False)
+            self.dlg.ui.lineEdit_flyto_duration.setEnabled(False)
+
             self.dlg.ui.lineEdit_visualization_camera_longitude.setEnabled(False)
             self.dlg.ui.lineEdit_visualization_camera_latitude.setEnabled(False)
             self.dlg.ui.lineEdit_visualization_camera_altitude.setEnabled(False)
@@ -263,6 +273,14 @@ class MilkMachine:
         try:
             # make a dictionary of all of the camera parameters
             camera = {'longitude': None, 'latitude': None,'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'gxhoriz' : None,'heading' : None,'roll' : None,'tilt' : None}
+            flyto = {'name': None, 'flyToMode': None, 'duration': None}
+
+
+            flyto['name'] = self.dlg.ui.lineEdit_tourname.text()
+            flyto['flyToMode'] = self.dlg.ui.comboBox_flyto_mode.currentText()
+            flyto['duration'] = self.dlg.ui.lineEdit_flyto_duration.text()
+
+
             camera['longitude'] = self.dlg.ui.lineEdit_visualization_camera_longitude.text()
             camera['latitude'] = self.dlg.ui.lineEdit_visualization_camera_latitude.text()
             camera['altitude'] = self.dlg.ui.lineEdit_visualization_camera_altitude.text()
@@ -299,6 +317,7 @@ class MilkMachine:
                     for f in self.selectList:
                         #self.ActiveLayer.dataProvider().changeAttributeValues({ f : {2: str(camera)} })
                         self.ActiveLayer.changeAttributeValue(f, 2, str(camera))
+                        self.ActiveLayer.changeAttributeValue(f, 3, str(flyto))
                     #self.ActiveLayer.updateFields()
                     self.ActiveLayer.endEditCommand()
                 else:
@@ -368,7 +387,7 @@ class MilkMachine:
                 QgsVectorFileWriter.writeAsVectorFormat(kmllayer, shapepath_dup, "utf-8", None, "ESRI Shapefile")  # duplicate of original
                 #bring the shapefile back in, and render it on the map
                 shaper = QgsVectorLayer(shapepath, layername, "ogr")
-                shaper.dataProvider().addAttributes( [ QgsField("camera",QVariant.String), QgsField("pointsize", QVariant.Int) ] )
+                shaper.dataProvider().addAttributes( [ QgsField("camera",QVariant.String), QgsField("flyto",QVariant.String), QgsField("pointstyle", QVariant.Int) ] )
                 shaper.updateFields()
 
                 # define the layer properties as a dict
@@ -831,6 +850,114 @@ class MilkMachine:
         try:
             cc = 0
             kml = simplekml.Kml()
+
+
+            for f in self.ActiveLayer.getFeatures(): #  QgsFeatureIterator #[u'2014/06/06 10:38:48', u'Time:10:38:48, Latitude: 39.965949, Longitude: -75.172239, Speed: 0.102851, Altitude: -3.756733']
+                currentatt = f.attributes()
+
+                if currentatt[2]:
+
+                    if cc == 0:  # establish this as the start of the tour
+                        cameradict = eval(currentatt[2])
+                        flytodict = eval(currentatt[3])
+
+                        # Create a tour and attach a playlist to it
+                        if flytodict['name']:
+                            tour = kml.newgxtour(name=flytodict['name'])
+                        else:
+                            tour = kml.newgxtour(name="Tour")
+
+                        playlist = tour.newgxplaylist()
+
+##                        # Attach a gx:SoundCue to the playlist and delay playing by 2 second (sound clip is about 4 seconds long)
+##                        soundcue = playlist.newgxsoundcue()
+##                        soundcue.href = "http://simplekml.googlecode.com/hg/samples/resources/drum_roll_1.wav"
+##                        soundcue.gxdelayedstart = 2
+
+                        if flytodict['duration']:
+                            flyto = playlist.newgxflyto(gxduration=float(flytodict['duration']))
+                        else:
+                            flyto = playlist.newgxflyto()
+                        if flytodict['flyToMode']:
+                            flyto.gxflytomode = flytodict['flyToMode']
+
+
+
+
+                        if cameradict['longitude']:
+                            flyto.camera.longitude = cameradict['longitude']
+                        if cameradict['latitude']:
+                            flyto.camera.latitude = cameradict['latitude']
+                        if cameradict['altitude']:
+                            flyto.camera.altitude = cameradict['altitude']
+                        if cameradict['altitudemode']:
+                            if cameradict['altitudemode'] == 'absolute':
+                                flyto.camera.altitudemode = simplekml.AltitudeMode.absolute
+                            if cameradict['altitudemode'] == 'clampToGround':
+                                flyto.camera.altitudemode = simplekml.AltitudeMode.clamptoground
+                            if cameradict['altitudemode'] == 'relativeToGround':
+                                flyto.camera.altitudemode = simplekml.AltitudeMode.relativetoground
+                        if cameradict['gxaltitudemode']:
+                            if cameradict['gxaltitudemode'] == 'clampToSeaFloor':
+                                flyto.camera.gxaltitudemode = simplekml.GxAltitudeMode.clampToSeaFloor
+                            if cameradict['gxaltitudemode'] == 'relativeToSeaFloor':
+                                flyto.camera.gxaltitudemode = simplekml.GxAltitudeMode.relativetoseafloor
+                        if cameradict['gxhoriz']:
+                            flyto.camera.gxhoriz = cameradict['gxhoriz']
+                        if cameradict['heading']:
+                            flyto.camera.heading = cameradict['heading']
+                        if cameradict['roll']:
+                            flyto.camera.roll = cameradict['roll']
+                        if cameradict['tilt']:
+                            flyto.camera.tilt = cameradict['tilt']
+
+                        cc += 1
+
+                    else:
+                        cameradict = eval(currentatt[2])
+                        flytodict = eval(currentatt[3])
+##                        # Attach a gx:SoundCue to the playlist and delay playing by 2 second (sound clip is about 4 seconds long)
+##                        soundcue = playlist.newgxsoundcue()
+##                        soundcue.href = "http://simplekml.googlecode.com/hg/samples/resources/drum_roll_1.wav"
+##                        soundcue.gxdelayedstart = 2
+
+                        if flytodict['duration']:
+                            flyto = playlist.newgxflyto(gxduration=float(flytodict['duration']))
+                        else:
+                            flyto = playlist.newgxflyto()
+                        if flytodict['flyToMode']:
+                            flyto.gxflytomode = flytodict['flyToMode']
+
+                        if cameradict['longitude']:
+                            flyto.camera.longitude = cameradict['longitude']
+                        if cameradict['latitude']:
+                            flyto.camera.latitude = cameradict['latitude']
+                        if cameradict['altitude']:
+                            flyto.camera.altitude = cameradict['altitude']
+                        if cameradict['altitudemode']:
+                            if cameradict['altitudemode'] == 'absolute':
+                                flyto.camera.altitudemode = simplekml.AltitudeMode.absolute
+                            if cameradict['altitudemode'] == 'clampToGround':
+                                flyto.camera.altitudemode = simplekml.AltitudeMode.clamptoground
+                            if cameradict['altitudemode'] == 'relativeToGround':
+                                flyto.camera.altitudemode = simplekml.AltitudeMode.relativetoground
+                        if cameradict['gxaltitudemode']:
+                            if cameradict['gxaltitudemode'] == 'clampToSeaFloor':
+                                flyto.camera.gxaltitudemode = simplekml.GxAltitudeMode.clampToSeaFloor
+                            if cameradict['gxaltitudemode'] == 'relativeToSeaFloor':
+                                flyto.camera.gxaltitudemode = simplekml.GxAltitudeMode.relativetoseafloor
+                        if cameradict['gxhoriz']:
+                            flyto.camera.gxhoriz = cameradict['gxhoriz']
+                        if cameradict['heading']:
+                            flyto.camera.heading = float(cameradict['heading'])
+                        if cameradict['roll']:
+                            flyto.camera.roll = float(cameradict['roll'])
+                        if cameradict['tilt']:
+                            flyto.camera.tilt = float(cameradict['tilt'])
+
+                        cc += 1
+
+            folder = kml.newfolder(name='Points')
             for f in self.ActiveLayer.getFeatures(): #  QgsFeatureIterator #[u'2014/06/06 10:38:48', u'Time:10:38:48, Latitude: 39.965949, Longitude: -75.172239, Speed: 0.102851, Altitude: -3.756733']
                 geom = f.geometry()
                 coords = geom.asPoint() #(-75.1722,39.9659)
@@ -840,44 +967,13 @@ class MilkMachine:
                 pointtime = currentatt[0].split(" ")[1] #10:38:48
                 current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
 
-
-                pnt = kml.newpoint(name=str(cc), coords=[(coords[0], coords[1])], description=str(currentatt[1]))
+                pnt = folder.newpoint(name=str(cc), coords=[(coords[0], coords[1])], description=str(currentatt[1]))
                 pnt.timestamp.when = current_dt.strftime('%Y-%m-%dT%XZ')
-                if currentatt[2]:
-                    cameradict = eval(currentatt[2])
-                    if cameradict['longitude']:
-                        pnt.camera.longitude = cameradict['longitude']
-                    if cameradict['latitude']:
-                        pnt.camera.latitude = cameradict['latitude']
-                    if cameradict['altitude']:
-                        pnt.camera.altitude = cameradict['altitude']
-                    if cameradict['altitudemode']:
-                        if cameradict['altitudemode'] == 'absolute':
-                            pnt.camera.altitudemode = simplekml.AltitudeMode.absolute
-                        if cameradict['altitudemode'] == 'clampToGround':
-                            pnt.camera.altitudemode = simplekml.AltitudeMode.clamptoground
-                        if cameradict['altitudemode'] == 'relativeToGround':
-                            pnt.camera.altitudemode = simplekml.AltitudeMode.relativetoground
-                    if cameradict['gxaltitudemode']:
-                        if cameradict['gxaltitudemode'] == 'clampToSeaFloor':
-                            pnt.camera.gxaltitudemode = simplekml.GxAltitudeMode.clampToSeaFloor
-                        if cameradict['gxaltitudemode'] == 'relativeToSeaFloor':
-                            pnt.camera.gxaltitudemode = simplekml.GxAltitudeMode.relativetoseafloor
-                    if cameradict['gxhoriz']:
-                        pnt.camera.gxhoriz = cameradict['gxhoriz']
-                    if cameradict['heading']:
-                        pnt.camera.heading = cameradict['heading']
-                    if cameradict['roll']:
-                        pnt.camera.roll = cameradict['roll']
-                    if cameradict['tilt']:
-                        pnt.camera.tilt = cameradict['tilt']
-
-
-                    #pnt.camera.altitudemode = simplekml.AltitudeMode.relativetoground
-
-
 
                 cc += 1
+
+
+
 
             exportpath = QFileDialog.getSaveFileName(None, "Save Track", self.lastdirectory, "*.kml")
             kml.save(exportpath)
@@ -888,18 +984,6 @@ class MilkMachine:
                 self.logger.exception(traceback.format_exc())
             self.iface.messageBar().pushMessage("Error", "exportToFile error. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
 
-
-
-##        #QMessageBox.information( self.iface.mainWindow(),"Info", "You clicked browse" )
-##        #QFileDialog.getOpenFileName(QWidget parent=None, QString caption=QString(), QString directory=QString(), QString filter=QString(), QString selectedFilter=None, QFileDialog.Options options=0)
-##
-##        # get the current layername in the TOC
-##        exportlayername = self.dlg.ui.comboBox_export.currentText()
-##        exportlayersource = self.layerX[exportlayername]
-##        #QMessageBox.information( self.iface.mainWindow(),"Info", exportlayersource )
-##
-##        self.iface.actionLayerSaveAs()
-##        #exportpath = QFileDialog.getSaveFileName(caption="Import Raw GPS File")
 
 
     def changeActive(self,state):
@@ -937,21 +1021,7 @@ class MilkMachine:
             layerdatasource.append(layer.source())
 
         QMessageBox.information( self.iface.mainWindow(),"Info", str(layerlist) + str(layerdatasource) )
-##        selectList = []
-##        if cLayer:
-##            provider = cLayer.dataProvider()
-##            feat = QgsFeature()
-##            # create the select statement
-##            provider.select([],rect) # the arguments mean no attributes returned, and do a bbox filter with our buffered rectangle to limit the amount of features
-##            while provider.nextFeature(feat):
-##                # if the feat geom returned from the selection intersects our point then put it in a list
-##                if feat.geometry().intersects(pntGeom):
-##                    selectList.append(feat.id())
-##
-##            # make the actual selection
-##            cLayer.setSelectedFeatures(selectList)
-##        else:
-##            QMessageBox.information( self.iface.mainWindow(),"Info", "No layer currently selected in TOC" )
+
 
     ############################################################################
     ############################################################################
@@ -1000,10 +1070,16 @@ class MilkMachine:
                 ii += 1
 
         # Populate the Visualization Camera Combo boxes
+        self.dlg.ui.comboBox_flyto_mode.clear()
+        flytomodelist = [None, 'smooth', 'bounce']
+        for hh in flytomodelist:
+            self.dlg.ui.comboBox_flyto_mode.addItem(hh)
+
         self.dlg.ui.comboBox_altitudemode.clear()
         altitudemode = [None, 'absolute', 'clampToGround', 'relativeToGround']
         for alt in altitudemode:
             self.dlg.ui.comboBox_altitudemode.addItem(alt)
+
         self.dlg.ui.comboBox_gxaltitudemode.clear()
         gxaltitudemode = [None, 'clampToSeaFloor', 'relativeToSeaFloor']
         for gxalt in gxaltitudemode:
@@ -1043,6 +1119,9 @@ class MilkMachine:
         self.dlg.ui.lineEdit_visualization_active.setText(None)
         self.dlg.ui.checkBox_visualization_edit.setEnabled(False)
 
+        self.dlg.ui.lineEdit_tourname.setText(None)
+        self.dlg.ui.lineEdit_flyto_duration.setText(None)
+
         self.dlg.ui.lineEdit_visualization_camera_longitude.setText(None)
         self.dlg.ui.lineEdit_visualization_camera_latitude.setText(None)
         self.dlg.ui.lineEdit_visualization_camera_altitude.setText(None)
@@ -1050,6 +1129,11 @@ class MilkMachine:
         self.dlg.ui.lineEdit__visualization_camera_heading.setText(None)
         self.dlg.ui.lineEdit__visualization_camera_roll.setText(None)
         self.dlg.ui.lineEdit__visualization_camera_tilt.setText(None)
+
+
+        self.dlg.ui.lineEdit_tourname.setEnabled(False)
+        self.dlg.ui.comboBox_flyto_mode.setEnabled(False)
+        self.dlg.ui.lineEdit_flyto_duration.setEnabled(False)
 
         self.dlg.ui.lineEdit_visualization_camera_longitude.setEnabled(False)
         self.dlg.ui.lineEdit_visualization_camera_latitude.setEnabled(False)

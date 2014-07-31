@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>604</width>
-    <height>339</height>
+    <width>576</width>
+    <height>354</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,8 +21,8 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>541</width>
-     <height>321</height>
+     <width>551</width>
+     <height>341</height>
     </rect>
    </property>
    <property name="tabShape">
@@ -543,303 +543,407 @@
       <string>Edit Visualization</string>
      </property>
     </widget>
-    <widget class="QGroupBox" name="groupBox_cameraview">
+    <widget class="QGroupBox" name="groupBox_2">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>50</y>
-       <width>231</width>
-       <height>241</height>
+       <width>461</width>
+       <height>261</height>
       </rect>
      </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Introduced with KML 2.2, &lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;&amp;lt;Camera&amp;gt;&lt;/span&gt; provides an additional way to specify the observer's viewpoint and associated view parameters. &lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;&amp;lt;Camera&amp;gt;&lt;/span&gt; is similar to &lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;&amp;lt;LookAt&amp;gt;&lt;/span&gt;, since both elements define the placement and orientation of a virtual camera that is viewing the Earth. The difference is that LookAt specifies the view in terms of the point of interest that is being viewed. Camera, in contrast, specifies the view in terms of the viewer's position and orientation. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
      <property name="title">
-      <string>Camera</string>
+      <string>KML Tour</string>
      </property>
-     <widget class="QLabel" name="label_4">
+     <widget class="QGroupBox" name="groupBox_cameraview">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>60</y>
-        <width>81</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>altitude:</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_5">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>81</y>
-        <width>91</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>altitudemode:</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_6">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>102</y>
-        <width>91</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>gxaltitudemode:</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_7">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>123</y>
-        <width>91</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>gxhorizfov:</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_8">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>144</y>
-        <width>91</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>heading:</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_9">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>165</y>
-        <width>91</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>roll:</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_10">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>186</y>
-        <width>91</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>tilt:</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit_visualization_camera_altitude">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>60</y>
-        <width>101</width>
-        <height>20</height>
+        <x>220</x>
+        <y>10</y>
+        <width>231</width>
+        <height>241</height>
        </rect>
       </property>
       <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Distance of the camera from the earth's surface, in meters. Interpreted according to the Camera's &amp;lt;altitudeMode&amp;gt; or &amp;lt;gx:altitudeMode&amp;gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Introduced with KML 2.2, &lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;&amp;lt;Camera&amp;gt;&lt;/span&gt; provides an additional way to specify the observer's viewpoint and associated view parameters. &lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;&amp;lt;Camera&amp;gt;&lt;/span&gt; is similar to &lt;span style=&quot; font-family:'Courier New,courier';&quot;&gt;&amp;lt;LookAt&amp;gt;&lt;/span&gt;, since both elements define the placement and orientation of a virtual camera that is viewing the Earth. The difference is that LookAt specifies the view in terms of the point of interest that is being viewed. Camera, in contrast, specifies the view in terms of the viewer's position and orientation. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
+      <property name="title">
+       <string>Camera</string>
+      </property>
+      <widget class="QLabel" name="label_4">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>60</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>altitude:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_5">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>81</y>
+         <width>91</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>altitudemode:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_6">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>102</y>
+         <width>91</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>gxaltitudemode:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_7">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>123</y>
+         <width>91</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>gxhorizfov:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_8">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>144</y>
+         <width>91</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>heading:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_9">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>165</y>
+         <width>91</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>roll:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_10">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>186</y>
+         <width>91</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>tilt:</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_visualization_camera_altitude">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>60</y>
+         <width>101</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Distance of the camera from the earth's surface, in meters. Interpreted according to the Camera's &amp;lt;altitudeMode&amp;gt; or &amp;lt;gx:altitudeMode&amp;gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit__visualization_camera_gxhoriz">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>123</y>
+         <width>101</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Rotation about the x axis. &lt;float&gt;</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit__visualization_camera_heading">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>144</y>
+         <width>101</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Direction (azimuth) of the camera, in degrees. Default=0 (true North). (&lt;a href=&quot;https://developers.google.com/kml/documentation/kmlreference#headingdiagram&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;See diagram&lt;/span&gt;&lt;/a&gt;.) Values range from 0 to 360 degrees. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit__visualization_camera_roll">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>165</y>
+         <width>101</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rotation, in degrees, of the camera around the Z axis. Values range from −180 to +180 degrees. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="comboBox_altitudemode">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>81</y>
+         <width>101</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Specifies how the &amp;lt;altitude&amp;gt; specified for the Camera is interpreted. Possible values are as follows: &lt;/p&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;relativeToGround&lt;/span&gt; - (default) Interprets the &amp;lt;altitude&amp;gt; as a value in meters above the ground. If the point is over water, the &amp;lt;altitude&amp;gt; will be interpreted as a value in meters above sea level. See &lt;a href=&quot;https://developers.google.com/kml/documentation/kmlreference#gxaltitudemode&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;&amp;lt;gx:altitudeMode&amp;gt;&lt;/span&gt;&lt;/a&gt; below to specify points relative to the sea floor. &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;clampToGround &lt;/span&gt;- For a camera, this setting also places the camera &lt;span style=&quot; font-weight:600;&quot;&gt;relativeToGround&lt;/span&gt;, since putting the camera exactly at terrain height would mean that the eye would intersect the terrain (and the view would be blocked). &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;absolute &lt;/span&gt;- Interprets the &amp;lt;altitude&amp;gt; as a value in meters above sea level. &lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="comboBox_gxaltitudemode">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>102</y>
+         <width>101</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A KML extension in the &lt;a href=&quot;https://developers.google.com/kml/documentation/kmlreference#kmlextensions&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Google extension namespace&lt;/span&gt;&lt;/a&gt;, allowing altitudes relative to the sea floor. Values are: &lt;/p&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;relativeToSeaFloor&lt;/span&gt; - Interprets the &amp;lt;altitude&amp;gt; as a value in meters above the sea floor. If the point is above land rather than sea, the &amp;lt;altitude&amp;gt; will be interpreted as being above the ground. &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;clampToSeaFloor&lt;/span&gt; - The &amp;lt;altitude&amp;gt; specification is ignored, and the Camera will be positioned on the sea floor. If the point is on land rather than at sea, the Camera will be positioned on the ground. &lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_camera_apply">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>210</y>
+         <width>61</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Apply the camera view changes to the selected points in the active layer. To roll back these edits, select &amp;quot;Cancel for selected layer&amp;quot; in the editor options.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>Apply</string>
+       </property>
+       <property name="icon">
+        <iconset resource="resources.qrc">
+         <normaloff>:/plugins/milkmachine/triangle.png</normaloff>:/plugins/milkmachine/triangle.png</iconset>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit__visualization_camera_tilt">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>186</y>
+         <width>101</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rotation, in degrees, of the camera around the &lt;span style=&quot; font-style:italic;&quot;&gt;X&lt;/span&gt; axis. A value of 0 indicates that the view is aimed straight down toward the earth (the most common case). A value for 90 for &amp;lt;tilt&amp;gt; indicates that the view is aimed toward the horizon. Values greater than 90 indicate that the view is pointed up into the sky. Values for &amp;lt;tilt&amp;gt; are clamped at +180 degrees. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_11">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>39</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>latitude:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_12">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>18</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>longitude:</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_visualization_camera_latitude">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>39</y>
+         <width>101</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Latitude of the virtual camera. Degrees north or south of the Equator (0 degrees). Values range from −90 degrees to 90 degrees.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_visualization_camera_longitude">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>18</y>
+         <width>101</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Longitude of the virtual camera (eye point). Angular distance in degrees, relative to the Prime Meridian. Values west of the Meridian range from −180 to 0 degrees. Values east of the Meridian range from 0 to 180 degrees.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
      </widget>
-     <widget class="QLineEdit" name="lineEdit__visualization_camera_gxhoriz">
+     <widget class="QGroupBox" name="groupBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>70</y>
+        <width>181</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>FlyTo</string>
+      </property>
+      <widget class="QLabel" name="label_14">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>61</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>flyToMode:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_15">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>41</y>
+         <width>51</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>duration:</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="comboBox_flyto_mode">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>20</y>
+         <width>91</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_flyto_duration">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>41</y>
+         <width>91</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_tourname">
       <property name="enabled">
        <bool>false</bool>
       </property>
       <property name="geometry">
        <rect>
-        <x>110</x>
-        <y>123</y>
-        <width>101</width>
+        <x>90</x>
+        <y>30</y>
+        <width>91</width>
         <height>20</height>
        </rect>
       </property>
-      <property name="toolTip">
-       <string>Rotation about the x axis. &lt;float&gt;</string>
-      </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit__visualization_camera_heading">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
+     <widget class="QLabel" name="label_13">
       <property name="geometry">
        <rect>
-        <x>110</x>
-        <y>144</y>
-        <width>101</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Direction (azimuth) of the camera, in degrees. Default=0 (true North). (&lt;a href=&quot;https://developers.google.com/kml/documentation/kmlreference#headingdiagram&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;See diagram&lt;/span&gt;&lt;/a&gt;.) Values range from 0 to 360 degrees. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit__visualization_camera_roll">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>165</y>
-        <width>101</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rotation, in degrees, of the camera around the Z axis. Values range from −180 to +180 degrees. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="comboBox_altitudemode">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>81</y>
-        <width>101</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Specifies how the &amp;lt;altitude&amp;gt; specified for the Camera is interpreted. Possible values are as follows: &lt;/p&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;relativeToGround&lt;/span&gt; - (default) Interprets the &amp;lt;altitude&amp;gt; as a value in meters above the ground. If the point is over water, the &amp;lt;altitude&amp;gt; will be interpreted as a value in meters above sea level. See &lt;a href=&quot;https://developers.google.com/kml/documentation/kmlreference#gxaltitudemode&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;&amp;lt;gx:altitudeMode&amp;gt;&lt;/span&gt;&lt;/a&gt; below to specify points relative to the sea floor. &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;clampToGround &lt;/span&gt;- For a camera, this setting also places the camera &lt;span style=&quot; font-weight:600;&quot;&gt;relativeToGround&lt;/span&gt;, since putting the camera exactly at terrain height would mean that the eye would intersect the terrain (and the view would be blocked). &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;absolute &lt;/span&gt;- Interprets the &amp;lt;altitude&amp;gt; as a value in meters above sea level. &lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="comboBox_gxaltitudemode">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>102</y>
-        <width>101</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A KML extension in the &lt;a href=&quot;https://developers.google.com/kml/documentation/kmlreference#kmlextensions&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Google extension namespace&lt;/span&gt;&lt;/a&gt;, allowing altitudes relative to the sea floor. Values are: &lt;/p&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;relativeToSeaFloor&lt;/span&gt; - Interprets the &amp;lt;altitude&amp;gt; as a value in meters above the sea floor. If the point is above land rather than sea, the &amp;lt;altitude&amp;gt; will be interpreted as being above the ground. &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;clampToSeaFloor&lt;/span&gt; - The &amp;lt;altitude&amp;gt; specification is ignored, and the Camera will be positioned on the sea floor. If the point is on land rather than at sea, the Camera will be positioned on the ground. &lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_camera_apply">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>130</x>
-        <y>210</y>
+        <x>20</x>
+        <y>30</y>
         <width>61</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Apply the camera view changes to the selected points in the active layer. To roll back these edits, select &amp;quot;Cancel for selected layer&amp;quot; in the editor options.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-      <property name="text">
-       <string>Apply</string>
-      </property>
-      <property name="icon">
-       <iconset resource="resources.qrc">
-        <normaloff>:/plugins/milkmachine/triangle.png</normaloff>:/plugins/milkmachine/triangle.png</iconset>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit__visualization_camera_tilt">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>186</y>
-        <width>101</width>
         <height>20</height>
        </rect>
       </property>
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rotation, in degrees, of the camera around the &lt;span style=&quot; font-style:italic;&quot;&gt;X&lt;/span&gt; axis. A value of 0 indicates that the view is aimed straight down toward the earth (the most common case). A value for 90 for &amp;lt;tilt&amp;gt; indicates that the view is aimed toward the horizon. Values greater than 90 indicate that the view is pointed up into the sky. Values for &amp;lt;tilt&amp;gt; are clamped at +180 degrees. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_11">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>39</y>
-        <width>81</width>
-        <height>16</height>
-       </rect>
-      </property>
       <property name="text">
-       <string>latitude:</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_12">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>18</y>
-        <width>81</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>longitude:</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit_visualization_camera_latitude">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>39</y>
-        <width>101</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Latitude of the virtual camera. Degrees north or south of the Equator (0 degrees). Values range from −90 degrees to 90 degrees.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit_visualization_camera_longitude">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>18</y>
-        <width>101</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Longitude of the virtual camera (eye point). Angular distance in degrees, relative to the Prime Meridian. Values west of the Meridian range from −180 to 0 degrees. Values east of the Meridian range from 0 to 180 degrees.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>Tour Name:</string>
       </property>
      </widget>
     </widget>
@@ -937,6 +1041,9 @@
   <tabstop>pushButton_google_earth</tabstop>
   <tabstop>lineEdit_visualization_active</tabstop>
   <tabstop>checkBox_visualization_edit</tabstop>
+  <tabstop>lineEdit_tourname</tabstop>
+  <tabstop>comboBox_flyto_mode</tabstop>
+  <tabstop>lineEdit_flyto_duration</tabstop>
   <tabstop>lineEdit_visualization_camera_longitude</tabstop>
   <tabstop>lineEdit_visualization_camera_latitude</tabstop>
   <tabstop>lineEdit_visualization_camera_altitude</tabstop>
