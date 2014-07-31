@@ -272,7 +272,7 @@ class MilkMachine:
             camera['heading'] = self.dlg.ui.lineEdit__visualization_camera_heading.text()
             camera['roll'] = self.dlg.ui.lineEdit__visualization_camera_roll.text()
             camera['tilt'] = self.dlg.ui.lineEdit__visualization_camera_tilt.text()
-            QMessageBox.information(self.iface.mainWindow(),"Camera dict", str(camera) )
+            #QMessageBox.information(self.iface.mainWindow(),"Camera dict", str(camera) )
 
 ##            # Populate the Visualization Camera Combo boxes
 ##            self.dlg.ui.comboBox_altitudemode.clear()
@@ -370,6 +370,16 @@ class MilkMachine:
                 shaper = QgsVectorLayer(shapepath, layername, "ogr")
                 shaper.dataProvider().addAttributes( [ QgsField("camera",QVariant.String), QgsField("pointsize", QVariant.Int) ] )
                 shaper.updateFields()
+
+                # define the layer properties as a dict
+                properties = {'size': '3.0'}
+                # initalise a new symbol layer with those properties
+                symbol_layer = QgsSimpleMarkerSymbolLayerV2.create(properties)
+                # replace the default symbol layer with the new symbol layer
+                shaper.rendererV2().symbols()[0].changeSymbolLayer(0, symbol_layer)
+                shaper.commitChanges()
+
+
                 QgsMapLayerRegistry.instance().addMapLayer(shaper)
                 #kmllayer2 = self.iface.addVectorLayer(shapepath, layername, "ogr")
 
@@ -383,10 +393,10 @@ class MilkMachine:
                 self.gpsfile = None
 
                 if self.dlg.ui.checkBox_headoftrack.isChecked(): # draw the head of track
-                    QMessageBox.information(self.iface.mainWindow(),"Head of track", 'head of track yo' )
+                    #QMessageBox.information(self.iface.mainWindow(),"Head of track", 'head of track yo' )
                     headof = {}
                     cc = 0
-                    for f in kmllayer2.getFeatures():
+                    for f in shaper.getFeatures():
                         if cc == 0:
                             geom = f.geometry()
                             if geom.type() == QGis.Point:
@@ -404,7 +414,7 @@ class MilkMachine:
                     pr.addFeatures([fet])
 
                     # define the layer properties as a dict
-                    properties = {'size': '4.0', 'color': '0,255,0,255'}
+                    properties = {'size': '5.0', 'color': '0,255,0,255'}
 
                     # initalise a new symbol layer with those properties
                     symbol_layer = QgsSimpleMarkerSymbolLayerV2.create(properties)

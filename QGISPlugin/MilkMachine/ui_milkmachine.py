@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\Edward\.qgis2\python\plugins\MilkMachine\ui_milkmachine.ui'
 #
-# Created: Mon Jul 28 21:39:17 2014
+# Created: Wed Jul 30 20:17:10 2014
 #      by: PyQt4 UI code generator 4.10.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -280,6 +280,37 @@ class Ui_MilkMachine(object):
         QtCore.QObject.connect(self.buttonboxOkCancel, QtCore.SIGNAL(_fromUtf8("accepted()")), MilkMachine.accept)
         QtCore.QObject.connect(self.buttonboxOkCancel, QtCore.SIGNAL(_fromUtf8("rejected()")), MilkMachine.reject)
         QtCore.QMetaObject.connectSlotsByName(MilkMachine)
+        MilkMachine.setTabOrder(self.tabWidget, self.buttonImportGPS)
+        MilkMachine.setTabOrder(self.buttonImportGPS, self.lineEdit_ImportGPS)
+        MilkMachine.setTabOrder(self.lineEdit_ImportGPS, self.buttonDrawTrack)
+        MilkMachine.setTabOrder(self.buttonDrawTrack, self.checkBox_headoftrack)
+        MilkMachine.setTabOrder(self.checkBox_headoftrack, self.buttonImport_audio)
+        MilkMachine.setTabOrder(self.buttonImport_audio, self.lineEdit_InAudio1)
+        MilkMachine.setTabOrder(self.lineEdit_InAudio1, self.pushButton_clearAudio1)
+        MilkMachine.setTabOrder(self.pushButton_clearAudio1, self.pushButton_Audio1info)
+        MilkMachine.setTabOrder(self.pushButton_Audio1info, self.pushButton_sync)
+        MilkMachine.setTabOrder(self.pushButton_sync, self.pushButton_Audio1)
+        MilkMachine.setTabOrder(self.pushButton_Audio1, self.pushButton_stop1)
+        MilkMachine.setTabOrder(self.pushButton_stop1, self.lineEdit_export_active)
+        MilkMachine.setTabOrder(self.lineEdit_export_active, self.buttonExportTrack)
+        MilkMachine.setTabOrder(self.buttonExportTrack, self.pushButton_TrackInfo)
+        MilkMachine.setTabOrder(self.pushButton_TrackInfo, self.pushButton_google_earth)
+        MilkMachine.setTabOrder(self.pushButton_google_earth, self.lineEdit_visualization_active)
+        MilkMachine.setTabOrder(self.lineEdit_visualization_active, self.checkBox_visualization_edit)
+        MilkMachine.setTabOrder(self.checkBox_visualization_edit, self.lineEdit_visualization_camera_longitude)
+        MilkMachine.setTabOrder(self.lineEdit_visualization_camera_longitude, self.lineEdit_visualization_camera_latitude)
+        MilkMachine.setTabOrder(self.lineEdit_visualization_camera_latitude, self.lineEdit_visualization_camera_altitude)
+        MilkMachine.setTabOrder(self.lineEdit_visualization_camera_altitude, self.comboBox_altitudemode)
+        MilkMachine.setTabOrder(self.comboBox_altitudemode, self.comboBox_gxaltitudemode)
+        MilkMachine.setTabOrder(self.comboBox_gxaltitudemode, self.lineEdit__visualization_camera_gxhoriz)
+        MilkMachine.setTabOrder(self.lineEdit__visualization_camera_gxhoriz, self.lineEdit__visualization_camera_heading)
+        MilkMachine.setTabOrder(self.lineEdit__visualization_camera_heading, self.lineEdit__visualization_camera_roll)
+        MilkMachine.setTabOrder(self.lineEdit__visualization_camera_roll, self.lineEdit__visualization_camera_tilt)
+        MilkMachine.setTabOrder(self.lineEdit__visualization_camera_tilt, self.pushButton_camera_apply)
+        MilkMachine.setTabOrder(self.pushButton_camera_apply, self.chkActivate)
+        MilkMachine.setTabOrder(self.chkActivate, self.txtFeedback)
+        MilkMachine.setTabOrder(self.txtFeedback, self.buttonboxOkCancel)
+        MilkMachine.setTabOrder(self.buttonboxOkCancel, self.comboBox_export)
 
     def retranslateUi(self, MilkMachine):
         MilkMachine.setWindowTitle(_translate("MilkMachine", "MilkMachine", None))
