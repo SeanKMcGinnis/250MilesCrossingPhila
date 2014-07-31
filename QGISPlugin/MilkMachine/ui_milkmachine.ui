@@ -918,6 +918,40 @@
    </widget>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>buttonImportGPS</tabstop>
+  <tabstop>lineEdit_ImportGPS</tabstop>
+  <tabstop>buttonDrawTrack</tabstop>
+  <tabstop>checkBox_headoftrack</tabstop>
+  <tabstop>buttonImport_audio</tabstop>
+  <tabstop>lineEdit_InAudio1</tabstop>
+  <tabstop>pushButton_clearAudio1</tabstop>
+  <tabstop>pushButton_Audio1info</tabstop>
+  <tabstop>pushButton_sync</tabstop>
+  <tabstop>pushButton_Audio1</tabstop>
+  <tabstop>pushButton_stop1</tabstop>
+  <tabstop>lineEdit_export_active</tabstop>
+  <tabstop>buttonExportTrack</tabstop>
+  <tabstop>pushButton_TrackInfo</tabstop>
+  <tabstop>pushButton_google_earth</tabstop>
+  <tabstop>lineEdit_visualization_active</tabstop>
+  <tabstop>checkBox_visualization_edit</tabstop>
+  <tabstop>lineEdit_visualization_camera_longitude</tabstop>
+  <tabstop>lineEdit_visualization_camera_latitude</tabstop>
+  <tabstop>lineEdit_visualization_camera_altitude</tabstop>
+  <tabstop>comboBox_altitudemode</tabstop>
+  <tabstop>comboBox_gxaltitudemode</tabstop>
+  <tabstop>lineEdit__visualization_camera_gxhoriz</tabstop>
+  <tabstop>lineEdit__visualization_camera_heading</tabstop>
+  <tabstop>lineEdit__visualization_camera_roll</tabstop>
+  <tabstop>lineEdit__visualization_camera_tilt</tabstop>
+  <tabstop>pushButton_camera_apply</tabstop>
+  <tabstop>chkActivate</tabstop>
+  <tabstop>txtFeedback</tabstop>
+  <tabstop>buttonboxOkCancel</tabstop>
+  <tabstop>comboBox_export</tabstop>
+ </tabstops>
  <resources>
   <include location="resources.qrc"/>
  </resources>
