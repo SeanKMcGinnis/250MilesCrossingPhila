@@ -145,6 +145,8 @@ class MilkMachine:
         QObject.connect(self.iface, SIGNAL("currentLayerChanged(QgsMapLayer *)"), self.active_layer)
         QObject.connect(self.dlg.ui.checkBox_visualization_edit,SIGNAL("stateChanged(int)"),self.vischeck)
         QObject.connect(self.dlg.ui.pushButton_camera_apply, SIGNAL("clicked()"), self.camera_apply)
+        QObject.connect(self.dlg.ui.pushButton_TrackInfo, SIGNAL("clicked()"), self.trackdetails)
+
     ############################################################################
     ## SLOTS
 
@@ -173,7 +175,7 @@ class MilkMachine:
                     # export
                     if self.ActiveLayer.storageType() == 'ESRI Shapefile' and self.ActiveLayer.geometryType() == 0:
                         self.dlg.ui.buttonExportTrack.setEnabled(True)
-                        #self.dlg.ui.pushButton_TrackInfo.setEnabled(True)
+                        self.dlg.ui.pushButton_TrackInfo.setEnabled(True)
                         #self.dlg.ui.pushButton_google_earth.setEnabled(True)
                     else:
                         self.dlg.ui.buttonExportTrack.setEnabled(False)
@@ -634,8 +636,9 @@ class MilkMachine:
                         #startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
                         UserOs = platform.platform()
                         WindOs = re.search('Windows', UserOs, re.I)
-                        if WindOs == 'Windows':
-                            self.pp = subprocess.Popen(["C:/Program Files (x86)/VideoLAN/VLC/vlc.exe", wav_path, "--start-time", str(jumptime)], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                        if WindOs:
+                            if WindOs.group() == 'Windows':
+                                self.pp = subprocess.Popen(["C:/Program Files (x86)/VideoLAN/VLC/vlc.exe", wav_path, "--start-time", str(jumptime)], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                         else:
                             self.pp = subprocess.Popen(["/Applications/VLC.app/Contents/MacOS/VLC", self.line_audiopath, "--start-time", str(jumptime)], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                         NOW = datetime.datetime.now()
@@ -651,15 +654,6 @@ class MilkMachine:
                 self.logger.error('playaudio function error')
                 self.logger.exception(trace)
             self.iface.messageBar().pushMessage("Error", "Play audio error. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
-
-                    #self.Sound1 = QSound(self.audiopath)
-                    #self.Sound1.play()
-                    #time.sleep(5)
-                    #self.Sound.stop()
-
-                    ##features = cLayer.selectedFeatures()
-                    ##features = cLayer.selectedFeatures()
-                    ##features = cLayer.selectedFeatures()
 
     def stopAudio1(self):
         try:
@@ -983,6 +977,83 @@ class MilkMachine:
                 self.logger.error('sync function error')
                 self.logger.exception(traceback.format_exc())
             self.iface.messageBar().pushMessage("Error", "exportToFile error. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+
+    def trackdetails(self):
+        try:
+
+            rectangle = self.ActiveLayer.extent() #QgsRectange,  returns string representation of form xmin,ymin xmax,ymax,   u'-75.17254,39.96574 : -75.17047,39.96658'
+            self.extent = {'xmin' : rectangle.xMinimum(), 'xmax' : rectangle.xMaximum(), 'ymin' : rectangle.yMinimum(), 'ymax' : rectangle.yMaximum()}
+            featcount = self.ActiveLayer.featureCount()
+
+            # create layer
+
+            utmpts = QgsVectorLayer("Point?crs=EPSG:26918", 'utmpts', "memory")
+            pr = utmpts.dataProvider()
+            # add a feature
+            fet = QgsFeature()
+
+
+            crsSrc = QgsCoordinateReferenceSystem(4326)    # WGS 84
+            crsDest = QgsCoordinateReferenceSystem(26918)  # WGS 84 / UTM zone 33N
+            xform = QgsCoordinateTransform(crsSrc, crsDest)
+
+            speedlist = []; altitudelist = []; ptlist = []; i = 0
+            for f in self.ActiveLayer.getFeatures(): #  QgsFeatureIterator #[u'2014/06/06 10:38:48', u'Time:10:38:48, Latitude: 39.965949, Longitude: -75.172239, Speed: 0.102851, Altitude: -3.756733']
+                currentatt = f.attributes()
+                geom = f.geometry().asPoint()
+                utmpt = xform.transform(QgsPoint(geom[0], geom[1]))
+                ptlist.append(utmpt)
+
+                # now add the utm 18n point to the new feature
+                fet.setGeometry( QgsGeometry.fromPoint(QgsPoint(utmpt[0],utmpt[1])) )
+                pr.addFeatures([fet])
+
+
+                if i == 0:
+                    pointdate = currentatt[0].split(" ")[0]; pointtime = currentatt[0].split(" ")[1]
+                    start_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
+                else:
+                    pointdate = currentatt[0].split(" ")[0]; pointtime = currentatt[0].split(" ")[1]
+                    end_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
+
+                speedlist.append(float(f.attributes()[1].split(',')[3].split(':')[1]))
+                altitudelist.append(float(f.attributes()[1].split(',')[4].split(':')[1]))
+                i += 1
+
+            dura = end_dt - start_dt # duration
+
+            d = QgsDistanceArea()  # create an instance of the distance area class
+            d.setEllipsoidalMode(True)
+            d.setSourceCrs(26918)
+            distancekm = d.measureLine(ptlist)/1000
+            distancemi = distancekm * 0.621371
+
+
+            featmess = 'Features:\t\t{0}\n'.format(featcount)
+            elevmess = 'Elevation (min, max):\t{0}, {1}\n'.format("%.2f" % min(altitudelist),"%.2f" %  max(altitudelist))
+            speedmess = 'Speed (min, max):\t{0}, {1}\n'.format("%.2f" % min(speedlist), "%.2f" % max(speedlist))
+            duramess = 'Duration:\t\t{0}\n'.format(dura)
+            lenmess = 'Distance (km, mi):\t{0}, {1}\n'.format("%.2f" % distancekm, "%.2f" % distancemi)
+
+            bmessage = 'Bounding Box:\n\n\t{0}\n{1}\t\t{2}\n\t{3}'.format(self.extent['ymax'], self.extent['xmin'], self.extent['xmax'], self.extent['ymin'])
+
+            message = featmess + elevmess + speedmess + duramess + lenmess + bmessage
+
+            QMessageBox.information( self.iface.mainWindow(),"Track Details", message )
+
+            #QgsMapLayerRegistry.instance().addMapLayer(utmpts)
+
+        except:
+            if self.logging == True:
+                self.logger.error('track function error')
+                self.logger.exception(traceback.format_exc())
+            self.iface.messageBar().pushMessage("Error", "trackdetails error. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+
+
+
+
 
 
 
