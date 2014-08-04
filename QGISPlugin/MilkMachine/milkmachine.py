@@ -146,9 +146,185 @@ class MilkMachine:
         QObject.connect(self.dlg.ui.checkBox_visualization_edit,SIGNAL("stateChanged(int)"),self.vischeck)
         QObject.connect(self.dlg.ui.pushButton_camera_apply, SIGNAL("clicked()"), self.camera_apply)
         QObject.connect(self.dlg.ui.pushButton_TrackInfo, SIGNAL("clicked()"), self.trackdetails)
-
+        QObject.connect(self.dlg.ui.checkBox_rendering_edit,SIGNAL("stateChanged(int)"),self.rendercheck)
+        QObject.connect(self.dlg.ui.pushButton_rendering_icon_apply, SIGNAL("clicked()"), self.icon_apply)
+        QObject.connect(self.dlg.ui.pushButton_rendering_label_apply, SIGNAL("clicked()"), self.label_apply)
+        QObject.connect(self.dlg.ui.comboBox_rendering_icon_color, SIGNAL("activated(int)"), self.trans_enable)
     ############################################################################
     ## SLOTS
+
+
+    ############################################################################
+    ############################################################################
+    ## Rendering
+    ############################################################################
+
+    def trans_enable(self):
+        col = self.dlg.ui.comboBox_rendering_icon_color.currentText()
+        if col:
+            self.dlg.ui.lineEdit_rendering_icon_transparency.setEnabled(True)
+        else:
+            self.dlg.ui.lineEdit_rendering_icon_transparency.setEnabled(False)
+
+
+    def rendercheck(self,state):  # the checkbox is checked or unchecked for vis Editing
+        if self.dlg.ui.checkBox_rendering_edit.isChecked():  # the checkbox is check for vis Editing
+
+            if not self.ActiveLayer.isEditable():  # the layer is not editable
+                QMessageBox.information(self.iface.mainWindow(),"Visualization Error", 'The currently active layer is not in an "Edit Session".' )
+                self.dlg.ui.checkBox_rendering_edit.setChecked(False)
+                #iface.actionToggleEditing.trigger()
+            else:  # cleared for editing...
+
+                # Get the curretly selected feature
+                self.cLayer = self.iface.mapCanvas().currentLayer()
+                self.selectList = []
+                features = self.cLayer.selectedFeatures()
+                for f in features:
+                    self.selectList.append(f.id())  #[u'689',u'2014-06-06 13:30:54']  #[u'2014/06/06 10:30:10', u'Time:10:30:10, Latitude: 39.966531, Longitude: -75.172003, Speed: 3.382047, Altitude: 1.596764']
+
+                if len(self.selectList) >= 1:
+                    # enable everything
+
+                    # label style
+                    self.dlg.ui.comboBox_rendering_label_color.setEnabled(True)
+                    self.dlg.ui.comboBox_rendering_label_colormode.setEnabled(True)
+                    self.dlg.ui.lineEdit_rendering_label_scale.setEnabled(True)
+
+                    # Icon Style
+                    self.dlg.ui.comboBox_rendering_icon_color.setEnabled(True)
+                    #self.dlg.ui.lineEdit_rendering_icon_transparency.setEnabled(True)
+                    self.dlg.ui.comboBox_rendering_icon_colormode.setEnabled(True)
+                    self.dlg.ui.lineEdit_rendering_icon_scale.setEnabled(True)
+                    self.dlg.ui.lineEdit_rendering_icon_heading.setEnabled(True)
+                    self.dlg.ui.lineEdit_rendering_icon_icon.setEnabled(True)
+                    #self.dlg.ui.lineEdit_rendering_icon_hotspot.setEnabled(True)
+
+                    self.dlg.ui.pushButton_rendering_icon_apply.setEnabled(True)
+                    self.dlg.ui.pushButton_rendering_label_apply.setEnabled(True)
+                else:
+                    QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "Please select points in the active layer to be edited." )
+
+
+
+        else:  # checkbox is false, clear shit out
+
+            # Label style
+            self.dlg.ui.comboBox_rendering_label_color.setEnabled(False)
+            self.dlg.ui.comboBox_rendering_label_colormode.setEnabled(False)
+            self.dlg.ui.lineEdit_rendering_label_scale.setEnabled(False)
+
+            # Icon Style
+            self.dlg.ui.comboBox_rendering_icon_color.setEnabled(False)
+            self.dlg.ui.lineEdit_rendering_icon_transparency.setEnabled(False)
+            self.dlg.ui.comboBox_rendering_icon_colormode.setEnabled(False)
+            self.dlg.ui.lineEdit_rendering_icon_scale.setEnabled(False)
+            self.dlg.ui.lineEdit_rendering_icon_heading.setEnabled(False)
+            self.dlg.ui.lineEdit_rendering_icon_icon.setEnabled(False)
+            self.dlg.ui.lineEdit_rendering_icon_hotspot.setEnabled(False)
+
+            # Apply
+            self.dlg.ui.pushButton_rendering_icon_apply.setEnabled(True)
+            self.dlg.ui.pushButton_rendering_label_apply.setEnabled(True)
+
+    def icon_apply(self):
+
+        try:
+            # make a dictionary of all icon parameters
+            icon = {'color': None, 'transparency': None, 'colormode': None,'scale' : None, 'heading': None,'icon' : None ,'hotspot' : None}
+
+            icon['color'] = self.dlg.ui.comboBox_rendering_icon_color.currentText()
+            icon['transparency'] = self.dlg.ui.lineEdit_rendering_icon_transparency.text()
+            icon['colormode'] = self.dlg.ui.comboBox_rendering_icon_colormode.currentText()
+            icon['scale'] = self.dlg.ui.lineEdit_rendering_icon_scale.text()
+            icon['heading'] = self.dlg.ui.lineEdit_rendering_icon_heading.text()
+            icon['icon'] = self.dlg.ui.lineEdit_rendering_icon_icon.text()
+            icon['hotspot'] = self.dlg.ui.lineEdit_rendering_icon_hotspot.text()
+
+
+
+            # Get the curretly selected feature
+            self.cLayer = self.iface.mapCanvas().currentLayer()
+            self.selectList = []
+            features = self.cLayer.selectedFeatures()
+            for f in features:
+                self.selectList.append(f.id())  #[u'689',u'2014-06-06 13:30:54']  #[u'2014/06/06 10:30:10', u'Time:10:30:10, Latitude: 39.966531, Longitude: -75.172003, Speed: 3.382047, Altitude: 1.596764']
+
+
+            try:
+                self.ActiveLayer.beginEditCommand("Rendering Editing")
+                if len(self.selectList) >= 1:
+                    self.ActiveLayer.beginEditCommand("Rendering Editing")
+                    for f in self.selectList:
+                        self.ActiveLayer.changeAttributeValue(f, 4, str(icon))
+                    self.ActiveLayer.updateFields()
+                    self.ActiveLayer.endEditCommand()
+                else:
+                    QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "Please select points in the active layer to be edited." )
+            except:
+                self.ActiveLayer.destroyEditCommand()
+                self.logger.error('icon_apply destroy edit session')
+                self.logger.exception(traceback.format_exc())
+                self.iface.messageBar().pushMessage("Error", "Failed to apply icon style parameters. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+
+
+        except:
+            global NOW, pointid, ClockDateTime
+            NOW = None; pointid = None; ClockDateTime = None
+            trace = traceback.format_exc()
+            if self.logging == True:
+                self.logger.error('icon_apply function error')
+                self.logger.exception(trace)
+            self.iface.messageBar().pushMessage("Error", "Failed to apply icon style parameters. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+    def label_apply(self):
+
+        try:
+            # make a dictionary of all icon parameters
+            label = {'color': None, 'colormode': None,'scale' : None}
+
+            label['color'] = self.dlg.ui.comboBox_rendering_label_color.currentText()
+            label['colormode'] = self.dlg.ui.comboBox_rendering_label_colormode.currentText()
+            label['scale'] = self.dlg.ui.lineEdit_rendering_label_scale.text()
+
+            # Get the curretly selected feature
+            self.cLayer = self.iface.mapCanvas().currentLayer()
+            self.selectList = []
+            features = self.cLayer.selectedFeatures()
+            for f in features:
+                self.selectList.append(f.id())  #[u'689',u'2014-06-06 13:30:54']  #[u'2014/06/06 10:30:10', u'Time:10:30:10, Latitude: 39.966531, Longitude: -75.172003, Speed: 3.382047, Altitude: 1.596764']
+
+
+            try:
+                self.ActiveLayer.beginEditCommand("Rendering Editing")
+                if len(self.selectList) >= 1:
+                    self.ActiveLayer.beginEditCommand("Rendering Editing")
+                    for f in self.selectList:
+                        self.ActiveLayer.changeAttributeValue(f, 5, str(label))
+                    self.ActiveLayer.updateFields()
+                    self.ActiveLayer.endEditCommand()
+                else:
+                    QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "Please select points in the active layer to be edited." )
+            except:
+                self.ActiveLayer.destroyEditCommand()
+                self.logger.error('label_apply destroy edit session')
+                self.logger.exception(traceback.format_exc())
+                self.iface.messageBar().pushMessage("Error", "Failed to apply label style parameters. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+
+
+        except:
+            global NOW, pointid, ClockDateTime
+            NOW = None; pointid = None; ClockDateTime = None
+            trace = traceback.format_exc()
+            if self.logging == True:
+                self.logger.error('label_apply function error')
+                self.logger.exception(trace)
+            self.iface.messageBar().pushMessage("Error", "Failed to apply label style parameters. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+
+
 
 
     ############################################################################
@@ -159,18 +335,23 @@ class MilkMachine:
     def active_layer(self):
         try:
             self.dlg.ui.checkBox_visualization_edit.setChecked(False)  # uncheck the box everytime
-            # get the active layer and populate the combo boxes
+            # get the active layer and populate active layer boxes in each of the tabs
             self.ActiveLayer = self.iface.activeLayer()
             if self.ActiveLayer:
                 self.ActiveLayer_name = self.ActiveLayer.name()
                 self.dlg.ui.lineEdit_visualization_active.setText(self.ActiveLayer_name)
                 self.dlg.ui.lineEdit_export_active.setText(self.ActiveLayer_name)
+                self.dlg.ui.lineEdit_rendering_active.setText(self.ActiveLayer_name)
+
 
                 # enable the checkBox_visualization_edit
                 # Get the curretly selected feature
 
                 if self.ActiveLayer.type() == 0: # is the active layer a vector layer?
+
+                    # enable the checkboxes in the viz and rendering tabs
                     self.dlg.ui.checkBox_visualization_edit.setEnabled(True)
+                    self.dlg.ui.checkBox_rendering_edit.setEnabled(True)
 
                     # export
                     if self.ActiveLayer.storageType() == 'ESRI Shapefile' and self.ActiveLayer.geometryType() == 0:
@@ -199,9 +380,29 @@ class MilkMachine:
                 self.dlg.ui.lineEdit__visualization_camera_heading.setText(None)
                 self.dlg.ui.lineEdit__visualization_camera_roll.setText(None)
                 self.dlg.ui.lineEdit__visualization_camera_tilt.setText(None)
+
+                #rendering
+                # Label style
+                self.dlg.ui.lineEdit_rendering_label_scale.setText(None)
+
+                # Icon Style
+                self.dlg.ui.lineEdit_rendering_icon_transparency.setText(None)
+                self.dlg.ui.lineEdit_rendering_icon_scale.setText(None)
+                self.dlg.ui.lineEdit_rendering_icon_heading.setText(None)
+                self.dlg.ui.lineEdit_rendering_icon_icon.setText(None)
+                self.dlg.ui.lineEdit_rendering_icon_hotspot.setText(None)
+
+
+                # check box viz
                 self.dlg.ui.checkBox_visualization_edit.setChecked(False)
                 self.dlg.ui.checkBox_visualization_edit.setEnabled(False)
                 self.dlg.ui.pushButton_camera_apply.setEnabled(False)
+
+                # check box rendering
+                self.dlg.ui.checkBox_rendering_edit.setChecked(False)
+                self.dlg.ui.checkBox_rendering_edit.setEnabled(False)
+                self.dlg.ui.pushButton_rendering_icon_apply.setEnabled(False)
+                self.dlg.ui.pushButton_rendering_label_apply.setEnabled(False)
 
                 #export
                 self.dlg.ui.buttonExportTrack.setEnabled(False)
@@ -389,7 +590,7 @@ class MilkMachine:
                 QgsVectorFileWriter.writeAsVectorFormat(kmllayer, shapepath_dup, "utf-8", None, "ESRI Shapefile")  # duplicate of original
                 #bring the shapefile back in, and render it on the map
                 shaper = QgsVectorLayer(shapepath, layername, "ogr")
-                shaper.dataProvider().addAttributes( [ QgsField("camera",QVariant.String), QgsField("flyto",QVariant.String), QgsField("pointstyle", QVariant.Int) ] )
+                shaper.dataProvider().addAttributes( [ QgsField("camera",QVariant.String), QgsField("flyto",QVariant.String), QgsField("iconstyle", QVariant.String), QgsField("labelstyle", QVariant.String) ] )
                 shaper.updateFields()
 
                 # define the layer properties as a dict
@@ -964,14 +1165,60 @@ class MilkMachine:
                 pnt = folder.newpoint(name=str(cc), coords=[(coords[0], coords[1])], description=str(currentatt[1]))
                 pnt.timestamp.when = current_dt.strftime('%Y-%m-%dT%XZ')
 
+                def transtokmlhex(trans):
+                    dec = int(float(icondict['transparency']) * 2.55)
+                    if dec < 10:
+                        return '0' + str(dec)
+                    else:
+                        return str(hex(dec)[2:4])
+
+                # Icon Style
+                # icon = {'color': None, 'colormode': None,'scale' : None, 'heading': None,'icon' : None ,'hotspot' : None}
+                if currentatt[4]:
+                    icondict = eval(currentatt[4])
+
+                    if icondict['color']:
+                        pnt.style.iconstyle.color = simplekml.Color.__dict__[icondict['color']]
+                    if icondict['color'] and icondict['transparency']:
+                        transvalue = transtokmlhex(icondict['transparency'])
+                        colorpick = simplekml.Color.__dict__[icondict['color']]
+                        pnt.style.iconstyle.color = transvalue + colorpick[2:8]
+                    if icondict['colormode']:
+                        pnt.style.iconstyle.colormode = icondict['colormode']
+                    if icondict['scale']:
+                        pnt.style.iconstyle.scale = icondict['scale']
+                    if icondict['heading']:
+                        pnt.style.iconstyle.heading = icondict['heading']
+                    if icondict['icon']:
+                        pnt.style.iconstyle.icon.href = icondict['icon']
+
+
+                # Label Style
+                # label = {'color': None, 'colormode': None,'scale' : None}
+                if currentatt[5]:
+                    labeldict = eval(currentatt[5])
+                    if labeldict['color']:
+                        pnt.style.labelstyle.color = simplekml.Color.__dict__[labeldict['color']]
+                    if labeldict['colormode']:
+                        pnt.style.labelstyle.colormode = labeldict['colormode']
+                    if labeldict['scale']:
+                        pnt.style.labelstyle.scale = labeldict['scale']
+
+
                 cc += 1
 
 
 
 
-            exportpath = QFileDialog.getSaveFileName(None, "Save Track", self.lastdirectory, "*.kml")
-            kml.save(exportpath)
-            self.iface.messageBar().pushMessage("Success", "kml file exported to: {0}".format(exportpath), level=QgsMessageBar.INFO, duration=5)
+            exportpath = QFileDialog.getSaveFileName(None, "Save Track", self.lastdirectory, "(*.kml *.kmz)")
+            if exportpath:
+                if exportpath.split('.')[1] == 'kml':
+                    kml.save(exportpath)
+                    self.iface.messageBar().pushMessage("Success", "kml file exported to: {0}".format(exportpath), level=QgsMessageBar.INFO, duration=5)
+                if exportpath.split('.')[1] == 'kmz':
+                    kml.savekmz(exportpath)
+                    self.iface.messageBar().pushMessage("Success", "kmz file exported to: {0}".format(exportpath), level=QgsMessageBar.INFO, duration=5)
+
         except:
             if self.logging == True:
                 self.logger.error('sync function error')
@@ -1156,6 +1403,30 @@ class MilkMachine:
         for gxalt in gxaltitudemode:
             self.dlg.ui.comboBox_gxaltitudemode.addItem(gxalt)
 
+        # Populate the Rendering Combo Box
+        self.dlg.ui.comboBox_rendering_icon_color.clear()
+        colors = simplekml.Color.__dict__.keys()
+        colors.append('')
+        colors.sort()
+        for c in colors:
+            if not c:
+                self.dlg.ui.comboBox_rendering_icon_color.addItem(c)
+                self.dlg.ui.comboBox_rendering_label_color.addItem(c)
+            elif c[0] == '_':
+                pass
+            else:
+                self.dlg.ui.comboBox_rendering_icon_color.addItem(c)
+                self.dlg.ui.comboBox_rendering_label_color.addItem(c)
+
+
+        self.dlg.ui.comboBox_rendering_label_colormode.clear()
+        self.dlg.ui.comboBox_rendering_icon_colormode.clear()
+        colormode = [None, 'normal', 'random']
+        for c in colormode:
+            self.dlg.ui.comboBox_rendering_label_colormode.addItem(c)
+            self.dlg.ui.comboBox_rendering_icon_colormode.addItem(c)
+
+
         # Run the dialog event loop
         result = self.dlg.exec_()
         #QMessageBox.information(self.iface.mainWindow(),"result", str(result) )
@@ -1216,3 +1487,32 @@ class MilkMachine:
         self.dlg.ui.lineEdit__visualization_camera_roll.setEnabled(False)
         self.dlg.ui.lineEdit__visualization_camera_tilt.setEnabled(False)
         self.dlg.ui.checkBox_visualization_edit.setChecked(False)
+
+        # Rendering
+
+        # Clear the text
+        # Label style
+        self.dlg.ui.lineEdit_rendering_label_scale.setText(None)
+
+        # Icon Style
+        self.dlg.ui.lineEdit_rendering_icon_transparency.setText(None)
+        self.dlg.ui.lineEdit_rendering_icon_scale.setText(None)
+        self.dlg.ui.lineEdit_rendering_icon_heading.setText(None)
+        self.dlg.ui.lineEdit_rendering_icon_icon.setText(None)
+        self.dlg.ui.lineEdit_rendering_icon_hotspot.setText(None)
+
+        #Disble
+        # Label style
+        self.dlg.ui.comboBox_rendering_label_color.setEnabled(False)
+        self.dlg.ui.comboBox_rendering_label_colormode.setEnabled(False)
+        self.dlg.ui.lineEdit_rendering_label_scale.setEnabled(False)
+
+        # Icon Style
+        self.dlg.ui.comboBox_rendering_icon_color.setEnabled(False)
+        self.dlg.ui.lineEdit_rendering_icon_transparency.setEnabled(False)
+        self.dlg.ui.comboBox_rendering_icon_colormode.setEnabled(False)
+        self.dlg.ui.lineEdit_rendering_icon_scale.setEnabled(False)
+        self.dlg.ui.lineEdit_rendering_icon_heading.setEnabled(False)
+        self.dlg.ui.lineEdit_rendering_icon_icon.setEnabled(False)
+        self.dlg.ui.lineEdit_rendering_icon_hotspot.setEnabled(False)
+
