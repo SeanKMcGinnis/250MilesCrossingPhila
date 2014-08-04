@@ -25,6 +25,9 @@
      <height>341</height>
     </rect>
    </property>
+   <property name="acceptDrops">
+    <bool>false</bool>
+   </property>
    <property name="tabShape">
     <enum>QTabWidget::Rounded</enum>
    </property>
@@ -59,7 +62,7 @@
        <x>460</x>
        <y>100</y>
        <width>31</width>
-       <height>31</height>
+       <height>30</height>
       </rect>
      </property>
      <property name="toolTip">
@@ -85,7 +88,7 @@
        <x>20</x>
        <y>20</y>
        <width>101</width>
-       <height>31</height>
+       <height>30</height>
       </rect>
      </property>
      <property name="toolTip">
@@ -124,7 +127,7 @@
        <x>420</x>
        <y>100</y>
        <width>31</width>
-       <height>31</height>
+       <height>30</height>
       </rect>
      </property>
      <property name="toolTip">
@@ -147,7 +150,7 @@
        <x>20</x>
        <y>60</y>
        <width>101</width>
-       <height>31</height>
+       <height>30</height>
       </rect>
      </property>
      <property name="toolTip">
@@ -167,7 +170,7 @@
        <x>140</x>
        <y>20</y>
        <width>271</width>
-       <height>31</height>
+       <height>30</height>
       </rect>
      </property>
      <property name="toolTip">
@@ -189,7 +192,7 @@
        <x>20</x>
        <y>150</y>
        <width>31</width>
-       <height>31</height>
+       <height>30</height>
       </rect>
      </property>
      <property name="toolTip">
@@ -206,7 +209,7 @@
        <x>100</x>
        <y>150</y>
        <width>131</width>
-       <height>31</height>
+       <height>30</height>
       </rect>
      </property>
      <property name="toolTip">
@@ -228,7 +231,7 @@
        <x>60</x>
        <y>150</y>
        <width>31</width>
-       <height>31</height>
+       <height>30</height>
       </rect>
      </property>
      <property name="toolTip">
@@ -264,7 +267,7 @@
        <x>240</x>
        <y>150</y>
        <width>131</width>
-       <height>31</height>
+       <height>30</height>
       </rect>
      </property>
      <property name="toolTip">
@@ -296,7 +299,7 @@
        <x>380</x>
        <y>150</y>
        <width>81</width>
-       <height>31</height>
+       <height>30</height>
       </rect>
      </property>
      <property name="toolTip">
@@ -309,7 +312,7 @@
        <x>20</x>
        <y>100</y>
        <width>101</width>
-       <height>31</height>
+       <height>30</height>
       </rect>
      </property>
      <property name="toolTip">
@@ -329,7 +332,7 @@
        <x>140</x>
        <y>99</y>
        <width>271</width>
-       <height>31</height>
+       <height>30</height>
       </rect>
      </property>
     </widget>
@@ -342,7 +345,7 @@
        <x>500</x>
        <y>100</y>
        <width>31</width>
-       <height>31</height>
+       <height>30</height>
       </rect>
      </property>
      <property name="toolTip">
@@ -369,9 +372,9 @@
      <property name="geometry">
       <rect>
        <x>140</x>
-       <y>68</y>
+       <y>60</y>
        <width>131</width>
-       <height>17</height>
+       <height>30</height>
       </rect>
      </property>
      <property name="toolTip">
@@ -382,92 +385,27 @@
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="tab_export">
+   <widget class="QWidget" name="tab_rendering">
     <attribute name="title">
-     <string>Export and Details</string>
+     <string>Rendering</string>
     </attribute>
-    <widget class="QPushButton" name="buttonExportTrack">
+    <widget class="QLineEdit" name="lineEdit_rendering_active">
      <property name="enabled">
       <bool>false</bool>
      </property>
      <property name="geometry">
       <rect>
-       <x>240</x>
-       <y>14</y>
-       <width>101</width>
-       <height>31</height>
+       <x>90</x>
+       <y>18</y>
+       <width>131</width>
+       <height>20</height>
       </rect>
      </property>
      <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Export the selected track to .kml. If the active track is an ESRI shapefile point layer, the user will be able to export.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="text">
-      <string>Export Track</string>
-     </property>
-     <property name="icon">
-      <iconset resource="resources.qrc">
-       <normaloff>:/plugins/milkmachine/Export.png</normaloff>:/plugins/milkmachine/Export.png</iconset>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The selected layer in the table of contents.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_TrackInfo">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>350</x>
-       <y>14</y>
-       <width>31</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click for information about the current audio track&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset resource="resources.qrc">
-       <normaloff>:/plugins/milkmachine/question.png</normaloff>:/plugins/milkmachine/question.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>24</width>
-       <height>24</height>
-      </size>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_google_earth">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>390</x>
-       <y>14</y>
-       <width>31</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;View selected track in Google Earth&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset resource="resources.qrc">
-       <normaloff>:/plugins/milkmachine/earth.png</normaloff>:/plugins/milkmachine/earth.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>36</width>
-       <height>36</height>
-      </size>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_visualization_active_2">
+    <widget class="QLabel" name="label_visualization_active_3">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -480,18 +418,392 @@
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Active Track:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_export_active">
+    <widget class="QCheckBox" name="checkBox_rendering_edit">
      <property name="enabled">
       <bool>false</bool>
      </property>
      <property name="geometry">
       <rect>
-       <x>90</x>
-       <y>18</y>
-       <width>131</width>
-       <height>20</height>
+       <x>240</x>
+       <y>21</y>
+       <width>111</width>
+       <height>16</height>
       </rect>
      </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Checking this box will enable the &amp;quot;Icon Style&amp;quot; and &amp;quot;Label Style&amp;quot; fields for editing. The user must select a layer in the table of contents, have editing &amp;quot;on&amp;quot;, and have at least point selected. Styling icons and labels can be done independently.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Edit Point Style</string>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>50</y>
+       <width>231</width>
+       <height>121</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Label Style</string>
+     </property>
+     <widget class="QLabel" name="label_17">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>41</y>
+        <width>91</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>colormode:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_16">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>color:</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox_rendering_label_colormode">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>41</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Values for &amp;lt;colorMode&amp;gt; are &lt;span style=&quot; font-weight:600;&quot;&gt;normal&lt;/span&gt; (no effect) and &lt;span style=&quot; font-weight:600;&quot;&gt;random&lt;/span&gt;. A value of &lt;span style=&quot; font-weight:600;&quot;&gt;random&lt;/span&gt; applies a random linear scale to the base &amp;lt;color&amp;gt; as follows. &lt;/p&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;To achieve a truly random selection of colors, specify a base &amp;lt;color&amp;gt; of white (ffffffff). &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;If you specify a single color component (for example, a value of ff0000ff for &lt;span style=&quot; font-style:italic;&quot;&gt;red&lt;/span&gt;), random color values for that one component (red) will be selected. In this case, the values would range from 00 (&lt;span style=&quot; font-style:italic;&quot;&gt;black&lt;/span&gt;) to ff (&lt;span style=&quot; font-style:italic;&quot;&gt;full red&lt;/span&gt;). &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;If you specify values for two or for all three color components, a random linear scale is applied to each color component, with results ranging from black to the maximum values specified for each component.&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The opacity of a color comes from the alpha component of &amp;lt;color&amp;gt; and is never randomized. &lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_rendering_label_scale">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>62</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Resize the icon by the scale value. Default is 1. For example, if scale is 5 the icon will be 5x larger than normal.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_18">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>62</y>
+        <width>91</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>scale:</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_rendering_label_apply">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>90</y>
+        <width>61</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Apply the label style changes to the selected points in the active layer. To roll back these edits, select &amp;quot;Cancel for selected layer&amp;quot; in the editor options.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Apply</string>
+      </property>
+      <property name="icon">
+       <iconset resource="resources.qrc">
+        <normaloff>:/plugins/milkmachine/triangle.png</normaloff>:/plugins/milkmachine/triangle.png</iconset>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox_rendering_label_color">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>20</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Choose a color from the dropdown list. Milk Machine will translate this into hexidecimal for kml.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_4">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>50</y>
+       <width>201</width>
+       <height>251</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Specifies how icons for point Placemarks are drawn, both in the Places panel and in the 3D viewer of Google Earth. The &amp;lt;Icon&amp;gt; element specifies the icon image. The &amp;lt;scale&amp;gt; element specifies the &lt;span style=&quot; font-style:italic;&quot;&gt;x, y&lt;/span&gt; scaling of the icon. The color specified in the &amp;lt;color&amp;gt; element of &amp;lt;IconStyle&amp;gt; is blended with the color of the &amp;lt;Icon&amp;gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="title">
+      <string>Icon Style</string>
+     </property>
+     <widget class="QComboBox" name="comboBox_rendering_icon_colormode">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>62</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Values for &amp;lt;colorMode&amp;gt; are &lt;span style=&quot; font-weight:600;&quot;&gt;normal&lt;/span&gt; (no effect) and &lt;span style=&quot; font-weight:600;&quot;&gt;random&lt;/span&gt;. A value of &lt;span style=&quot; font-weight:600;&quot;&gt;random&lt;/span&gt; applies a random linear scale to the base &amp;lt;color&amp;gt; as follows. &lt;/p&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;To achieve a truly random selection of colors, specify a base &amp;lt;color&amp;gt; of white (ffffffff). &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;If you specify a single color component (for example, a value of ff0000ff for &lt;span style=&quot; font-style:italic;&quot;&gt;red&lt;/span&gt;), random color values for that one component (red) will be selected. In this case, the values would range from 00 (&lt;span style=&quot; font-style:italic;&quot;&gt;black&lt;/span&gt;) to ff (&lt;span style=&quot; font-style:italic;&quot;&gt;full red&lt;/span&gt;). &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;If you specify values for two or for all three color components, a random linear scale is applied to each color component, with results ranging from black to the maximum values specified for each component.&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The opacity of a color comes from the alpha component of &amp;lt;color&amp;gt; and is never randomized. &lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_19">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>62</y>
+        <width>91</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>colormode:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_20">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>color:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_rendering_icon_scale">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>83</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Resize the icon by the scale value. Default is 1. For example, if scale is 5 the icon will be 5x larger than normal.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_21">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>83</y>
+        <width>91</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>scale:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_22">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>104</y>
+        <width>91</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>heading:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_rendering_icon_heading">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>104</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Direction (&lt;span style=&quot; font-style:italic;&quot;&gt;e.g.&lt;/span&gt; North, South, East, West), in degrees. Default=0 (North).Values range from 0 to 360 degrees.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_23">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>125</y>
+        <width>91</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>icon:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_rendering_icon_icon">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>125</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A custom Icon. For example;&lt;/p&gt;&lt;p&gt;Airport; http://maps.google.com/mapfiles/kml/shapes/airports.png&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_24">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>146</y>
+        <width>91</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>hotspot:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_rendering_icon_hotspot">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>146</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a name=&quot;hotspot&quot;/&gt;&amp;lt;hotSpot x=&amp;quot;0.5&amp;quot; y=&amp;quot;0.5&amp;quot; xunits=&amp;quot;fraction&amp;quot; yunits=&amp;quot;fraction&amp;quot;&amp;gt; &lt;/p&gt;&lt;p&gt;Specifies the position within the Icon that is &amp;quot;anchored&amp;quot; to the &amp;lt;Point&amp;gt; specified in the Placemark. The &lt;span style=&quot; font-style:italic;&quot;&gt;x&lt;/span&gt; and &lt;span style=&quot; font-style:italic;&quot;&gt;y&lt;/span&gt; values can be specified in three different ways: as &lt;span style=&quot; font-style:italic;&quot;&gt;pixels&lt;/span&gt; (&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;pixels&amp;quot;&lt;/span&gt;), as &lt;span style=&quot; font-style:italic;&quot;&gt;fractions&lt;/span&gt; of the icon (&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;fraction&amp;quot;&lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;)&lt;/span&gt;, or as &lt;span style=&quot; font-style:italic;&quot;&gt;inset pixels &lt;/span&gt;(&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;insetPixels&amp;quot;&lt;/span&gt;), which is an offset in pixels from the upper right corner of the icon. The &lt;span style=&quot; font-style:italic;&quot;&gt;x&lt;/span&gt; and &lt;span style=&quot; font-style:italic;&quot;&gt;y&lt;/span&gt; positions can be specified in different ways—for example, &lt;span style=&quot; font-style:italic;&quot;&gt;x&lt;/span&gt; can be in pixels and &lt;span style=&quot; font-style:italic;&quot;&gt;y&lt;/span&gt; can be a fraction. The origin of the coordinate system is in the lower left corner of the icon. &lt;/p&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; margin-top:12px; margin-bottom:0px; margin-left:30px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;x &lt;/span&gt;- Either the number of pixels, a fractional component of the icon, or a pixel inset indicating the &lt;span style=&quot; font-style:italic;&quot;&gt;x&lt;/span&gt; component of a point on the icon. &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:30px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;y &lt;/span&gt;- Either the number of pixels, a fractional component of the icon, or a pixel inset indicating the &lt;span style=&quot; font-style:italic;&quot;&gt;y&lt;/span&gt; component of a point on the icon. &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:30px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;xunits &lt;/span&gt;- Units in which the &lt;span style=&quot; font-style:italic;&quot;&gt;x&lt;/span&gt; value is specified. A value of &lt;span style=&quot; font-weight:600;&quot;&gt;fraction&lt;/span&gt; indicates the &lt;span style=&quot; font-style:italic;&quot;&gt;x&lt;/span&gt; value is a fraction of the icon. A value of &lt;span style=&quot; font-weight:600;&quot;&gt;pixels&lt;/span&gt; indicates the &lt;span style=&quot; font-style:italic;&quot;&gt;x&lt;/span&gt; value in pixels. A value of &lt;span style=&quot; font-weight:600;&quot;&gt;insetPixels&lt;/span&gt; indicates the indent from the right edge of the icon. &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:12px; margin-left:30px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;yunits&lt;/span&gt; - Units in which the &lt;span style=&quot; font-style:italic;&quot;&gt;y&lt;/span&gt; value is specified. A value of &lt;span style=&quot; font-weight:600;&quot;&gt;fraction&lt;/span&gt; indicates the &lt;span style=&quot; font-style:italic;&quot;&gt;y&lt;/span&gt; value is a fraction of the icon. A value of &lt;span style=&quot; font-weight:600;&quot;&gt;pixels&lt;/span&gt; indicates the &lt;span style=&quot; font-style:italic;&quot;&gt;y&lt;/span&gt; value in pixels. A value of &lt;span style=&quot; font-weight:600;&quot;&gt;insetPixels&lt;/span&gt; indicates the indent from the top edge of the icon. &lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_rendering_icon_apply">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>220</y>
+        <width>61</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Apply the icon style changes to the selected points in the active layer. To roll back these edits, select &amp;quot;Cancel for selected layer&amp;quot; in the editor options.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Apply</string>
+      </property>
+      <property name="icon">
+       <iconset resource="resources.qrc">
+        <normaloff>:/plugins/milkmachine/triangle.png</normaloff>:/plugins/milkmachine/triangle.png</iconset>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_25">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>41</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>transparency:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_rendering_icon_transparency">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>41</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Transparency of the icon. (0 - 100) 0 is fully transparent, and 100 is opaque. This field will only be enabled when color is specified.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>100</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox_rendering_icon_color">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>20</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Choose a color from the dropdown list. Milk Machine will translate this into hexidecimal for kml.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_visualization">
@@ -522,6 +834,9 @@
        <width>131</width>
        <height>20</height>
       </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The selected layer in the table of contents.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
     <widget class="QCheckBox" name="checkBox_visualization_edit">
@@ -561,7 +876,7 @@
         <x>220</x>
         <y>10</y>
         <width>231</width>
-        <height>241</height>
+        <height>211</height>
        </rect>
       </property>
       <property name="toolTip">
@@ -757,29 +1072,6 @@
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A KML extension in the &lt;a href=&quot;https://developers.google.com/kml/documentation/kmlreference#kmlextensions&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Google extension namespace&lt;/span&gt;&lt;/a&gt;, allowing altitudes relative to the sea floor. Values are: &lt;/p&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;relativeToSeaFloor&lt;/span&gt; - Interprets the &amp;lt;altitude&amp;gt; as a value in meters above the sea floor. If the point is above land rather than sea, the &amp;lt;altitude&amp;gt; will be interpreted as being above the ground. &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;clampToSeaFloor&lt;/span&gt; - The &amp;lt;altitude&amp;gt; specification is ignored, and the Camera will be positioned on the sea floor. If the point is on land rather than at sea, the Camera will be positioned on the ground. &lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_camera_apply">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="geometry">
-        <rect>
-         <x>130</x>
-         <y>210</y>
-         <width>61</width>
-         <height>23</height>
-        </rect>
-       </property>
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Apply the camera view changes to the selected points in the active layer. To roll back these edits, select &amp;quot;Cancel for selected layer&amp;quot; in the editor options.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="text">
-        <string>Apply</string>
-       </property>
-       <property name="icon">
-        <iconset resource="resources.qrc">
-         <normaloff>:/plugins/milkmachine/triangle.png</normaloff>:/plugins/milkmachine/triangle.png</iconset>
-       </property>
-      </widget>
       <widget class="QLineEdit" name="lineEdit__visualization_camera_tilt">
        <property name="enabled">
         <bool>false</bool>
@@ -946,26 +1238,117 @@
        <string>Tour Name:</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="pushButton_camera_apply">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>230</y>
+        <width>61</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Apply the camera view changes to the selected points in the active layer. To roll back these edits, select &amp;quot;Cancel for selected layer&amp;quot; in the editor options.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Apply</string>
+      </property>
+      <property name="icon">
+       <iconset resource="resources.qrc">
+        <normaloff>:/plugins/milkmachine/triangle.png</normaloff>:/plugins/milkmachine/triangle.png</iconset>
+      </property>
+     </widget>
     </widget>
    </widget>
-   <widget class="QWidget" name="tab_rendering">
+   <widget class="QWidget" name="tab_export">
     <attribute name="title">
-     <string>Rendering</string>
+     <string>Export and Details</string>
     </attribute>
-    <widget class="QLineEdit" name="lineEdit_rendering_active">
+    <widget class="QPushButton" name="buttonExportTrack">
      <property name="enabled">
       <bool>false</bool>
      </property>
      <property name="geometry">
       <rect>
-       <x>90</x>
-       <y>18</y>
-       <width>131</width>
-       <height>20</height>
+       <x>240</x>
+       <y>14</y>
+       <width>101</width>
+       <height>30</height>
       </rect>
      </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Export the selected track to .kml. If the active track is an ESRI shapefile point layer, the user will be able to export.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Export Track</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/plugins/milkmachine/Export.png</normaloff>:/plugins/milkmachine/Export.png</iconset>
+     </property>
     </widget>
-    <widget class="QLabel" name="label_visualization_active_3">
+    <widget class="QPushButton" name="pushButton_TrackInfo">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>14</y>
+       <width>31</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click for information about the current audio track&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/plugins/milkmachine/question.png</normaloff>:/plugins/milkmachine/question.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_google_earth">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>14</y>
+       <width>31</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;View selected track in Google Earth&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/plugins/milkmachine/earth.png</normaloff>:/plugins/milkmachine/earth.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>36</width>
+       <height>36</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_visualization_active_2">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -978,124 +1361,21 @@
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Active Track:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
-    <widget class="QCheckBox" name="checkBox_rendering_edit">
+    <widget class="QLineEdit" name="lineEdit_export_active">
      <property name="enabled">
       <bool>false</bool>
      </property>
      <property name="geometry">
       <rect>
-       <x>240</x>
-       <y>21</y>
-       <width>111</width>
-       <height>16</height>
+       <x>90</x>
+       <y>18</y>
+       <width>131</width>
+       <height>20</height>
       </rect>
      </property>
      <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Checking this box will enable the &amp;quot;Camera&amp;quot; fields for editing. The user must select a layer in the table of contents, have editing &amp;quot;on&amp;quot;, and have at least one selected point.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The selected layer in the table of contents.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
-     <property name="text">
-      <string>Edit Point Style</string>
-     </property>
-    </widget>
-    <widget class="QGroupBox" name="groupBox_3">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>60</y>
-       <width>231</width>
-       <height>101</height>
-      </rect>
-     </property>
-     <property name="title">
-      <string>Label Style</string>
-     </property>
-     <widget class="QLabel" name="label_17">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>41</y>
-        <width>91</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>colormode:</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_16">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>81</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>color:</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit_visualization_camera_altitude_2">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>20</y>
-        <width>101</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Distance of the camera from the earth's surface, in meters. Interpreted according to the Camera's &amp;lt;altitudeMode&amp;gt; or &amp;lt;gx:altitudeMode&amp;gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="comboBox_altitudemode_2">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>41</y>
-        <width>101</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Specifies how the &amp;lt;altitude&amp;gt; specified for the Camera is interpreted. Possible values are as follows: &lt;/p&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;relativeToGround&lt;/span&gt; - (default) Interprets the &amp;lt;altitude&amp;gt; as a value in meters above the ground. If the point is over water, the &amp;lt;altitude&amp;gt; will be interpreted as a value in meters above sea level. See &lt;a href=&quot;https://developers.google.com/kml/documentation/kmlreference#gxaltitudemode&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;&amp;lt;gx:altitudeMode&amp;gt;&lt;/span&gt;&lt;/a&gt; below to specify points relative to the sea floor. &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;clampToGround &lt;/span&gt;- For a camera, this setting also places the camera &lt;span style=&quot; font-weight:600;&quot;&gt;relativeToGround&lt;/span&gt;, since putting the camera exactly at terrain height would mean that the eye would intersect the terrain (and the view would be blocked). &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;absolute &lt;/span&gt;- Interprets the &amp;lt;altitude&amp;gt; as a value in meters above sea level. &lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit__visualization_camera_heading_2">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>62</y>
-        <width>101</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Direction (azimuth) of the camera, in degrees. Default=0 (true North). (&lt;a href=&quot;https://developers.google.com/kml/documentation/kmlreference#headingdiagram&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;See diagram&lt;/span&gt;&lt;/a&gt;.) Values range from 0 to 360 degrees. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_18">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>62</y>
-        <width>91</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>scale:</string>
-      </property>
-     </widget>
     </widget>
    </widget>
    <widget class="QWidget" name="tab">
@@ -1199,6 +1479,20 @@
   <tabstop>lineEdit__visualization_camera_roll</tabstop>
   <tabstop>lineEdit__visualization_camera_tilt</tabstop>
   <tabstop>pushButton_camera_apply</tabstop>
+  <tabstop>lineEdit_rendering_active</tabstop>
+  <tabstop>checkBox_rendering_edit</tabstop>
+  <tabstop>comboBox_rendering_icon_color</tabstop>
+  <tabstop>lineEdit_rendering_icon_transparency</tabstop>
+  <tabstop>comboBox_rendering_icon_colormode</tabstop>
+  <tabstop>lineEdit_rendering_icon_scale</tabstop>
+  <tabstop>lineEdit_rendering_icon_heading</tabstop>
+  <tabstop>lineEdit_rendering_icon_icon</tabstop>
+  <tabstop>lineEdit_rendering_icon_hotspot</tabstop>
+  <tabstop>pushButton_rendering_icon_apply</tabstop>
+  <tabstop>comboBox_rendering_label_color</tabstop>
+  <tabstop>comboBox_rendering_label_colormode</tabstop>
+  <tabstop>lineEdit_rendering_label_scale</tabstop>
+  <tabstop>pushButton_rendering_label_apply</tabstop>
   <tabstop>chkActivate</tabstop>
   <tabstop>txtFeedback</tabstop>
   <tabstop>buttonboxOkCancel</tabstop>
