@@ -129,6 +129,16 @@ class MilkMachine:
         self.lcd1_D = self.dlg.ui.lcdNumber_Audio1_D
         self.lcd1_P = self.dlg.ui.lcdNumber_Audio1_P
 
+        # Order of the fields in the shapefile
+        self.fields ={}
+        self.fields['Name'] = 0
+        self.fields['Description'] = 1
+        self.fields['camera'] = 2
+        self.fields['flyto'] = 3
+        self.fields['iconstyle'] = 4
+        self.fields['labelstyle'] = 5
+        self.fields['model'] = 6
+
 
         QObject.connect(self.dlg.ui.chkActivate,SIGNAL("stateChanged(int)"),self.changeActive)
         QObject.connect(self.dlg.ui.buttonImportGPS, SIGNAL("clicked()"), self.browseOpen)
@@ -150,6 +160,8 @@ class MilkMachine:
         QObject.connect(self.dlg.ui.pushButton_rendering_icon_apply, SIGNAL("clicked()"), self.icon_apply)
         QObject.connect(self.dlg.ui.pushButton_rendering_label_apply, SIGNAL("clicked()"), self.label_apply)
         QObject.connect(self.dlg.ui.comboBox_rendering_icon_color, SIGNAL("activated(int)"), self.trans_enable)
+        QObject.connect(self.dlg.ui.pushButton_rendering_model_apply, SIGNAL("clicked()"), self.model_apply)
+        QObject.connect(self.dlg.ui.pushButton_rendering_model_file, SIGNAL("clicked()"), self.model_link)
     ############################################################################
     ## SLOTS
 
@@ -158,6 +170,67 @@ class MilkMachine:
     ############################################################################
     ## Rendering
     ############################################################################
+
+    def model_link(self):
+        try:
+            self.linkfile = QFileDialog.getOpenFileName(None, "Choose Collada DAE file", self.lastdirectory, "*.dae")  #C:\Users\Edward\Documents\Philly250\Scratch
+            self.lastdirectory = os.path.dirname(self.linkfile)
+            if self.linkfile:
+                self.dlg.ui.lineEdit_rendering_model_link.setText(self.linkfile)
+
+        except:
+            self.logger.error('model_link function errir')
+            self.logger.exception(traceback.format_exc())
+            self.iface.messageBar().pushMessage("Error", "Failed get link to DAE file. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+
+    def model_apply(self):
+        try:
+            # make a dictionary of all icon parameters
+            model = {'link': None, 'longitude': None, 'latitude': None, 'altitude' : None, 'scale': None}
+
+            model['link'] = self.dlg.ui.lineEdit_rendering_model_link.text()
+            model['longitude'] = self.dlg.ui.lineEdit_rendering_model_longitude.text()
+            model['latitude'] = self.dlg.ui.lineEdit_rendering_model_latitude.text()
+            model['altitude'] = self.dlg.ui.lineEdit_rendering_model_altitude.text()
+            model['scale'] = self.dlg.ui.lineEdit_rendering_model_scale.text()
+
+            # Get the curretly selected feature
+            self.cLayer = self.iface.mapCanvas().currentLayer()
+            self.selectList = []
+            features = self.cLayer.selectedFeatures()
+            for f in features:
+                self.selectList.append(f.id())  #[u'689',u'2014-06-06 13:30:54']  #[u'2014/06/06 10:30:10', u'Time:10:30:10, Latitude: 39.966531, Longitude: -75.172003, Speed: 3.382047, Altitude: 1.596764']
+
+
+            try:
+                self.ActiveLayer.beginEditCommand("Rendering Editing")
+                if len(self.selectList) >= 1:
+                    self.ActiveLayer.beginEditCommand("Rendering Editing")
+                    for f in self.selectList:
+                        self.ActiveLayer.changeAttributeValue(f, self.fields['model'], str(model))
+                    self.ActiveLayer.updateFields()
+                    self.ActiveLayer.endEditCommand()
+                else:
+                    QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "Please select points in the active layer to be edited." )
+            except:
+                self.ActiveLayer.destroyEditCommand()
+                self.logger.error('model_apply destroy edit session')
+                self.logger.exception(traceback.format_exc())
+                self.iface.messageBar().pushMessage("Error", "Failed to apply model style parameters. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+
+
+        except:
+            global NOW, pointid, ClockDateTime
+            NOW = None; pointid = None; ClockDateTime = None
+            trace = traceback.format_exc()
+            if self.logging == True:
+                self.logger.error('icon_apply function error')
+                self.logger.exception(trace)
+            self.iface.messageBar().pushMessage("Error", "Failed to apply icon style parameters. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+
 
     def trans_enable(self):
         col = self.dlg.ui.comboBox_rendering_icon_color.currentText()
@@ -200,8 +273,19 @@ class MilkMachine:
                     self.dlg.ui.lineEdit_rendering_icon_icon.setEnabled(True)
                     #self.dlg.ui.lineEdit_rendering_icon_hotspot.setEnabled(True)
 
+                    # Model
+                    self.dlg.ui.lineEdit_rendering_model_link.setEnabled(True)
+                    self.dlg.ui.lineEdit_rendering_model_longitude.setEnabled(True)
+                    self.dlg.ui.lineEdit_rendering_model_latitude.setEnabled(True)
+                    self.dlg.ui.lineEdit_rendering_model_altitude.setEnabled(True)
+                    self.dlg.ui.lineEdit_rendering_model_scale.setEnabled(True)
+                    self.dlg.ui.pushButton_rendering_model_file.setEnabled(True)
+
+                    # Apply Buttons
                     self.dlg.ui.pushButton_rendering_icon_apply.setEnabled(True)
                     self.dlg.ui.pushButton_rendering_label_apply.setEnabled(True)
+                    self.dlg.ui.pushButton_rendering_model_apply.setEnabled(True)
+
                 else:
                     QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "Please select points in the active layer to be edited." )
 
@@ -223,9 +307,19 @@ class MilkMachine:
             self.dlg.ui.lineEdit_rendering_icon_icon.setEnabled(False)
             self.dlg.ui.lineEdit_rendering_icon_hotspot.setEnabled(False)
 
+            # Model
+            self.dlg.ui.lineEdit_rendering_model_link.setEnabled(False)
+            self.dlg.ui.lineEdit_rendering_model_longitude.setEnabled(False)
+            self.dlg.ui.lineEdit_rendering_model_latitude.setEnabled(False)
+            self.dlg.ui.lineEdit_rendering_model_altitude.setEnabled(False)
+            self.dlg.ui.lineEdit_rendering_model_scale.setEnabled(False)
+            self.dlg.ui.pushButton_rendering_model_file.setEnabled(False)
+
             # Apply
-            self.dlg.ui.pushButton_rendering_icon_apply.setEnabled(True)
-            self.dlg.ui.pushButton_rendering_label_apply.setEnabled(True)
+            self.dlg.ui.pushButton_rendering_icon_apply.setEnabled(False)
+            self.dlg.ui.pushButton_rendering_label_apply.setEnabled(False)
+            self.dlg.ui.pushButton_rendering_model_apply.setEnabled(False)
+
 
     def icon_apply(self):
 
@@ -590,7 +684,7 @@ class MilkMachine:
                 QgsVectorFileWriter.writeAsVectorFormat(kmllayer, shapepath_dup, "utf-8", None, "ESRI Shapefile")  # duplicate of original
                 #bring the shapefile back in, and render it on the map
                 shaper = QgsVectorLayer(shapepath, layername, "ogr")
-                shaper.dataProvider().addAttributes( [ QgsField("camera",QVariant.String), QgsField("flyto",QVariant.String), QgsField("iconstyle", QVariant.String), QgsField("labelstyle", QVariant.String) ] )
+                shaper.dataProvider().addAttributes( [ QgsField("camera",QVariant.String), QgsField("flyto",QVariant.String), QgsField("iconstyle", QVariant.String), QgsField("labelstyle", QVariant.String), QgsField("model", QVariant.String) ] )
                 shaper.updateFields()
 
                 # define the layer properties as a dict
@@ -1047,14 +1141,25 @@ class MilkMachine:
             kml = simplekml.Kml()
 
 
+##            self.fields['Name'] = 0
+##            self.fields['Description'] = 1
+##            self.fields['camera'] = 2
+##            self.fields['flyto'] = 3
+##            self.fields['iconstyle'] = 4
+##            self.fields['labelstyle'] = 5
+##            self.fields['model'] = 6
+
+            #################################
+            ## Tour and Camera
+
             for f in self.ActiveLayer.getFeatures(): #  QgsFeatureIterator #[u'2014/06/06 10:38:48', u'Time:10:38:48, Latitude: 39.965949, Longitude: -75.172239, Speed: 0.102851, Altitude: -3.756733']
                 currentatt = f.attributes()
 
-                if currentatt[2]:
+                if currentatt[self.fields['camera']]:
 
                     if cc == 0:  # establish this as the start of the tour
-                        cameradict = eval(currentatt[2])
-                        flytodict = eval(currentatt[3])
+                        cameradict = eval(currentatt[self.fields['camera']])
+                        flytodict = eval(currentatt[self.fields['flyto']])
 
                         # Create a tour and attach a playlist to it
                         if flytodict['name']:
@@ -1109,8 +1214,8 @@ class MilkMachine:
                         cc += 1
 
                     else:
-                        cameradict = eval(currentatt[2])
-                        flytodict = eval(currentatt[3])
+                        cameradict = eval(currentatt[self.fields['camera']])
+                        flytodict = eval(currentatt[self.fields['flyto']])
 ##                        # Attach a gx:SoundCue to the playlist and delay playing by 2 second (sound clip is about 4 seconds long)
 ##                        soundcue = playlist.newgxsoundcue()
 ##                        soundcue.href = "http://simplekml.googlecode.com/hg/samples/resources/drum_roll_1.wav"
@@ -1152,6 +1257,9 @@ class MilkMachine:
 
                         cc += 1
 
+            ###############################3
+            ## Points
+            cc = 0
             folder = kml.newfolder(name='Points')
             for f in self.ActiveLayer.getFeatures(): #  QgsFeatureIterator #[u'2014/06/06 10:38:48', u'Time:10:38:48, Latitude: 39.965949, Longitude: -75.172239, Speed: 0.102851, Altitude: -3.756733']
                 geom = f.geometry()
@@ -1174,8 +1282,8 @@ class MilkMachine:
 
                 # Icon Style
                 # icon = {'color': None, 'colormode': None,'scale' : None, 'heading': None,'icon' : None ,'hotspot' : None}
-                if currentatt[4]:
-                    icondict = eval(currentatt[4])
+                if currentatt[self.fields['iconstyle']]:
+                    icondict = eval(currentatt[self.fields['iconstyle']])
 
                     if icondict['color']:
                         pnt.style.iconstyle.color = simplekml.Color.__dict__[icondict['color']]
@@ -1195,8 +1303,8 @@ class MilkMachine:
 
                 # Label Style
                 # label = {'color': None, 'colormode': None,'scale' : None}
-                if currentatt[5]:
-                    labeldict = eval(currentatt[5])
+                if currentatt[self.fields['labelstyle']]:
+                    labeldict = eval(currentatt[self.fields['labelstyle']])
                     if labeldict['color']:
                         pnt.style.labelstyle.color = simplekml.Color.__dict__[labeldict['color']]
                     if labeldict['colormode']:
@@ -1204,10 +1312,47 @@ class MilkMachine:
                     if labeldict['scale']:
                         pnt.style.labelstyle.scale = labeldict['scale']
 
-
                 cc += 1
 
+            ###############################3
+            ## Models
+            cc = 0
+            mfolder = kml.newfolder(name='Models')
+            for f in self.ActiveLayer.getFeatures(): #  QgsFeatureIterator #[u'2014/06/06 10:38:48', u'Time:10:38:48, Latitude: 39.965949, Longitude: -75.172239, Speed: 0.102851, Altitude: -3.756733']
+                geom = f.geometry()
+                coords = geom.asPoint() #(-75.1722,39.9659)
+                currentatt = f.attributes()
 
+                mdl = mfolder.newmodel()
+
+
+                # Model
+                #model = {'link': None, 'longitude': None, 'latitude': None, 'altitude' : None, 'scale': None}
+                #class simplekml.Model(altitudemode=None, gxaltitudemode=None, location=None, orientation=None, scale=None, link=None, resourcemap=None, **kwargs)
+                if currentatt[self.fields['model']]:
+                    modeldict = eval(currentatt[self.fields['model']])
+                    if modeldict['link']:
+                        mdl.link = simplekml.Link(href = modeldict['link'])
+
+                        loc = simplekml.Location()
+                        if modeldict['longitude']:
+                            loc.longitude = modeldict['longitude']
+                        else:
+                            loc.longitude = coords[0]
+                        if modeldict['latitude']:
+                            loc.latitude = modeldict['latitude']
+                        else:
+                            loc.latitude = coords[1]
+                        if modeldict['altitude']:
+                            loc.altitude = modeldict['altitude']
+                        mdl.location = loc
+
+                    scl = simplekml.Scale()
+                    if modeldict['scale']:
+                        scl.x = modeldict['scale']; scl.y = modeldict['scale']; scl.z = modeldict['scale']
+
+
+                cc += 1
 
 
             exportpath = QFileDialog.getSaveFileName(None, "Save Track", self.lastdirectory, "(*.kml *.kmz)")
@@ -1501,7 +1646,15 @@ class MilkMachine:
         self.dlg.ui.lineEdit_rendering_icon_icon.setText(None)
         self.dlg.ui.lineEdit_rendering_icon_hotspot.setText(None)
 
+        # Model
+        self.dlg.ui.lineEdit_rendering_model_link.setText(None)
+        self.dlg.ui.lineEdit_rendering_model_longitude.setText(None)
+        self.dlg.ui.lineEdit_rendering_model_latitude.setText(None)
+        self.dlg.ui.lineEdit_rendering_model_altitude.setText(None)
+        self.dlg.ui.lineEdit_rendering_model_scale.setText(None)
+
         #Disble
+
         # Label style
         self.dlg.ui.comboBox_rendering_label_color.setEnabled(False)
         self.dlg.ui.comboBox_rendering_label_colormode.setEnabled(False)
@@ -1516,3 +1669,10 @@ class MilkMachine:
         self.dlg.ui.lineEdit_rendering_icon_icon.setEnabled(False)
         self.dlg.ui.lineEdit_rendering_icon_hotspot.setEnabled(False)
 
+        # Model
+        self.dlg.ui.lineEdit_rendering_model_link.setEnabled(False)
+        self.dlg.ui.lineEdit_rendering_model_longitude.setEnabled(False)
+        self.dlg.ui.lineEdit_rendering_model_latitude.setEnabled(False)
+        self.dlg.ui.lineEdit_rendering_model_altitude.setEnabled(False)
+        self.dlg.ui.lineEdit_rendering_model_scale.setEnabled(False)
+        self.dlg.ui.pushButton_rendering_model_file.setEnabled(False)

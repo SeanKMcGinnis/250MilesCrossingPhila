@@ -11,6 +11,7 @@
 		<file>question.png</file>
 		<file>synchronize.png</file>
 		<file>earth.png</file>
-		<file>triangle.png</file>		
+		<file>triangle.png</file>	
+		<file>folder.png</file>		
     </qresource>
 </RCC>
