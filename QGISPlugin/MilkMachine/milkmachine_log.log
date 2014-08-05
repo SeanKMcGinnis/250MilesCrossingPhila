@@ -1949,3 +1949,162 @@ IOError: [Errno 22] invalid mode ('wb') or filename: u''
 2014-08-03 20:11:54,809 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
 2014-08-03 20:11:54,809 - milkmachine - INFO - Milk Machine plugin initialized
 2014-08-03 20:14:20,401 - milkmachine - INFO - Clicked Cancel
+2014-08-04 20:57:21,042 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 20:57:21,042 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 20:57:21,042 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 20:57:21,042 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-04 20:58:05,947 - milkmachine - INFO - Quit Milk Machine
+2014-08-04 20:58:13,832 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 20:58:13,832 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 20:58:13,832 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 20:58:13,832 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-04 21:13:26,842 - milkmachine - INFO - Quit Milk Machine
+2014-08-04 21:51:03,299 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 21:51:03,301 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 21:51:03,301 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 21:51:03,301 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-04 21:59:46,108 - milkmachine - INFO - Clicked Cancel
+2014-08-04 21:59:54,217 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 21:59:54,217 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 21:59:54,217 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 21:59:54,217 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-04 22:00:37,966 - milkmachine - INFO - Clicked Cancel
+2014-08-04 22:12:35,648 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:12:35,648 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:12:35,648 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:12:35,648 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-04 22:12:51,566 - milkmachine - ERROR - icon_apply function error
+2014-08-04 22:12:51,566 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 171, in model_apply
+    model['latitude'] = self.dlg.ui.lineEdit_rendering_model_latitude.currentText()
+AttributeError: 'QLineEdit' object has no attribute 'currentText'
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 171, in model_apply
+    model['latitude'] = self.dlg.ui.lineEdit_rendering_model_latitude.currentText()
+AttributeError: 'QLineEdit' object has no attribute 'currentText'
+2014-08-04 22:13:25,428 - milkmachine - INFO - Clicked Cancel
+2014-08-04 22:13:30,645 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:13:30,645 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:13:30,647 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:13:30,647 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-04 22:13:40,634 - milkmachine - ERROR - model_apply destroy edit session
+2014-08-04 22:13:40,637 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 188, in model_apply
+    self.ActiveLayer.changeAttributeValue(f, 'model', str(model))
+TypeError: arguments did not match any overloaded call:
+  QgsVectorLayer.changeAttributeValue(int, int, QVariant, bool): argument 2 has unexpected type 'str'
+  QgsVectorLayer.changeAttributeValue(int, int, QVariant, QVariant oldValue=QVariant()): argument 2 has unexpected type 'str'
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 188, in model_apply
+    self.ActiveLayer.changeAttributeValue(f, 'model', str(model))
+TypeError: arguments did not match any overloaded call:
+  QgsVectorLayer.changeAttributeValue(int, int, QVariant, bool): argument 2 has unexpected type 'str'
+  QgsVectorLayer.changeAttributeValue(int, int, QVariant, QVariant oldValue=QVariant()): argument 2 has unexpected type 'str'
+2014-08-04 22:15:04,125 - milkmachine - ERROR - model_apply destroy edit session
+2014-08-04 22:15:04,125 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 188, in model_apply
+    self.ActiveLayer.changeAttributeValue(f, 'model', str(model))
+TypeError: arguments did not match any overloaded call:
+  QgsVectorLayer.changeAttributeValue(int, int, QVariant, bool): argument 2 has unexpected type 'str'
+  QgsVectorLayer.changeAttributeValue(int, int, QVariant, QVariant oldValue=QVariant()): argument 2 has unexpected type 'str'
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 188, in model_apply
+    self.ActiveLayer.changeAttributeValue(f, 'model', str(model))
+TypeError: arguments did not match any overloaded call:
+  QgsVectorLayer.changeAttributeValue(int, int, QVariant, bool): argument 2 has unexpected type 'str'
+  QgsVectorLayer.changeAttributeValue(int, int, QVariant, QVariant oldValue=QVariant()): argument 2 has unexpected type 'str'
+2014-08-04 22:15:22,204 - milkmachine - INFO - Clicked Cancel
+2014-08-04 22:19:07,322 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:19:07,322 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:19:07,323 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:19:07,323 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-04 22:19:27,221 - milkmachine - ERROR - model_apply destroy edit session
+2014-08-04 22:19:27,227 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 188, in model_apply
+    self.ActiveLayer.changeAttributeValue(f, self.fields['model'], str(model))
+AttributeError: MilkMachine instance has no attribute 'fields'
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 188, in model_apply
+    self.ActiveLayer.changeAttributeValue(f, self.fields['model'], str(model))
+AttributeError: MilkMachine instance has no attribute 'fields'
+2014-08-04 22:20:40,220 - milkmachine - INFO - Quit Milk Machine
+2014-08-04 22:20:41,661 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:20:41,661 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:20:41,663 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:20:41,663 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-04 22:25:59,007 - milkmachine - INFO - Clicked Cancel
+2014-08-04 22:26:02,848 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:26:02,848 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:26:02,848 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:26:02,848 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-04 22:26:16,305 - milkmachine - ERROR - model_link function errir
+2014-08-04 22:26:16,305 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 177, in model_link
+    self.lastdirectory = os.path.dirname(self.gpsfile)
+AttributeError: MilkMachine instance has no attribute 'gpsfile'
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 177, in model_link
+    self.lastdirectory = os.path.dirname(self.gpsfile)
+AttributeError: MilkMachine instance has no attribute 'gpsfile'
+2014-08-04 22:26:53,392 - milkmachine - INFO - Clicked Cancel
+2014-08-04 22:26:58,539 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:26:58,539 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:26:58,539 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:26:58,540 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-04 22:53:07,740 - milkmachine - INFO - Clicked Cancel
+2014-08-04 22:53:46,407 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:53:46,407 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:53:46,407 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:53:46,407 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-04 22:54:40,321 - milkmachine - ERROR - sync function error
+2014-08-04 22:54:40,322 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1321, in exportToFile
+    pnt.style.labelstyle.color = simplekml.Color.__dict__[labeldict['color']]
+UnboundLocalError: local variable 'labeldict' referenced before assignment
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1321, in exportToFile
+    pnt.style.labelstyle.color = simplekml.Color.__dict__[labeldict['color']]
+UnboundLocalError: local variable 'labeldict' referenced before assignment
+2014-08-04 22:54:55,821 - milkmachine - INFO - Clicked Cancel
+2014-08-04 22:56:23,263 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:56:23,265 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:56:23,265 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:56:23,265 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-04 22:56:58,187 - milkmachine - ERROR - sync function error
+2014-08-04 22:56:58,190 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1335, in exportToFile
+    mdl.link = modeldict['link']
+  File "build\bdist.win-amd64\egg\simplekml\base.py", line 302, in _inner
+    "simplekml.{1}".format(value.__class__.__name__, classtype.__name__))
+TypeError: unicode is an invalid type. Accepts an instance of simplekml.Link
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1335, in exportToFile
+    mdl.link = modeldict['link']
+  File "build\bdist.win-amd64\egg\simplekml\base.py", line 302, in _inner
+    "simplekml.{1}".format(value.__class__.__name__, classtype.__name__))
+TypeError: unicode is an invalid type. Accepts an instance of simplekml.Link
+2014-08-04 22:59:35,691 - milkmachine - INFO - Clicked Cancel
+2014-08-04 22:59:38,502 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:59:38,502 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:59:38,502 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 22:59:38,502 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-04 22:59:43,533 - milkmachine - ERROR - sync function error
+2014-08-04 22:59:43,536 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1335, in exportToFile
+    mdl.link = simplekml.Line(href = modeldict['link'])
+AttributeError: 'module' object has no attribute 'Line'
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1335, in exportToFile
+    mdl.link = simplekml.Line(href = modeldict['link'])
+AttributeError: 'module' object has no attribute 'Line'
+2014-08-04 22:59:59,033 - milkmachine - INFO - Clicked Cancel
+2014-08-04 23:00:12,374 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 23:00:12,375 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 23:00:12,375 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 23:00:12,375 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-04 23:12:12,191 - milkmachine - INFO - Clicked Cancel
+2014-08-04 23:12:14,661 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 23:12:14,661 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 23:12:14,663 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-04 23:12:14,663 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-04 23:16:48,621 - milkmachine - INFO - Clicked Cancel
