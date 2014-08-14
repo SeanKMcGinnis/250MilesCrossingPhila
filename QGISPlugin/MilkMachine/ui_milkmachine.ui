@@ -25,6 +25,11 @@
      <height>341</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+    </font>
+   </property>
    <property name="acceptDrops">
     <bool>false</bool>
    </property>
@@ -107,7 +112,7 @@
       <rect>
        <x>381</x>
        <y>133</y>
-       <width>81</width>
+       <width>91</width>
        <height>16</height>
       </rect>
      </property>
@@ -387,7 +392,7 @@
    </widget>
    <widget class="QWidget" name="tab_rendering">
     <attribute name="title">
-     <string>Rendering</string>
+     <string>Placemarks</string>
     </attribute>
     <widget class="QLineEdit" name="lineEdit_rendering_active">
      <property name="enabled">
@@ -454,7 +459,7 @@
        <rect>
         <x>13</x>
         <y>41</y>
-        <width>91</width>
+        <width>61</width>
         <height>20</height>
        </rect>
       </property>
@@ -467,7 +472,7 @@
        <rect>
         <x>13</x>
         <y>20</y>
-        <width>81</width>
+        <width>41</width>
         <height>20</height>
        </rect>
       </property>
@@ -506,13 +511,16 @@
       <property name="toolTip">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Resize the icon by the scale value. Default is 1. For example, if scale is 5 the icon will be 5x larger than normal.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
+      <property name="text">
+       <string>0</string>
+      </property>
      </widget>
      <widget class="QLabel" name="label_18">
       <property name="geometry">
        <rect>
         <x>13</x>
         <y>62</y>
-        <width>91</width>
+        <width>41</width>
         <height>20</height>
        </rect>
       </property>
@@ -596,7 +604,7 @@
        <rect>
         <x>10</x>
         <y>62</y>
-        <width>91</width>
+        <width>61</width>
         <height>20</height>
        </rect>
       </property>
@@ -609,7 +617,7 @@
        <rect>
         <x>10</x>
         <y>20</y>
-        <width>81</width>
+        <width>61</width>
         <height>20</height>
        </rect>
       </property>
@@ -632,13 +640,16 @@
       <property name="toolTip">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Resize the icon by the scale value. Default is 1. For example, if scale is 5 the icon will be 5x larger than normal.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
+      <property name="text">
+       <string>1</string>
+      </property>
      </widget>
      <widget class="QLabel" name="label_21">
       <property name="geometry">
        <rect>
         <x>10</x>
         <y>83</y>
-        <width>91</width>
+        <width>41</width>
         <height>20</height>
        </rect>
       </property>
@@ -651,7 +662,7 @@
        <rect>
         <x>10</x>
         <y>104</y>
-        <width>91</width>
+        <width>51</width>
         <height>20</height>
        </rect>
       </property>
@@ -674,13 +685,16 @@
       <property name="toolTip">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Direction (&lt;span style=&quot; font-style:italic;&quot;&gt;e.g.&lt;/span&gt; North, South, East, West), in degrees. Default=0 (North).Values range from 0 to 360 degrees.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
+      <property name="text">
+       <string>0</string>
+      </property>
      </widget>
      <widget class="QLabel" name="label_23">
       <property name="geometry">
        <rect>
         <x>10</x>
         <y>125</y>
-        <width>91</width>
+        <width>31</width>
         <height>20</height>
        </rect>
       </property>
@@ -709,7 +723,7 @@
        <rect>
         <x>10</x>
         <y>146</y>
-        <width>91</width>
+        <width>51</width>
         <height>20</height>
        </rect>
       </property>
@@ -761,7 +775,7 @@
        <rect>
         <x>10</x>
         <y>41</y>
-        <width>81</width>
+        <width>71</width>
         <height>20</height>
        </rect>
       </property>
@@ -811,7 +825,7 @@
        <x>393</x>
        <y>50</y>
        <width>171</width>
-       <height>161</height>
+       <height>201</height>
       </rect>
      </property>
      <property name="toolTip">
@@ -828,7 +842,7 @@
        <rect>
         <x>63</x>
         <y>20</y>
-        <width>77</width>
+        <width>71</width>
         <height>20</height>
        </rect>
       </property>
@@ -896,7 +910,7 @@
        <rect>
         <x>63</x>
         <y>41</y>
-        <width>101</width>
+        <width>71</width>
         <height>20</height>
        </rect>
       </property>
@@ -912,7 +926,7 @@
        <rect>
         <x>63</x>
         <y>62</y>
-        <width>101</width>
+        <width>71</width>
         <height>20</height>
        </rect>
       </property>
@@ -928,12 +942,15 @@
        <rect>
         <x>63</x>
         <y>83</y>
-        <width>101</width>
+        <width>71</width>
         <height>20</height>
        </rect>
       </property>
       <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Altitude (decimal degrees). Defaults to 0 (ground level), if none is provided.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Altitude (meters). Defaults to the altitude of the GPS, which is indicated by 'altitude'. If no value is given it will default to ground level.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>altitude</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="lineEdit_rendering_model_scale">
@@ -950,6 +967,9 @@
       </property>
       <property name="toolTip">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Scale of the point model. Defaults to 1 (regular size) is none is provided. If a value above 1 is provided it will enlarge the model by multiplying it by the scale value.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>1</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_30">
@@ -972,7 +992,7 @@
       <property name="geometry">
        <rect>
         <x>63</x>
-        <y>130</y>
+        <y>140</y>
         <width>61</width>
         <height>23</height>
        </rect>
@@ -994,7 +1014,7 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>143</x>
+        <x>140</x>
         <y>20</y>
         <width>20</width>
         <height>20</height>
@@ -1008,11 +1028,57 @@
         <normaloff>:/plugins/milkmachine/folder.png</normaloff>:/plugins/milkmachine/folder.png</iconset>
       </property>
      </widget>
+     <widget class="QPushButton" name="pushButton_rendering_model_xy">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>50</y>
+        <width>20</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>6</pointsize>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If one point is selected in the active layer, the &amp;quot;x,y&amp;quot; button will automatically fill the longitude and latitude location for the model using the coordinates from the selected point.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>x,y</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_rendering_model_z">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>83</y>
+        <width>31</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Checked (default) indicates that the selected points will have an altitute that matches the GPS value. Unchecked will enable the &amp;quot;altitude&amp;quot; entry box and the user can provide a value.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>z</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_visualization">
     <attribute name="title">
-     <string>Visualization</string>
+     <string>Tour</string>
     </attribute>
     <widget class="QLabel" name="label_visualization_active">
      <property name="geometry">
@@ -1059,7 +1125,7 @@
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Checking this box will enable the &amp;quot;Camera&amp;quot; fields for editing. The user must select a layer in the table of contents, have editing &amp;quot;on&amp;quot;, and have at least one selected point.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="text">
-      <string>Edit Visualization</string>
+      <string>Edit Tour</string>
      </property>
     </widget>
     <widget class="QGroupBox" name="groupBox_2">
@@ -1067,7 +1133,7 @@
       <rect>
        <x>10</x>
        <y>50</y>
-       <width>461</width>
+       <width>551</width>
        <height>261</height>
       </rect>
      </property>
@@ -1079,7 +1145,7 @@
        <rect>
         <x>220</x>
         <y>10</y>
-        <width>231</width>
+        <width>311</width>
         <height>211</height>
        </rect>
       </property>
@@ -1227,6 +1293,9 @@
        <property name="toolTip">
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Direction (azimuth) of the camera, in degrees. Default=0 (true North). (&lt;a href=&quot;https://developers.google.com/kml/documentation/kmlreference#headingdiagram&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;See diagram&lt;/span&gt;&lt;/a&gt;.) Values range from 0 to 360 degrees. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
+       <property name="text">
+        <string>0</string>
+       </property>
       </widget>
       <widget class="QLineEdit" name="lineEdit__visualization_camera_roll">
        <property name="enabled">
@@ -1326,7 +1395,7 @@
         <rect>
          <x>110</x>
          <y>39</y>
-         <width>101</width>
+         <width>77</width>
          <height>20</height>
         </rect>
        </property>
@@ -1342,12 +1411,94 @@
         <rect>
          <x>110</x>
          <y>18</y>
-         <width>101</width>
+         <width>77</width>
          <height>20</height>
         </rect>
        </property>
        <property name="toolTip">
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Longitude of the virtual camera (eye point). Angular distance in degrees, relative to the Prime Meridian. Values west of the Meridian range from −180 to 0 degrees. Values east of the Meridian range from 0 to 180 degrees.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_visualization_camera_xy">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>30</y>
+         <width>20</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>6</pointsize>
+        </font>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If one point is selected in the active layer, the &amp;quot;x,y&amp;quot; button will automatically fill the longitude and latitude location for the model using the coordinates from the selected point.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>x,y</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_visualization_camera_longitude_off">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>18</y>
+         <width>31</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Longitude of the virtual camera (eye point). Angular distance in degrees, relative to the Prime Meridian. Values west of the Meridian range from −180 to 0 degrees. Values east of the Meridian range from 0 to 180 degrees.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_visualization_camera_latitude_off">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>39</y>
+         <width>31</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Latitude of the virtual camera. Degrees north or south of the Equator (0 degrees). Values range from −90 degrees to 90 degrees.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_31">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>20</y>
+         <width>20</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&amp;plusmn;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_32">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>39</y>
+         <width>20</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&amp;plusmn;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </widget>
@@ -1448,8 +1599,8 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>330</x>
-        <y>230</y>
+        <x>60</x>
+        <y>180</y>
         <width>61</width>
         <height>23</height>
        </rect>
