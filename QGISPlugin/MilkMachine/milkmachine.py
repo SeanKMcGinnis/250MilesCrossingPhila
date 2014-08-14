@@ -131,14 +131,6 @@ class MilkMachine:
 
         # Order of the fields in the shapefile
         self.fields ={}
-##        self.fields['Name'] = 0
-##        self.fields['Description'] = 1
-##        self.fields['datetime'] =2
-##        self.fields['camera'] = 3
-##        self.fields['flyto'] = 4
-##        self.fields['iconstyle'] = 5
-##        self.fields['labelstyle'] = 6
-##        self.fields['model'] = 7
 
 
         QObject.connect(self.dlg.ui.chkActivate,SIGNAL("stateChanged(int)"),self.changeActive)
@@ -1909,12 +1901,12 @@ class MilkMachine:
 
         # Clear the text
         # Label style
-        self.dlg.ui.lineEdit_rendering_label_scale.setText(None)
+        self.dlg.ui.lineEdit_rendering_label_scale.setText('0')
 
         # Icon Style
-        self.dlg.ui.lineEdit_rendering_icon_transparency.setText(None)
-        self.dlg.ui.lineEdit_rendering_icon_scale.setText(None)
-        self.dlg.ui.lineEdit_rendering_icon_heading.setText(None)
+        self.dlg.ui.lineEdit_rendering_icon_transparency.setText('100')
+        self.dlg.ui.lineEdit_rendering_icon_scale.setText('1')
+        self.dlg.ui.lineEdit_rendering_icon_heading.setText('0')
         self.dlg.ui.lineEdit_rendering_icon_icon.setText(None)
         self.dlg.ui.lineEdit_rendering_icon_hotspot.setText(None)
 
@@ -1922,8 +1914,8 @@ class MilkMachine:
         self.dlg.ui.lineEdit_rendering_model_link.setText(None)
         self.dlg.ui.lineEdit_rendering_model_longitude.setText(None)
         self.dlg.ui.lineEdit_rendering_model_latitude.setText(None)
-        self.dlg.ui.lineEdit_rendering_model_altitude.setText(None)
-        self.dlg.ui.lineEdit_rendering_model_scale.setText(None)
+        self.dlg.ui.lineEdit_rendering_model_altitude.setText('altitude')
+        self.dlg.ui.lineEdit_rendering_model_scale.setText('1')
 
         #Disble
 
@@ -1950,3 +1942,5 @@ class MilkMachine:
         self.dlg.ui.pushButton_rendering_model_file.setEnabled(False)
         self.dlg.ui.pushButton_rendering_model_xy.setEnabled(False)
         self.dlg.ui.checkBox_rendering_model_z.setEnabled(False)
+
+
