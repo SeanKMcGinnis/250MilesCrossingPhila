@@ -39,7 +39,7 @@ import TeatDip
 import subprocess
 import logging
 import platform
-import re
+import re, os, StringIO
 
 #--------------------------------------------------------------------------------
 NOW = None
@@ -158,10 +158,14 @@ class MilkMachine:
         QObject.connect(self.dlg.ui.pushButton_rendering_model_xy, SIGNAL("clicked()"), self.model_xy)
         QObject.connect(self.dlg.ui.pushButton_visualization_camera_xy, SIGNAL("clicked()"), self.camera_xy)
         QObject.connect(self.dlg.ui.checkBox_rendering_model_z,SIGNAL("stateChanged(int)"),self.model_altitude_check)
-
-
+        QObject.connect(self.dlg.ui.pushButton_export_audio_file, SIGNAL("clicked()"), self.file_export_audio)
+        QObject.connect(self.dlg.ui.pushButton_google_earth, SIGNAL("clicked()"), self.exportToFile)
     ############################################################################
     ## SLOTS
+
+    def google_earth(self):
+        pass
+
 
 
     ############################################################################
@@ -508,16 +512,22 @@ class MilkMachine:
 
                     # export
                     if self.ActiveLayer.storageType() == 'ESRI Shapefile' and self.ActiveLayer.geometryType() == 0:
+                        self.dlg.ui.lineEdit_export_audio.setEnabled(True)
+                        self.dlg.ui.pushButton_export_audio_file.setEnabled(True)
                         self.dlg.ui.buttonExportTrack.setEnabled(True)
                         self.dlg.ui.pushButton_TrackInfo.setEnabled(True)
                         self.dlg.ui.pushButton_sync.setEnabled(True)
                         #self.dlg.ui.pushButton_google_earth.setEnabled(True)
                     else:
+                        self.dlg.ui.lineEdit_export_audio.setEnabled(False)
+                        self.dlg.ui.pushButton_export_audio_file.setEnabled(False)
                         self.dlg.ui.buttonExportTrack.setEnabled(False)
                         self.dlg.ui.pushButton_TrackInfo.setEnabled(False)
                         self.dlg.ui.pushButton_google_earth.setEnabled(False)
                         self.dlg.ui.pushButton_sync.setEnabled(False)
                 else:
+                    self.dlg.ui.lineEdit_export_audio.setEnabled(False)
+                    self.dlg.ui.pushButton_export_audio_file.setEnabled(False)
                     self.dlg.ui.buttonExportTrack.setEnabled(False)
                     self.dlg.ui.pushButton_TrackInfo.setEnabled(False)
                     self.dlg.ui.pushButton_google_earth.setEnabled(False)
@@ -562,6 +572,8 @@ class MilkMachine:
                 self.dlg.ui.pushButton_rendering_label_apply.setEnabled(False)
 
                 #export
+                self.dlg.ui.lineEdit_export_audio.setEnabled(False)
+                self.dlg.ui.pushButton_export_audio_file.setEnabled(False)
                 self.dlg.ui.buttonExportTrack.setEnabled(False)
                 self.dlg.ui.pushButton_TrackInfo.setEnabled(False)
                 self.dlg.ui.pushButton_google_earth.setEnabled(False)
@@ -717,8 +729,8 @@ class MilkMachine:
                     self.ActiveLayer.beginEditCommand("Camera Editing")
                     for f in self.selectList:
                         #self.ActiveLayer.dataProvider().changeAttributeValues({ f : {2: str(camera)} })
-                        self.ActiveLayer.changeAttributeValue(f, 2, str(camera))
-                        self.ActiveLayer.changeAttributeValue(f, 3, str(flyto))
+                        self.ActiveLayer.changeAttributeValue(f, self.fields['camera'], str(camera))
+                        self.ActiveLayer.changeAttributeValue(f, self.fields['flyto'], str(flyto))
                     #self.ActiveLayer.updateFields()
                     self.ActiveLayer.endEditCommand()
                 else:
@@ -1287,6 +1299,49 @@ class MilkMachine:
     ## Export and Details
     ############################################################################
 
+    def file_export_audio(self):
+        try:
+            self.audio_export = QFileDialog.getOpenFileName(None, "Choose .wav file for .kmz export", self.lastdirectory, "*.wav")  #C:\Users\Edward\Documents\Philly250\Scratch
+
+            # Audio Start and End
+            audioname_ext = self.audio_export.split('/')[-1]
+            audioname = audioname_ext.split('.')[0]
+            # Audio start date and time
+            w = wave.open(self.audio_export)
+            # Frame Rate of the Wave File
+            framerate = w.getframerate()
+            # Number of Frames in the File
+            frames = w.getnframes()
+            # Estimate length of the file by dividing frames/framerate
+            length = frames/framerate # seconds
+            audio_start = datetime.datetime(int(audioname[0:4]), int(audioname[4:6]), int(audioname[6:8]), int(audioname[8:10]), int(audioname[10:12]), int(audioname[12:14]))
+            # Audio end time. Add seconds to the start time
+            audio_end = audio_start + datetime.timedelta(seconds=length)
+
+            # Track start and end
+            cc = 0
+            for f in self.ActiveLayer.getFeatures(): #  QgsFeatureIterator #[u'2014/06/06 10:38:48', u'Time:10:38:48, Latitude: 39.965949, Longitude: -75.172239, Speed: 0.102851, Altitude: -3.756733']
+                currentatt = f.attributes()
+                pointdate = currentatt[0].split(" ")[0]  #2014/06/06
+                pointtime = currentatt[0].split(" ")[1] #10:38:48
+                if cc == 0:
+                    track_dt_start = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
+                else:
+                    track_dt_end = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
+                cc += 1
+
+            if audio_start >= track_dt_start and audio_end <= track_dt_end:
+                self.dlg.ui.lineEdit_export_audio.setText(self.audio_export)
+                diff = audio_start - track_dt_start
+                self.audio_delay = diff.seconds
+            else:
+                QMessageBox.warning(self.iface.mainWindow(),"Audio Export Warning", "The audio time does not fall within the start and end time of the GPS track.\nAudio Start: {0}\nAudio End: {1}\nTrack Start: {2}\nTrack End: {3}".format(audio_start.strftime("%x %X"),audio_end.strftime("%x %X"),track_dt_start.strftime("%x %X"),track_dt_end.strftime("%x %X")) )
+        except:
+            self.logger.error('file_export_audio error')
+            self.logger.exception(traceback.format_exc())
+            self.iface.messageBar().pushMessage("Error", "Failed to import audio file. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+
     def addedCombo(self):
         #QMessageBox.information( self.iface.mainWindow(),"Info", 'You added' )
         self.dlg.ui.comboBox_export.clear()
@@ -1331,13 +1386,14 @@ class MilkMachine:
 
             self.fields['Name'] = self.ActiveLayer.fieldNameIndex('Name')
             self.fields['Description'] = self.ActiveLayer.fieldNameIndex('Description')
-            self.fields['audio'] =self.ActiveLayer.fieldNameIndex('audio')
+            self.fields['audio'] = self.ActiveLayer.fieldNameIndex('audio')
             self.fields['camera'] = self.ActiveLayer.fieldNameIndex('camera')
-            self.fields['flyto'] =self.ActiveLayer.fieldNameIndex('flyto')
+            self.fields['flyto'] = self.ActiveLayer.fieldNameIndex('flyto')
             self.fields['iconstyle'] = self.ActiveLayer.fieldNameIndex('iconstyle')
             self.fields['labelstyle'] = self.ActiveLayer.fieldNameIndex('labelstyle')
             self.fields['model'] = self.ActiveLayer.fieldNameIndex('model')
 
+            self.logger.info(self.fields)
             #################################
             ## Tour and Camera
 
@@ -1361,10 +1417,13 @@ class MilkMachine:
 
                         playlist = tour.newgxplaylist()
 
-##                        # Attach a gx:SoundCue to the playlist and delay playing by 2 second (sound clip is about 4 seconds long)
-##                        soundcue = playlist.newgxsoundcue()
-##                        soundcue.href = "http://simplekml.googlecode.com/hg/samples/resources/drum_roll_1.wav"
-##                        soundcue.gxdelayedstart = 2
+
+                        # Attach a gx:SoundCue to the playlist and delay playing by 2 second (sound clip is about 4 seconds long)
+                        if self.dlg.ui.lineEdit_export_audio.text():
+                            soundcue = playlist.newgxsoundcue()
+                            soundcue.href = self.dlg.ui.lineEdit_export_audio.text()
+                            soundcue.gxdelayedstart = self.audio_delay
+
 
                         if flytodict['duration']:
                             flyto = playlist.newgxflyto(gxduration=float(flytodict['duration']))
@@ -1594,6 +1653,7 @@ class MilkMachine:
 
                 cc += 1
 
+#            if self.dlg.ui.lineEdit_export_audio.currentText():  # there is a wav file to attach. So only offer kmz
 
             exportpath = QFileDialog.getSaveFileName(None, "Save Track", self.lastdirectory, "(*.kml *.kmz *.gpx *.shp *.geojson *.csv)")
             if exportpath:
@@ -1620,9 +1680,8 @@ class MilkMachine:
 #{u'ESRI Shapefile': u'ESRI Shapefile', u'AutoCAD DXF': u'DXF', u'Geography Markup Language [GML]': u'GML', u'GPS eXchange Format [GPX]': u'GPX', u'Generic Mapping Tools [GMT]': u'GMT', u'GeoJSON': u'GeoJSON', u'GeoRSS': u'GeoRSS', u'Mapinfo TAB': u'MapInfo File', u'Mapinfo MIF': u'MapInfo MIF', u'SpatiaLite': u'SpatiaLite', u'Geoconcept': u'Geoconcept', u'DBF file': u'DBF file', u'S-57 Base file': u'S57', u'Atlas BNA': u'BNA', u'Microstation DGN': u'DGN', u'Keyhole Markup Language [KML]': u'KML', u'Comma Separated Value': u'CSV', u'SQLite': u'SQLite'}
 
         except:
-            if self.logging == True:
-                self.logger.error('sync function error')
-                self.logger.exception(traceback.format_exc())
+            self.logger.error('export function error')
+            self.logger.exception(traceback.format_exc())
             self.iface.messageBar().pushMessage("Error", "exportToFile error. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
 
 
@@ -1851,6 +1910,8 @@ class MilkMachine:
 
         # Export
         self.dlg.ui.lineEdit_export_active.setText(None)
+        self.dlg.ui.lineEdit_export_audio.setText(None)
+        self.audio_delay = None
 
         # Viz
         self.dlg.ui.lineEdit_visualization_active.setText(None)
