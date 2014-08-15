@@ -2892,3 +2892,196 @@ TypeError: object() takes no parameters
 2014-08-13 21:30:51,773 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
 2014-08-13 21:30:51,773 - milkmachine - INFO - Milk Machine plugin initialized
 2014-08-13 21:30:55,519 - milkmachine - INFO - Clicked Cancel
+2014-08-13 21:34:31,763 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-13 21:34:31,763 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-13 21:34:31,763 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-13 21:34:31,763 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-13 21:40:16,575 - milkmachine - INFO - Clicked Cancel
+2014-08-14 20:24:46,065 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 20:24:46,065 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 20:24:46,065 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 20:24:46,065 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-14 20:42:57,385 - milkmachine - INFO - Clicked Cancel
+2014-08-14 20:42:59,417 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 20:42:59,417 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 20:42:59,417 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 20:42:59,417 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-14 20:43:11,084 - milkmachine - ERROR - file_export_audio error
+2014-08-14 20:43:11,085 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1316, in file_export_audio
+    audio_end = self.audio_start + datetime.timedelta(seconds=length)
+AttributeError: MilkMachine instance has no attribute 'audio_start'
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1316, in file_export_audio
+    audio_end = self.audio_start + datetime.timedelta(seconds=length)
+AttributeError: MilkMachine instance has no attribute 'audio_start'
+2014-08-14 20:43:56,849 - milkmachine - INFO - Clicked Cancel
+2014-08-14 20:43:59,618 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 20:43:59,618 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 20:43:59,618 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 20:43:59,618 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-14 20:47:31,329 - milkmachine - INFO - Clicked Cancel
+2014-08-14 20:47:34,056 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 20:47:34,056 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 20:47:34,056 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 20:47:34,058 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-14 20:47:42,207 - milkmachine - ERROR - file_export_audio error
+2014-08-14 20:47:42,213 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1333, in file_export_audio
+    QMessageBox.warning(self.iface.mainWindow(),"Audio Export Warning", "The audio time does not fall within the start and end time of the GPS track.\nAudio Start: {0}\nAudio End: {1}\nTrack Start: {2}\nTrack End: {3}".format(audio_start.strftime("%x %X"),audio_end.strftime("%x %X"),track_dt_start.strftime("%x %X"),track_dt_end.strftime("%x %X")) )
+UnboundLocalError: local variable 'track_dt_end' referenced before assignment
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1333, in file_export_audio
+    QMessageBox.warning(self.iface.mainWindow(),"Audio Export Warning", "The audio time does not fall within the start and end time of the GPS track.\nAudio Start: {0}\nAudio End: {1}\nTrack Start: {2}\nTrack End: {3}".format(audio_start.strftime("%x %X"),audio_end.strftime("%x %X"),track_dt_start.strftime("%x %X"),track_dt_end.strftime("%x %X")) )
+UnboundLocalError: local variable 'track_dt_end' referenced before assignment
+2014-08-14 20:48:36,210 - milkmachine - INFO - Clicked Cancel
+2014-08-14 20:48:39,497 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 20:48:39,497 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 20:48:39,499 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 20:48:39,499 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-14 21:08:22,822 - milkmachine - INFO - Clicked Cancel
+2014-08-14 21:08:27,124 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:08:27,125 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:08:27,125 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:08:27,125 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-14 21:09:09,007 - milkmachine - INFO - Clicked Cancel
+2014-08-14 21:09:49,470 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:09:49,470 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:09:49,470 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:09:49,470 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-14 21:11:16,842 - milkmachine - ERROR - sync function error
+2014-08-14 21:11:16,845 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1407, in exportToFile
+    flytodict = eval(currentatt[self.fields['flyto']])
+TypeError: eval() arg 1 must be a string or code object
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1407, in exportToFile
+    flytodict = eval(currentatt[self.fields['flyto']])
+TypeError: eval() arg 1 must be a string or code object
+2014-08-14 21:13:39,865 - milkmachine - ERROR - sync function error
+2014-08-14 21:13:39,865 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1407, in exportToFile
+    flytodict = eval(currentatt[self.fields['flyto']])
+TypeError: eval() arg 1 must be a string or code object
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1407, in exportToFile
+    flytodict = eval(currentatt[self.fields['flyto']])
+TypeError: eval() arg 1 must be a string or code object
+2014-08-14 21:13:52,404 - milkmachine - ERROR - sync function error
+2014-08-14 21:13:52,405 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1407, in exportToFile
+    flytodict = eval(currentatt[self.fields['flyto']])
+TypeError: eval() arg 1 must be a string or code object
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1407, in exportToFile
+    flytodict = eval(currentatt[self.fields['flyto']])
+TypeError: eval() arg 1 must be a string or code object
+2014-08-14 21:14:01,351 - milkmachine - INFO - Clicked Cancel
+2014-08-14 21:16:05,318 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:16:05,318 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:16:05,319 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:16:05,319 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-14 21:16:15,414 - milkmachine - ERROR - sync function error
+2014-08-14 21:16:15,417 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1394, in exportToFile
+    logger.info(self.fields)
+NameError: global name 'logger' is not defined
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1394, in exportToFile
+    logger.info(self.fields)
+NameError: global name 'logger' is not defined
+2014-08-14 21:17:13,901 - milkmachine - INFO - Clicked Cancel
+2014-08-14 21:17:22,480 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:17:22,480 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:17:22,480 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:17:22,480 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-14 21:17:37,145 - milkmachine - INFO - {'Name': 0, 'labelstyle': 6, 'iconstyle': 5, 'camera': 3, 'model': 7, 'audio': 2, 'flyto': 4, 'Description': -1}
+2014-08-14 21:17:37,148 - milkmachine - ERROR - export function error
+2014-08-14 21:17:37,150 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1408, in exportToFile
+    flytodict = eval(currentatt[self.fields['flyto']])
+TypeError: eval() arg 1 must be a string or code object
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1408, in exportToFile
+    flytodict = eval(currentatt[self.fields['flyto']])
+TypeError: eval() arg 1 must be a string or code object
+2014-08-14 21:18:44,460 - milkmachine - INFO - Clicked Cancel
+2014-08-14 21:18:58,450 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:18:58,450 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:18:58,450 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:18:58,451 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-14 21:19:10,434 - milkmachine - INFO - Quit Milk Machine
+2014-08-14 21:19:10,482 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:19:10,482 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:19:10,482 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:19:10,482 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-14 21:22:32,576 - milkmachine - INFO - Quit Milk Machine
+2014-08-14 21:22:33,101 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:22:33,102 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:22:33,102 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:22:33,102 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-14 21:22:38,174 - milkmachine - INFO - Quit Milk Machine
+2014-08-14 21:22:38,214 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:22:38,214 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:22:38,214 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:22:38,214 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-14 21:23:01,703 - milkmachine - INFO - Clicked Cancel
+2014-08-14 21:26:07,997 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:26:07,999 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:26:07,999 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:26:07,999 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-14 21:26:23,196 - milkmachine - INFO - {'Name': 0, 'labelstyle': 6, 'iconstyle': 5, 'camera': 3, 'model': 7, 'audio': 2, 'flyto': 4, 'Description': -1}
+2014-08-14 21:26:23,198 - milkmachine - ERROR - export function error
+2014-08-14 21:26:23,200 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1420, in exportToFile
+    if self.dlg.ui.lineEdit_export_audio.currentText():
+AttributeError: 'QLineEdit' object has no attribute 'currentText'
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1420, in exportToFile
+    if self.dlg.ui.lineEdit_export_audio.currentText():
+AttributeError: 'QLineEdit' object has no attribute 'currentText'
+2014-08-14 21:28:32,456 - milkmachine - INFO - Clicked Cancel
+2014-08-14 21:28:37,848 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:28:37,848 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:28:37,848 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:28:37,848 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-14 21:28:45,956 - milkmachine - INFO - {'Name': 0, 'labelstyle': 6, 'iconstyle': 5, 'camera': 3, 'model': 7, 'audio': 2, 'flyto': 4, 'Description': -1}
+2014-08-14 21:32:03,864 - milkmachine - INFO - {'Name': 0, 'labelstyle': 6, 'iconstyle': 5, 'camera': 3, 'model': 7, 'audio': 2, 'flyto': 4, 'Description': -1}
+2014-08-14 21:32:52,510 - milkmachine - INFO - {'Name': 0, 'labelstyle': 6, 'iconstyle': 5, 'camera': 3, 'model': 7, 'audio': 2, 'flyto': 4, 'Description': -1}
+2014-08-14 21:33:13,367 - milkmachine - INFO - {'Name': 0, 'labelstyle': 6, 'iconstyle': 5, 'camera': 3, 'model': 7, 'audio': 2, 'flyto': 4, 'Description': -1}
+2014-08-14 21:38:15,953 - milkmachine - INFO - Clicked Cancel
+2014-08-14 21:38:20,743 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:38:20,743 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:38:20,743 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 21:38:20,744 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-14 21:38:28,984 - milkmachine - INFO - {'Name': 0, 'labelstyle': 6, 'iconstyle': 5, 'camera': 3, 'model': 7, 'audio': 2, 'flyto': 4, 'Description': -1}
+2014-08-14 21:38:44,430 - milkmachine - INFO - {'Name': 0, 'labelstyle': 6, 'iconstyle': 5, 'camera': 3, 'model': 7, 'audio': 2, 'flyto': 4, 'Description': -1}
+2014-08-14 22:09:21,875 - milkmachine - INFO - Clicked Cancel
+2014-08-14 22:09:25,701 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 22:09:25,703 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 22:09:25,703 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 22:09:25,703 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-14 22:09:38,487 - milkmachine - INFO - {'Name': 0, 'labelstyle': 6, 'iconstyle': 5, 'camera': 3, 'model': 7, 'audio': 2, 'flyto': 4, 'Description': -1}
+2014-08-14 22:10:03,648 - milkmachine - ERROR - export function error
+2014-08-14 22:10:03,687 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1665, in exportToFile
+    kml.save(mem)
+  File "build\bdist.win-amd64\egg\simplekml\kml.py", line 286, in save
+    f = codecs.open(path, 'wb', 'utf-8')
+  File "C:\OSGEO4~1\apps\Python27\lib\codecs.py", line 881, in open
+    file = __builtin__.open(filename, mode, buffering)
+TypeError: coercing to Unicode: need string or buffer, instance found
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1665, in exportToFile
+    kml.save(mem)
+  File "build\bdist.win-amd64\egg\simplekml\kml.py", line 286, in save
+    f = codecs.open(path, 'wb', 'utf-8')
+  File "C:\OSGEO4~1\apps\Python27\lib\codecs.py", line 881, in open
+    file = __builtin__.open(filename, mode, buffering)
+TypeError: coercing to Unicode: need string or buffer, instance found
+2014-08-14 22:14:59,628 - milkmachine - INFO - Clicked Cancel
+2014-08-14 22:15:07,178 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 22:15:07,178 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 22:15:07,178 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-14 22:15:07,180 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-14 22:15:24,141 - milkmachine - INFO - Clicked Cancel
