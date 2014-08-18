@@ -3085,3 +3085,155 @@ TypeError: coercing to Unicode: need string or buffer, instance found
 2014-08-14 22:15:07,178 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
 2014-08-14 22:15:07,180 - milkmachine - INFO - Milk Machine plugin initialized
 2014-08-14 22:15:24,141 - milkmachine - INFO - Clicked Cancel
+2014-08-17 16:47:38,150 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 16:47:38,151 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 16:47:38,151 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 16:47:38,151 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-17 16:48:58,802 - milkmachine - ERROR - follow_apply function error
+2014-08-17 16:48:58,803 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 523, in follow_apply
+    camera['tilt'] = self.dlg.ui.lineEdit__visualization_follow_tilt.text()
+AttributeError: 'Ui_MilkMachine' object has no attribute 'lineEdit__visualization_follow_tilt'
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 523, in follow_apply
+    camera['tilt'] = self.dlg.ui.lineEdit__visualization_follow_tilt.text()
+AttributeError: 'Ui_MilkMachine' object has no attribute 'lineEdit__visualization_follow_tilt'
+2014-08-17 16:50:25,976 - milkmachine - INFO - Clicked Cancel
+2014-08-17 16:50:29,483 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 16:50:29,483 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 16:50:29,483 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 16:50:29,483 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-17 19:20:11,278 - milkmachine - INFO - Clicked Cancel
+2014-08-17 19:20:29,095 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 19:20:29,095 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 19:20:29,096 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 19:20:29,096 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-17 19:20:58,878 - milkmachine - ERROR - follow_apply function error
+2014-08-17 19:20:58,880 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 545, in follow_apply
+    headinglist.append(headindlist[i-1])
+NameError: global name 'headindlist' is not defined
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 545, in follow_apply
+    headinglist.append(headindlist[i-1])
+NameError: global name 'headindlist' is not defined
+2014-08-17 19:21:43,990 - milkmachine - INFO - Clicked Cancel
+2014-08-17 19:21:47,904 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 19:21:47,904 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 19:21:47,904 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 19:21:47,904 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-17 19:23:50,299 - milkmachine - INFO - {'Name': 0, 'labelstyle': 6, 'iconstyle': 5, 'camera': 3, 'model': 7, 'audio': 2, 'flyto': 4, 'Description': -1}
+2014-08-17 19:32:51,141 - milkmachine - INFO - Clicked Cancel
+2014-08-17 19:32:55,486 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 19:32:55,486 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 19:32:55,486 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 19:32:55,486 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-17 19:33:26,992 - milkmachine - ERROR - follow_apply error.
+2014-08-17 19:33:26,994 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 553, in follow_apply
+    camera['longitude'] = cordlist[i][0]; camera['latitude'] = cordlist[i][1]
+NameError: global name 'cordlist' is not defined
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 553, in follow_apply
+    camera['longitude'] = cordlist[i][0]; camera['latitude'] = cordlist[i][1]
+NameError: global name 'cordlist' is not defined
+2014-08-17 19:34:06,559 - milkmachine - INFO - Clicked Cancel
+2014-08-17 19:34:11,372 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 19:34:11,372 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 19:34:11,374 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 19:34:11,374 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-17 19:34:38,996 - milkmachine - INFO - {'Name': 0, 'labelstyle': 6, 'iconstyle': 5, 'camera': 3, 'model': 7, 'audio': 2, 'flyto': 4, 'Description': -1}
+2014-08-17 20:43:39,430 - milkmachine - INFO - Clicked Cancel
+2014-08-17 20:43:55,316 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 20:43:55,318 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 20:43:55,318 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 20:43:55,318 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-17 20:46:17,207 - milkmachine - ERROR - follow_apply function error
+2014-08-17 20:46:17,207 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 495, in follow_apply
+    self.fields['Name'] = self.ActiveLayer.fieldNameIndex('Name')
+AttributeError: 'NoneType' object has no attribute 'fieldNameIndex'
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 495, in follow_apply
+    self.fields['Name'] = self.ActiveLayer.fieldNameIndex('Name')
+AttributeError: 'NoneType' object has no attribute 'fieldNameIndex'
+2014-08-17 20:48:18,071 - milkmachine - ERROR - file_export_audio error
+2014-08-17 20:48:18,108 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1395, in file_export_audio
+    w = wave.open(self.audio_export)
+  File "C:\OSGEO4~1\apps\Python27\lib\wave.py", line 498, in open
+    return Wave_read(f)
+  File "C:\OSGEO4~1\apps\Python27\lib\wave.py", line 159, in __init__
+    f = __builtin__.open(f, 'rb')
+IOError: [Errno 22] invalid mode ('rb') or filename: u''
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1395, in file_export_audio
+    w = wave.open(self.audio_export)
+  File "C:\OSGEO4~1\apps\Python27\lib\wave.py", line 498, in open
+    return Wave_read(f)
+  File "C:\OSGEO4~1\apps\Python27\lib\wave.py", line 159, in __init__
+    f = __builtin__.open(f, 'rb')
+IOError: [Errno 22] invalid mode ('rb') or filename: u''
+2014-08-17 20:48:27,384 - milkmachine - INFO - {'Name': 0, 'labelstyle': 6, 'iconstyle': 5, 'camera': 3, 'model': 7, 'audio': 2, 'flyto': 4, 'Description': -1}
+2014-08-17 20:48:27,391 - milkmachine - ERROR - export function error
+2014-08-17 20:48:27,392 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1562, in exportToFile
+    wgs_camera = xform2.transform(QgsPoint(utm_camera))
+TypeError: arguments did not match any overloaded call:
+  QgsPoint(): too many arguments
+  QgsPoint(QgsPoint): argument 1 has unexpected type 'tuple'
+  QgsPoint(float, float): argument 1 has unexpected type 'tuple'
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1562, in exportToFile
+    wgs_camera = xform2.transform(QgsPoint(utm_camera))
+TypeError: arguments did not match any overloaded call:
+  QgsPoint(): too many arguments
+  QgsPoint(QgsPoint): argument 1 has unexpected type 'tuple'
+  QgsPoint(float, float): argument 1 has unexpected type 'tuple'
+2014-08-17 20:48:34,614 - milkmachine - INFO - Clicked Cancel
+2014-08-17 20:50:31,417 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 20:50:31,417 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 20:50:31,417 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 20:50:31,417 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-17 20:50:39,335 - milkmachine - INFO - {'Name': 0, 'labelstyle': 6, 'iconstyle': 5, 'camera': 3, 'model': 7, 'audio': 2, 'flyto': 4, 'Description': -1}
+2014-08-17 20:50:39,346 - milkmachine - ERROR - export function error
+2014-08-17 20:50:39,352 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1562, in exportToFile
+    wgs_camera = xform2.transform(QgsPoint(utm_camera))
+TypeError: arguments did not match any overloaded call:
+  QgsPoint(): too many arguments
+  QgsPoint(QgsPoint): argument 1 has unexpected type 'tuple'
+  QgsPoint(float, float): argument 1 has unexpected type 'tuple'
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1562, in exportToFile
+    wgs_camera = xform2.transform(QgsPoint(utm_camera))
+TypeError: arguments did not match any overloaded call:
+  QgsPoint(): too many arguments
+  QgsPoint(QgsPoint): argument 1 has unexpected type 'tuple'
+  QgsPoint(float, float): argument 1 has unexpected type 'tuple'
+2014-08-17 20:51:33,917 - milkmachine - INFO - Clicked Cancel
+2014-08-17 20:51:38,513 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 20:51:38,513 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 20:51:38,513 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 20:51:38,513 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-17 20:51:42,927 - milkmachine - INFO - {'Name': 0, 'labelstyle': 6, 'iconstyle': 5, 'camera': 3, 'model': 7, 'audio': 2, 'flyto': 4, 'Description': -1}
+2014-08-17 21:12:22,226 - milkmachine - INFO - Clicked Cancel
+2014-08-17 21:20:33,068 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 21:20:33,068 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 21:20:33,068 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 21:20:33,069 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-17 21:21:01,280 - milkmachine - INFO - Clicked Cancel
+2014-08-17 21:26:18,460 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 21:26:18,461 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 21:26:18,461 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 21:26:18,461 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-17 21:39:58,368 - milkmachine - INFO - Clicked Cancel
+2014-08-17 21:40:05,035 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 21:40:05,036 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 21:40:05,036 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 21:40:05,036 - milkmachine - INFO - Milk Machine plugin initialized
+2014-08-17 21:40:17,677 - milkmachine - INFO - Quit Milk Machine
+2014-08-17 21:40:17,719 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 21:40:17,720 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 21:40:17,720 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-08-17 21:40:17,720 - milkmachine - INFO - Milk Machine plugin initialized
