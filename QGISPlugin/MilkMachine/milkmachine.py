@@ -160,6 +160,7 @@ class MilkMachine:
         QObject.connect(self.dlg.ui.checkBox_rendering_model_z,SIGNAL("stateChanged(int)"),self.model_altitude_check)
         QObject.connect(self.dlg.ui.pushButton_export_audio_file, SIGNAL("clicked()"), self.file_export_audio)
         QObject.connect(self.dlg.ui.pushButton_google_earth, SIGNAL("clicked()"), self.exportToFile)
+        QObject.connect(self.dlg.ui.pushButton_follow_apply, SIGNAL("clicked()"), self.follow_apply)
     ############################################################################
     ## SLOTS
 
@@ -489,6 +490,90 @@ class MilkMachine:
     ## Tour / Visualization
     ############################################################################
 
+    def follow_apply(self):
+        try:
+            self.fields['Name'] = self.ActiveLayer.fieldNameIndex('Name')
+            self.fields['Description'] = self.ActiveLayer.fieldNameIndex('Description')
+            self.fields['audio'] =self.ActiveLayer.fieldNameIndex('audio')
+            self.fields['camera'] = self.ActiveLayer.fieldNameIndex('camera')
+            self.fields['flyto'] =self.ActiveLayer.fieldNameIndex('flyto')
+            self.fields['iconstyle'] = self.ActiveLayer.fieldNameIndex('iconstyle')
+            self.fields['labelstyle'] = self.ActiveLayer.fieldNameIndex('labelstyle')
+            self.fields['model'] = self.ActiveLayer.fieldNameIndex('model')
+            # make a dictionary of all of the camera parameters
+            camera = {'longitude': None, 'longitude_off': None, 'latitude': None, 'latitude_off': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'gxhoriz' : None,'heading' : None,'roll' : None,'tilt' : None, 'range': None}
+            flyto = {'name': None, 'flyToMode': None, 'duration': None}
+
+
+            flyto['name'] = self.dlg.ui.lineEdit_tourname.text()
+            flyto['flyToMode'] = self.dlg.ui.comboBox_flyto_mode.currentText()
+            flyto['duration'] = 1 #self.dlg.ui.lineEdit_flyto_duration.text()
+
+
+            #camera['longitude'] = self.dlg.ui.lineEdit_visualization_camera_longitude.text()
+            #camera['longitude_off'] = self.dlg.ui.lineEdit_visualization_camera_longitude_off.text()
+            #camera['latitude'] = self.dlg.ui.lineEdit_visualization_camera_latitude.text()
+            #camera['latitude_off'] = self.dlg.ui.lineEdit_visualization_camera_latitude_off.text()
+            camera['altitude'] = self.dlg.ui.lineEdit_visualization_follow_altitude.text()
+            camera['altitudemode'] = self.dlg.ui.comboBox_follow_altitudemode.currentText()
+            camera['gxaltitudemode'] = self.dlg.ui.comboBox_follow_gxaltitudemode.currentText()
+            camera['gxhoriz'] = self.dlg.ui.lineEdit__visualization_follow_gxhoriz.text()
+            #camera['heading'] = self.dlg.ui.lineEdit__visualization_camera_heading.text()
+            #camera['roll'] = self.dlg.ui.lineEdit__visualization_camera_roll.text()
+            camera['tilt'] = self.dlg.ui.lineEdit__visualization_follow_tilt.text()
+            camera['range'] = self.dlg.ui.lineEdit__visualization_follow_range.text()
+            #QMessageBox.information(self.iface.mainWindow(),"Camera dict", str(camera) )
+
+            # Calculate Heading !! Select All Features in the Current Layer !!
+            forward_int = 1
+            self.selectList = self.ActiveLayer.allFeatureIds()  #list of all the feature ids
+            self.ActiveLayer.setSelectedFeatures(self.selectList)  # select everything
+
+            # calculate heading
+            cordslist = []  # alist of tuples. [(x,y), (x,y)]
+            for f in self.ActiveLayer.getFeatures(): #  QgsFeatureIterator #[u'2014/06/06 10:38:48', u'Time:10:38:48, Latitude: 39.965949, Longitude: -75.172239, Speed: 0.102851, Altitude: -3.756733']
+                geom = f.geometry()
+                cordslist.append(geom.asPoint()) #(-75.1722,39.9659)
+
+            headinglist = []
+            featurelen = len(cordslist) - 1
+            forwardlen = featurelen - forward_int
+            for i,v in enumerate(cordslist):
+                if i <= forwardlen:
+                    headinglist.append(TeatDip.compass_bearing((v[1],v[0]),(cordslist[i+forward_int][1] , cordslist[i+forward_int][0])))
+                else:
+                    headinglist.append(headinglist[i-1])
+
+            try:
+                self.ActiveLayer.beginEditCommand("Camera Editing")
+                if len(self.selectList) >= 1:
+                    self.ActiveLayer.beginEditCommand("Camera Editing")
+                    for i,f in enumerate(self.selectList):
+                        camera['heading'] = headinglist[i]
+                        camera['longitude'] = cordslist[i][0]; camera['latitude'] = cordslist[i][1]
+                        self.ActiveLayer.changeAttributeValue(f, self.fields['camera'], str(camera))
+                        self.ActiveLayer.changeAttributeValue(f, self.fields['flyto'], str(flyto))
+                    self.ActiveLayer.endEditCommand()
+                else:
+                    QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "Please select points in the active layer to be edited." )
+            except:
+                self.ActiveLayer.destroyEditCommand()
+                self.logger.error('follow_apply error.')
+                self.logger.exception(traceback.format_exc())
+                self.iface.messageBar().pushMessage("Error", "Failed to apply camera view parameters for Follow Tour. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+
+
+        except:
+            global NOW, pointid, ClockDateTime
+            NOW = None; pointid = None; ClockDateTime = None
+            trace = traceback.format_exc()
+            if self.logging == True:
+                self.logger.error('follow_apply function error')
+                self.logger.exception(trace)
+            self.iface.messageBar().pushMessage("Error", "Failed to apply camera view parameters for Follow Tour. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+
     def active_layer(self):
         try:
             self.dlg.ui.checkBox_visualization_edit.setChecked(False)  # uncheck the box everytime
@@ -626,6 +711,16 @@ class MilkMachine:
                     self.dlg.ui.pushButton_camera_apply.setEnabled(True)
                     self.dlg.ui.pushButton_visualization_camera_xy.setEnabled(True)
 
+                    # Follow Behind
+                    self.dlg.ui.lineEdit_visualization_follow_altitude.setEnabled(True)
+                    self.dlg.ui.comboBox_follow_altitudemode.setEnabled(True)
+                    self.dlg.ui.comboBox_follow_gxaltitudemode.setEnabled(True)
+                    self.dlg.ui.lineEdit__visualization_follow_gxhoriz.setEnabled(True)
+                    self.dlg.ui.lineEdit__visualization_follow_tilt.setEnabled(True)
+                    self.dlg.ui.lineEdit__visualization_follow_range.setEnabled(True)
+                    self.dlg.ui.pushButton_follow_apply.setEnabled(True)
+
+
                 else:
                     QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "Please select points in the active layer to be edited." )
 
@@ -650,6 +745,16 @@ class MilkMachine:
 
             self.dlg.ui.pushButton_camera_apply.setEnabled(False)
             self.dlg.ui.pushButton_visualization_camera_xy.setEnabled(False)
+
+            # Follow Behind
+            self.dlg.ui.lineEdit_visualization_follow_altitude.setEnabled(False)
+            self.dlg.ui.comboBox_follow_altitudemode.setEnabled(False)
+            self.dlg.ui.comboBox_follow_gxaltitudemode.setEnabled(False)
+            self.dlg.ui.lineEdit__visualization_follow_gxhoriz.setEnabled(False)
+            self.dlg.ui.lineEdit__visualization_follow_tilt.setEnabled(False)
+            self.dlg.ui.lineEdit__visualization_follow_range.setEnabled(False)
+            self.dlg.ui.pushButton_follow_apply.setEnabled(False)
+
 
     def camera_xy(self):
         xylist = []
@@ -683,7 +788,7 @@ class MilkMachine:
             self.fields['labelstyle'] = self.ActiveLayer.fieldNameIndex('labelstyle')
             self.fields['model'] = self.ActiveLayer.fieldNameIndex('model')
             # make a dictionary of all of the camera parameters
-            camera = {'longitude': None, 'longitude_off': None, 'latitude': None, 'latitude_off': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'gxhoriz' : None,'heading' : None,'roll' : None,'tilt' : None}
+            camera = {'longitude': None, 'longitude_off': None, 'latitude': None, 'latitude_off': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'gxhoriz' : None,'heading' : None,'roll' : None,'tilt' : None, 'range': None}
             flyto = {'name': None, 'flyToMode': None, 'duration': None}
 
 
@@ -1302,40 +1407,40 @@ class MilkMachine:
     def file_export_audio(self):
         try:
             self.audio_export = QFileDialog.getOpenFileName(None, "Choose .wav file for .kmz export", self.lastdirectory, "*.wav")  #C:\Users\Edward\Documents\Philly250\Scratch
+            if self.audio_export:
+                # Audio Start and End
+                audioname_ext = self.audio_export.split('/')[-1]
+                audioname = audioname_ext.split('.')[0]
+                # Audio start date and time
+                w = wave.open(self.audio_export)
+                # Frame Rate of the Wave File
+                framerate = w.getframerate()
+                # Number of Frames in the File
+                frames = w.getnframes()
+                # Estimate length of the file by dividing frames/framerate
+                length = frames/framerate # seconds
+                audio_start = datetime.datetime(int(audioname[0:4]), int(audioname[4:6]), int(audioname[6:8]), int(audioname[8:10]), int(audioname[10:12]), int(audioname[12:14]))
+                # Audio end time. Add seconds to the start time
+                audio_end = audio_start + datetime.timedelta(seconds=length)
 
-            # Audio Start and End
-            audioname_ext = self.audio_export.split('/')[-1]
-            audioname = audioname_ext.split('.')[0]
-            # Audio start date and time
-            w = wave.open(self.audio_export)
-            # Frame Rate of the Wave File
-            framerate = w.getframerate()
-            # Number of Frames in the File
-            frames = w.getnframes()
-            # Estimate length of the file by dividing frames/framerate
-            length = frames/framerate # seconds
-            audio_start = datetime.datetime(int(audioname[0:4]), int(audioname[4:6]), int(audioname[6:8]), int(audioname[8:10]), int(audioname[10:12]), int(audioname[12:14]))
-            # Audio end time. Add seconds to the start time
-            audio_end = audio_start + datetime.timedelta(seconds=length)
+                # Track start and end
+                cc = 0
+                for f in self.ActiveLayer.getFeatures(): #  QgsFeatureIterator #[u'2014/06/06 10:38:48', u'Time:10:38:48, Latitude: 39.965949, Longitude: -75.172239, Speed: 0.102851, Altitude: -3.756733']
+                    currentatt = f.attributes()
+                    pointdate = currentatt[0].split(" ")[0]  #2014/06/06
+                    pointtime = currentatt[0].split(" ")[1] #10:38:48
+                    if cc == 0:
+                        track_dt_start = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
+                    else:
+                        track_dt_end = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
+                    cc += 1
 
-            # Track start and end
-            cc = 0
-            for f in self.ActiveLayer.getFeatures(): #  QgsFeatureIterator #[u'2014/06/06 10:38:48', u'Time:10:38:48, Latitude: 39.965949, Longitude: -75.172239, Speed: 0.102851, Altitude: -3.756733']
-                currentatt = f.attributes()
-                pointdate = currentatt[0].split(" ")[0]  #2014/06/06
-                pointtime = currentatt[0].split(" ")[1] #10:38:48
-                if cc == 0:
-                    track_dt_start = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
+                if audio_start >= track_dt_start and audio_end <= track_dt_end:
+                    self.dlg.ui.lineEdit_export_audio.setText(self.audio_export)
+                    diff = audio_start - track_dt_start
+                    self.audio_delay = diff.seconds
                 else:
-                    track_dt_end = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
-                cc += 1
-
-            if audio_start >= track_dt_start and audio_end <= track_dt_end:
-                self.dlg.ui.lineEdit_export_audio.setText(self.audio_export)
-                diff = audio_start - track_dt_start
-                self.audio_delay = diff.seconds
-            else:
-                QMessageBox.warning(self.iface.mainWindow(),"Audio Export Warning", "The audio time does not fall within the start and end time of the GPS track.\nAudio Start: {0}\nAudio End: {1}\nTrack Start: {2}\nTrack End: {3}".format(audio_start.strftime("%x %X"),audio_end.strftime("%x %X"),track_dt_start.strftime("%x %X"),track_dt_end.strftime("%x %X")) )
+                    QMessageBox.warning(self.iface.mainWindow(),"Audio Export Warning", "The audio time does not fall within the start and end time of the GPS track.\nAudio Start: {0}\nAudio End: {1}\nTrack Start: {2}\nTrack End: {3}".format(audio_start.strftime("%x %X"),audio_end.strftime("%x %X"),track_dt_start.strftime("%x %X"),track_dt_end.strftime("%x %X")) )
         except:
             self.logger.error('file_export_audio error')
             self.logger.exception(traceback.format_exc())
@@ -1381,6 +1486,7 @@ class MilkMachine:
     def exportToFile(self):
 
         try:
+            self.utmzone = 26918 #UTM 18N
             cc = 0
             kml = simplekml.Kml()
 
@@ -1437,7 +1543,6 @@ class MilkMachine:
 
                         if cameradict['longitude'] and cameradict['latitude']:
                             if cameradict['longitude_off'] or cameradict['latitude_off']:
-                                self.utmzone = 26918
 
                                 crsSrc = QgsCoordinateReferenceSystem(4326)    # WGS 84
                                 crsDest = QgsCoordinateReferenceSystem(self.utmzone)  # WGS 84 / UTM zone
@@ -1456,6 +1561,31 @@ class MilkMachine:
 
                                 flyto.camera.longitude = offsetpt[0]
                                 flyto.camera.latitude = offsetpt[1]
+
+                            elif cameradict['range'] and cameradict['heading'] and cameradict['altitude']:
+                                import math
+                                crsSrc = QgsCoordinateReferenceSystem(4326)    # WGS 84
+                                crsDest = QgsCoordinateReferenceSystem(self.utmzone)  # WGS 84 / UTM zone
+                                xform = QgsCoordinateTransform(crsSrc, crsDest)
+                                xform2 = QgsCoordinateTransform(crsDest, crsSrc)
+
+                                utmpt = xform.transform(QgsPoint(float(cameradict['longitude']),float(cameradict['latitude'])))
+                                utmptlist = [utmpt[0], utmpt[1]]  # x,y utm
+
+                                opp_rad = (math.radians(float(cameradict['heading'])) + math.pi) % (2*math.pi) #opposite angle in radians
+                                leg_distance = math.sqrt( float(cameradict['range'])**2 - float(cameradict['altitude'])**2 ) # horizontal distance between the camera at altiduce and the range
+                                heading_rad = math.radians(float(cameradict['heading']))
+                                x_dist = math.sin(heading_rad) * leg_distance
+                                y_dist = math.cos(heading_rad) * leg_distance
+
+                                utm_camera = ((utmpt[0] + x_dist), (utmpt[1] + y_dist))
+                                wgs_camera = xform2.transform(QgsPoint(utm_camera[0], utm_camera[1]))
+
+                                flyto.camera.longitude = wgs_camera[0]
+                                flyto.camera.latitude = wgs_camera[1]
+
+                                # camera tilt
+
 
                             else:
                                 flyto.camera.longitude = cameradict['longitude']
@@ -1862,6 +1992,16 @@ class MilkMachine:
         for gxalt in gxaltitudemode:
             self.dlg.ui.comboBox_gxaltitudemode.addItem(gxalt)
 
+        # Follow Behind Combo Boxes
+        self.dlg.ui.comboBox_follow_altitudemode.clear()
+        for alt in altitudemode:
+            self.dlg.ui.comboBox_follow_altitudemode.addItem(alt)
+
+        self.dlg.ui.comboBox_follow_gxaltitudemode.clear()
+        for gxalt in gxaltitudemode:
+            self.dlg.ui.comboBox_follow_gxaltitudemode.addItem(gxalt)
+
+
         # Populate the Rendering Combo Box
         self.dlg.ui.comboBox_rendering_icon_color.clear()
         colors = simplekml.Color.__dict__.keys()
@@ -1939,6 +2079,13 @@ class MilkMachine:
         self.dlg.ui.lineEdit_visualization_camera_longitude_off.setText(None)
         self.dlg.ui.lineEdit_visualization_camera_latitude_off.setText(None)
 
+        # Follow Behind
+        self.dlg.ui.lineEdit_visualization_follow_altitude.setText(None)
+        self.dlg.ui.lineEdit__visualization_follow_gxhoriz.setText(None)
+        self.dlg.ui.lineEdit__visualization_follow_tilt.setText(None)
+        self.dlg.ui.lineEdit__visualization_follow_range.setText(None)
+
+
         # Tour
         self.dlg.ui.lineEdit_tourname.setEnabled(False)
         # FlyTo
@@ -1958,6 +2105,17 @@ class MilkMachine:
         self.dlg.ui.pushButton_visualization_camera_xy.setEnabled(False)
         self.dlg.ui.lineEdit_visualization_camera_longitude_off.setEnabled(False)
         self.dlg.ui.lineEdit_visualization_camera_latitude_off.setEnabled(False)
+
+        # Follow Behind
+        self.dlg.ui.lineEdit_visualization_follow_altitude.setEnabled(False)
+        self.dlg.ui.comboBox_follow_altitudemode.setEnabled(False)
+        self.dlg.ui.comboBox_follow_gxaltitudemode.setEnabled(False)
+        self.dlg.ui.lineEdit__visualization_follow_gxhoriz.setEnabled(False)
+        self.dlg.ui.lineEdit__visualization_follow_tilt.setEnabled(False)
+        self.dlg.ui.lineEdit__visualization_follow_range.setEnabled(False)
+        self.dlg.ui.pushButton_follow_apply.setEnabled(False)
+
+
         # Placemarks/Rendering
 
         # Clear the text
