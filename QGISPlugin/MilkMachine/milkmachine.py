@@ -689,13 +689,6 @@ class MilkMachine:
                     self.selectList.append(f.id())  #[u'689',u'2014-06-06 13:30:54']  #[u'2014/06/06 10:30:10', u'Time:10:30:10, Latitude: 39.966531, Longitude: -75.172003, Speed: 3.382047, Altitude: 1.596764']
 
                 if len(self.selectList) >= 1:
-                    # enable everything
-
-                    # Tour
-                    self.dlg.ui.lineEdit_tourname.setEnabled(True)
-                    # FlyTo
-                    self.dlg.ui.comboBox_flyto_mode.setEnabled(True)
-                    self.dlg.ui.lineEdit_flyto_duration.setEnabled(True)
                     # Camera
                     self.dlg.ui.lineEdit_visualization_camera_longitude.setEnabled(True)
                     self.dlg.ui.lineEdit_visualization_camera_latitude.setEnabled(True)
@@ -711,6 +704,15 @@ class MilkMachine:
                     self.dlg.ui.pushButton_camera_apply.setEnabled(True)
                     self.dlg.ui.pushButton_visualization_camera_xy.setEnabled(True)
 
+                else:
+
+                    # Tour
+                    self.dlg.ui.lineEdit_tourname.setEnabled(True)
+
+                    # FlyTo
+                    self.dlg.ui.comboBox_flyto_mode.setEnabled(True)
+                    self.dlg.ui.lineEdit_flyto_duration.setEnabled(True)
+
                     # Follow Behind
                     self.dlg.ui.lineEdit_visualization_follow_altitude.setEnabled(True)
                     self.dlg.ui.comboBox_follow_altitudemode.setEnabled(True)
@@ -721,8 +723,7 @@ class MilkMachine:
                     self.dlg.ui.pushButton_follow_apply.setEnabled(True)
 
 
-                else:
-                    QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "Please select points in the active layer to be edited." )
+                    QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "To edit the custom camera tab, select at least 1 point in the active layer." )
 
 
 
