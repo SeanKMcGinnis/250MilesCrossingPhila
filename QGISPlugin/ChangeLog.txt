@@ -1,0 +1,10 @@
+Change Log
+--------------------------------------------
+Commit #15
+
+Bug Fix: 	"Follow Behind" tab was disabled when all points were selected in active layer
+Task:		Enabled audio to be attached to kml/kmz when the end is beyond the length of the the GPS track
+Task:		Added datetime field. Populated on import with YYYY/MM/DD HH:MM:SS
+Task:		Changed all date and time references to point to the datetime field
+Task:		Enabled the audio sync to populate the "audio" field without being in an edit session
+Task:		Time tab. Edit selected time and before/after the selected time.
