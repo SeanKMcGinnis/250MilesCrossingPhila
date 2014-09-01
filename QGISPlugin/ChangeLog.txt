@@ -8,3 +8,11 @@ Task:		Added datetime field. Populated on import with YYYY/MM/DD HH:MM:SS
 Task:		Changed all date and time references to point to the datetime field
 Task:		Enabled the audio sync to populate the "audio" field without being in an edit session
 Task:		Time tab. Edit selected time and before/after the selected time.
+
+--------------------------------------------
+Commit #16
+
+Bug Fix: 	<TimeSpan> was defaulting to 5 seconds. Fixed to be 1 second.
+Bug Fix:	<Camera> heading was 180 degrees off what it should be.
+Task:		Added "relativeToModel" tag in the <altitude> for <Camera>. This means that the altitude will be relative to the 'altitude' tag in the <Model>, and that <Model> must be populated before attempting to use this setting.
+Task: 		Added a yellow marker that indicates the selected point in an audio tour in QGIS
