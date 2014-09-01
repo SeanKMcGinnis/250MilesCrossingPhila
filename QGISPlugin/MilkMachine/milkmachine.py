@@ -516,7 +516,16 @@ class MilkMachine:
             features = self.cLayer.selectedFeatures()
             for f in features: #QgsFeature
                 self.selectList.append(f.id())  #[u'689',u'2014-06-06 13:30:54']  #[u'2014/06/06 10:30:10', u'Time:10:30:10, Latitude: 39.966531, Longitude: -75.172003, Speed: 3.382047, Altitude: 1.596764']
-                model_altitude.append(f.attributes()[self.fields['Descriptio']].split(",")[4].split(': ')[1])
+                try:
+                    model_altitude.append(f.attributes()[self.fields['descriptio']].split(",")[4].split(': ')[1])
+                except:
+                    try:
+                        model_altitude.append(f.attributes()[self.fields['Descriptio']].split(",")[4].split(': ')[1])
+                    except:
+                        self.logger.error('model_apply destroy edit session')
+                        self.logger.exception(traceback.format_exc())
+                        self.logger.info('self.fields keys {0}'.format(self.fields.keys))
+                        self.iface.messageBar().pushMessage("Error", "Failed to apply model style parameters. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
 
             try:
                 if len(self.selectList) >= 1:
@@ -2205,7 +2214,19 @@ class MilkMachine:
 
                         if modeldict['altitude']:
                             if modeldict['altitude'] == 'altitude':  # get the altitude from the gps  [u'2014/06/06 10:38:48', u'Time:10:38:48, Latitude: 39.965949, Longitude: -75.172239, Speed: 0.102851, Altitude: -3.756733']
-                                loc.altitude = currentatt[self.fields['Descriptio']].split(",")[4].split(': ')[1]  #u'-3.756733'
+
+                                try:
+                                    loc.altitude = currentatt[self.fields['descriptio']].split(",")[4].split(': ')[1]
+                                except:
+                                    try:
+                                        loc.altitude = currentatt[self.fields['Descriptio']].split(",")[4].split(': ')[1]
+                                    except:
+                                        self.logger.error('export function error')
+                                        self.logger.info('self.fields keys {0}'.format(self.fields.keys))
+                                        self.logger.exception(traceback.format_exc())
+                                        self.iface.messageBar().pushMessage("Error", "exportToFile error. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+
                             else:
                                 loc.altitude = modeldict['altitude']
                             mdl.altitudemode = 'relativeToGround'
