@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\Edward\.qgis2\python\plugins\MilkMachine\ui_milkmachine.ui'
 #
-# Created: Tue Aug 26 21:53:53 2014
+# Created: Sun Aug 31 18:39:16 2014
 #      by: PyQt4 UI code generator 4.10.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -614,8 +614,8 @@ class Ui_MilkMachine(object):
         self.tabWidget.addTab(self.tab, _fromUtf8(""))
 
         self.retranslateUi(MilkMachine)
-        self.tabWidget.setCurrentIndex(0)
-        self.tabWidget_2.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(3)
+        self.tabWidget_2.setCurrentIndex(1)
         QtCore.QObject.connect(self.buttonboxOkCancel, QtCore.SIGNAL(_fromUtf8("accepted()")), MilkMachine.accept)
         QtCore.QObject.connect(self.buttonboxOkCancel, QtCore.SIGNAL(_fromUtf8("rejected()")), MilkMachine.reject)
         QtCore.QMetaObject.connectSlotsByName(MilkMachine)
@@ -823,16 +823,16 @@ class Ui_MilkMachine(object):
         self.tabWidget_2.setTabToolTip(self.tabWidget_2.indexOf(self.tab_4), _translate("MilkMachine", "<html><head/><body><p>Create a camera within a tour at the selected point, or at numerous selected points.</p></body></html>", None))
         self.lineEdit__visualization_follow_range.setToolTip(_translate("MilkMachine", "<html><head/><body><p>Distance in meters from the point. Since the &quot;Follow Behind&quot; is following the sequence of points, the &quot;range&quot; is the distance between the camera and the point (or row in the table) that is corresponds to. This is the same as the &quot;range&quot; for a KML &lt;LookAt&gt;.</p></body></html>", None))
         self.lineEdit__visualization_follow_tilt.setToolTip(_translate("MilkMachine", "<html><head/><body><p>Rotation, in degrees, of the camera around the <span style=\" font-style:italic;\">X</span> axis. A value of 0 indicates that the view is aimed straight down toward the earth (the most common case). A value for 90 for &lt;tilt&gt; indicates that the view is aimed toward the horizon. Values greater than 90 indicate that the view is pointed up into the sky. Values for &lt;tilt&gt; are clamped at +180 degrees. </p></body></html>", None))
-        self.label_37.setText(_translate("MilkMachine", "altitude:", None))
-        self.label_39.setText(_translate("MilkMachine", "range:", None))
+        self.label_37.setText(_translate("MilkMachine", "*altitude:", None))
+        self.label_39.setText(_translate("MilkMachine", "*range:", None))
         self.lineEdit__visualization_follow_gxhoriz.setToolTip(_translate("MilkMachine", "Rotation about the x axis. <float>", None))
         self.comboBox_follow_altitudemode.setToolTip(_translate("MilkMachine", "<html><head/><body><p>Specifies how the &lt;altitude&gt; specified for the Camera is interpreted. Possible values are as follows: </p><ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">relativeToGround</span> - (default) Interprets the &lt;altitude&gt; as a value in meters above the ground. If the point is over water, the &lt;altitude&gt; will be interpreted as a value in meters above sea level. See <a href=\"https://developers.google.com/kml/documentation/kmlreference#gxaltitudemode\"><span style=\" text-decoration: underline; color:#0000ff;\">&lt;gx:altitudeMode&gt;</span></a> below to specify points relative to the sea floor. </li><li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">clampToGround </span>- For a camera, this setting also places the camera <span style=\" font-weight:600;\">relativeToGround</span>, since putting the camera exactly at terrain height would mean that the eye would intersect the terrain (and the view would be blocked). </li><li style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">absolute </span>- Interprets the &lt;altitude&gt; as a value in meters above sea level. </li></ul></body></html>", None))
         self.label_34.setText(_translate("MilkMachine", "gxaltitudemode:", None))
-        self.label_38.setText(_translate("MilkMachine", "tilt:", None))
+        self.label_38.setText(_translate("MilkMachine", "*tilt:", None))
         self.label_35.setText(_translate("MilkMachine", "gxhorizfov:", None))
         self.comboBox_follow_gxaltitudemode.setToolTip(_translate("MilkMachine", "<html><head/><body><p>A KML extension in the <a href=\"https://developers.google.com/kml/documentation/kmlreference#kmlextensions\"><span style=\" text-decoration: underline; color:#0000ff;\">Google extension namespace</span></a>, allowing altitudes relative to the sea floor. Values are: </p><ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">relativeToSeaFloor</span> - Interprets the &lt;altitude&gt; as a value in meters above the sea floor. If the point is above land rather than sea, the &lt;altitude&gt; will be interpreted as being above the ground. </li><li style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">clampToSeaFloor</span> - The &lt;altitude&gt; specification is ignored, and the Camera will be positioned on the sea floor. If the point is on land rather than at sea, the Camera will be positioned on the ground. </li></ul><p><br/></p></body></html>", None))
         self.lineEdit_visualization_follow_altitude.setToolTip(_translate("MilkMachine", "<html><head/><body><p>Distance of the camera from the earth\'s surface, in meters. Interpreted according to the Camera\'s &lt;altitudeMode&gt; or &lt;gx:altitudeMode&gt;.</p></body></html>", None))
-        self.label_36.setText(_translate("MilkMachine", "altitudemode:", None))
+        self.label_36.setText(_translate("MilkMachine", "*altitudemode:", None))
         self.pushButton_follow_apply.setToolTip(_translate("MilkMachine", "<html><head/><body><p>Apply the camera view changes to the active layer. MM will automaticaly select all of the points in the active layer to apply the changes. &quot;Tour Name&quot; and &quot;FlyTo mode apply to this tool. To roll back these edits, select &quot;Cancel for selected layer&quot; in the editor options.</p><p>NOTE: this will overwrite everything in the &quot;flyto&quot; and &quot;camera&quot; columns.</p></body></html>", None))
         self.pushButton_follow_apply.setText(_translate("MilkMachine", "Apply", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_5), _translate("MilkMachine", "Follow Behind", None))

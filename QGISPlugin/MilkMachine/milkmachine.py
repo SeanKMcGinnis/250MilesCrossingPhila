@@ -497,7 +497,8 @@ class MilkMachine:
 
     def model_apply(self):
         try:
-
+            self.ActiveLayer = self.iface.activeLayer()
+            self.fields = self.field_indices(self.ActiveLayer)
             # make a dictionary of all icon parameters
             model = {'link': None, 'longitude': None, 'latitude': None, 'altitude' : None, 'scale': None}
 
@@ -511,18 +512,22 @@ class MilkMachine:
             self.cLayer = self.iface.mapCanvas().currentLayer()
             self.fields = self.field_indices(self.cLayer)
             self.selectList = []
+            model_altitude = []
             features = self.cLayer.selectedFeatures()
-            for f in features:
+            for f in features: #QgsFeature
                 self.selectList.append(f.id())  #[u'689',u'2014-06-06 13:30:54']  #[u'2014/06/06 10:30:10', u'Time:10:30:10, Latitude: 39.966531, Longitude: -75.172003, Speed: 3.382047, Altitude: 1.596764']
-
+                model_altitude.append(f.attributes()[self.fields['Descriptio']].split(",")[4].split(': ')[1])
 
             try:
-                self.ActiveLayer.beginEditCommand("Rendering Editing")
                 if len(self.selectList) >= 1:
+                    self.ActiveLayer.startEditing()
                     self.ActiveLayer.beginEditCommand("Rendering Editing")
-                    for f in self.selectList:
-                        self.ActiveLayer.changeAttributeValue(f, self.fields['model'], str(model))
-                    self.ActiveLayer.updateFields()
+                    for i,f in enumerate(self.selectList):
+                        if self.dlg.ui.lineEdit_rendering_model_altitude.text() == 'altitude':
+                            model['altitude'] = model_altitude[i]
+                            self.ActiveLayer.changeAttributeValue(f, self.fields['model'], str(model))
+                        else:
+                            self.ActiveLayer.changeAttributeValue(f, self.fields['model'], str(model))
                     self.ActiveLayer.endEditCommand()
                 else:
                     QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "Please select points in the active layer to be edited." )
@@ -556,52 +561,55 @@ class MilkMachine:
     def rendercheck(self,state):  # the checkbox is checked or unchecked for vis Editing
         if self.dlg.ui.checkBox_rendering_edit.isChecked():  # the checkbox is check for vis Editing
 
-            if not self.ActiveLayer.isEditable():  # the layer is not editable
-                QMessageBox.information(self.iface.mainWindow(),"Visualization Error", 'The currently active layer is not in an "Edit Session".' )
-                self.dlg.ui.checkBox_rendering_edit.setChecked(False)
-                #iface.actionToggleEditing.trigger()
-            else:  # cleared for editing...
+            if self.ActiveLayer:
+                if self.ActiveLayer.isEditable():
+                     # cleared for editing...
 
-                # Get the curretly selected feature
-                self.cLayer = self.iface.mapCanvas().currentLayer()
-                self.selectList = []
-                features = self.cLayer.selectedFeatures()
-                for f in features:
-                    self.selectList.append(f.id())  #[u'689',u'2014-06-06 13:30:54']  #[u'2014/06/06 10:30:10', u'Time:10:30:10, Latitude: 39.966531, Longitude: -75.172003, Speed: 3.382047, Altitude: 1.596764']
+                    # Get the curretly selected feature
+                    self.cLayer = self.iface.mapCanvas().currentLayer()
+                    self.selectList = []
+                    features = self.cLayer.selectedFeatures()
+                    for f in features:
+                        self.selectList.append(f.id())  #[u'689',u'2014-06-06 13:30:54']  #[u'2014/06/06 10:30:10', u'Time:10:30:10, Latitude: 39.966531, Longitude: -75.172003, Speed: 3.382047, Altitude: 1.596764']
 
-                if len(self.selectList) >= 1:
-                    # enable everything
+                    if len(self.selectList) >= 1:
+                        # enable everything
 
-                    # label style
-                    self.dlg.ui.comboBox_rendering_label_color.setEnabled(True)
-                    self.dlg.ui.comboBox_rendering_label_colormode.setEnabled(True)
-                    self.dlg.ui.lineEdit_rendering_label_scale.setEnabled(True)
+                        # label style
+                        self.dlg.ui.comboBox_rendering_label_color.setEnabled(True)
+                        self.dlg.ui.comboBox_rendering_label_colormode.setEnabled(True)
+                        self.dlg.ui.lineEdit_rendering_label_scale.setEnabled(True)
 
-                    # Icon Style
-                    self.dlg.ui.comboBox_rendering_icon_color.setEnabled(True)
-                    #self.dlg.ui.lineEdit_rendering_icon_transparency.setEnabled(True)
-                    self.dlg.ui.comboBox_rendering_icon_colormode.setEnabled(True)
-                    self.dlg.ui.lineEdit_rendering_icon_scale.setEnabled(True)
-                    self.dlg.ui.lineEdit_rendering_icon_heading.setEnabled(True)
-                    self.dlg.ui.lineEdit_rendering_icon_icon.setEnabled(True)
-                    #self.dlg.ui.lineEdit_rendering_icon_hotspot.setEnabled(True)
+                        # Icon Style
+                        self.dlg.ui.comboBox_rendering_icon_color.setEnabled(True)
+                        #self.dlg.ui.lineEdit_rendering_icon_transparency.setEnabled(True)
+                        self.dlg.ui.comboBox_rendering_icon_colormode.setEnabled(True)
+                        self.dlg.ui.lineEdit_rendering_icon_scale.setEnabled(True)
+                        self.dlg.ui.lineEdit_rendering_icon_heading.setEnabled(True)
+                        self.dlg.ui.lineEdit_rendering_icon_icon.setEnabled(True)
+                        #self.dlg.ui.lineEdit_rendering_icon_hotspot.setEnabled(True)
 
-                    # Model
-                    self.dlg.ui.lineEdit_rendering_model_link.setEnabled(True)
-                    self.dlg.ui.lineEdit_rendering_model_longitude.setEnabled(True)
-                    self.dlg.ui.lineEdit_rendering_model_latitude.setEnabled(True)
-                    if not self.dlg.ui.checkBox_rendering_model_z.isChecked():
-                        self.dlg.ui.lineEdit_rendering_model_altitude.setEnabled(True)
-                    self.dlg.ui.lineEdit_rendering_model_scale.setEnabled(True)
-                    self.dlg.ui.pushButton_rendering_model_file.setEnabled(True)
-                    self.dlg.ui.pushButton_rendering_model_xy.setEnabled(True)
-                    self.dlg.ui.checkBox_rendering_model_z.setEnabled(True)
+                        # Model
+                        self.dlg.ui.lineEdit_rendering_model_link.setEnabled(True)
+                        self.dlg.ui.lineEdit_rendering_model_longitude.setEnabled(True)
+                        self.dlg.ui.lineEdit_rendering_model_latitude.setEnabled(True)
+                        if not self.dlg.ui.checkBox_rendering_model_z.isChecked():
+                            self.dlg.ui.lineEdit_rendering_model_altitude.setEnabled(True)
+                        self.dlg.ui.lineEdit_rendering_model_scale.setEnabled(True)
+                        self.dlg.ui.pushButton_rendering_model_file.setEnabled(True)
+                        self.dlg.ui.pushButton_rendering_model_xy.setEnabled(True)
+                        self.dlg.ui.checkBox_rendering_model_z.setEnabled(True)
 
 
-                    # Apply Buttons
-                    self.dlg.ui.pushButton_rendering_icon_apply.setEnabled(True)
-                    self.dlg.ui.pushButton_rendering_label_apply.setEnabled(True)
-                    self.dlg.ui.pushButton_rendering_model_apply.setEnabled(True)
+                        # Apply Buttons
+                        self.dlg.ui.pushButton_rendering_icon_apply.setEnabled(True)
+                        self.dlg.ui.pushButton_rendering_label_apply.setEnabled(True)
+                        self.dlg.ui.pushButton_rendering_model_apply.setEnabled(True)
+
+                elif not self.ActiveLayer.isEditable():  # the layer is not editable
+                    QMessageBox.information(self.iface.mainWindow(),"Visualization Error", 'The currently active layer is not in an "Edit Session".' )
+                    self.dlg.ui.checkBox_rendering_edit.setChecked(False)
+                    #iface.actionToggleEditing.trigger()
 
                 else:
                     QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "Please select points in the active layer to be edited." )
@@ -644,7 +652,8 @@ class MilkMachine:
 
         try:
 
-
+            self.cLayer = self.iface.mapCanvas().currentLayer()
+            self.fields = self.field_indices(self.cLayer)
             # make a dictionary of all icon parameters
             icon = {'color': None, 'transparency': None, 'colormode': None,'scale' : None, 'heading': None,'icon' : None ,'hotspot' : None}
 
@@ -670,7 +679,7 @@ class MilkMachine:
                 if len(self.selectList) >= 1:
                     self.ActiveLayer.beginEditCommand("Rendering Editing")
                     for f in self.selectList:
-                        self.ActiveLayer.changeAttributeValue(f, 4, str(icon))
+                        self.ActiveLayer.changeAttributeValue(f, self.fields['iconstyle'], str(icon))
                     self.ActiveLayer.updateFields()
                     self.ActiveLayer.endEditCommand()
                 else:
@@ -692,6 +701,8 @@ class MilkMachine:
     def label_apply(self):
         try:
 
+            self.cLayer = self.iface.mapCanvas().currentLayer()
+            self.fields = self.field_indices(self.cLayer)
             # make a dictionary of all icon parameters
             label = {'color': None, 'colormode': None,'scale' : None}
 
@@ -712,7 +723,7 @@ class MilkMachine:
                 if len(self.selectList) >= 1:
                     self.ActiveLayer.beginEditCommand("Rendering Editing")
                     for f in self.selectList:
-                        self.ActiveLayer.changeAttributeValue(f, 5, str(label))
+                        self.ActiveLayer.changeAttributeValue(f, self.fields['labelstyle'], str(label))
                     self.ActiveLayer.updateFields()
                     self.ActiveLayer.endEditCommand()
                 else:
@@ -750,19 +761,14 @@ class MilkMachine:
             flyto['duration'] = 1 #self.dlg.ui.lineEdit_flyto_duration.text()
 
 
-            #camera['longitude'] = self.dlg.ui.lineEdit_visualization_camera_longitude.text()
-            #camera['longitude_off'] = self.dlg.ui.lineEdit_visualization_camera_longitude_off.text()
-            #camera['latitude'] = self.dlg.ui.lineEdit_visualization_camera_latitude.text()
-            #camera['latitude_off'] = self.dlg.ui.lineEdit_visualization_camera_latitude_off.text()
+            # check for 'relativeToModel' in model field 'altitude' key
             camera['altitude'] = self.dlg.ui.lineEdit_visualization_follow_altitude.text()
             camera['altitudemode'] = self.dlg.ui.comboBox_follow_altitudemode.currentText()
             camera['gxaltitudemode'] = self.dlg.ui.comboBox_follow_gxaltitudemode.currentText()
             camera['gxhoriz'] = self.dlg.ui.lineEdit__visualization_follow_gxhoriz.text()
-            #camera['heading'] = self.dlg.ui.lineEdit__visualization_camera_heading.text()
-            #camera['roll'] = self.dlg.ui.lineEdit__visualization_camera_roll.text()
             camera['tilt'] = self.dlg.ui.lineEdit__visualization_follow_tilt.text()
             camera['range'] = self.dlg.ui.lineEdit__visualization_follow_range.text()
-            #QMessageBox.information(self.iface.mainWindow(),"Camera dict", str(camera) )
+
 
             # Calculate Heading !! Select All Features in the Current Layer !!
             forward_int = 1
@@ -771,24 +777,42 @@ class MilkMachine:
 
             # calculate heading
             cordslist = []  # alist of tuples. [(x,y), (x,y)]
+            altitudelist = []
             for f in self.ActiveLayer.getFeatures(): #  QgsFeatureIterator #[u'2014/06/06 10:38:48', u'Time:10:38:48, Latitude: 39.965949, Longitude: -75.172239, Speed: 0.102851, Altitude: -3.756733']
                 geom = f.geometry()
                 cordslist.append(geom.asPoint()) #(-75.1722,39.9659)
+
+            try:
+                for f in self.ActiveLayer.getFeatures():
+                    if camera['altitudemode'] == 'relativeToModel':
+                        modelfield = eval(f.attributes()[self.fields['model']])
+                        if not camera['altitude']:
+                            alt = 0
+                        else:
+                            alt = float(camera['altitude'])
+                        altitudelist.append(float(modelfield['altitude']) + alt)
+            except:
+                QMessageBox.warning( self.iface.mainWindow(),"Camera Altitude Error", "Please make sure that the 'model' field has 'altitude' values. This can be calculated in the 'Placemarks' tab for Models." )
 
             headinglist = []
             featurelen = len(cordslist) - 1
             forwardlen = featurelen - forward_int
             for i,v in enumerate(cordslist):
-                if i <= forwardlen:
-                    headinglist.append(TeatDip.compass_bearing((v[1],v[0]),(cordslist[i+forward_int][1] , cordslist[i+forward_int][0])))
+                if i == 0:
+                    headinglist.append(TeatDip.compass_bearing((v[1],v[0]),(cordslist[i+forward_int][1] , cordslist[i+forward_int][0])) )
+                if i >= 1 and i <= forwardlen:
+                    #headinglist.append(TeatDip.compass_bearing((v[1],v[0]),(cordslist[i+forward_int][1] , cordslist[i+forward_int][0])) )
+                    headinglist.append(TeatDip.compass_bearing((cordslist[i-1][1] , cordslist[i-1][0]), (v[1],v[0])) )
                 else:
                     headinglist.append(headinglist[i-1])
 
             try:
-                self.ActiveLayer.beginEditCommand("Camera Editing")
                 if len(self.selectList) >= 1:
+                    self.ActiveLayer.startEditing()
                     self.ActiveLayer.beginEditCommand("Camera Editing")
                     for i,f in enumerate(self.selectList):
+                        if altitudelist:
+                            camera['altitude'] = altitudelist[i]
                         camera['heading'] = headinglist[i]
                         camera['longitude'] = cordslist[i][0]; camera['latitude'] = cordslist[i][1]
                         self.ActiveLayer.changeAttributeValue(f, self.fields['camera'], str(camera))
@@ -1360,6 +1384,24 @@ class MilkMachine:
                 pointid += 1
                 self.lcd1_P.display(str(pointid))
                 self.cLayer.setSelectedFeatures([pointid])
+
+                features = self.cLayer.selectedFeatures()
+                selxy = ()
+                for f in features:
+                    geom = f.geometry()
+                    selxy = geom.asPoint()
+
+                pr = self.audioselect_layer.dataProvider()
+                # add a feature
+                fet = QgsGeometry.fromPoint(QgsPoint(selxy[0],selxy[1]))
+                self.audioselect_layer.startEditing()
+                self.audioselect_layer.beginEditCommand('selected')
+                self.audioselect_layer.changeGeometry(0,fet)
+##                self.audioselect_layer.endEditCommand()
+##                self.audioselect_layer.commitChanges()
+                self.canvas.refresh()
+
+
                 self.canvas.zoomToSelected()
 
             except:
@@ -1461,6 +1503,23 @@ class MilkMachine:
                                 self.pp = subprocess.Popen(["C:/Program Files (x86)/VideoLAN/VLC/vlc.exe", wav_path, "--start-time", str(jumptime)], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                         else:
                             self.pp = subprocess.Popen(["/Applications/VLC.app/Contents/MacOS/VLC", self.line_audiopath, "--start-time", str(jumptime)], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+                        #-----------
+                        # make a marker to hover over the selected point
+                        self.audioselect_layer = QgsVectorLayer("Point?crs=EPSG:4326", 'Selected Point', "memory")
+                        pr = self.audioselect_layer.dataProvider()
+                        fet = QgsFeature()
+                        fet.setGeometry( QgsGeometry.fromPoint(QgsPoint(-75,40)) )
+                        pr.addFeatures([fet])
+                        properties = {'size': '6', 'color': '255,255,0,255'}
+                        symbol_layer = QgsSimpleMarkerSymbolLayerV2.create(properties)
+                        self.audioselect_layer.rendererV2().symbols()[0].changeSymbolLayer(0, symbol_layer)
+                        self.audioselect_layer.setLayerTransparency(30)
+                        self.audioselect_layer.commitChanges()
+                        QgsMapLayerRegistry.instance().addMapLayer(self.audioselect_layer)
+
+
+
                         NOW = datetime.datetime.now()
                         self.dlg.timer.start(1000)
 
@@ -1487,6 +1546,8 @@ class MilkMachine:
                 self.dlg.timer.stop()
             except:
                 pass
+            self.audioselect_layer.endEditCommand()
+            #self.audioselect_layer.commitChanges()
         except:
             global NOW, pointid, ClockDateTime
             NOW = None; pointid = None; ClockDateTime = None
@@ -1786,7 +1847,7 @@ class MilkMachine:
                         pointdate = currentatt[self.fields['datetime']].split(" ")[0]  #2014/06/06
                         pointtime = currentatt[self.fields['datetime']].split(" ")[1] #10:38:48
                         current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]) )
-                        current_dt_end = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]) ) + datetime.timedelta(seconds=5)
+                        current_dt_end = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]) ) #+ datetime.timedelta(seconds=5)
                         CamStartTime = current_dt.strftime('%Y-%m-%dT%XZ')
                         camendtime = current_dt_end.strftime('%Y-%m-%dT%XZ')
 
@@ -1840,13 +1901,26 @@ class MilkMachine:
                                 utmptlist = [utmpt[0], utmpt[1]]  # x,y utm
 
                                 opp_rad = (math.radians(float(cameradict['heading'])) + math.pi) % (2*math.pi) #opposite angle in radians
-                                leg_distance = math.sqrt( float(cameradict['range'])**2 - float(cameradict['altitude'])**2 ) # horizontal distance between the camera at altiduce and the range
-                                heading_rad = math.radians(float(cameradict['heading']))
-                                x_dist = math.sin(heading_rad) * leg_distance
-                                y_dist = math.cos(heading_rad) * leg_distance
+                                #leg_distance = float(cameradict['range']) * sin(float(cameradict['tilt']))
 
-                                self.logger.info('xdist {0}'.format(x_dist))
-                                self.logger.info('ydist {0}'.format(y_dist))
+                                if cameradict['altitudemode'] == 'relativeToModel':
+                                    modeldict = eval(currentatt[self.fields['model']])
+                                    camaltitude = float(cameradict['altitude']) - float(modeldict['altitude'])
+                                else:
+                                    camaltitude = float(cameradict['altitude'])
+
+                                leg_distance = math.sqrt( float(cameradict['range'])**2 - camaltitude**2 ) # horizontal distance between the camera at altiduce and the range
+                                heading_rad = math.radians(float(cameradict['heading']))
+                                x_dist = math.sin(opp_rad) * leg_distance
+                                y_dist = math.cos(opp_rad) * leg_distance
+
+
+##                                self.logger.info('opp_rad {0}'.format(math.degrees(opp_rad)))
+##                                self.logger.info('heading_rad {0}'.format(math.degrees(heading_rad)))
+##                                self.logger.info('range {0}'.format(cameradict['range']))
+##                                self.logger.info('altitude {0}'.format(cameradict['altitude']))
+##                                self.logger.info('xdist {0}'.format(x_dist))
+##                                self.logger.info('ydist {0}'.format(y_dist))
 
                                 utm_camera = ((utmpt[0] + x_dist), (utmpt[1] + y_dist))
                                 wgs_camera = xform2.transform(QgsPoint(utm_camera[0], utm_camera[1]))
@@ -1874,6 +1948,20 @@ class MilkMachine:
                                 flyto.camera.altitudemode = simplekml.AltitudeMode.clamptoground
                             if cameradict['altitudemode'] == 'relativeToGround':
                                 flyto.camera.altitudemode = simplekml.AltitudeMode.relativetoground
+                            if cameradict['altitudemode'] == 'relativeToPoint':
+                                flyto.camera.altitudemode = simplekml.AltitudeMode.relativetoground
+                            if cameradict['altitudemode'] == 'relativeToModel':
+                                flyto.camera.altitudemode = simplekml.AltitudeMode.relativetoground
+
+##                        if cameradict['altitude']:
+##                            if cameradict['altitudemode'] == 'relativeToPoint':
+##                                flyto.camera.altitude = cameradict['altitude'] +
+##                            if cameradict['altitudemode'] == 'relativeToModel':
+##
+##                                flyto.camera.altitude = cameradict['altitude'] +
+##
+##                                loc.altitude = currentatt[self.fields['Descriptio']].split(",")[4].split(': ')[1]  #u'-3.756733'
+
                         if cameradict['gxaltitudemode']:
                             if cameradict['gxaltitudemode'] == 'clampToSeaFloor':
                                 flyto.camera.gxaltitudemode = simplekml.GxAltitudeMode.clampToSeaFloor
@@ -1902,7 +1990,7 @@ class MilkMachine:
                         # Start time. Will be used for TimeSpan tags
                         pointdate = currentatt[self.fields['datetime']].split(" ")[0]  #2014/06/06
                         pointtime = currentatt[self.fields['datetime']].split(" ")[1] #10:38:48
-                        current_dt_end = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2])) + datetime.timedelta(seconds=5)
+                        current_dt_end = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))# + datetime.timedelta(seconds=5)
                         camendtime = current_dt_end.strftime('%Y-%m-%dT%XZ')
 
                         if flytodict['duration']:
@@ -1944,17 +2032,35 @@ class MilkMachine:
                                 utmptlist = [utmpt[0], utmpt[1]]  # x,y utm
 
                                 opp_rad = (math.radians(float(cameradict['heading'])) + math.pi) % (2*math.pi) #opposite angle in radians
-                                leg_distance = math.sqrt( float(cameradict['range'])**2 - float(cameradict['altitude'])**2 ) # horizontal distance between the camera at altiduce and the range
-                                heading_rad = math.radians(float(cameradict['heading']))
-                                x_dist = math.sin(heading_rad) * leg_distance
-                                y_dist = math.cos(heading_rad) * leg_distance
 
-                                self.logger.info('xdist {0}'.format(x_dist))
-                                self.logger.info('ydist {0}'.format(y_dist))
+                                if cameradict['altitudemode'] == 'relativeToModel':
+                                    modeldict = eval(currentatt[self.fields['model']])
+                                    camaltitude = float(cameradict['altitude']) - float(modeldict['altitude'])
+                                else:
+                                    camaltitude = float(cameradict['altitude'])
+                                leg_distance = math.sqrt( float(cameradict['range'])**2 - camaltitude**2 ) # horizontal distance between the camera at altiduce and the range
+
+
+                                #leg_distance = math.sqrt( float(cameradict['range'])**2 - float(cameradict['altitude'])**2 ) # horizontal distance between the camera at altiduce and the range
+                                heading_rad = math.radians(float(cameradict['heading']))
+                                x_dist = math.sin(opp_rad) * leg_distance
+                                y_dist = math.cos(opp_rad) * leg_distance
+
+##                                self.logger.info('-----------------------')
+##                                self.logger.info('model xy {0}'.format((float(cameradict['longitude']),float(cameradict['latitude']))))
+##                                self.logger.info('utmptlist {0}'.format(utmptlist))
+##                                self.logger.info('opp_rad {0}'.format(math.degrees(opp_rad)))
+##                                self.logger.info('heading_rad {0}'.format(math.degrees(heading_rad)))
+##                                self.logger.info('range {0}'.format(cameradict['range']))
+##                                self.logger.info('altitude {0}'.format(cameradict['altitude']))
+##                                self.logger.info('xdist {0}'.format(x_dist))
+##                                self.logger.info('ydist {0}'.format(y_dist))
+##                                self.logger.info('utm_camera {0}'.format(utm_camera))
 
                                 utm_camera = ((utmpt[0] + x_dist), (utmpt[1] + y_dist))
                                 wgs_camera = xform2.transform(QgsPoint(utm_camera[0], utm_camera[1]))
 
+                                self.logger.info('wgs xy {0}'.format(wgs_camera))
                                 flyto.camera.longitude = wgs_camera[0]
                                 flyto.camera.latitude = wgs_camera[1]
 
@@ -1972,6 +2078,10 @@ class MilkMachine:
                             if cameradict['altitudemode'] == 'clampToGround':
                                 flyto.camera.altitudemode = simplekml.AltitudeMode.clamptoground
                             if cameradict['altitudemode'] == 'relativeToGround':
+                                flyto.camera.altitudemode = simplekml.AltitudeMode.relativetoground
+                            if cameradict['altitudemode'] == 'relativeToPoint':
+                                flyto.camera.altitudemode = simplekml.AltitudeMode.relativetoground
+                            if cameradict['altitudemode'] == 'relativeToModel':
                                 flyto.camera.altitudemode = simplekml.AltitudeMode.relativetoground
                         if cameradict['gxaltitudemode']:
                             if cameradict['gxaltitudemode'] == 'clampToSeaFloor':
@@ -2095,7 +2205,7 @@ class MilkMachine:
 
                         if modeldict['altitude']:
                             if modeldict['altitude'] == 'altitude':  # get the altitude from the gps  [u'2014/06/06 10:38:48', u'Time:10:38:48, Latitude: 39.965949, Longitude: -75.172239, Speed: 0.102851, Altitude: -3.756733']
-                                loc.altitude = currentatt[1].split(",")[4].split(': ')[1]  #u'-3.756733'
+                                loc.altitude = currentatt[self.fields['Descriptio']].split(",")[4].split(': ')[1]  #u'-3.756733'
                             else:
                                 loc.altitude = modeldict['altitude']
                             mdl.altitudemode = 'relativeToGround'
@@ -2312,7 +2422,7 @@ class MilkMachine:
             self.dlg.ui.comboBox_flyto_mode.addItem(hh)
 
         self.dlg.ui.comboBox_altitudemode.clear()
-        altitudemode = [None, 'absolute', 'clampToGround', 'relativeToGround']
+        altitudemode = [None, 'absolute', 'clampToGround', 'relativeToGround', 'relativeToModel']
         for alt in altitudemode:
             self.dlg.ui.comboBox_altitudemode.addItem(alt)
 
