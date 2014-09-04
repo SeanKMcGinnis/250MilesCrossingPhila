@@ -40,7 +40,7 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>0</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideNone</enum>
@@ -390,6 +390,30 @@
      </property>
      <property name="text">
       <string>Draw &quot;Head of Track&quot;</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_import_indicator">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>190</y>
+       <width>181</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Lucida Sans</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>Indicate Selected Point</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
@@ -2381,6 +2405,13 @@
   <tabstop>lineEdit__visualization_camera_roll</tabstop>
   <tabstop>lineEdit__visualization_camera_tilt</tabstop>
   <tabstop>pushButton_camera_apply</tabstop>
+  <tabstop>lineEdit_visualization_follow_altitude</tabstop>
+  <tabstop>comboBox_follow_altitudemode</tabstop>
+  <tabstop>comboBox_follow_gxaltitudemode</tabstop>
+  <tabstop>lineEdit__visualization_follow_gxhoriz</tabstop>
+  <tabstop>lineEdit__visualization_follow_tilt</tabstop>
+  <tabstop>lineEdit__visualization_follow_range</tabstop>
+  <tabstop>pushButton_follow_apply</tabstop>
   <tabstop>lineEdit_filtering_active</tabstop>
   <tabstop>checkBox_filtering_edit</tabstop>
   <tabstop>lineEdit_time_active</tabstop>
@@ -2400,13 +2431,6 @@
   <tabstop>txtFeedback</tabstop>
   <tabstop>buttonboxOkCancel</tabstop>
   <tabstop>comboBox_export</tabstop>
-  <tabstop>lineEdit__visualization_follow_range</tabstop>
-  <tabstop>lineEdit__visualization_follow_gxhoriz</tabstop>
-  <tabstop>comboBox_follow_gxaltitudemode</tabstop>
-  <tabstop>pushButton_follow_apply</tabstop>
-  <tabstop>comboBox_follow_altitudemode</tabstop>
-  <tabstop>lineEdit__visualization_follow_tilt</tabstop>
-  <tabstop>lineEdit_visualization_follow_altitude</tabstop>
  </tabstops>
  <resources>
   <include location="resources.qrc"/>
