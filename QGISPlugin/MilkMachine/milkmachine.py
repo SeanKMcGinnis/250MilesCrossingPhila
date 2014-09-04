@@ -1427,7 +1427,7 @@ class MilkMachine:
 
     def playAudio1(self):
         try:
-
+            self.dlg.ui.pushButton_Audio1.setEnabled(False)
             self.line_audiopath = self.dlg.ui.lineEdit_InAudio1.text()
             if self.audiopath and self.line_audiopath:
                 #self.audio_start = None
@@ -1555,6 +1555,7 @@ class MilkMachine:
 
     def stopAudio1(self):
         try:
+            self.dlg.ui.pushButton_Audio1.setEnabled(True)
             global NOW, pointid, ClockDateTime
             NOW = None; pointid = None; ClockDateTime = None
             try:

@@ -28,3 +28,4 @@ Commit #18
 Bug Fix:	Tab order on "Tour" tab.
 Task:		Check box for presence of yellow indicator over selected point in audio sync.
 Bug Fix: 	If audio start time matches exactly with time of first GPS point: a) we get no notification window (window that gives audio and track info), b) MM does not generate a 'play-head', c) the audio does not play automatically when you click the play button
+Task:		"play" button is disabled when it is pressed. To enable it, press "stop" button.

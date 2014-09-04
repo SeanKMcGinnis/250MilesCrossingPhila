@@ -52,3 +52,18 @@
 2014-09-03 22:46:21,444 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
 2014-09-03 22:46:21,444 - milkmachine - INFO - Milk Machine plugin initialized
 2014-09-03 22:46:26,216 - milkmachine - INFO - Clicked Cancel
+2014-09-03 22:59:07,371 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-03 22:59:07,371 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-03 22:59:07,371 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-03 22:59:07,371 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-03 23:00:16,558 - milkmachine - INFO - Size: 3.0
+2014-09-03 23:00:16,559 - milkmachine - INFO - Color: #ff0000
+2014-09-03 23:00:21,128 - milkmachine - INFO - IN selectList: [[u'2014/06/06 10:08:54', u'Time:10:08:54, Latitude: 39.965940, Longitude: -75.172320, Speed: 0.491576, Altitude: 20.065025', u'2014/06/06 10:08:54', u'1', u"{'altitudemode': u'relativeToGround', 'latitude_off': None, 'longitude_off': None, 'gxhoriz': u'', 'tilt': u'50', 'altitude': u'10', 'gxaltitudemode': u'', 'longitude': -75.17232, 'heading': 217.46750930986437, 'range': u'20', 'latitude': 39.96594, 'roll", u"{'flyToMode': u'smooth', 'duration': 1, 'name': u'rty'}", u"{'scale': u'1', 'color': u'', 'colormode': u'', 'hotspot': u'', 'transparency': u'100', 'heading': u'0', 'icon': u'http://maps.google.com/mapfiles/kml/shapes/placemark_circle_highlight.png'}", u"{'color': u'', 'colormode': u'', 'scale': u'1'}", u"{'latitude': u'', 'altitude': u'', 'scale': u'1', 'link': u'C:/Users/Edward/Documents/AAA_Scratch/DAE/green_sphere.dae', 'longitude': u''}"]]
+2014-09-03 23:00:21,130 - milkmachine - INFO - IN jumptime: 0, ClockDateTime
+2014-09-03 23:00:21,130 - milkmachine - INFO - WindOs: <_sre.SRE_Match object at 0x000000000F93AED0>
+2014-09-03 23:00:21,171 - milkmachine - INFO - jumptime: 0, ClockDateTime
+2014-09-03 23:00:30,299 - milkmachine - INFO - IN selectList: [[u'2014/06/06 10:08:59', u'Time:10:08:59, Latitude: 39.965930, Longitude: -75.172328, Speed: 1.571747, Altitude: 20.066101', u'2014/06/06 10:08:59', u'1', u"{'altitudemode': u'relativeToGround', 'latitude_off': None, 'longitude_off': None, 'gxhoriz': u'', 'tilt': u'50', 'altitude': u'10', 'gxaltitudemode': u'', 'longitude': -75.172328, 'heading': 217.46751098430315, 'range': u'20', 'latitude': 39.96593, 'rol", u"{'flyToMode': u'smooth', 'duration': 1, 'name': u'rty'}", u"{'scale': u'1', 'color': u'', 'colormode': u'', 'hotspot': u'', 'transparency': u'100', 'heading': u'0', 'icon': u'http://maps.google.com/mapfiles/kml/shapes/placemark_circle_highlight.png'}", u"{'color': u'', 'colormode': u'', 'scale': u'1'}", u"{'latitude': u'', 'altitude': u'', 'scale': u'1', 'link': u'C:/Users/Edward/Documents/AAA_Scratch/DAE/green_sphere.dae', 'longitude': u''}"]]
+2014-09-03 23:00:30,299 - milkmachine - INFO - IN jumptime: 5, ClockDateTime
+2014-09-03 23:00:30,299 - milkmachine - INFO - WindOs: <_sre.SRE_Match object at 0x000000000F93AED0>
+2014-09-03 23:00:30,309 - milkmachine - INFO - jumptime: 5, ClockDateTime
+2014-09-03 23:00:36,283 - milkmachine - INFO - Clicked Cancel
