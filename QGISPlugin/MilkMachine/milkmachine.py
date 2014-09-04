@@ -1378,7 +1378,7 @@ class MilkMachine:
     def Time(self):
         global NOW, pointid, ClockDateTime
 
-        if NOW and pointid and ClockDateTime:
+        if NOW and pointid >=0 and ClockDateTime:
             try:
 
                 # Clock Time and Duration
@@ -1394,23 +1394,22 @@ class MilkMachine:
                 self.lcd1_P.display(str(pointid))
                 self.cLayer.setSelectedFeatures([pointid])
 
-                features = self.cLayer.selectedFeatures()
-                selxy = ()
-                for f in features:
-                    geom = f.geometry()
-                    selxy = geom.asPoint()
+                if self.dlg.ui.checkBox_import_indicator.isChecked():
+                    features = self.cLayer.selectedFeatures()
+                    selxy = ()
+                    for f in features:
+                        geom = f.geometry()
+                        selxy = geom.asPoint()
 
-                pr = self.audioselect_layer.dataProvider()
-                # add a feature
-                fet = QgsGeometry.fromPoint(QgsPoint(selxy[0],selxy[1]))
-                self.audioselect_layer.startEditing()
-                self.audioselect_layer.beginEditCommand('selected')
-                self.audioselect_layer.changeGeometry(0,fet)
-##                self.audioselect_layer.endEditCommand()
-##                self.audioselect_layer.commitChanges()
+                    pr = self.audioselect_layer.dataProvider()
+                    # add a feature
+                    fet = QgsGeometry.fromPoint(QgsPoint(selxy[0],selxy[1]))
+                    self.audioselect_layer.startEditing()
+                    self.audioselect_layer.beginEditCommand('selected')
+                    self.audioselect_layer.changeGeometry(0,fet)
+    ##                self.audioselect_layer.endEditCommand()
+    ##                self.audioselect_layer.commitChanges()
                 self.canvas.refresh()
-
-
                 self.canvas.zoomToSelected()
 
             except:
@@ -1428,7 +1427,7 @@ class MilkMachine:
 
     def playAudio1(self):
         try:
-
+            self.dlg.ui.pushButton_Audio1.setEnabled(False)
             self.line_audiopath = self.dlg.ui.lineEdit_InAudio1.text()
             if self.audiopath and self.line_audiopath:
                 #self.audio_start = None
@@ -1515,17 +1514,25 @@ class MilkMachine:
 
                         #-----------
                         # make a marker to hover over the selected point
-                        self.audioselect_layer = QgsVectorLayer("Point?crs=EPSG:4326", 'Selected Point', "memory")
-                        pr = self.audioselect_layer.dataProvider()
-                        fet = QgsFeature()
-                        fet.setGeometry( QgsGeometry.fromPoint(QgsPoint(-75,40)) )
-                        pr.addFeatures([fet])
-                        properties = {'size': '6', 'color': '255,255,0,255'}
-                        symbol_layer = QgsSimpleMarkerSymbolLayerV2.create(properties)
-                        self.audioselect_layer.rendererV2().symbols()[0].changeSymbolLayer(0, symbol_layer)
-                        self.audioselect_layer.setLayerTransparency(30)
-                        self.audioselect_layer.commitChanges()
-                        QgsMapLayerRegistry.instance().addMapLayer(self.audioselect_layer)
+                        if self.dlg.ui.checkBox_import_indicator.isChecked():
+                            toclayers = self.canvas.layers()
+                            pres = False
+                            for i,l in enumerate(toclayers):
+                                if l.name() == 'Selected Point':
+                                    pres = True
+                                    self.audioselect_layer = toclayers[i]
+                            if pres == False:
+                                self.audioselect_layer = QgsVectorLayer("Point?crs=EPSG:4326", 'Selected Point', "memory")
+                                pr = self.audioselect_layer.dataProvider()
+                                fet = QgsFeature()
+                                fet.setGeometry( QgsGeometry.fromPoint(QgsPoint(-75,40)) )
+                                pr.addFeatures([fet])
+                                properties = {'size': '6', 'color': '255,255,0,255'}
+                                symbol_layer = QgsSimpleMarkerSymbolLayerV2.create(properties)
+                                self.audioselect_layer.rendererV2().symbols()[0].changeSymbolLayer(0, symbol_layer)
+                                self.audioselect_layer.setLayerTransparency(30)
+                                self.audioselect_layer.commitChanges()
+                                QgsMapLayerRegistry.instance().addMapLayer(self.audioselect_layer)
 
 
 
@@ -1548,14 +1555,17 @@ class MilkMachine:
 
     def stopAudio1(self):
         try:
+            self.dlg.ui.pushButton_Audio1.setEnabled(True)
             global NOW, pointid, ClockDateTime
             NOW = None; pointid = None; ClockDateTime = None
             try:
                 self.pp.terminate()
                 self.dlg.timer.stop()
             except:
-                pass
-            self.audioselect_layer.endEditCommand()
+                try:
+                    self.audioselect_layer.endEditCommand()
+                except:
+                    pass
             #self.audioselect_layer.commitChanges()
         except:
             global NOW, pointid, ClockDateTime
@@ -1618,7 +1628,15 @@ class MilkMachine:
                             current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
                             if cc == 0:
                                 track_start_dt = current_dt
-                                if current_dt > self.audio_start: # if it is the first attribute and there is no match and the track time is larger than the start of the audio.
+                                if current_dt == self.audio_start:
+                                    self.aLayer.setSelectedFeatures([int(f.id())])
+                                    matchdict['fid'] = f.id()
+                                    matchdict['attributes'] = currentatt
+                                    geom = f.geometry()  # QgsGeometry object, get the geometry
+                                    if geom.type() == QGis.Point:
+                                        matchdict['coordinates'] = geom.asPoint() #(-75.1722,39.9659)
+                                    break
+                                elif current_dt > self.audio_start: # if it is the first attribute and there is no match and the track time is larger than the start of the audio.
                                     diff = current_dt - self.audio_start
                                     QMessageBox.information(self.iface.mainWindow(),"Audio File Sync Info", 'Audio starts before the begining of the track by {0}'.format(diff) )
                                     break
@@ -1651,13 +1669,6 @@ class MilkMachine:
                                 cc += 1
                             self.aLayer.endEditCommand()
                             self.aLayer.commitChanges()
-
-    ##                        shaper.startEditing()
-    ##                        shaper.beginEditCommand('datetime')
-    ##                        for i,v in enumerate(fid_dt):
-    ##                            shaper.changeAttributeValue(i, idx, v)
-    ##                        shaper.endEditCommand()
-    ##                        shaper.commitChanges()
 
 
                         except:

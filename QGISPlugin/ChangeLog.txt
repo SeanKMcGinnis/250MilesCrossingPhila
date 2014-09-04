@@ -16,3 +16,16 @@ Bug Fix: 	<TimeSpan> was defaulting to 5 seconds. Fixed to be 1 second.
 Bug Fix:	<Camera> heading was 180 degrees off what it should be.
 Task:		Added "relativeToModel" tag in the <altitude> for <Camera>. This means that the altitude will be relative to the 'altitude' tag in the <Model>, and that <Model> must be populated before attempting to use this setting.
 Task: 		Added a yellow marker that indicates the selected point in an audio tour in QGIS
+
+--------------------------------------------
+Commit #17
+
+Bug Fix:	On windows, "Description" field formats as "Descriptio". On MAC, it format to "descriptio". MM handles both now.
+
+--------------------------------------------
+Commit #18
+
+Bug Fix:	Tab order on "Tour" tab.
+Task:		Check box for presence of yellow indicator over selected point in audio sync.
+Bug Fix: 	If audio start time matches exactly with time of first GPS point: a) we get no notification window (window that gives audio and track info), b) MM does not generate a 'play-head', c) the audio does not play automatically when you click the play button
+Task:		"play" button is disabled when it is pressed. To enable it, press "stop" button.

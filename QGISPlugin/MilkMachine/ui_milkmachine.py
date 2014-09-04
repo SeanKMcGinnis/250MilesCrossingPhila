@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\Edward\.qgis2\python\plugins\MilkMachine\ui_milkmachine.ui'
 #
-# Created: Sun Aug 31 18:39:16 2014
+# Created: Wed Sep 03 21:54:01 2014
 #      by: PyQt4 UI code generator 4.10.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -134,6 +134,14 @@ class Ui_MilkMachine(object):
         self.checkBox_headoftrack.setEnabled(False)
         self.checkBox_headoftrack.setGeometry(QtCore.QRect(140, 60, 131, 30))
         self.checkBox_headoftrack.setObjectName(_fromUtf8("checkBox_headoftrack"))
+        self.checkBox_import_indicator = QtGui.QCheckBox(self.tab_import)
+        self.checkBox_import_indicator.setEnabled(True)
+        self.checkBox_import_indicator.setGeometry(QtCore.QRect(20, 190, 181, 20))
+        font = QtGui.QFont()
+        font.setFamily(_fromUtf8("Lucida Sans"))
+        self.checkBox_import_indicator.setFont(font)
+        self.checkBox_import_indicator.setChecked(True)
+        self.checkBox_import_indicator.setObjectName(_fromUtf8("checkBox_import_indicator"))
         self.tabWidget.addTab(self.tab_import, _fromUtf8(""))
         self.tab_rendering = QtGui.QWidget()
         self.tab_rendering.setObjectName(_fromUtf8("tab_rendering"))
@@ -614,7 +622,7 @@ class Ui_MilkMachine(object):
         self.tabWidget.addTab(self.tab, _fromUtf8(""))
 
         self.retranslateUi(MilkMachine)
-        self.tabWidget.setCurrentIndex(3)
+        self.tabWidget.setCurrentIndex(0)
         self.tabWidget_2.setCurrentIndex(1)
         QtCore.QObject.connect(self.buttonboxOkCancel, QtCore.SIGNAL(_fromUtf8("accepted()")), MilkMachine.accept)
         QtCore.QObject.connect(self.buttonboxOkCancel, QtCore.SIGNAL(_fromUtf8("rejected()")), MilkMachine.reject)
@@ -672,7 +680,14 @@ class Ui_MilkMachine(object):
         MilkMachine.setTabOrder(self.lineEdit__visualization_camera_heading, self.lineEdit__visualization_camera_roll)
         MilkMachine.setTabOrder(self.lineEdit__visualization_camera_roll, self.lineEdit__visualization_camera_tilt)
         MilkMachine.setTabOrder(self.lineEdit__visualization_camera_tilt, self.pushButton_camera_apply)
-        MilkMachine.setTabOrder(self.pushButton_camera_apply, self.lineEdit_filtering_active)
+        MilkMachine.setTabOrder(self.pushButton_camera_apply, self.lineEdit_visualization_follow_altitude)
+        MilkMachine.setTabOrder(self.lineEdit_visualization_follow_altitude, self.comboBox_follow_altitudemode)
+        MilkMachine.setTabOrder(self.comboBox_follow_altitudemode, self.comboBox_follow_gxaltitudemode)
+        MilkMachine.setTabOrder(self.comboBox_follow_gxaltitudemode, self.lineEdit__visualization_follow_gxhoriz)
+        MilkMachine.setTabOrder(self.lineEdit__visualization_follow_gxhoriz, self.lineEdit__visualization_follow_tilt)
+        MilkMachine.setTabOrder(self.lineEdit__visualization_follow_tilt, self.lineEdit__visualization_follow_range)
+        MilkMachine.setTabOrder(self.lineEdit__visualization_follow_range, self.pushButton_follow_apply)
+        MilkMachine.setTabOrder(self.pushButton_follow_apply, self.lineEdit_filtering_active)
         MilkMachine.setTabOrder(self.lineEdit_filtering_active, self.checkBox_filtering_edit)
         MilkMachine.setTabOrder(self.checkBox_filtering_edit, self.lineEdit_time_active)
         MilkMachine.setTabOrder(self.lineEdit_time_active, self.checkBox_time_edit)
@@ -691,13 +706,6 @@ class Ui_MilkMachine(object):
         MilkMachine.setTabOrder(self.chkActivate, self.txtFeedback)
         MilkMachine.setTabOrder(self.txtFeedback, self.buttonboxOkCancel)
         MilkMachine.setTabOrder(self.buttonboxOkCancel, self.comboBox_export)
-        MilkMachine.setTabOrder(self.comboBox_export, self.lineEdit__visualization_follow_range)
-        MilkMachine.setTabOrder(self.lineEdit__visualization_follow_range, self.lineEdit__visualization_follow_gxhoriz)
-        MilkMachine.setTabOrder(self.lineEdit__visualization_follow_gxhoriz, self.comboBox_follow_gxaltitudemode)
-        MilkMachine.setTabOrder(self.comboBox_follow_gxaltitudemode, self.pushButton_follow_apply)
-        MilkMachine.setTabOrder(self.pushButton_follow_apply, self.comboBox_follow_altitudemode)
-        MilkMachine.setTabOrder(self.comboBox_follow_altitudemode, self.lineEdit__visualization_follow_tilt)
-        MilkMachine.setTabOrder(self.lineEdit__visualization_follow_tilt, self.lineEdit_visualization_follow_altitude)
 
     def retranslateUi(self, MilkMachine):
         MilkMachine.setWindowTitle(_translate("MilkMachine", "MilkMachine", None))
@@ -724,6 +732,7 @@ class Ui_MilkMachine(object):
         self.pushButton_sync.setToolTip(_translate("MilkMachine", "<html><head/><body><p>Syncronize the audio with the GPS track. Press the button while a track is selected that matches the audio file and a marker will be produced that shows where the audio starts in the GPS track.<br/></p></body></html>", None))
         self.checkBox_headoftrack.setToolTip(_translate("MilkMachine", "<html><head/><body><p>If checked, a green marker is drawn when the &quot;Draw Track&quot; button is pressed to indicate where the track starts.</p></body></html>", None))
         self.checkBox_headoftrack.setText(_translate("MilkMachine", "Draw \"Head of Track\"", None))
+        self.checkBox_import_indicator.setText(_translate("MilkMachine", "Indicate Selected Point", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_import), _translate("MilkMachine", "Import and Sync", None))
         self.tabWidget.setTabToolTip(self.tabWidget.indexOf(self.tab_import), _translate("MilkMachine", "<html><head/><body><p>Import raw .kml files and render as an ESRI shapefile for editing, and import audio files for interactive time syncronization.</p></body></html>", None))
         self.lineEdit_rendering_active.setToolTip(_translate("MilkMachine", "<html><head/><body><p>The selected layer in the table of contents.</p></body></html>", None))
