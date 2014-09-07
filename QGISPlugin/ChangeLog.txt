@@ -29,3 +29,12 @@ Bug Fix:	Tab order on "Tour" tab.
 Task:		Check box for presence of yellow indicator over selected point in audio sync.
 Bug Fix: 	If audio start time matches exactly with time of first GPS point: a) we get no notification window (window that gives audio and track info), b) MM does not generate a 'play-head', c) the audio does not play automatically when you click the play button
 Task:		"play" button is disabled when it is pressed. To enable it, press "stop" button.
+
+--------------------------------------------
+Commit #19
+
+Bug Fix: 	Create <Camera> in the <document> before the <Tour> so that there are no strange camera actions.
+Task:		Make the "Follow Behind" applicable to a selection of points rather than automatically selecting the whole track
+Task:		Create a "smoother" field in "Follow Behind" tour so that the camera heading will take the mean angles of the points ahead of it.
+Task:		Create a "follow angle" field in "Follow Behind" tour. This field is the angle between the point and the camera. This enables the user to place the camera anywhere (0-360 degrees) around the model.
+Task: 		Suggest a tilt angle based on the altitude and range values. This auto populates.
