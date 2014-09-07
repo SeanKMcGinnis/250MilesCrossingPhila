@@ -12,6 +12,8 @@
 		<file>synchronize.png</file>
 		<file>earth.png</file>
 		<file>triangle.png</file>	
-		<file>folder.png</file>		
+		<file>folder.png</file>	
+		<file>followangle.png</file>
+		<file>camera.png</file>		
     </qresource>
 </RCC>

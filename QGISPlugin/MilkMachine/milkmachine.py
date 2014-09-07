@@ -40,6 +40,7 @@ import subprocess
 import logging
 import platform
 import re, os, StringIO
+import math
 
 #--------------------------------------------------------------------------------
 NOW = None
@@ -163,8 +164,18 @@ class MilkMachine:
         QObject.connect(self.dlg.ui.pushButton_follow_apply, SIGNAL("clicked()"), self.follow_apply)
         QObject.connect(self.dlg.ui.pushButton_time_apply_startend, SIGNAL("clicked()"), self.time_startend_apply)
         QObject.connect(self.dlg.ui.checkBox_time_edit,SIGNAL("stateChanged(int)"),self.timecheck)
+        QObject.connect(self.dlg.ui.lineEdit_visualization_follow_altitude,SIGNAL("editingFinished()"),self.tiltpopulate)
+        QObject.connect(self.dlg.ui.lineEdit__visualization_follow_range,SIGNAL("editingFinished()"),self.tiltpopulate)
     ############################################################################
     ## SLOTS
+
+    def tiltpopulate(self):
+        if self.dlg.ui.lineEdit_visualization_follow_altitude.text() and self.dlg.ui.lineEdit__visualization_follow_range.text():
+            altitude = float(self.dlg.ui.lineEdit_visualization_follow_altitude.text())
+            ranger = float(self.dlg.ui.lineEdit__visualization_follow_range.text())
+            angle = round(math.degrees(math.acos(altitude/ranger)),1)
+            self.dlg.ui.lineEdit__visualization_follow_tilt.setText(str(angle))
+
 
     # generic function for finding the idices of qgsvector layers
     def field_indices(self, qgsvectorlayer):
@@ -761,7 +772,7 @@ class MilkMachine:
         try:
             self.fields = self.field_indices(self.ActiveLayer)
             # make a dictionary of all of the camera parameters
-            camera = {'longitude': None, 'longitude_off': None, 'latitude': None, 'latitude_off': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'gxhoriz' : None,'heading' : None,'roll' : None,'tilt' : None, 'range': None}
+            camera = {'longitude': None, 'longitude_off': None, 'latitude': None, 'latitude_off': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'gxhoriz' : None,'heading' : None,'roll' : None,'tilt' : None, 'range': None, 'follow_angle': None}
             flyto = {'name': None, 'flyToMode': None, 'duration': None}
 
 
@@ -777,22 +788,24 @@ class MilkMachine:
             camera['gxhoriz'] = self.dlg.ui.lineEdit__visualization_follow_gxhoriz.text()
             camera['tilt'] = self.dlg.ui.lineEdit__visualization_follow_tilt.text()
             camera['range'] = self.dlg.ui.lineEdit__visualization_follow_range.text()
+            camera['follow_angle'] = self.dlg.ui.lineEdit__visualization_follow_follow_angle.text()
 
 
             # Calculate Heading !! Select All Features in the Current Layer !!
-            forward_int = 1
-            self.selectList = self.ActiveLayer.allFeatureIds()  #list of all the feature ids
-            self.ActiveLayer.setSelectedFeatures(self.selectList)  # select everything
+            forward_int = int(self.dlg.ui.lineEdit__visualization_follow_smoother.text())  # default to 1
+            #self.selectList = self.ActiveLayer.selectedFeaturesIds()  #list of all the feature ids
+            layerlen = len(self.selectList)-1
+            #self.ActiveLayer.setSelectedFeatures(self.selectList)  # select everything
 
             # calculate heading
             cordslist = []  # alist of tuples. [(x,y), (x,y)]
             altitudelist = []
-            for f in self.ActiveLayer.getFeatures(): #  QgsFeatureIterator #[u'2014/06/06 10:38:48', u'Time:10:38:48, Latitude: 39.965949, Longitude: -75.172239, Speed: 0.102851, Altitude: -3.756733']
-                geom = f.geometry()
-                cordslist.append(geom.asPoint()) #(-75.1722,39.9659)
+            self.selectList = []  #[[id, (x,y), altitude]]
 
             try:
-                for f in self.ActiveLayer.getFeatures():
+                for f in self.ActiveLayer.selectedFeatures():          #getFeatures():
+                    geom = f.geometry()
+
                     if camera['altitudemode'] == 'relativeToModel':
                         modelfield = eval(f.attributes()[self.fields['model']])
                         if not camera['altitude']:
@@ -800,32 +813,47 @@ class MilkMachine:
                         else:
                             alt = float(camera['altitude'])
                         altitudelist.append(float(modelfield['altitude']) + alt)
+                        altinum = float(modelfield['altitude']) + alt
+                        self.selectList.append([f.id(), geom.asPoint(), altinum])
+                    else:
+                        self.selectList.append([f.id(), geom.asPoint()])
+
+                # sort self.selectList by fid
+                def getKey(item):
+                    return item[0]
+                self.selectList = sorted(self.selectList, key=getKey)  #[[id, (x,y), altitude]]
+
             except:
                 QMessageBox.warning( self.iface.mainWindow(),"Camera Altitude Error", "Please make sure that the 'model' field has 'altitude' values. This can be calculated in the 'Placemarks' tab for Models." )
 
             headinglist = []
-            featurelen = len(cordslist) - 1
+            featurelen = len(self.selectList) - 1
             forwardlen = featurelen - forward_int
-            for i,v in enumerate(cordslist):
-                if i == 0:
-                    headinglist.append(TeatDip.compass_bearing((v[1],v[0]),(cordslist[i+forward_int][1] , cordslist[i+forward_int][0])) )
-                if i >= 1 and i <= forwardlen:
-                    #headinglist.append(TeatDip.compass_bearing((v[1],v[0]),(cordslist[i+forward_int][1] , cordslist[i+forward_int][0])) )
-                    headinglist.append(TeatDip.compass_bearing((cordslist[i-1][1] , cordslist[i-1][0]), (v[1],v[0])) )
+            self.logger.info(self.selectList)
+            for i,v in enumerate(self.selectList):
+                if i >= 0 and i <= forwardlen:
+                    forwardlist = []
+                    for ii in range(forward_int):
+                        forwardlist.append(TeatDip.compass_bearing((v[1][1],v[1][0]),(self.selectList[i+ii+1][1][1] ,self.selectList[i+ii+1][1][0])))
+                    self.logger.info('list: {0}, mean: {1}'.format(forwardlist,TeatDip.mean_angle(forwardlist) ))
+                    headinglist.append(TeatDip.mean_angle(forwardlist))
+                    #headinglist.append(TeatDip.compass_bearing((cordslist[i-1][1] , cordslist[i-1][0]), (v[1],v[0])) )
                 else:
                     headinglist.append(headinglist[i-1])
+            self.logger.info(headinglist)
 
             try:
                 if len(self.selectList) >= 1:
                     self.ActiveLayer.startEditing()
                     self.ActiveLayer.beginEditCommand("Camera Editing")
-                    for i,f in enumerate(self.selectList):
-                        if altitudelist:
-                            camera['altitude'] = altitudelist[i]
+                    for i,f in enumerate(self.selectList):   #[[id, (x,y), altitude]]
+                        self.logger.info('enum {0} {1}'.format(i,f))
+                        if len(f) == 3:
+                            camera['altitude'] = f[2]
                         camera['heading'] = headinglist[i]
-                        camera['longitude'] = cordslist[i][0]; camera['latitude'] = cordslist[i][1]
-                        self.ActiveLayer.changeAttributeValue(f, self.fields['camera'], str(camera))
-                        self.ActiveLayer.changeAttributeValue(f, self.fields['flyto'], str(flyto))
+                        camera['longitude'] = f[1][0]; camera['latitude'] = f[1][1]
+                        self.ActiveLayer.changeAttributeValue(f[0], self.fields['camera'], str(camera))
+                        self.ActiveLayer.changeAttributeValue(f[0], self.fields['flyto'], str(flyto))
                     self.ActiveLayer.endEditCommand()
                 else:
                     QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "Please select points in the active layer to be edited." )
@@ -992,6 +1020,8 @@ class MilkMachine:
                 self.dlg.ui.lineEdit__visualization_follow_tilt.setEnabled(True)
                 self.dlg.ui.lineEdit__visualization_follow_range.setEnabled(True)
                 self.dlg.ui.pushButton_follow_apply.setEnabled(True)
+                self.dlg.ui.lineEdit__visualization_follow_follow_angle.setEnabled(True)
+                self.dlg.ui.lineEdit__visualization_follow_smoother.setEnabled(True)
 
         else:  # checkbox is false, clear shit out
             self.dlg.ui.lineEdit_tourname.setEnabled(False)
@@ -1021,7 +1051,8 @@ class MilkMachine:
             self.dlg.ui.lineEdit__visualization_follow_tilt.setEnabled(False)
             self.dlg.ui.lineEdit__visualization_follow_range.setEnabled(False)
             self.dlg.ui.pushButton_follow_apply.setEnabled(False)
-
+            self.dlg.ui.lineEdit__visualization_follow_follow_angle.setEnabled(False)
+            self.dlg.ui.lineEdit__visualization_follow_smoother.setEnabled(False)
 
     def camera_xy(self):
         xylist = []
@@ -1855,6 +1886,13 @@ class MilkMachine:
                         cameradict = eval(currentatt[self.fields['camera']])
                         flytodict = eval(currentatt[self.fields['flyto']])
 
+                        # First, put in a <Camera> that matches the same <Camera> at the beginning of the tour, that
+                        # there is no strange camera movement at the beginning.
+
+                        #firstcam_pnt = kml.newpoint()
+                        kml.document.camera = simplekml.Camera()
+
+
                         # Create a tour and attach a playlist to it
                         if flytodict['name']:
                             tour = kml.newgxtour(name=flytodict['name'])
@@ -1907,6 +1945,9 @@ class MilkMachine:
 
                                 offsetpt = xform2.transform(QgsPoint(utmptlist[0],utmptlist[1]))
 
+                                #firstcam_pnt.camera.longitude = offsetpt[0]
+                                #firstcam_pnt.camera.latitude = offsetpt[1]
+
                                 flyto.camera.longitude = offsetpt[0]
                                 flyto.camera.latitude = offsetpt[1]
 
@@ -1920,7 +1961,12 @@ class MilkMachine:
                                 utmpt = xform.transform(QgsPoint(float(cameradict['longitude']),float(cameradict['latitude'])))
                                 utmptlist = [utmpt[0], utmpt[1]]  # x,y utm
 
-                                opp_rad = (math.radians(float(cameradict['heading'])) + math.pi) % (2*math.pi) #opposite angle in radians
+                                if cameradict['follow_angle']:
+                                    follow_angle = math.radians(float(cameradict['follow_angle']))
+                                    # now you need to change heading. It should be rotated
+                                else:
+                                    follow_angle = math.pi
+                                opp_rad = (math.radians(float(cameradict['heading'])) + follow_angle) % (2*math.pi) #opposite angle in radians
                                 #leg_distance = float(cameradict['range']) * sin(float(cameradict['tilt']))
 
                                 if cameradict['altitudemode'] == 'relativeToModel':
@@ -1990,7 +2036,11 @@ class MilkMachine:
                         if cameradict['gxhoriz']:
                             flyto.camera.gxhoriz = cameradict['gxhoriz']
                         if cameradict['heading']:
-                            flyto.camera.heading = cameradict['heading']
+                            if cameradict['follow_angle']:
+                                newhead = math.degrees((math.radians(float(cameradict['heading'])) + follow_angle + math.pi) % (2 * math.pi))
+                                flyto.camera.heading = newhead
+                            else:
+                                flyto.camera.heading = cameradict['heading']
                         if cameradict['roll']:
                             flyto.camera.roll = cameradict['roll']
                         if cameradict['tilt']:
@@ -2000,6 +2050,9 @@ class MilkMachine:
                         flyto.camera.gxtimespan.begin = CamStartTime
                         flyto.camera.gxtimespan.end = camendtime
 
+
+                        #firstcam_pnt.camera = flyto.camera
+                        kml.document.camera = flyto.camera
 
                         cc += 1
 
@@ -2051,7 +2104,11 @@ class MilkMachine:
                                 utmpt = xform.transform(QgsPoint(float(cameradict['longitude']),float(cameradict['latitude'])))
                                 utmptlist = [utmpt[0], utmpt[1]]  # x,y utm
 
-                                opp_rad = (math.radians(float(cameradict['heading'])) + math.pi) % (2*math.pi) #opposite angle in radians
+                                if cameradict['follow_angle']:
+                                    follow_angle = math.radians(float(cameradict['follow_angle']))
+                                else:
+                                    follow_angle = math.pi
+                                opp_rad = (math.radians(float(cameradict['heading'])) + follow_angle) % (2*math.pi) #opposite angle in radians from the heading. So you can calculate the direction whre the camerea should be placed
 
                                 if cameradict['altitudemode'] == 'relativeToModel':
                                     modeldict = eval(currentatt[self.fields['model']])
@@ -2080,7 +2137,7 @@ class MilkMachine:
                                 utm_camera = ((utmpt[0] + x_dist), (utmpt[1] + y_dist))
                                 wgs_camera = xform2.transform(QgsPoint(utm_camera[0], utm_camera[1]))
 
-                                self.logger.info('wgs xy {0}'.format(wgs_camera))
+                                #self.logger.info('wgs xy {0}'.format(wgs_camera))
                                 flyto.camera.longitude = wgs_camera[0]
                                 flyto.camera.latitude = wgs_camera[1]
 
@@ -2111,7 +2168,11 @@ class MilkMachine:
                         if cameradict['gxhoriz']:
                             flyto.camera.gxhoriz = cameradict['gxhoriz']
                         if cameradict['heading']:
-                            flyto.camera.heading = float(cameradict['heading'])
+                            if cameradict['follow_angle']:
+                                newhead = math.degrees((math.radians(float(cameradict['heading'])) + follow_angle + math.pi) % (2 * math.pi))
+                                flyto.camera.heading = newhead
+                            else:
+                                flyto.camera.heading = float(cameradict['heading'])
                         if cameradict['roll']:
                             flyto.camera.roll = float(cameradict['roll'])
                         if cameradict['tilt']:
@@ -2123,6 +2184,8 @@ class MilkMachine:
 
                         cc += 1
 
+                    #kml.document.camera = simplekml.Camera()
+                    #kml.document.camera = flyto.camera
             ###############################3
             ## Points
             cc = 0
@@ -2585,7 +2648,8 @@ class MilkMachine:
         self.dlg.ui.lineEdit__visualization_follow_tilt.setEnabled(False)
         self.dlg.ui.lineEdit__visualization_follow_range.setEnabled(False)
         self.dlg.ui.pushButton_follow_apply.setEnabled(False)
-
+        self.dlg.ui.lineEdit__visualization_follow_follow_angle.setEnabled(False)
+        self.dlg.ui.lineEdit__visualization_follow_smoother.setEnabled(False)
 
         # Placemarks/Rendering
 

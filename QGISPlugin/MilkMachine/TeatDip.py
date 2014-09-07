@@ -115,4 +115,8 @@ def compass_bearing(pointA, pointB):
     return compass_bearing
 
 
+def mean_angle(deg):
+    from cmath import rect, phase
+    from math import radians, degrees
+    return degrees(phase(sum(rect(1, radians(d)) for d in deg)/len(deg))) % 360
 
