@@ -1456,6 +1456,8 @@ class MilkMachine:
         if NOW and pointid >=0 and ClockDateTime:
             try:
 
+                # check if the time difference is larger than 1 between points
+
                 # Clock Time and Duration
                 ClockTime_delta = ClockDateTime + datetime.timedelta(seconds=1)
                 diff_sec = ClockDateTime - self.audio_start
@@ -1825,6 +1827,39 @@ class MilkMachine:
     ## Export and Details
     ############################################################################
 
+    def audio_offset(self, audiopath):
+        # Audio Start and End
+        audioname_ext = audiopath.split('/')[-1]
+        audioname = audioname_ext.split('.')[0]
+        # Audio start date and time
+        w = wave.open(audiopath)
+        # Frame Rate of the Wave File
+        framerate = w.getframerate()
+        # Number of Frames in the File
+        frames = w.getnframes()
+        # Estimate length of the file by dividing frames/framerate
+        length = frames/framerate # seconds
+        audio_start = datetime.datetime(int(audioname[0:4]), int(audioname[4:6]), int(audioname[6:8]), int(audioname[8:10]), int(audioname[10:12]), int(audioname[12:14]))
+        # Audio end time. Add seconds to the start time
+        audio_end = audio_start + datetime.timedelta(seconds=length)
+
+        # Track start and end
+        cc = 0
+        for f in self.ActiveLayer.getFeatures(): #  QgsFeatureIterator #[u'2014/06/06 10:38:48', u'Time:10:38:48, Latitude: 39.965949, Longitude: -75.172239, Speed: 0.102851, Altitude: -3.756733']
+            currentatt = f.attributes()
+            pointdate = currentatt[self.fields['datetime']].split(" ")[0]  #2014/06/06
+            pointtime = currentatt[self.fields['datetime']].split(" ")[1] #10:38:48
+            if cc == 0:
+                track_dt_start = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
+            else:
+                track_dt_end = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
+            cc += 1
+
+        if audio_start >= track_dt_start:  #and audio_end <= track_dt_end
+            diff = audio_start - track_dt_start
+            return diff.seconds
+            #self.audio_delay = diff.seconds
+
     def file_export_audio(self):
         try:
             self.ActiveLayer = self.iface.activeLayer()
@@ -1963,7 +1998,7 @@ class MilkMachine:
                         if self.dlg.ui.lineEdit_export_audio.text():
                             soundcue = playlist.newgxsoundcue()
                             soundcue.href = self.dlg.ui.lineEdit_export_audio.text()
-                            soundcue.gxdelayedstart = self.audio_delay
+                            soundcue.gxdelayedstart = self.audio_offset(self.dlg.ui.lineEdit_export_audio.text())
 
 
                         if flytodict['duration']:
