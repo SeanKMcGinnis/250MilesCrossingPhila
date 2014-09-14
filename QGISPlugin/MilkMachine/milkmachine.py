@@ -496,8 +496,8 @@ class MilkMachine:
     def model_link(self):
         try:
             self.linkfile = QFileDialog.getOpenFileName(None, "Choose Collada DAE file", self.lastdirectory, "*.dae")  #C:\Users\Edward\Documents\Philly250\Scratch
-            self.lastdirectory = os.path.dirname(self.linkfile)
             if self.linkfile:
+                self.lastdirectory = os.path.dirname(self.linkfile)
                 self.dlg.ui.lineEdit_rendering_model_link.setText(self.linkfile)
 
         except:
@@ -801,6 +801,7 @@ class MilkMachine:
             cordslist = []  # alist of tuples. [(x,y), (x,y)]
             altitudelist = []
             self.selectList = []  #[[id, (x,y), altitude]]
+            selectflyto = []
 
             try:
                 for f in self.ActiveLayer.selectedFeatures():          #getFeatures():
@@ -818,42 +819,77 @@ class MilkMachine:
                     else:
                         self.selectList.append([f.id(), geom.asPoint()])
 
+                    # get the time vector in order to calculate duration of the flyto
+                    currentatt = f.attributes()
+                    pointdate = currentatt[self.fields['datetime']].split(" ")[0]  #2014/06/06
+                    pointtime = currentatt[self.fields['datetime']].split(" ")[1]
+                    current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
+                    selectflyto.append([f.id(), flyto, current_dt])  # [[fid, {'name', 'flytomode', 'duration'}, dt], ...]
+
                 # sort self.selectList by fid
                 def getKey(item):
                     return item[0]
                 self.selectList = sorted(self.selectList, key=getKey)  #[[id, (x,y), altitude]]
+                selectflyto = sorted(selectflyto, key=getKey)  # [[fid, {'name', 'flytomode', 'duration'}, dt], ...]
+                selectflyto2 = selectflyto
+                newdiff = []
+                # calcualte duration of flyto and replace the dictionary value
+                for i,fly in enumerate(selectflyto):
+                    if i <= (len(selectflyto)-2):
+                        nexttime = selectflyto[i+1][2]
+                        thistime = fly[2]
+                        difftime = nexttime - thistime
+                        #self.logger.info('next {0}, this {1}, diff {2}'.format(nexttime, thistime, difftime.seconds))
+                        #if difftime.seconds > 1:
+                            #self.logger.info('larger by  {0}'.format(difftime.seconds))
+                            #selectflyto2[i][1]['duration'] = str(difftime.seconds)
+                        newdiff.append(difftime.seconds)
+                newdiff.append(1)
+                #self.logger.info(selectflyto2)
+                newlistwithflyto = []
+                for i,v in enumerate(newdiff):
+                    newlistwithflyto.append({'name': self.dlg.ui.lineEdit_tourname.text(), 'flyToMode': self.dlg.ui.comboBox_flyto_mode.currentText(), 'duration': v})
+
+                self.logger.info(newdiff)
+                for bb in newlistwithflyto:
+                    self.logger.info(bb)
 
             except:
-                QMessageBox.warning( self.iface.mainWindow(),"Camera Altitude Error", "Please make sure that the 'model' field has 'altitude' values. This can be calculated in the 'Placemarks' tab for Models." )
+                #QMessageBox.warning( self.iface.mainWindow(),"Camera Altitude Error", "Please make sure that the 'model' field has 'altitude' values. This can be calculated in the 'Placemarks' tab for Models." )
+                self.logger.exception(traceback.format_exc())
+                self.iface.messageBar().pushMessage("Error", "Failed to apply camera view parameters for Follow Tour. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
 
             headinglist = []
             featurelen = len(self.selectList) - 1
             forwardlen = featurelen - forward_int
-            self.logger.info(self.selectList)
+            #self.logger.info(self.selectList)
             for i,v in enumerate(self.selectList):
                 if i >= 0 and i <= forwardlen:
                     forwardlist = []
                     for ii in range(forward_int):
                         forwardlist.append(TeatDip.compass_bearing((v[1][1],v[1][0]),(self.selectList[i+ii+1][1][1] ,self.selectList[i+ii+1][1][0])))
-                    self.logger.info('list: {0}, mean: {1}'.format(forwardlist,TeatDip.mean_angle(forwardlist) ))
+                    #self.logger.info('list: {0}, mean: {1}'.format(forwardlist,TeatDip.mean_angle(forwardlist) ))
                     headinglist.append(TeatDip.mean_angle(forwardlist))
                     #headinglist.append(TeatDip.compass_bearing((cordslist[i-1][1] , cordslist[i-1][0]), (v[1],v[0])) )
                 else:
                     headinglist.append(headinglist[i-1])
-            self.logger.info(headinglist)
+            #self.logger.info(headinglist)
 
             try:
                 if len(self.selectList) >= 1:
                     self.ActiveLayer.startEditing()
                     self.ActiveLayer.beginEditCommand("Camera Editing")
                     for i,f in enumerate(self.selectList):   #[[id, (x,y), altitude]]
-                        self.logger.info('enum {0} {1}'.format(i,f))
+                        #self.logger.info('enum {0} {1}'.format(i,f))
                         if len(f) == 3:
                             camera['altitude'] = f[2]
                         camera['heading'] = headinglist[i]
                         camera['longitude'] = f[1][0]; camera['latitude'] = f[1][1]
                         self.ActiveLayer.changeAttributeValue(f[0], self.fields['camera'], str(camera))
-                        self.ActiveLayer.changeAttributeValue(f[0], self.fields['flyto'], str(flyto))
+
+                        #self.ActiveLayer.changeAttributeValue(f[0], self.fields['flyto'], str(flyto))
+                        self.ActiveLayer.changeAttributeValue(f[0], self.fields['flyto'], str(newlistwithflyto[i]))
+
                     self.ActiveLayer.endEditCommand()
                 else:
                     QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "Please select points in the active layer to be edited." )
@@ -900,6 +936,10 @@ class MilkMachine:
                     # export
                     if self.ActiveLayer.storageType() == 'ESRI Shapefile' and self.ActiveLayer.geometryType() == 0:
                         self.dlg.ui.lineEdit_export_audio.setEnabled(True)
+                        if self.dlg.ui.lineEdit_InAudio1.text():
+                            self.dlg.ui.lineEdit_export_audio.setText(self.dlg.ui.lineEdit_InAudio1.text())
+                        else:
+                            self.dlg.ui.lineEdit_export_audio.setText(None)
                         self.dlg.ui.pushButton_export_audio_file.setEnabled(True)
                         self.dlg.ui.buttonExportTrack.setEnabled(True)
                         self.dlg.ui.pushButton_TrackInfo.setEnabled(True)
@@ -1157,7 +1197,9 @@ class MilkMachine:
 
     def browseOpen(self):
         self.gpsfile = QFileDialog.getOpenFileName(None, "Import Raw GPS File", self.lastdirectory, "*.kml")  #C:\Users\Edward\Documents\Philly250\Scratch
-        self.lastdirectory = os.path.dirname(self.gpsfile)
+        if self.gpsfile:
+            self.lastdirectory = os.path.dirname(self.gpsfile)
+
 
         try:
             if self.gpsfile:
@@ -1340,7 +1382,9 @@ class MilkMachine:
         #QMessageBox.information( self.iface.mainWindow(),"Info", "You clicked browse" )
         #QFileDialog.getOpenFileName(QWidget parent=None, QString caption=QString(), QString directory=QString(), QString filter=QString(), QString selectedFilter=None, QFileDialog.Options options=0)
         self.audiopath = QFileDialog.getOpenFileName(None, "Import Raw .wav Audio File",self.lastdirectory, "*.wav")
-        self.lastdirectory = os.path.dirname(self.audiopath)
+        if self.audiopath:
+            self.lastdirectory = os.path.dirname(self.audiopath)
+            self.dlg.ui.lineEdit_export_audio.setText(self.audiopath)
         try:
             if self.audiopath:
                 self.dlg.ui.lineEdit_InAudio1.setText(self.audiopath)
@@ -1783,42 +1827,47 @@ class MilkMachine:
 
     def file_export_audio(self):
         try:
-            self.fields = self.field_indices(self.ActiveLayer)
-            self.audio_export = QFileDialog.getOpenFileName(None, "Choose .wav file for .kmz export", self.lastdirectory, "*.wav")  #C:\Users\Edward\Documents\Philly250\Scratch
-            if self.audio_export:
-                # Audio Start and End
-                audioname_ext = self.audio_export.split('/')[-1]
-                audioname = audioname_ext.split('.')[0]
-                # Audio start date and time
-                w = wave.open(self.audio_export)
-                # Frame Rate of the Wave File
-                framerate = w.getframerate()
-                # Number of Frames in the File
-                frames = w.getnframes()
-                # Estimate length of the file by dividing frames/framerate
-                length = frames/framerate # seconds
-                audio_start = datetime.datetime(int(audioname[0:4]), int(audioname[4:6]), int(audioname[6:8]), int(audioname[8:10]), int(audioname[10:12]), int(audioname[12:14]))
-                # Audio end time. Add seconds to the start time
-                audio_end = audio_start + datetime.timedelta(seconds=length)
+            self.ActiveLayer = self.iface.activeLayer()
+            if self.ActiveLayer:
+                self.fields = self.field_indices(self.ActiveLayer)
+                self.audio_export = QFileDialog.getOpenFileName(None, "Choose .wav file for .kmz export", self.lastdirectory, "*.wav")  #C:\Users\Edward\Documents\Philly250\Scratch
+                if self.audio_export:
+                    self.lastdirectory = os.path.dirname(self.audio_export)
 
-                # Track start and end
-                cc = 0
-                for f in self.ActiveLayer.getFeatures(): #  QgsFeatureIterator #[u'2014/06/06 10:38:48', u'Time:10:38:48, Latitude: 39.965949, Longitude: -75.172239, Speed: 0.102851, Altitude: -3.756733']
-                    currentatt = f.attributes()
-                    pointdate = currentatt[self.fields['datetime']].split(" ")[0]  #2014/06/06
-                    pointtime = currentatt[self.fields['datetime']].split(" ")[1] #10:38:48
-                    if cc == 0:
-                        track_dt_start = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
+                if self.audio_export:
+                    # Audio Start and End
+                    audioname_ext = self.audio_export.split('/')[-1]
+                    audioname = audioname_ext.split('.')[0]
+                    # Audio start date and time
+                    w = wave.open(self.audio_export)
+                    # Frame Rate of the Wave File
+                    framerate = w.getframerate()
+                    # Number of Frames in the File
+                    frames = w.getnframes()
+                    # Estimate length of the file by dividing frames/framerate
+                    length = frames/framerate # seconds
+                    audio_start = datetime.datetime(int(audioname[0:4]), int(audioname[4:6]), int(audioname[6:8]), int(audioname[8:10]), int(audioname[10:12]), int(audioname[12:14]))
+                    # Audio end time. Add seconds to the start time
+                    audio_end = audio_start + datetime.timedelta(seconds=length)
+
+                    # Track start and end
+                    cc = 0
+                    for f in self.ActiveLayer.getFeatures(): #  QgsFeatureIterator #[u'2014/06/06 10:38:48', u'Time:10:38:48, Latitude: 39.965949, Longitude: -75.172239, Speed: 0.102851, Altitude: -3.756733']
+                        currentatt = f.attributes()
+                        pointdate = currentatt[self.fields['datetime']].split(" ")[0]  #2014/06/06
+                        pointtime = currentatt[self.fields['datetime']].split(" ")[1] #10:38:48
+                        if cc == 0:
+                            track_dt_start = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
+                        else:
+                            track_dt_end = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
+                        cc += 1
+
+                    if audio_start >= track_dt_start:  #and audio_end <= track_dt_end
+                        self.dlg.ui.lineEdit_export_audio.setText(self.audio_export)
+                        diff = audio_start - track_dt_start
+                        self.audio_delay = diff.seconds
                     else:
-                        track_dt_end = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
-                    cc += 1
-
-                if audio_start >= track_dt_start:  #and audio_end <= track_dt_end
-                    self.dlg.ui.lineEdit_export_audio.setText(self.audio_export)
-                    diff = audio_start - track_dt_start
-                    self.audio_delay = diff.seconds
-                else:
-                    QMessageBox.warning(self.iface.mainWindow(),"Audio Export Warning", "The audio time does not fall within the start and end time of the GPS track.\nAudio Start: {0}\nAudio End: {1}\nTrack Start: {2}\nTrack End: {3}".format(audio_start.strftime("%x %X"),audio_end.strftime("%x %X"),track_dt_start.strftime("%x %X"),track_dt_end.strftime("%x %X")) )
+                        QMessageBox.warning(self.iface.mainWindow(),"Audio Export Warning", "The audio time does not fall within the start and end time of the GPS track.\nAudio Start: {0}\nAudio End: {1}\nTrack Start: {2}\nTrack End: {3}".format(audio_start.strftime("%x %X"),audio_end.strftime("%x %X"),track_dt_start.strftime("%x %X"),track_dt_end.strftime("%x %X")) )
         except:
             self.logger.error('file_export_audio error')
             self.logger.exception(traceback.format_exc())
@@ -2320,6 +2369,8 @@ class MilkMachine:
 #            if self.dlg.ui.lineEdit_export_audio.currentText():  # there is a wav file to attach. So only offer kmz
 
             exportpath = QFileDialog.getSaveFileName(None, "Save Track", self.lastdirectory, "(*.kml *.kmz *.gpx *.shp *.geojson *.csv)")
+            if exportpath:
+                self.lastdirectory = os.path.dirname(exportpath)
             if exportpath:
                 if exportpath.split('.')[1] == 'kml':
                     kml.save(exportpath)

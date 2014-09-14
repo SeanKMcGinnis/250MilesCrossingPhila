@@ -40,7 +40,7 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>0</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideNone</enum>
@@ -390,6 +390,30 @@
      </property>
      <property name="text">
       <string>Draw &quot;Head of Track&quot;</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_import_indicator">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>190</y>
+       <width>181</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Lucida Sans</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>Indicate Selected Point</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
@@ -1620,7 +1644,7 @@
          </rect>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Distance in meters from the point. Since the &amp;quot;Follow Behind&amp;quot; is following the sequence of points, the &amp;quot;range&amp;quot; is the distance between the camera and the point (or row in the table) that is corresponds to. This is the same as the &amp;quot;range&amp;quot; for a KML &amp;lt;LookAt&amp;gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Distance in meters from the point. Since the &amp;quot;Follow Behind&amp;quot; is following the sequence of points, the &amp;quot;range&amp;quot; is the distance between the camera and the point (or row in the table) that is corresponds to. This is the same as the &amp;quot;range&amp;quot; for a KML &amp;lt;LookAt&amp;gt;.&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/plugins/milkmachine/camera.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
        <widget class="QLineEdit" name="lineEdit__visualization_follow_tilt">
@@ -1636,7 +1660,7 @@
          </rect>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rotation, in degrees, of the camera around the &lt;span style=&quot; font-style:italic;&quot;&gt;X&lt;/span&gt; axis. A value of 0 indicates that the view is aimed straight down toward the earth (the most common case). A value for 90 for &amp;lt;tilt&amp;gt; indicates that the view is aimed toward the horizon. Values greater than 90 indicate that the view is pointed up into the sky. Values for &amp;lt;tilt&amp;gt; are clamped at +180 degrees. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rotation, in degrees, of the camera around the &lt;span style=&quot; font-style:italic;&quot;&gt;X&lt;/span&gt; axis. A value of 0 indicates that the view is aimed straight down toward the earth (the most common case). A value for 90 for &amp;lt;tilt&amp;gt; indicates that the view is aimed toward the horizon. Values greater than 90 indicate that the view is pointed up into the sky. Values for &amp;lt;tilt&amp;gt; are clamped at +180 degrees. &lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/plugins/milkmachine/camera.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_37">
@@ -1694,7 +1718,7 @@
          </rect>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Specifies how the &amp;lt;altitude&amp;gt; specified for the Camera is interpreted. Possible values are as follows: &lt;/p&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;relativeToGround&lt;/span&gt; - (default) Interprets the &amp;lt;altitude&amp;gt; as a value in meters above the ground. If the point is over water, the &amp;lt;altitude&amp;gt; will be interpreted as a value in meters above sea level. See &lt;a href=&quot;https://developers.google.com/kml/documentation/kmlreference#gxaltitudemode&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;&amp;lt;gx:altitudeMode&amp;gt;&lt;/span&gt;&lt;/a&gt; below to specify points relative to the sea floor. &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;clampToGround &lt;/span&gt;- For a camera, this setting also places the camera &lt;span style=&quot; font-weight:600;&quot;&gt;relativeToGround&lt;/span&gt;, since putting the camera exactly at terrain height would mean that the eye would intersect the terrain (and the view would be blocked). &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;absolute &lt;/span&gt;- Interprets the &amp;lt;altitude&amp;gt; as a value in meters above sea level. &lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Specifies how the &amp;lt;altitude&amp;gt; specified for the Camera is interpreted. Possible values are as follows: &lt;/p&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;relativeToGround&lt;/span&gt; - (default) Interprets the &amp;lt;altitude&amp;gt; as a value in meters above the ground. If the point is over water, the &amp;lt;altitude&amp;gt; will be interpreted as a value in meters above sea level. See &lt;a href=&quot;https://developers.google.com/kml/documentation/kmlreference#gxaltitudemode&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;&amp;lt;gx:altitudeMode&amp;gt;&lt;/span&gt;&lt;/a&gt; below to specify points relative to the sea floor. &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;clampToGround &lt;/span&gt;- For a camera, this setting also places the camera &lt;span style=&quot; font-weight:600;&quot;&gt;relativeToGround&lt;/span&gt;, since putting the camera exactly at terrain height would mean that the eye would intersect the terrain (and the view would be blocked). &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;relativeToModel&lt;/span&gt; - If the &amp;quot;model&amp;quot; field has an &amp;quot;altitude&amp;quot; tag, the the camera altitude can be set as the vertical distance from the model.&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;absolute &lt;/span&gt;- Interprets the &amp;lt;altitude&amp;gt; as a value in meters above sea level. &lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;img src=&quot;:/plugins/milkmachine/camera.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_34">
@@ -1765,7 +1789,7 @@
          </rect>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Distance of the camera from the earth's surface, in meters. Interpreted according to the Camera's &amp;lt;altitudeMode&amp;gt; or &amp;lt;gx:altitudeMode&amp;gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vertical distance of the camera from the earth's surface, in meters. Interpreted according to the Camera's &amp;lt;altitudeMode&amp;gt; or &amp;lt;gx:altitudeMode&amp;gt;. If &amp;lt;altitudemode&amp;gt; is relativeToModel, then this is the vertical distance from the model.&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/plugins/milkmachine/camera.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_36">
@@ -1802,6 +1826,70 @@
         <property name="icon">
          <iconset resource="resources.qrc">
           <normaloff>:/plugins/milkmachine/triangle.png</normaloff>:/plugins/milkmachine/triangle.png</iconset>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_40">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>165</y>
+          <width>61</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>smoother:</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit__visualization_follow_smoother">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>165</y>
+          <width>101</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Number of models to look forward in order to calculate the mean angle. Each angle in the calculation is the compass angle between the current model (n) and all of the models between n and the smoother parameter. The effect is a smoothed camera heading. The larger the smoother, the more smooth the heading will be. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="text">
+         <string>1</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_41">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>144</y>
+          <width>71</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>follow angle:</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit__visualization_follow_follow_angle">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>144</y>
+          <width>101</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The compass angle of the &amp;lt;Camera&amp;gt; relative to the point (0-360 degrees).&lt;/p&gt;&lt;p&gt;If the follow angle is 0, then the camera will be in front of the model. &lt;/p&gt;&lt;p&gt;If the follow angle is 90, then the camera will be starboard of the model.&lt;/p&gt;&lt;p&gt;If the follow angle is 180, then the camera will be behind (following) the model.&lt;/p&gt;&lt;p&gt;If the follow angle is 270, then the camera will be port of the model. &lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/plugins/milkmachine/followangle.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="text">
+         <string>180</string>
         </property>
        </widget>
       </widget>
@@ -2381,6 +2469,15 @@
   <tabstop>lineEdit__visualization_camera_roll</tabstop>
   <tabstop>lineEdit__visualization_camera_tilt</tabstop>
   <tabstop>pushButton_camera_apply</tabstop>
+  <tabstop>lineEdit_visualization_follow_altitude</tabstop>
+  <tabstop>comboBox_follow_altitudemode</tabstop>
+  <tabstop>comboBox_follow_gxaltitudemode</tabstop>
+  <tabstop>lineEdit__visualization_follow_gxhoriz</tabstop>
+  <tabstop>lineEdit__visualization_follow_tilt</tabstop>
+  <tabstop>lineEdit__visualization_follow_range</tabstop>
+  <tabstop>lineEdit__visualization_follow_follow_angle</tabstop>
+  <tabstop>lineEdit__visualization_follow_smoother</tabstop>
+  <tabstop>pushButton_follow_apply</tabstop>
   <tabstop>lineEdit_filtering_active</tabstop>
   <tabstop>checkBox_filtering_edit</tabstop>
   <tabstop>lineEdit_time_active</tabstop>
@@ -2400,13 +2497,7 @@
   <tabstop>txtFeedback</tabstop>
   <tabstop>buttonboxOkCancel</tabstop>
   <tabstop>comboBox_export</tabstop>
-  <tabstop>lineEdit__visualization_follow_range</tabstop>
-  <tabstop>lineEdit__visualization_follow_gxhoriz</tabstop>
-  <tabstop>comboBox_follow_gxaltitudemode</tabstop>
-  <tabstop>pushButton_follow_apply</tabstop>
-  <tabstop>comboBox_follow_altitudemode</tabstop>
-  <tabstop>lineEdit__visualization_follow_tilt</tabstop>
-  <tabstop>lineEdit_visualization_follow_altitude</tabstop>
+  <tabstop>checkBox_import_indicator</tabstop>
  </tabstops>
  <resources>
   <include location="resources.qrc"/>
