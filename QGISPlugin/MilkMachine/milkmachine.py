@@ -42,11 +42,15 @@ import platform
 import re, os, StringIO
 import math
 
+
+
 #--------------------------------------------------------------------------------
 NOW = None
 pointid = None
 ClockDateTime = None
 Scratch = None
+AllList = []
+pause = 0
 
 class MilkMachine:
 
@@ -1451,12 +1455,19 @@ class MilkMachine:
             self.iface.messageBar().pushMessage("Error", "Failed to import specified file. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
 
     def Time(self):
-        global NOW, pointid, ClockDateTime
+        global NOW, pointid, ClockDateTime, AllList, pause  # [[fid, dt],...]
 
         if NOW and pointid >=0 and ClockDateTime:
             try:
 
                 # check if the time difference is larger than 1 between points
+                if pointid <= (len(AllList)-2):
+                    allDT = AllList[pointid][1]
+                    allDTnext = AllList[pointid+1][1]
+                    diff = allDTnext - allDT
+                    diffsec = diff.seconds
+                else:
+                    diffsec = 1
 
                 # Clock Time and Duration
                 ClockTime_delta = ClockDateTime + datetime.timedelta(seconds=1)
@@ -1466,28 +1477,63 @@ class MilkMachine:
                 self.lcd1_D.display(faker.strftime("%H:%M:%S"))
                 ClockDateTime = ClockTime_delta
 
-                # Point ID
-                pointid += 1
-                self.lcd1_P.display(str(pointid))
-                self.cLayer.setSelectedFeatures([pointid])
+                pauseBreak = diff.seconds
 
-                if self.dlg.ui.checkBox_import_indicator.isChecked():
-                    features = self.cLayer.selectedFeatures()
-                    selxy = ()
-                    for f in features:
-                        geom = f.geometry()
-                        selxy = geom.asPoint()
+                if diffsec == 1:
 
-                    pr = self.audioselect_layer.dataProvider()
-                    # add a feature
-                    fet = QgsGeometry.fromPoint(QgsPoint(selxy[0],selxy[1]))
-                    self.audioselect_layer.startEditing()
-                    self.audioselect_layer.beginEditCommand('selected')
-                    self.audioselect_layer.changeGeometry(0,fet)
-    ##                self.audioselect_layer.endEditCommand()
-    ##                self.audioselect_layer.commitChanges()
-                self.canvas.refresh()
-                self.canvas.zoomToSelected()
+                    # Point ID
+                    pointid += 1
+                    self.lcd1_P.display(str(pointid))
+                    self.cLayer.setSelectedFeatures([pointid])
+
+                    if self.dlg.ui.checkBox_import_indicator.isChecked():
+                        features = self.cLayer.selectedFeatures()
+                        selxy = ()
+                        for f in features:
+                            geom = f.geometry()
+                            selxy = geom.asPoint()
+
+                        pr = self.audioselect_layer.dataProvider()
+                        # add a feature
+                        fet = QgsGeometry.fromPoint(QgsPoint(selxy[0],selxy[1]))
+                        self.audioselect_layer.startEditing()
+                        self.audioselect_layer.beginEditCommand('selected')
+                        self.audioselect_layer.changeGeometry(0,fet)
+        ##                self.audioselect_layer.endEditCommand()
+        ##                self.audioselect_layer.commitChanges()
+                    self.canvas.refresh()
+                    self.canvas.zoomToSelected()
+                    pause = 0
+
+                elif diffsec > 1 and pause == pauseBreak:
+                    # Point ID
+                    pointid += 1
+                    self.lcd1_P.display(str(pointid))
+                    self.cLayer.setSelectedFeatures([pointid])
+
+                    if self.dlg.ui.checkBox_import_indicator.isChecked():
+                        features = self.cLayer.selectedFeatures()
+                        selxy = ()
+                        for f in features:
+                            geom = f.geometry()
+                            selxy = geom.asPoint()
+
+                        pr = self.audioselect_layer.dataProvider()
+                        # add a feature
+                        fet = QgsGeometry.fromPoint(QgsPoint(selxy[0],selxy[1]))
+                        self.audioselect_layer.startEditing()
+                        self.audioselect_layer.beginEditCommand('selected')
+                        self.audioselect_layer.changeGeometry(0,fet)
+        ##                self.audioselect_layer.endEditCommand()
+        ##                self.audioselect_layer.commitChanges()
+                    self.canvas.refresh()
+                    self.canvas.zoomToSelected()
+                    pause = 0
+
+                else:
+                    pause += 1
+
+                self.logger.info('pause: {0}, pauseBreak {1}, diffseconds: {2}'.format(pause, pauseBreak, diff.seconds))
 
             except:
 
@@ -1503,6 +1549,7 @@ class MilkMachine:
 
 
     def playAudio1(self):
+        global AllList
         try:
             self.dlg.ui.pushButton_Audio1.setEnabled(False)
             self.line_audiopath = self.dlg.ui.lineEdit_InAudio1.text()
@@ -1517,6 +1564,21 @@ class MilkMachine:
                 self.cLayer = self.iface.mapCanvas().currentLayer()
                 self.fields = self.field_indices(self.cLayer)
                 selectList = []
+
+                # get all the features and make a list of [[fid, datetime]]
+                AllList = []
+                allfeats = self.cLayer.getFeatures()
+                for feat in allfeats:
+                    currentatt = feat.attributes()
+                    pointdate = currentatt[self.fields['datetime']].split(" ")[0]  #2014/06/06
+                    pointtime = currentatt[self.fields['datetime']].split(" ")[1]
+                    current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
+                    AllList.append([feat.id(), current_dt])
+                # sort self.selectList by fid
+                def getKey(item):
+                    return item[0]
+                AllList = sorted(AllList, key=getKey)
+
                 try:
                     features = self.cLayer.selectedFeatures()
                     for f in features:

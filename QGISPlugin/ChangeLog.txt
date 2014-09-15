@@ -45,3 +45,8 @@ Commit #20
 Task:		Allow for gaps in time in the <FlyTo> duration parameter. duration = time(n+1) - time(n)
 Task:		Pre-populate last known folder directory, for all browsing dialog boxes.
 Task:		Make the audio import file path the same as the export audio path.
+
+--------------------------------------------
+Commit #21
+
+Bug Fix: 	The audio delay calculation was not firing since I was only inheriting the path from the import, rather than doind the calculation on the export tab.
