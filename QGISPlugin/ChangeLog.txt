@@ -50,3 +50,8 @@ Task:		Make the audio import file path the same as the export audio path.
 Commit #21
 
 Bug Fix: 	The audio delay calculation was not firing since I was only inheriting the path from the import, rather than doind the calculation on the export tab.
+
+--------------------------------------------
+Commit #22
+
+Task:		The MM sync tab now behaves like GE. If there is a time gap between points, MM will continue to add time in the "Audio Clock Time" and "Duration Into Audio" time boxes. However, the FID box will stay static as well as the selected point on the map. These will again change, once the gps point timestamp matches the audio clock.

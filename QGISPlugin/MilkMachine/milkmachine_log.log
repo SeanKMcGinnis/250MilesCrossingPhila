@@ -104,3 +104,169 @@
 2014-09-14 21:33:26,351 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
 2014-09-14 21:33:27,355 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
 2014-09-14 21:33:28,354 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
+2014-09-14 22:41:22,358 - milkmachine - INFO - Clicked Cancel
+2014-09-15 12:03:46,229 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-15 12:03:46,229 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-15 12:03:46,229 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-15 12:03:46,230 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-15 12:05:13,051 - milkmachine - INFO - [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+2014-09-15 12:05:13,052 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
+2014-09-15 12:05:13,052 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
+2014-09-15 12:05:13,052 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
+2014-09-15 12:05:13,052 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
+2014-09-15 12:05:13,052 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
+2014-09-15 12:05:13,052 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
+2014-09-15 12:05:13,052 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
+2014-09-15 12:05:13,052 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
+2014-09-15 12:05:13,052 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
+2014-09-15 12:05:13,052 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
+2014-09-15 12:05:13,052 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
+2014-09-15 12:05:13,052 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
+2014-09-15 12:05:13,053 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
+2014-09-15 12:05:13,053 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
+2014-09-15 12:05:13,053 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
+2014-09-15 12:05:13,053 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
+2014-09-15 12:05:13,053 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
+2014-09-15 12:05:13,053 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
+2014-09-15 12:05:13,055 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
+2014-09-15 12:05:13,055 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
+2014-09-15 12:05:13,055 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
+2014-09-15 12:05:13,055 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
+2014-09-15 12:32:17,088 - milkmachine - INFO - Clicked Cancel
+2014-09-15 12:32:19,111 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-15 12:32:19,111 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-15 12:32:19,111 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-15 12:32:19,111 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-15 12:32:37,351 - milkmachine - INFO - [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+2014-09-15 12:32:37,351 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
+2014-09-15 12:32:37,351 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
+2014-09-15 12:32:37,351 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
+2014-09-15 12:32:37,351 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
+2014-09-15 12:32:37,351 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
+2014-09-15 12:32:37,352 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
+2014-09-15 12:32:37,352 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
+2014-09-15 12:32:37,352 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
+2014-09-15 12:32:37,352 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
+2014-09-15 12:32:37,352 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
+2014-09-15 12:32:37,352 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
+2014-09-15 12:32:37,354 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
+2014-09-15 12:32:37,354 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
+2014-09-15 12:32:37,354 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
+2014-09-15 12:32:37,354 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
+2014-09-15 12:32:37,354 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
+2014-09-15 12:32:37,354 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
+2014-09-15 12:32:37,354 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
+2014-09-15 12:32:37,355 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
+2014-09-15 12:32:37,355 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
+2014-09-15 12:32:37,355 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
+2014-09-15 12:32:37,355 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
+2014-09-15 12:32:37,358 - milkmachine - ERROR - follow_apply error.
+2014-09-15 12:32:37,359 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 904, in follow_apply
+    self.ActiveLayer.changeAttributeValue(f[0], self.fields['flyto'], str(newlistwithflyto[i]))
+TypeError: list indices must be integers, not str
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 904, in follow_apply
+    self.ActiveLayer.changeAttributeValue(f[0], self.fields['flyto'], str(newlistwithflyto[i]))
+TypeError: list indices must be integers, not str
+2014-09-15 12:34:34,779 - milkmachine - INFO - Clicked Cancel
+2014-09-15 12:34:36,415 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-15 12:34:36,415 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-15 12:34:36,415 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-15 12:34:36,415 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-15 12:34:54,414 - milkmachine - INFO - [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+2014-09-15 12:34:54,414 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
+2014-09-15 12:34:54,414 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
+2014-09-15 12:34:54,415 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
+2014-09-15 12:34:54,415 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
+2014-09-15 12:34:54,415 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
+2014-09-15 12:34:54,415 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
+2014-09-15 12:34:54,415 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
+2014-09-15 12:34:54,415 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
+2014-09-15 12:34:54,415 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
+2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
+2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
+2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
+2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
+2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
+2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
+2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
+2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
+2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
+2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
+2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
+2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
+2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
+2014-09-15 12:35:58,180 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-09-15 12:35:58,184 - milkmachine - ERROR - export function error
+2014-09-15 12:35:58,187 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2045, in exportToFile
+    for kk,vv in camera.iteritems():
+NameError: global name 'camera' is not defined
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2045, in exportToFile
+    for kk,vv in camera.iteritems():
+NameError: global name 'camera' is not defined
+2014-09-15 12:36:14,023 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-09-15 12:36:14,026 - milkmachine - ERROR - export function error
+2014-09-15 12:36:14,026 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2045, in exportToFile
+    for kk,vv in camera.iteritems():
+NameError: global name 'camera' is not defined
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2045, in exportToFile
+    for kk,vv in camera.iteritems():
+NameError: global name 'camera' is not defined
+2014-09-15 12:36:47,298 - milkmachine - INFO - Clicked Cancel
+2014-09-15 12:36:49,529 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-15 12:36:49,529 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-15 12:36:49,530 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-15 12:36:49,530 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-15 12:36:54,658 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-09-15 12:36:54,668 - milkmachine - ERROR - export function error
+2014-09-15 12:36:54,671 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2238, in exportToFile
+    if cameradict['longitude'] and cameradict['latitude']:
+KeyError: 'longitude'
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2238, in exportToFile
+    if cameradict['longitude'] and cameradict['latitude']:
+KeyError: 'longitude'
+2014-09-15 12:37:59,262 - milkmachine - INFO - Clicked Cancel
+2014-09-15 12:38:03,779 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-15 12:38:03,779 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-15 12:38:03,779 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-15 12:38:03,779 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-15 12:38:07,779 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-09-15 12:38:07,783 - milkmachine - INFO - {'gxhoriz': u'', 'altitudemode': u'relativeToGround', 'roll': None, 'tilt': u'60.0', 'altitude': u'10', 'gxaltitudemode': u'', 'longitude': -75.17232, 'heading': 217.5, 'range': u'20', 'follow_angle': u'180', 'longitude_off': None, 'latitude': 39.96594, 'latitude_off': None}
+2014-09-15 12:38:07,789 - milkmachine - ERROR - export function error
+2014-09-15 12:38:07,792 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2239, in exportToFile
+    if cameradict['longitude'] and cameradict['latitude']:
+KeyError: 'longitude'
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2239, in exportToFile
+    if cameradict['longitude'] and cameradict['latitude']:
+KeyError: 'longitude'
+2014-09-15 12:40:03,888 - milkmachine - INFO - Clicked Cancel
+2014-09-15 12:40:07,017 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-15 12:40:07,017 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-15 12:40:07,019 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-15 12:40:07,019 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-15 12:40:09,454 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-09-15 12:40:09,459 - milkmachine - INFO - -75.17232
+2014-09-15 12:40:09,464 - milkmachine - ERROR - export function error
+2014-09-15 12:40:09,467 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2239, in exportToFile
+    if cameradict['longitude'] and cameradict['latitude']:
+KeyError: 'longitude'
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2239, in exportToFile
+    if cameradict['longitude'] and cameradict['latitude']:
+KeyError: 'longitude'
+2014-09-15 12:42:35,828 - milkmachine - INFO - Clicked Cancel
+2014-09-15 12:42:38,404 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-15 12:42:38,404 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-15 12:42:38,404 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-15 12:42:38,404 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-15 12:42:42,177 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'model': 8, u'audio': 3, u'flyto': 5}
