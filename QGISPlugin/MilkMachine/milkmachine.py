@@ -174,7 +174,7 @@ class MilkMachine:
     ## SLOTS
 
     def tiltpopulate(self):
-        if self.dlg.ui.lineEdit_visualization_follow_altitude.text() and self.dlg.ui.lineEdit__visualization_follow_range.text():
+        if self.dlg.ui.lineEdit_visualization_follow_altitude.text() and self.dlg.ui.lineEdit__visualization_follow_range.text() and not self.dlg.ui.lineEdit__visualization_follow_tilt.text():
             altitude = float(self.dlg.ui.lineEdit_visualization_follow_altitude.text())
             ranger = float(self.dlg.ui.lineEdit__visualization_follow_range.text())
             angle = round(math.degrees(math.acos(altitude/ranger)),1)

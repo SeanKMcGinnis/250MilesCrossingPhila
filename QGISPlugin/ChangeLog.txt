@@ -55,3 +55,9 @@ Bug Fix: 	The audio delay calculation was not firing since I was only inheriting
 Commit #22
 
 Task:		The MM sync tab now behaves like GE. If there is a time gap between points, MM will continue to add time in the "Audio Clock Time" and "Duration Into Audio" time boxes. However, the FID box will stay static as well as the selected point on the map. These will again change, once the gps point timestamp matches the audio clock.
+
+--------------------------------------------
+Commit #22
+
+Bug Fix:  	The 'camera' field exceeds the maximum character limit of 254 sometimes. This means that QGIS cuts of extra characters when saving as a shapefile. However, during and edit session the field will hold the extra characters. This allows a safe export in MM. There is no error in QGIS for the extra characters. The solution is to code all of the parameters. This brings the camera field down to about 180 characters.
+Bug Fix:	The 'tilt' field needs only to autopopulate when it is empty, not when the user enters a value. This stops it from overwriting the user values.
