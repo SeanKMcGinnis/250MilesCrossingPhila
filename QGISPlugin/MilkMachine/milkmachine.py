@@ -174,7 +174,7 @@ class MilkMachine:
     ## SLOTS
 
     def tiltpopulate(self):
-        if self.dlg.ui.lineEdit_visualization_follow_altitude.text() and self.dlg.ui.lineEdit__visualization_follow_range.text():
+        if self.dlg.ui.lineEdit_visualization_follow_altitude.text() and self.dlg.ui.lineEdit__visualization_follow_range.text() and not self.dlg.ui.lineEdit__visualization_follow_tilt.text():
             altitude = float(self.dlg.ui.lineEdit_visualization_follow_altitude.text())
             ranger = float(self.dlg.ui.lineEdit__visualization_follow_range.text())
             angle = round(math.degrees(math.acos(altitude/ranger)),1)
@@ -777,6 +777,10 @@ class MilkMachine:
             self.fields = self.field_indices(self.ActiveLayer)
             # make a dictionary of all of the camera parameters
             camera = {'longitude': None, 'longitude_off': None, 'latitude': None, 'latitude_off': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'gxhoriz' : None,'heading' : None,'roll' : None,'tilt' : None, 'range': None, 'follow_angle': None}
+            cameraAlpha = {'longitude': 'a', 'longitude_off': 'b', 'latitude': 'c', 'latitude_off': 'd', 'altitude' : 'e', 'altitudemode': 'f','gxaltitudemode' : 'g','gxhoriz' : 'h','heading' : 'i','roll' : 'j','tilt' : 'k', 'range': 'l', 'follow_angle': 'm'}
+            cameraBack = {'a': 'longitude', 'b': 'longitude_off','c': 'latitude','d': 'latitude_off','e': 'altitude' ,'f': 'altitudemode', 'g': 'gxaltitudemode' ,'h': 'gxhoriz' ,'i': 'heading' ,'j': 'roll' ,'k': 'tilt' ,'l': 'range','m': 'follow_angle'}
+
+            cameratemp = {}
             flyto = {'name': None, 'flyToMode': None, 'duration': None}
 
 
@@ -887,9 +891,14 @@ class MilkMachine:
                         #self.logger.info('enum {0} {1}'.format(i,f))
                         if len(f) == 3:
                             camera['altitude'] = f[2]
-                        camera['heading'] = headinglist[i]
+                        camera['heading'] = round(headinglist[i],1)
                         camera['longitude'] = f[1][0]; camera['latitude'] = f[1][1]
-                        self.ActiveLayer.changeAttributeValue(f[0], self.fields['camera'], str(camera))
+
+                        #convert to cameratemp
+                        for key,value in camera.iteritems():
+                            cameratemp[cameraAlpha[key]] = value
+
+                        self.ActiveLayer.changeAttributeValue(f[0], self.fields['camera'], str(cameratemp))
 
                         #self.ActiveLayer.changeAttributeValue(f[0], self.fields['flyto'], str(flyto))
                         self.ActiveLayer.changeAttributeValue(f[0], self.fields['flyto'], str(newlistwithflyto[i]))
@@ -1123,8 +1132,9 @@ class MilkMachine:
 
             self.fields = self.field_indices(self.ActiveLayer)
             # make a dictionary of all of the camera parameters
-            camera = {'longitude': None, 'longitude_off': None, 'latitude': None, 'latitude_off': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'gxhoriz' : None,'heading' : None,'roll' : None,'tilt' : None, 'range': None}
             flyto = {'name': None, 'flyToMode': None, 'duration': None}
+            camera = {'longitude': None, 'longitude_off': None, 'latitude': None, 'latitude_off': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'gxhoriz' : None,'heading' : None,'roll' : None,'tilt' : None, 'range': None, 'follow_angle': None}
+            cameraAlpha = {'longitude': 'a', 'longitude_off': 'b', 'latitude': 'c', 'latitude_off': 'd', 'altitude' : 'e', 'altitudemode': 'f','gxaltitudemode' : 'g','gxhoriz' : 'h','heading' : 'i','roll' : 'j','tilt' : 'k', 'range': 'l', 'follow_angle': 'm'}
 
 
             flyto['name'] = self.dlg.ui.lineEdit_tourname.text()
@@ -1132,17 +1142,30 @@ class MilkMachine:
             flyto['duration'] = self.dlg.ui.lineEdit_flyto_duration.text()
 
 
-            camera['longitude'] = self.dlg.ui.lineEdit_visualization_camera_longitude.text()
-            camera['longitude_off'] = self.dlg.ui.lineEdit_visualization_camera_longitude_off.text()
-            camera['latitude'] = self.dlg.ui.lineEdit_visualization_camera_latitude.text()
-            camera['latitude_off'] = self.dlg.ui.lineEdit_visualization_camera_latitude_off.text()
-            camera['altitude'] = self.dlg.ui.lineEdit_visualization_camera_altitude.text()
-            camera['altitudemode'] = self.dlg.ui.comboBox_altitudemode.currentText()
-            camera['gxaltitudemode'] = self.dlg.ui.comboBox_gxaltitudemode.currentText()
-            camera['gxhoriz'] = self.dlg.ui.lineEdit__visualization_camera_gxhoriz.text()
-            camera['heading'] = self.dlg.ui.lineEdit__visualization_camera_heading.text()
-            camera['roll'] = self.dlg.ui.lineEdit__visualization_camera_roll.text()
-            camera['tilt'] = self.dlg.ui.lineEdit__visualization_camera_tilt.text()
+##            camera['longitude'] = self.dlg.ui.lineEdit_visualization_camera_longitude.text()
+##            camera['longitude_off'] = self.dlg.ui.lineEdit_visualization_camera_longitude_off.text()
+##            camera['latitude'] = self.dlg.ui.lineEdit_visualization_camera_latitude.text()
+##            camera['latitude_off'] = self.dlg.ui.lineEdit_visualization_camera_latitude_off.text()
+##            camera['altitude'] = self.dlg.ui.lineEdit_visualization_camera_altitude.text()
+##            camera['altitudemode'] = self.dlg.ui.comboBox_altitudemode.currentText()
+##            camera['gxaltitudemode'] = self.dlg.ui.comboBox_gxaltitudemode.currentText()
+##            camera['gxhoriz'] = self.dlg.ui.lineEdit__visualization_camera_gxhoriz.text()
+##            camera['heading'] = self.dlg.ui.lineEdit__visualization_camera_heading.text()
+##            camera['roll'] = self.dlg.ui.lineEdit__visualization_camera_roll.text()
+##            camera['tilt'] = self.dlg.ui.lineEdit__visualization_camera_tilt.text()
+
+            camera['a'] = self.dlg.ui.lineEdit_visualization_camera_longitude.text()
+            camera['b'] = self.dlg.ui.lineEdit_visualization_camera_longitude_off.text()
+            camera['c'] = self.dlg.ui.lineEdit_visualization_camera_latitude.text()
+            camera['d'] = self.dlg.ui.lineEdit_visualization_camera_latitude_off.text()
+            camera['e'] = self.dlg.ui.lineEdit_visualization_camera_altitude.text()
+            camera['f'] = self.dlg.ui.comboBox_altitudemode.currentText()
+            camera['g'] = self.dlg.ui.comboBox_gxaltitudemode.currentText()
+            camera['h'] = self.dlg.ui.lineEdit__visualization_camera_gxhoriz.text()
+            camera['i'] = self.dlg.ui.lineEdit__visualization_camera_heading.text()
+            camera['j'] = self.dlg.ui.lineEdit__visualization_camera_roll.text()
+            camera['k'] = self.dlg.ui.lineEdit__visualization_camera_tilt.text()
+
             #QMessageBox.information(self.iface.mainWindow(),"Camera dict", str(camera) )
 
 ##            # Populate the Visualization Camera Combo boxes
@@ -2029,7 +2052,15 @@ class MilkMachine:
                         # 'heading' : None,'roll' : None,'tilt' : None}
 
                     if cc == 0:  # establish this as the start of the tour
-                        cameradict = eval(currentatt[self.fields['camera']])
+                        camera = eval(currentatt[self.fields['camera']])
+                        cameraBack = {'a': 'longitude', 'b': 'longitude_off','c': 'latitude','d': 'latitude_off','e': 'altitude' ,'f': 'altitudemode', 'g': 'gxaltitudemode' ,'h': 'gxhoriz' ,'i': 'heading' ,'j': 'roll' ,'k': 'tilt' ,'l': 'range','m': 'follow_angle'}
+                        #convert back to full format
+                        newcam = {}
+                        for kk,vv in camera.iteritems():
+                            newcam[cameraBack[kk]] = vv
+                        cameradict = newcam
+
+
                         flytodict = eval(currentatt[self.fields['flyto']])
 
                         # First, put in a <Camera> that matches the same <Camera> at the beginning of the tour, that
@@ -2203,7 +2234,13 @@ class MilkMachine:
                         cc += 1
 
                     else:  # everything after zero camera
-                        cameradict = eval(currentatt[self.fields['camera']])
+                        camera = eval(currentatt[self.fields['camera']])
+                        cameraBack = {'a': 'longitude', 'b': 'longitude_off','c': 'latitude','d': 'latitude_off','e': 'altitude' ,'f': 'altitudemode', 'g': 'gxaltitudemode' ,'h': 'gxhoriz' ,'i': 'heading' ,'j': 'roll' ,'k': 'tilt' ,'l': 'range','m': 'follow_angle'}
+                        #convert back to full format
+                        newcam = {}
+                        for kk,vv in camera.iteritems():
+                            newcam[cameraBack[kk]] = vv
+                        cameradict = newcam
                         flytodict = eval(currentatt[self.fields['flyto']])
 
                         # Start time. Will be used for TimeSpan tags
