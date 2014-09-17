@@ -1135,36 +1135,36 @@ class MilkMachine:
             flyto = {'name': None, 'flyToMode': None, 'duration': None}
             camera = {'longitude': None, 'longitude_off': None, 'latitude': None, 'latitude_off': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'gxhoriz' : None,'heading' : None,'roll' : None,'tilt' : None, 'range': None, 'follow_angle': None}
             cameraAlpha = {'longitude': 'a', 'longitude_off': 'b', 'latitude': 'c', 'latitude_off': 'd', 'altitude' : 'e', 'altitudemode': 'f','gxaltitudemode' : 'g','gxhoriz' : 'h','heading' : 'i','roll' : 'j','tilt' : 'k', 'range': 'l', 'follow_angle': 'm'}
-
+            cameratemp = {}
 
             flyto['name'] = self.dlg.ui.lineEdit_tourname.text()
             flyto['flyToMode'] = self.dlg.ui.comboBox_flyto_mode.currentText()
             flyto['duration'] = self.dlg.ui.lineEdit_flyto_duration.text()
 
 
-##            camera['longitude'] = self.dlg.ui.lineEdit_visualization_camera_longitude.text()
-##            camera['longitude_off'] = self.dlg.ui.lineEdit_visualization_camera_longitude_off.text()
-##            camera['latitude'] = self.dlg.ui.lineEdit_visualization_camera_latitude.text()
-##            camera['latitude_off'] = self.dlg.ui.lineEdit_visualization_camera_latitude_off.text()
-##            camera['altitude'] = self.dlg.ui.lineEdit_visualization_camera_altitude.text()
-##            camera['altitudemode'] = self.dlg.ui.comboBox_altitudemode.currentText()
-##            camera['gxaltitudemode'] = self.dlg.ui.comboBox_gxaltitudemode.currentText()
-##            camera['gxhoriz'] = self.dlg.ui.lineEdit__visualization_camera_gxhoriz.text()
-##            camera['heading'] = self.dlg.ui.lineEdit__visualization_camera_heading.text()
-##            camera['roll'] = self.dlg.ui.lineEdit__visualization_camera_roll.text()
-##            camera['tilt'] = self.dlg.ui.lineEdit__visualization_camera_tilt.text()
+            camera['longitude'] = self.dlg.ui.lineEdit_visualization_camera_longitude.text()
+            camera['longitude_off'] = self.dlg.ui.lineEdit_visualization_camera_longitude_off.text()
+            camera['latitude'] = self.dlg.ui.lineEdit_visualization_camera_latitude.text()
+            camera['latitude_off'] = self.dlg.ui.lineEdit_visualization_camera_latitude_off.text()
+            camera['altitude'] = self.dlg.ui.lineEdit_visualization_camera_altitude.text()
+            camera['altitudemode'] = self.dlg.ui.comboBox_altitudemode.currentText()
+            camera['gxaltitudemode'] = self.dlg.ui.comboBox_gxaltitudemode.currentText()
+            camera['gxhoriz'] = self.dlg.ui.lineEdit__visualization_camera_gxhoriz.text()
+            camera['heading'] = self.dlg.ui.lineEdit__visualization_camera_heading.text()
+            camera['roll'] = self.dlg.ui.lineEdit__visualization_camera_roll.text()
+            camera['tilt'] = self.dlg.ui.lineEdit__visualization_camera_tilt.text()
 
-            camera['a'] = self.dlg.ui.lineEdit_visualization_camera_longitude.text()
-            camera['b'] = self.dlg.ui.lineEdit_visualization_camera_longitude_off.text()
-            camera['c'] = self.dlg.ui.lineEdit_visualization_camera_latitude.text()
-            camera['d'] = self.dlg.ui.lineEdit_visualization_camera_latitude_off.text()
-            camera['e'] = self.dlg.ui.lineEdit_visualization_camera_altitude.text()
-            camera['f'] = self.dlg.ui.comboBox_altitudemode.currentText()
-            camera['g'] = self.dlg.ui.comboBox_gxaltitudemode.currentText()
-            camera['h'] = self.dlg.ui.lineEdit__visualization_camera_gxhoriz.text()
-            camera['i'] = self.dlg.ui.lineEdit__visualization_camera_heading.text()
-            camera['j'] = self.dlg.ui.lineEdit__visualization_camera_roll.text()
-            camera['k'] = self.dlg.ui.lineEdit__visualization_camera_tilt.text()
+##            camera['a'] = self.dlg.ui.lineEdit_visualization_camera_longitude.text()
+##            camera['b'] = self.dlg.ui.lineEdit_visualization_camera_longitude_off.text()
+##            camera['c'] = self.dlg.ui.lineEdit_visualization_camera_latitude.text()
+##            camera['d'] = self.dlg.ui.lineEdit_visualization_camera_latitude_off.text()
+##            camera['e'] = self.dlg.ui.lineEdit_visualization_camera_altitude.text()
+##            camera['f'] = self.dlg.ui.comboBox_altitudemode.currentText()
+##            camera['g'] = self.dlg.ui.comboBox_gxaltitudemode.currentText()
+##            camera['h'] = self.dlg.ui.lineEdit__visualization_camera_gxhoriz.text()
+##            camera['i'] = self.dlg.ui.lineEdit__visualization_camera_heading.text()
+##            camera['j'] = self.dlg.ui.lineEdit__visualization_camera_roll.text()
+##            camera['k'] = self.dlg.ui.lineEdit__visualization_camera_tilt.text()
 
             #QMessageBox.information(self.iface.mainWindow(),"Camera dict", str(camera) )
 
@@ -1191,8 +1191,12 @@ class MilkMachine:
                 if len(self.selectList) >= 1:
                     self.ActiveLayer.beginEditCommand("Camera Editing")
                     for f in self.selectList:
-                        #self.ActiveLayer.dataProvider().changeAttributeValues({ f : {2: str(camera)} })
-                        self.ActiveLayer.changeAttributeValue(f, self.fields['camera'], str(camera))
+                        #convert to cameratemp
+                        for key,value in camera.iteritems():
+                            cameratemp[cameraAlpha[key]] = value
+
+                        self.ActiveLayer.changeAttributeValue(f, self.fields['camera'], str(cameratemp))
+                        #self.ActiveLayer.changeAttributeValue(f, self.fields['camera'], str(camera))
                         self.ActiveLayer.changeAttributeValue(f, self.fields['flyto'], str(flyto))
                     #self.ActiveLayer.updateFields()
                     self.ActiveLayer.endEditCommand()
