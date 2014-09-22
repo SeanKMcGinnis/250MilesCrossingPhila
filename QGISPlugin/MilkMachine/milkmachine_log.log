@@ -1,1079 +1,541 @@
-2014-09-14 21:28:11,471 - milkmachine - INFO - Clicked Cancel
-2014-09-14 21:28:22,082 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-14 21:28:22,082 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-14 21:28:22,082 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-14 21:28:22,082 - milkmachine - INFO - Milk Machine plugin initialized
-2014-09-14 21:28:32,783 - milkmachine - INFO - IN selectList: [[u'2014/06/06 10:10:10', u'Time:10:10:10, Latitude: 39.965956, Longitude: -75.172291, Speed: 0.795546, Altitude: 18.755497', u'2014/06/06 10:10:10', NULL, NULL, NULL, NULL, NULL, NULL]]
-2014-09-14 21:28:32,783 - milkmachine - INFO - IN jumptime: 70, ClockDateTime
-2014-09-14 21:28:32,785 - milkmachine - INFO - WindOs: <_sre.SRE_Match object at 0x000000000F66DBF8>
-2014-09-14 21:28:32,799 - milkmachine - INFO - jumptime: 70, ClockDateTime
-2014-09-14 21:28:33,803 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:28:34,806 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:28:35,805 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:28:36,806 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:28:37,808 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:28:38,805 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:28:39,799 - milkmachine - INFO - pause: 1, pauseBreak 27, diffseconds: 27
-2014-09-14 21:28:40,801 - milkmachine - INFO - pause: 2, pauseBreak 27, diffseconds: 27
-2014-09-14 21:28:41,799 - milkmachine - INFO - pause: 3, pauseBreak 27, diffseconds: 27
-2014-09-14 21:28:42,798 - milkmachine - INFO - pause: 4, pauseBreak 27, diffseconds: 27
-2014-09-14 21:28:43,799 - milkmachine - INFO - pause: 5, pauseBreak 27, diffseconds: 27
-2014-09-14 21:28:44,799 - milkmachine - INFO - pause: 6, pauseBreak 27, diffseconds: 27
-2014-09-14 21:28:45,798 - milkmachine - INFO - pause: 7, pauseBreak 27, diffseconds: 27
-2014-09-14 21:28:46,799 - milkmachine - INFO - pause: 8, pauseBreak 27, diffseconds: 27
-2014-09-14 21:28:47,798 - milkmachine - INFO - pause: 9, pauseBreak 27, diffseconds: 27
-2014-09-14 21:28:48,799 - milkmachine - INFO - pause: 10, pauseBreak 27, diffseconds: 27
-2014-09-14 21:28:49,799 - milkmachine - INFO - pause: 11, pauseBreak 27, diffseconds: 27
-2014-09-14 21:28:50,801 - milkmachine - INFO - pause: 12, pauseBreak 27, diffseconds: 27
-2014-09-14 21:28:51,799 - milkmachine - INFO - pause: 13, pauseBreak 27, diffseconds: 27
-2014-09-14 21:28:52,799 - milkmachine - INFO - pause: 14, pauseBreak 27, diffseconds: 27
-2014-09-14 21:28:53,799 - milkmachine - INFO - pause: 15, pauseBreak 27, diffseconds: 27
-2014-09-14 21:28:54,798 - milkmachine - INFO - pause: 16, pauseBreak 27, diffseconds: 27
-2014-09-14 21:28:55,799 - milkmachine - INFO - pause: 17, pauseBreak 27, diffseconds: 27
-2014-09-14 21:28:56,798 - milkmachine - INFO - pause: 18, pauseBreak 27, diffseconds: 27
-2014-09-14 21:28:57,799 - milkmachine - INFO - pause: 19, pauseBreak 27, diffseconds: 27
-2014-09-14 21:28:58,801 - milkmachine - INFO - pause: 20, pauseBreak 27, diffseconds: 27
-2014-09-14 21:28:59,799 - milkmachine - INFO - pause: 21, pauseBreak 27, diffseconds: 27
-2014-09-14 21:29:00,799 - milkmachine - INFO - pause: 22, pauseBreak 27, diffseconds: 27
-2014-09-14 21:29:01,798 - milkmachine - INFO - pause: 23, pauseBreak 27, diffseconds: 27
-2014-09-14 21:29:02,799 - milkmachine - INFO - pause: 24, pauseBreak 27, diffseconds: 27
-2014-09-14 21:29:03,798 - milkmachine - INFO - pause: 25, pauseBreak 27, diffseconds: 27
-2014-09-14 21:29:04,801 - milkmachine - INFO - pause: 26, pauseBreak 27, diffseconds: 27
-2014-09-14 21:29:05,801 - milkmachine - INFO - pause: 27, pauseBreak 27, diffseconds: 27
-2014-09-14 21:29:06,805 - milkmachine - INFO - pause: 0, pauseBreak 27, diffseconds: 27
-2014-09-14 21:29:07,805 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:29:08,806 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:29:09,805 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:29:10,805 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:29:11,805 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:29:12,805 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:29:13,805 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:29:14,803 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:29:15,803 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:29:16,803 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:29:17,806 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:29:18,806 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:29:19,806 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:29:20,805 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:29:21,803 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:29:22,806 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:29:23,799 - milkmachine - INFO - pause: 1, pauseBreak 1018, diffseconds: 1018
-2014-09-14 21:29:28,302 - milkmachine - INFO - Clicked Cancel
-2014-09-14 21:32:39,171 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-14 21:32:39,171 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-14 21:32:39,171 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-14 21:32:39,171 - milkmachine - INFO - Milk Machine plugin initialized
-2014-09-14 21:32:51,328 - milkmachine - INFO - IN selectList: [[u'2014/06/06 10:10:10', u'Time:10:10:10, Latitude: 39.965956, Longitude: -75.172291, Speed: 0.795546, Altitude: 18.755497', u'2014/06/06 10:10:10', NULL, NULL, NULL, NULL, NULL, NULL]]
-2014-09-14 21:32:51,329 - milkmachine - INFO - IN jumptime: 70, ClockDateTime
-2014-09-14 21:32:51,329 - milkmachine - INFO - WindOs: <_sre.SRE_Match object at 0x000000000F66DF38>
-2014-09-14 21:32:51,345 - milkmachine - INFO - jumptime: 70, ClockDateTime
-2014-09-14 21:32:52,358 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:32:53,352 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:32:54,352 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:32:55,351 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:32:56,354 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:32:57,355 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:32:58,345 - milkmachine - INFO - pause: 1, pauseBreak 27, diffseconds: 27
-2014-09-14 21:32:59,348 - milkmachine - INFO - pause: 2, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:00,348 - milkmachine - INFO - pause: 3, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:01,345 - milkmachine - INFO - pause: 4, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:02,346 - milkmachine - INFO - pause: 5, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:03,348 - milkmachine - INFO - pause: 6, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:04,346 - milkmachine - INFO - pause: 7, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:05,345 - milkmachine - INFO - pause: 8, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:06,345 - milkmachine - INFO - pause: 9, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:07,345 - milkmachine - INFO - pause: 10, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:08,346 - milkmachine - INFO - pause: 11, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:09,345 - milkmachine - INFO - pause: 12, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:10,348 - milkmachine - INFO - pause: 13, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:11,346 - milkmachine - INFO - pause: 14, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:12,345 - milkmachine - INFO - pause: 15, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:13,349 - milkmachine - INFO - pause: 16, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:14,348 - milkmachine - INFO - pause: 17, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:15,346 - milkmachine - INFO - pause: 18, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:16,345 - milkmachine - INFO - pause: 19, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:17,345 - milkmachine - INFO - pause: 20, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:18,348 - milkmachine - INFO - pause: 21, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:19,345 - milkmachine - INFO - pause: 22, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:20,348 - milkmachine - INFO - pause: 23, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:21,348 - milkmachine - INFO - pause: 24, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:22,346 - milkmachine - INFO - pause: 25, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:23,348 - milkmachine - INFO - pause: 26, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:24,346 - milkmachine - INFO - pause: 27, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:25,351 - milkmachine - INFO - pause: 0, pauseBreak 27, diffseconds: 27
-2014-09-14 21:33:26,351 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:33:27,355 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 21:33:28,354 - milkmachine - INFO - pause: 0, pauseBreak 1, diffseconds: 1
-2014-09-14 22:41:22,358 - milkmachine - INFO - Clicked Cancel
-2014-09-15 12:03:46,229 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-15 12:03:46,229 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-15 12:03:46,229 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-15 12:03:46,230 - milkmachine - INFO - Milk Machine plugin initialized
-2014-09-15 12:05:13,051 - milkmachine - INFO - [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-2014-09-15 12:05:13,052 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
-2014-09-15 12:05:13,052 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
-2014-09-15 12:05:13,052 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
-2014-09-15 12:05:13,052 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
-2014-09-15 12:05:13,052 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
-2014-09-15 12:05:13,052 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
-2014-09-15 12:05:13,052 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
-2014-09-15 12:05:13,052 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
-2014-09-15 12:05:13,052 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
-2014-09-15 12:05:13,052 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
-2014-09-15 12:05:13,052 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
-2014-09-15 12:05:13,052 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
-2014-09-15 12:05:13,053 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
-2014-09-15 12:05:13,053 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
-2014-09-15 12:05:13,053 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
-2014-09-15 12:05:13,053 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
-2014-09-15 12:05:13,053 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
-2014-09-15 12:05:13,053 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
-2014-09-15 12:05:13,055 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
-2014-09-15 12:05:13,055 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
-2014-09-15 12:05:13,055 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
-2014-09-15 12:05:13,055 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ccc'}
-2014-09-15 12:32:17,088 - milkmachine - INFO - Clicked Cancel
-2014-09-15 12:32:19,111 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-15 12:32:19,111 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-15 12:32:19,111 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-15 12:32:19,111 - milkmachine - INFO - Milk Machine plugin initialized
-2014-09-15 12:32:37,351 - milkmachine - INFO - [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-2014-09-15 12:32:37,351 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
-2014-09-15 12:32:37,351 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
-2014-09-15 12:32:37,351 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
-2014-09-15 12:32:37,351 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
-2014-09-15 12:32:37,351 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
-2014-09-15 12:32:37,352 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
-2014-09-15 12:32:37,352 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
-2014-09-15 12:32:37,352 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
-2014-09-15 12:32:37,352 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
-2014-09-15 12:32:37,352 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
-2014-09-15 12:32:37,352 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
-2014-09-15 12:32:37,354 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
-2014-09-15 12:32:37,354 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
-2014-09-15 12:32:37,354 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
-2014-09-15 12:32:37,354 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
-2014-09-15 12:32:37,354 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
-2014-09-15 12:32:37,354 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
-2014-09-15 12:32:37,354 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
-2014-09-15 12:32:37,355 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
-2014-09-15 12:32:37,355 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
-2014-09-15 12:32:37,355 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
-2014-09-15 12:32:37,355 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'zzz'}
-2014-09-15 12:32:37,358 - milkmachine - ERROR - follow_apply error.
-2014-09-15 12:32:37,359 - milkmachine - ERROR - Traceback (most recent call last):
-  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 904, in follow_apply
-    self.ActiveLayer.changeAttributeValue(f[0], self.fields['flyto'], str(newlistwithflyto[i]))
-TypeError: list indices must be integers, not str
+2014-09-20 20:21:55,895 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 20:21:55,895 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 20:21:55,895 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 20:21:55,897 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-20 20:24:05,246 - milkmachine - INFO - Clicked Cancel
+2014-09-20 20:24:07,960 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 20:24:07,961 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 20:24:07,961 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 20:24:07,961 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-20 20:25:14,121 - milkmachine - INFO - Clicked Cancel
+2014-09-20 20:26:43,628 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 20:26:43,630 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 20:26:43,630 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 20:26:43,630 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-20 21:03:21,868 - milkmachine - INFO - Clicked Cancel
+2014-09-20 21:03:46,214 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 21:03:46,216 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 21:03:46,216 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 21:03:46,216 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-20 21:04:16,882 - milkmachine - ERROR - lookat_apply function error
+2014-09-20 21:04:16,884 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 874, in circle_apply
+    lookat['heading'] = self.dlg.ui.lineEdit__visualization_circle_heading.text()
+AttributeError: 'Ui_MilkMachine' object has no attribute 'lineEdit__visualization_circle_heading'
 Traceback (most recent call last):
-  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 904, in follow_apply
-    self.ActiveLayer.changeAttributeValue(f[0], self.fields['flyto'], str(newlistwithflyto[i]))
-TypeError: list indices must be integers, not str
-2014-09-15 12:34:34,779 - milkmachine - INFO - Clicked Cancel
-2014-09-15 12:34:36,415 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-15 12:34:36,415 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-15 12:34:36,415 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-15 12:34:36,415 - milkmachine - INFO - Milk Machine plugin initialized
-2014-09-15 12:34:54,414 - milkmachine - INFO - [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-2014-09-15 12:34:54,414 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
-2014-09-15 12:34:54,414 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
-2014-09-15 12:34:54,415 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
-2014-09-15 12:34:54,415 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
-2014-09-15 12:34:54,415 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
-2014-09-15 12:34:54,415 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
-2014-09-15 12:34:54,415 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
-2014-09-15 12:34:54,415 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
-2014-09-15 12:34:54,415 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
-2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
-2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
-2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
-2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
-2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
-2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
-2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
-2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
-2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
-2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
-2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
-2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
-2014-09-15 12:34:54,417 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'ddd'}
-2014-09-15 12:35:58,180 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'model': 8, u'audio': 3, u'flyto': 5}
-2014-09-15 12:35:58,184 - milkmachine - ERROR - export function error
-2014-09-15 12:35:58,187 - milkmachine - ERROR - Traceback (most recent call last):
-  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2045, in exportToFile
-    for kk,vv in camera.iteritems():
-NameError: global name 'camera' is not defined
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 874, in circle_apply
+    lookat['heading'] = self.dlg.ui.lineEdit__visualization_circle_heading.text()
+AttributeError: 'Ui_MilkMachine' object has no attribute 'lineEdit__visualization_circle_heading'
+2014-09-20 21:04:42,036 - milkmachine - INFO - Clicked Cancel
+2014-09-20 21:05:48,125 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 21:05:48,125 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 21:05:48,125 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 21:05:48,125 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-20 21:11:25,494 - milkmachine - INFO - Quit Milk Machine
+2014-09-20 21:11:27,009 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 21:11:27,010 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 21:11:27,010 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 21:11:27,010 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-20 21:11:27,934 - milkmachine - INFO - Clicked Cancel
+2014-09-20 21:11:30,098 - milkmachine - INFO - Quit Milk Machine
+2014-09-20 21:11:30,160 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 21:11:30,160 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 21:11:30,161 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 21:11:30,161 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-20 22:17:59,109 - milkmachine - INFO - Clicked Cancel
+2014-09-20 22:18:02,661 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 22:18:02,663 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 22:18:02,663 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 22:18:02,663 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-20 22:18:11,275 - milkmachine - INFO - Quit Milk Machine
+2014-09-20 22:18:11,391 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 22:18:11,392 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 22:18:11,392 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 22:18:11,392 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-20 22:18:26,052 - milkmachine - INFO - Quit Milk Machine
+2014-09-20 22:18:26,118 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 22:18:26,118 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 22:18:26,118 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 22:18:26,118 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-20 22:21:31,088 - milkmachine - INFO - Clicked Cancel
+2014-09-20 22:21:34,999 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 22:21:35,000 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 22:21:35,000 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 22:21:35,000 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-20 22:22:45,963 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-09-20 22:29:53,621 - milkmachine - INFO - Clicked Cancel
+2014-09-20 22:29:58,983 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 22:29:58,983 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 22:29:58,983 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 22:29:58,984 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-20 22:30:04,476 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-09-20 22:30:04,480 - milkmachine - ERROR - export function error
+2014-09-20 22:30:04,483 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2332, in exportToFile
+    c+=1
+UnboundLocalError: local variable 'c' referenced before assignment
 Traceback (most recent call last):
-  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2045, in exportToFile
-    for kk,vv in camera.iteritems():
-NameError: global name 'camera' is not defined
-2014-09-15 12:36:14,023 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'model': 8, u'audio': 3, u'flyto': 5}
-2014-09-15 12:36:14,026 - milkmachine - ERROR - export function error
-2014-09-15 12:36:14,026 - milkmachine - ERROR - Traceback (most recent call last):
-  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2045, in exportToFile
-    for kk,vv in camera.iteritems():
-NameError: global name 'camera' is not defined
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2332, in exportToFile
+    c+=1
+UnboundLocalError: local variable 'c' referenced before assignment
+2014-09-20 22:30:27,822 - milkmachine - INFO - Clicked Cancel
+2014-09-20 22:30:32,444 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 22:30:32,444 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 22:30:32,444 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 22:30:32,444 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-20 22:30:35,532 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-09-20 22:32:51,263 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-09-20 22:41:33,418 - milkmachine - INFO - Clicked Cancel
+2014-09-20 22:41:38,846 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 22:41:38,846 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 22:41:38,846 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-20 22:41:38,846 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-20 22:41:43,338 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-09-20 22:42:31,872 - milkmachine - INFO - Clicked Cancel
+2014-09-21 12:04:05,769 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 12:04:05,770 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 12:04:05,770 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 12:04:05,770 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-21 12:07:41,318 - milkmachine - INFO - Clicked Cancel
+2014-09-21 12:07:42,648 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 12:07:42,648 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 12:07:42,648 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 12:07:42,650 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-21 12:12:49,147 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-09-21 12:18:53,634 - milkmachine - INFO - Clicked Cancel
+2014-09-21 12:18:57,727 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 12:18:57,727 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 12:18:57,727 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 12:18:57,727 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-21 12:19:01,364 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-09-21 12:19:01,384 - milkmachine - INFO - Here {'altitudemode': u'relativeToModel', 'tilt': u'55', 'altitude': 21.73, 'gxaltitudemode': u'', 'longitude': -75.17179, 'duration': u'20', 'range': u'40', 'latitude': 39.96647, 'startheading': u'0', 'heading': None}
+2014-09-21 12:26:56,210 - milkmachine - INFO - Clicked Cancel
+2014-09-21 12:26:59,584 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 12:26:59,584 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 12:26:59,585 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 12:26:59,585 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-21 12:27:04,727 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-09-21 12:27:04,747 - milkmachine - INFO - Here {'altitudemode': u'relativeToModel', 'tilt': u'55', 'altitude': 21.73, 'gxaltitudemode': u'', 'longitude': -75.17179, 'duration': u'20', 'range': u'40', 'latitude': 39.96647, 'startheading': u'0', 'heading': None}
+2014-09-21 12:27:04,747 - milkmachine - INFO - Here 2
+2014-09-21 12:30:45,374 - milkmachine - INFO - Clicked Cancel
+2014-09-21 12:30:49,548 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 12:30:49,549 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 12:30:49,549 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 12:30:49,549 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-21 12:30:53,233 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-09-21 12:30:53,253 - milkmachine - INFO - Here {'altitudemode': u'relativeToModel', 'tilt': u'55', 'altitude': 21.73, 'gxaltitudemode': u'', 'longitude': -75.17179, 'duration': u'20', 'range': u'40', 'latitude': 39.96647, 'startheading': u'0', 'heading': None}
+2014-09-21 12:30:53,253 - milkmachine - INFO - Here 2
+2014-09-21 12:34:38,994 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-09-21 12:34:39,088 - milkmachine - INFO - Here {'altitudemode': u'relativeToModel', 'tilt': u'55', 'altitude': 21.73, 'gxaltitudemode': u'', 'longitude': -75.17179, 'duration': u'20', 'range': u'40', 'latitude': 39.96647, 'startheading': u'0', 'heading': None}
+2014-09-21 12:34:39,088 - milkmachine - INFO - Here 2
+2014-09-21 12:34:59,509 - milkmachine - INFO - Clicked Cancel
+2014-09-21 13:08:29,296 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 13:08:29,296 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 13:08:29,298 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 13:08:29,298 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-21 13:10:02,555 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-09-21 13:10:02,575 - milkmachine - INFO - Here {'altitudemode': u'relativeToModel', 'rotations': u'2', 'tilt': u'55', 'altitude': 11.73, 'gxaltitudemode': u'', 'longitude': -75.17179, 'duration': u'20', 'range': u'20', 'latitude': 39.96647, 'startheading': u'0', 'heading': None}
+2014-09-21 13:10:02,575 - milkmachine - INFO - Here 2
+2014-09-21 13:10:02,575 - milkmachine - ERROR - export function error
+2014-09-21 13:10:02,578 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2330, in exportToFile
+    for x in range(circle_count):
+TypeError: range() integer end argument expected, got float.
 Traceback (most recent call last):
-  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2045, in exportToFile
-    for kk,vv in camera.iteritems():
-NameError: global name 'camera' is not defined
-2014-09-15 12:36:47,298 - milkmachine - INFO - Clicked Cancel
-2014-09-15 12:36:49,529 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-15 12:36:49,529 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-15 12:36:49,530 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-15 12:36:49,530 - milkmachine - INFO - Milk Machine plugin initialized
-2014-09-15 12:36:54,658 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'model': 8, u'audio': 3, u'flyto': 5}
-2014-09-15 12:36:54,668 - milkmachine - ERROR - export function error
-2014-09-15 12:36:54,671 - milkmachine - ERROR - Traceback (most recent call last):
-  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2238, in exportToFile
-    if cameradict['longitude'] and cameradict['latitude']:
-KeyError: 'longitude'
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2330, in exportToFile
+    for x in range(circle_count):
+TypeError: range() integer end argument expected, got float.
+2014-09-21 13:10:31,460 - milkmachine - INFO - Clicked Cancel
+2014-09-21 13:11:02,996 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 13:11:02,996 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 13:11:02,996 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 13:11:02,996 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-21 13:11:06,819 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-09-21 13:11:06,839 - milkmachine - INFO - Here {'altitudemode': u'relativeToModel', 'rotations': u'2', 'tilt': u'55', 'altitude': 11.73, 'gxaltitudemode': u'', 'longitude': -75.17179, 'duration': u'20', 'range': u'20', 'latitude': 39.96647, 'startheading': u'0', 'heading': None}
+2014-09-21 13:11:06,839 - milkmachine - INFO - Here 2
+2014-09-21 13:15:04,487 - milkmachine - INFO - Quit Milk Machine
+2014-09-21 13:15:06,450 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 13:15:06,450 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 13:15:06,451 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 13:15:06,451 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-21 13:15:09,967 - milkmachine - INFO - Clicked Cancel
+2014-09-21 13:15:14,512 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-09-21 13:15:14,532 - milkmachine - INFO - Here {'altitudemode': u'relativeToModel', 'rotations': u'2', 'tilt': u'55', 'altitude': 11.73, 'gxaltitudemode': u'', 'longitude': -75.17179, 'duration': u'20', 'range': u'20', 'latitude': 39.96647, 'startheading': u'0', 'heading': None}
+2014-09-21 13:15:14,532 - milkmachine - INFO - Here 2
+2014-09-21 13:21:02,523 - milkmachine - INFO - [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 27, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1018, 1, 1, 13, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+2014-09-21 13:21:02,523 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,523 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,525 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,525 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,525 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,525 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,525 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,525 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,526 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,526 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,526 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,526 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,526 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,526 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,526 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,526 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,526 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,526 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,526 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,526 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,528 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,528 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,528 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,528 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,528 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,528 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 2, 'name': u'tester'}
+2014-09-21 13:21:02,528 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,530 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,530 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,530 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,530 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,530 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,530 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,533 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,533 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,533 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,533 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,533 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,533 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,533 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,535 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,535 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,535 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,535 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,535 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,535 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 27, 'name': u'tester'}
+2014-09-21 13:21:02,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,538 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,538 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,538 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,538 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,538 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,538 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,538 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1018, 'name': u'tester'}
+2014-09-21 13:21:02,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 13, 'name': u'tester'}
+2014-09-21 13:21:02,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 3, 'name': u'tester'}
+2014-09-21 13:21:02,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,540 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,540 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,540 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,540 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,540 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,540 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,540 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,543 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,543 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,543 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,543 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,543 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,543 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,543 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,545 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,545 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,545 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,545 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,545 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,545 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,548 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,548 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,548 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,548 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,548 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,548 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,551 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,551 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,551 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,551 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,551 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,551 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,551 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,553 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,553 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,553 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,553 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,553 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,553 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,556 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,556 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,556 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,556 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,556 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,556 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,558 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,558 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,558 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,558 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,558 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,558 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,558 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,561 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,561 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,561 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,561 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,561 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,561 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,561 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,563 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,563 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,563 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,563 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,563 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,563 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,563 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,566 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,566 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,566 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,566 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,566 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,566 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,566 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,568 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,568 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,568 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,568 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,568 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,568 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,569 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,569 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,569 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,569 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,569 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:21:02,569 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'tester'}
+2014-09-21 13:22:21,632 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-09-21 13:22:21,711 - milkmachine - INFO - Here {'altitudemode': u'relativeToModel', 'rotations': u'2', 'tilt': u'55', 'altitude': 30.07, 'gxaltitudemode': u'', 'longitude': -75.17232, 'duration': u'20', 'range': u'20', 'latitude': 39.96594, 'startheading': u'0', 'heading': None}
+2014-09-21 13:22:21,711 - milkmachine - INFO - Here 2
+2014-09-21 13:22:23,059 - milkmachine - INFO - Here {'altitudemode': u'relativeToModel', 'rotations': u'2', 'tilt': u'55', 'altitude': 11.73, 'gxaltitudemode': u'', 'longitude': -75.17179, 'duration': u'20', 'range': u'20', 'latitude': 39.96647, 'startheading': u'0', 'heading': None}
+2014-09-21 13:22:23,059 - milkmachine - INFO - Here 2
+2014-09-21 14:17:45,200 - milkmachine - INFO - Clicked Cancel
+2014-09-21 14:17:50,588 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 14:17:50,588 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 14:17:50,588 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 14:17:50,589 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-21 14:17:54,865 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-09-21 14:17:54,869 - milkmachine - ERROR - export function error
+2014-09-21 14:17:54,872 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2325, in exportToFile
+    flyto.lookat.gxtimespan.begin = CamStartTime
+UnboundLocalError: local variable 'flyto' referenced before assignment
 Traceback (most recent call last):
-  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2238, in exportToFile
-    if cameradict['longitude'] and cameradict['latitude']:
-KeyError: 'longitude'
-2014-09-15 12:37:59,262 - milkmachine - INFO - Clicked Cancel
-2014-09-15 12:38:03,779 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-15 12:38:03,779 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-15 12:38:03,779 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-15 12:38:03,779 - milkmachine - INFO - Milk Machine plugin initialized
-2014-09-15 12:38:07,779 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'model': 8, u'audio': 3, u'flyto': 5}
-2014-09-15 12:38:07,783 - milkmachine - INFO - {'gxhoriz': u'', 'altitudemode': u'relativeToGround', 'roll': None, 'tilt': u'60.0', 'altitude': u'10', 'gxaltitudemode': u'', 'longitude': -75.17232, 'heading': 217.5, 'range': u'20', 'follow_angle': u'180', 'longitude_off': None, 'latitude': 39.96594, 'latitude_off': None}
-2014-09-15 12:38:07,789 - milkmachine - ERROR - export function error
-2014-09-15 12:38:07,792 - milkmachine - ERROR - Traceback (most recent call last):
-  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2239, in exportToFile
-    if cameradict['longitude'] and cameradict['latitude']:
-KeyError: 'longitude'
-Traceback (most recent call last):
-  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2239, in exportToFile
-    if cameradict['longitude'] and cameradict['latitude']:
-KeyError: 'longitude'
-2014-09-15 12:40:03,888 - milkmachine - INFO - Clicked Cancel
-2014-09-15 12:40:07,017 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-15 12:40:07,017 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-15 12:40:07,019 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-15 12:40:07,019 - milkmachine - INFO - Milk Machine plugin initialized
-2014-09-15 12:40:09,454 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'model': 8, u'audio': 3, u'flyto': 5}
-2014-09-15 12:40:09,459 - milkmachine - INFO - -75.17232
-2014-09-15 12:40:09,464 - milkmachine - ERROR - export function error
-2014-09-15 12:40:09,467 - milkmachine - ERROR - Traceback (most recent call last):
-  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2239, in exportToFile
-    if cameradict['longitude'] and cameradict['latitude']:
-KeyError: 'longitude'
-Traceback (most recent call last):
-  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2239, in exportToFile
-    if cameradict['longitude'] and cameradict['latitude']:
-KeyError: 'longitude'
-2014-09-15 12:42:35,828 - milkmachine - INFO - Clicked Cancel
-2014-09-15 12:42:38,404 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-15 12:42:38,404 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-15 12:42:38,404 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-15 12:42:38,404 - milkmachine - INFO - Milk Machine plugin initialized
-2014-09-15 12:42:42,177 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'model': 8, u'audio': 3, u'flyto': 5}
-2014-09-15 12:54:27,322 - milkmachine - INFO - Clicked Cancel
-2014-09-15 21:15:54,499 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-15 21:15:54,500 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-15 21:15:54,500 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-15 21:15:54,500 - milkmachine - INFO - Milk Machine plugin initialized
-2014-09-15 21:16:56,471 - milkmachine - INFO - Clicked Cancel
-2014-09-17 12:18:31,517 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-17 12:18:31,517 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-17 12:18:31,519 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-17 12:18:31,519 - milkmachine - INFO - Milk Machine plugin initialized
-2014-09-17 12:19:57,457 - milkmachine - INFO - [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 27, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1018, 1, 1, 13, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-2014-09-17 12:19:57,457 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,459 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,459 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,459 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,459 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,459 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,459 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,459 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,460 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,460 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,460 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,460 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,460 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,460 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,460 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,460 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,460 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,460 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,460 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,460 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,461 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,461 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,461 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,461 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,461 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,461 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 2, 'name': u'www'}
-2014-09-17 12:19:57,461 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,463 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,463 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,463 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,463 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,463 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,463 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,463 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,463 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,463 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,463 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,463 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,463 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,463 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,464 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,464 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,464 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,464 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,464 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,464 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,464 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,466 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,466 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,466 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,466 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,466 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,466 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,466 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,467 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,467 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,467 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,467 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,467 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,467 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,467 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,467 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,467 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,467 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,467 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,467 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,467 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,469 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,469 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,469 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,469 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,469 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,469 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,469 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,470 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,470 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,470 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,470 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,470 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,470 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,470 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,470 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 27, 'name': u'www'}
-2014-09-17 12:19:57,470 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,470 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,470 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,470 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,470 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,470 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,471 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,471 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,471 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,471 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,471 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,471 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,473 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,473 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,473 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,473 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,473 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1018, 'name': u'www'}
-2014-09-17 12:19:57,473 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,473 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,473 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 13, 'name': u'www'}
-2014-09-17 12:19:57,473 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 3, 'name': u'www'}
-2014-09-17 12:19:57,473 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,473 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,473 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,474 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,474 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,474 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,474 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,474 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,474 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,474 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,476 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,476 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,476 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,476 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,476 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,476 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,476 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,476 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,476 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,476 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,476 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,476 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,476 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,477 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,477 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,477 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,477 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,477 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,477 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,477 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,479 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,479 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,479 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,479 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,479 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,479 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,479 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,480 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,480 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,480 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,480 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,480 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,480 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,480 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,480 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,480 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,480 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,480 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,480 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,480 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,482 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,482 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,482 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,482 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,482 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,482 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,482 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,483 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,483 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,483 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,483 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,483 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,483 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,483 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,483 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,483 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,483 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,483 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,483 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,483 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,483 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,484 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,484 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,484 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,484 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,484 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,484 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,484 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,486 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,486 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,486 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,486 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,486 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,486 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,486 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,486 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,486 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,486 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,486 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,486 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,486 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,487 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,487 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,487 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,487 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,487 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,487 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,487 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,489 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,489 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,489 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,489 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,489 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,489 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,489 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,490 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,490 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,490 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,490 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,490 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,490 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,490 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,490 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,490 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,490 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,490 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,490 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,490 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,490 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,492 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,492 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,492 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,492 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,492 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,492 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,492 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,493 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,493 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,493 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,493 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,493 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,493 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,493 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,493 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,493 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,493 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,493 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,493 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,493 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,494 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,494 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,494 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,494 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,494 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,494 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,494 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,496 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,496 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,496 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,496 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,496 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,496 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,496 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,496 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,496 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,496 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,496 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,496 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,496 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,497 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,497 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,497 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,497 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,497 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,497 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,497 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,499 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,499 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,499 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,499 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,499 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,499 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,499 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,500 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,500 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,500 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,500 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,500 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,500 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,500 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,500 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,500 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,500 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,500 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,500 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,500 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,500 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,502 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,502 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,502 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,502 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,502 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,502 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,502 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,503 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,503 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,503 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,503 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,503 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,503 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,503 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,503 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,503 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,503 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,503 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,503 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,503 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,505 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,505 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,505 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,505 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,505 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,505 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,505 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,506 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,506 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,506 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,506 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,506 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,506 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,506 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,506 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,506 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,506 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,506 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,506 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,506 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,506 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,507 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,507 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,507 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,507 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,507 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,507 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,509 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,509 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,509 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,509 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,509 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,509 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,509 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,509 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,509 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,509 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,509 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,509 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,509 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,509 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,510 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,510 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,510 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,510 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,510 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,510 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,512 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,512 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,512 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,512 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,512 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,512 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,512 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,513 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,513 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,513 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,513 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,513 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,513 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,513 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,513 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,513 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,513 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,513 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,513 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,513 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,513 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,515 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,515 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,515 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,515 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,515 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,515 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,516 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,516 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,516 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,516 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,516 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,516 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,516 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,516 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,516 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,516 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,516 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,516 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,516 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,516 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,517 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,517 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,517 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,517 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,517 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,517 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,517 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,519 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,519 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,519 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,519 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,519 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,519 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,519 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,519 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,519 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,519 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,519 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,519 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,519 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,520 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,520 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,520 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,520 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,520 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,520 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,520 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,522 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,522 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,522 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,522 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,522 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,522 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,522 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,523 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,523 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,523 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,523 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,523 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,523 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,523 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,523 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,523 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,523 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,523 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,523 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,523 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,523 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,525 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,525 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,525 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,525 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,525 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,525 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,525 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,526 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,526 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,526 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,526 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,526 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,526 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,526 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,526 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,526 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,526 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,526 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,526 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,526 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,528 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,528 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,528 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,528 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,528 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,528 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,528 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,529 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,530 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,530 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,530 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,530 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,530 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,530 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,532 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,533 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,533 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,533 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,533 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,533 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,533 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,533 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,535 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,535 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,535 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,535 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,535 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,535 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,535 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,536 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,538 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,538 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,538 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,538 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,538 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,538 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,538 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,539 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,540 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,540 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,540 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,540 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,540 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,540 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,540 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,542 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,543 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,543 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,543 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,543 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,543 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,543 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,543 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,545 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,545 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,545 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,545 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,545 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,545 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,545 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,546 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,548 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,548 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,548 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,548 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,548 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,548 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,549 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,551 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 3, 'name': u'www'}
-2014-09-17 12:19:57,551 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,551 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,551 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,551 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,551 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,551 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,552 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,553 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,553 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,553 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,553 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,553 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,553 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,555 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,556 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,556 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,556 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,556 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,556 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,556 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,556 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,558 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,558 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,558 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,558 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,558 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,558 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,558 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,559 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,561 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,561 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,561 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,561 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,561 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,561 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,563 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,563 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,563 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,563 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,563 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,563 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,563 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,565 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,566 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,566 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,566 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:19:57,566 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'www'}
-2014-09-17 12:20:27,657 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'model': 8, u'audio': 3, u'flyto': 5}
-2014-09-17 12:20:42,349 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'model': 8, u'audio': 3, u'flyto': 5}
-2014-09-17 12:20:57,049 - milkmachine - INFO - Clicked Cancel
-2014-09-17 12:22:00,698 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-17 12:22:00,698 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-17 12:22:00,698 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-17 12:22:00,700 - milkmachine - INFO - Milk Machine plugin initialized
-2014-09-17 12:22:32,411 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'model': 8, u'audio': 3, u'flyto': 5}
-2014-09-17 12:22:49,414 - milkmachine - INFO - Clicked Cancel
-2014-09-17 12:28:27,236 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-17 12:28:27,236 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-17 12:28:27,236 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-17 12:28:27,237 - milkmachine - INFO - Milk Machine plugin initialized
-2014-09-17 12:29:22,575 - milkmachine - ERROR - camera_apply destroy edit session
-2014-09-17 12:29:22,576 - milkmachine - ERROR - Traceback (most recent call last):
-  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1196, in camera_apply
-    cameratemp[cameraAlpha[key]] = value
-NameError: global name 'cameratemp' is not defined
-Traceback (most recent call last):
-  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1196, in camera_apply
-    cameratemp[cameraAlpha[key]] = value
-NameError: global name 'cameratemp' is not defined
-2014-09-17 12:29:47,770 - milkmachine - ERROR - camera_apply destroy edit session
-2014-09-17 12:29:47,772 - milkmachine - ERROR - Traceback (most recent call last):
-  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1196, in camera_apply
-    cameratemp[cameraAlpha[key]] = value
-NameError: global name 'cameratemp' is not defined
-Traceback (most recent call last):
-  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1196, in camera_apply
-    cameratemp[cameraAlpha[key]] = value
-NameError: global name 'cameratemp' is not defined
-2014-09-17 12:31:06,632 - milkmachine - INFO - Clicked Cancel
-2014-09-17 12:31:08,555 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-17 12:31:08,555 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-17 12:31:08,555 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-17 12:31:08,555 - milkmachine - INFO - Milk Machine plugin initialized
-2014-09-17 12:31:25,227 - milkmachine - ERROR - camera_apply destroy edit session
-2014-09-17 12:31:25,233 - milkmachine - ERROR - Traceback (most recent call last):
-  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1196, in camera_apply
-    cameratemp[cameraAlpha[key]] = value
-KeyError: 'c'
-Traceback (most recent call last):
-  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1196, in camera_apply
-    cameratemp[cameraAlpha[key]] = value
-KeyError: 'c'
-2014-09-17 12:34:35,719 - milkmachine - INFO - Clicked Cancel
-2014-09-17 12:34:37,637 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-17 12:34:37,637 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-17 12:34:37,637 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-17 12:34:37,638 - milkmachine - INFO - Milk Machine plugin initialized
-2014-09-17 12:34:53,562 - milkmachine - INFO - [1, 1, 1]
-2014-09-17 12:34:53,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'rrr'}
-2014-09-17 12:34:53,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'rrr'}
-2014-09-17 12:34:53,562 - milkmachine - INFO - {'flyToMode': u'smooth', 'duration': 1, 'name': u'rrr'}
-2014-09-17 12:35:42,089 - milkmachine - INFO - Clicked Cancel
-2014-09-17 12:35:56,655 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-17 12:35:56,655 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-17 12:35:56,655 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
-2014-09-17 12:35:56,657 - milkmachine - INFO - Milk Machine plugin initialized
-2014-09-17 12:36:23,910 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'model': 8, u'audio': 3, u'flyto': 5}
-2014-09-17 12:36:32,450 - milkmachine - INFO - Clicked Cancel
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2325, in exportToFile
+    flyto.lookat.gxtimespan.begin = CamStartTime
+UnboundLocalError: local variable 'flyto' referenced before assignment
+2014-09-21 14:22:02,816 - milkmachine - INFO - Quit Milk Machine
+2014-09-21 14:22:05,309 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 14:22:05,309 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 14:22:05,309 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 14:22:05,309 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-21 14:22:05,691 - milkmachine - INFO - Clicked Cancel
+2014-09-21 14:22:10,303 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-09-21 14:22:10,309 - milkmachine - INFO - Here {'altitudemode': u'relativeToModel', 'rotations': u'2', 'tilt': u'55', 'altitude': 30.07, 'gxaltitudemode': u'', 'longitude': -75.17232, 'duration': u'20', 'range': u'20', 'latitude': 39.96594, 'startheading': u'0', 'heading': None}
+2014-09-21 14:22:10,309 - milkmachine - INFO - Here 2
+2014-09-21 14:22:11,395 - milkmachine - INFO - Here {'altitudemode': u'relativeToModel', 'rotations': u'2', 'tilt': u'55', 'altitude': 11.73, 'gxaltitudemode': u'', 'longitude': -75.17179, 'duration': u'20', 'range': u'20', 'latitude': 39.96647, 'startheading': u'0', 'heading': None}
+2014-09-21 14:22:11,395 - milkmachine - INFO - Here 2
+2014-09-21 14:29:24,823 - milkmachine - INFO - Clicked Cancel
+2014-09-21 14:29:30,296 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 14:29:30,296 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 14:29:30,296 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 14:29:30,296 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-21 14:30:20,575 - milkmachine - INFO - Quit Milk Machine
+2014-09-21 14:30:20,640 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 14:30:20,641 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 14:30:20,641 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 14:30:20,641 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-21 14:30:25,747 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-09-21 14:30:25,753 - milkmachine - INFO - Here {'altitudemode': u'relativeToModel', 'rotations': u'2', 'tilt': u'55', 'altitude': 30.07, 'gxaltitudemode': u'', 'longitude': -75.17232, 'duration': u'20', 'range': u'20', 'latitude': 39.96594, 'startheading': u'0', 'heading': None}
+2014-09-21 14:30:25,753 - milkmachine - INFO - Here 2
+2014-09-21 14:30:26,851 - milkmachine - INFO - Here {'altitudemode': u'relativeToModel', 'rotations': u'2', 'tilt': u'55', 'altitude': 11.73, 'gxaltitudemode': u'', 'longitude': -75.17179, 'duration': u'20', 'range': u'20', 'latitude': 39.96647, 'startheading': u'0', 'heading': None}
+2014-09-21 14:30:26,851 - milkmachine - INFO - Here 2
+2014-09-21 14:44:57,313 - milkmachine - INFO - Clicked Cancel
+2014-09-21 14:45:12,881 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 14:45:12,882 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 14:45:12,882 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 14:45:12,882 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-21 14:47:06,750 - milkmachine - INFO - Size: 3.0
+2014-09-21 14:47:06,752 - milkmachine - INFO - Color: #ff0000
+2014-09-21 14:48:31,535 - milkmachine - INFO - Size: 3.0
+2014-09-21 14:48:31,535 - milkmachine - INFO - Color: #ff0000
+2014-09-21 14:49:57,003 - milkmachine - INFO - Size: 3.0
+2014-09-21 14:49:57,003 - milkmachine - INFO - Color: #ff0000
+2014-09-21 14:51:17,864 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-09-21 14:51:18,230 - milkmachine - INFO - Here {'altitudemode': u'relativeToModel', 'rotations': u'2', 'tilt': u'55', 'altitude': 11.73, 'gxaltitudemode': u'', 'longitude': -75.17179, 'duration': u'20', 'range': u'20', 'latitude': 39.96647, 'startheading': u'0', 'heading': None}
+2014-09-21 14:51:18,232 - milkmachine - INFO - Here 2
+2014-09-21 15:31:48,736 - milkmachine - INFO - Clicked Cancel
+2014-09-21 15:31:51,625 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 15:31:51,625 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 15:31:51,627 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 15:31:51,627 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-21 15:32:09,013 - milkmachine - INFO - Clicked Cancel
+2014-09-21 18:33:03,311 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 18:33:03,312 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 18:33:03,312 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 18:33:03,312 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-21 20:39:31,961 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 20:39:31,961 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 20:39:31,963 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 20:39:31,963 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-21 21:03:47,589 - milkmachine - INFO - Quit Milk Machine
+2014-09-21 22:15:53,065 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 22:15:53,065 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 22:15:53,065 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-09-21 22:15:53,066 - milkmachine - INFO - Milk Machine plugin initialized
+2014-09-21 22:16:28,380 - milkmachine - INFO - Clicked Cancel

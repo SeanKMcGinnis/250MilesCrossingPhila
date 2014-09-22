@@ -61,3 +61,14 @@ Commit #22
 
 Bug Fix:  	The 'camera' field exceeds the maximum character limit of 254 sometimes. This means that QGIS cuts of extra characters when saving as a shapefile. However, during and edit session the field will hold the extra characters. This allows a safe export in MM. There is no error in QGIS for the extra characters. The solution is to code all of the parameters. This brings the camera field down to about 180 characters.
 Bug Fix:	The 'tilt' field needs only to autopopulate when it is empty, not when the user enters a value. This stops it from overwriting the user values.
+
+--------------------------------------------
+Commit #23
+
+Bug Fix:	The custom camera function is was not fully obfuscating the camera dictionary. Result was writing the full dictionary, and it was still getting cut off by the 254 character limit.
+
+--------------------------------------------
+Commit #24
+
+Task:		Create a <LookAt> tab in the Tour tab of Milk Machine. The <LookAt> tab has two modes; "custom" and "circle around". Both automatically calculate latitude and longitude. In custom mode, the user can select 1 or more points and apply a custom <LookAt> to each. If multiple points are selected, lat/long for each <LookAt> will be the lat/long of that point/model. In "circle around" mode, 1 or more points can also be selected. If multiple points are selected, MM calculates the geometric centroid of the selected points for the <LookAt> lat/long. If only 1 point is selected, it's lat/long will be the lat/long for the <LookAt>. "circle around" also has some parameter for customizing the number of rotations, starting heading, and duration.
+Bug Fix:	After deleting points, the sync does not recognize the new point parameters. It needs to re-read the table and reset values based on edits that have taken place.

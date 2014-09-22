@@ -41,7 +41,7 @@ import logging
 import platform
 import re, os, StringIO
 import math
-
+import numpy
 
 
 #--------------------------------------------------------------------------------
@@ -170,6 +170,8 @@ class MilkMachine:
         QObject.connect(self.dlg.ui.checkBox_time_edit,SIGNAL("stateChanged(int)"),self.timecheck)
         QObject.connect(self.dlg.ui.lineEdit_visualization_follow_altitude,SIGNAL("editingFinished()"),self.tiltpopulate)
         QObject.connect(self.dlg.ui.lineEdit__visualization_follow_range,SIGNAL("editingFinished()"),self.tiltpopulate)
+        QObject.connect(self.dlg.ui.pushButton_lookat_apply, SIGNAL("clicked()"), self.lookat_apply)
+        QObject.connect(self.dlg.ui.pushButton_circle_apply, SIGNAL("clicked()"), self.circle_apply)
     ############################################################################
     ## SLOTS
 
@@ -772,6 +774,177 @@ class MilkMachine:
     ## Tour / Visualization
     ############################################################################
 
+    def lookat_apply(self):
+        try:
+            self.fields = self.field_indices(self.ActiveLayer)
+            # make a dictionary of all of the camera parameters
+            flyto = {'name': None, 'flyToMode': None, 'duration': None}
+            lookat = {'longitude': None, 'latitude': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'heading' : None,'tilt' : None, 'range': None, 'duration': None, 'startheading': None, 'rotations': None}
+            lookatAlpha = {'longitude': 'a', 'latitude': 'b', 'altitude' : 'c', 'altitudemode': 'd','gxaltitudemode' : 'e','heading' : 'f','tilt' : 'g', 'range': 'h', 'duration': 'i', 'startheading': 'j', 'rotations': 'k'}
+            lookattemp = {}
+
+            flyto['name'] = self.dlg.ui.lineEdit_tourname.text()
+            flyto['flyToMode'] = self.dlg.ui.comboBox_flyto_mode.currentText()
+            flyto['duration'] = self.dlg.ui.lineEdit_flyto_duration.text()
+
+            lookat['altitude'] = self.dlg.ui.lineEdit_visualization_lookat_altitude.text()
+            lookat['altitudemode'] = self.dlg.ui.comboBox_lookat_altitudemode.currentText()
+            lookat['gxaltitudemode'] = self.dlg.ui.comboBox_lookat_gxaltitudemode.currentText()
+            lookat['range'] = self.dlg.ui.lineEdit__visualization_lookat_range.text()
+            lookat['heading'] = self.dlg.ui.lineEdit__visualization_lookat_heading.text()
+            lookat['tilt'] = self.dlg.ui.lineEdit__visualization_lookat_tilt.text()
+
+            # calculate heading
+            cordslist = []  # alist of tuples. [(x,y), (x,y)]
+            altitudelist = []
+            self.selectList = []  #[[id, (x,y), altitude]]
+            selectflyto = []
+
+            try:
+                for f in self.ActiveLayer.selectedFeatures():          #getFeatures():
+                    geom = f.geometry()
+                    if lookat['altitudemode'] == 'relativeToModel':
+                        modelfield = eval(f.attributes()[self.fields['model']])
+                        if not lookat['altitude']:
+                            alt = 0
+                        else:
+                            alt = float(lookat['altitude'])
+                        altitudelist.append(float(modelfield['altitude']) + alt)
+                        altinum = float(modelfield['altitude']) + alt
+                        self.selectList.append([f.id(), geom.asPoint(), round(altinum,2)])
+                    else:
+                        self.selectList.append([f.id(), geom.asPoint()])
+                # sort self.selectList by fid
+                def getKey(item):
+                    return item[0]
+                self.selectList = sorted(self.selectList, key=getKey)  #[[id, (x,y), altitude]]
+            except:
+                self.logger.exception(traceback.format_exc())
+                self.iface.messageBar().pushMessage("Error", "Failed to apply lookat view parameters for Follow Tour. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+            try:
+                self.ActiveLayer.beginEditCommand("LookAt Editing")
+                if len(self.selectList) >= 1:
+                    self.ActiveLayer.beginEditCommand("LookAt Editing")
+                    for i,f in enumerate(self.selectList):
+                        if len(f) == 3:
+                            lookat['altitude'] = f[2]
+                        lookat['longitude'] = f[1][0]; lookat['latitude'] = f[1][1]
+                        for key,value in lookat.iteritems():
+                            lookattemp[lookatAlpha[key]] = value
+                        self.ActiveLayer.changeAttributeValue(f[0], self.fields['lookat'], str(lookattemp))
+                        self.ActiveLayer.changeAttributeValue(f[0], self.fields['flyto'], str(flyto))
+                    self.ActiveLayer.endEditCommand()
+                else:
+                    QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "Please select points in the active layer to be edited." )
+            except:
+                self.ActiveLayer.destroyEditCommand()
+                self.logger.error('lookat_apply destroy edit session')
+                self.logger.exception(traceback.format_exc())
+                self.iface.messageBar().pushMessage("Error", "Failed to apply lookat view parameters. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+        except:
+            global NOW, pointid, ClockDateTime
+            NOW = None; pointid = None; ClockDateTime = None
+            trace = traceback.format_exc()
+            if self.logging == True:
+                self.logger.error('lookat_apply function error')
+                self.logger.exception(trace)
+            self.iface.messageBar().pushMessage("Error", "Failed to apply lookat view parameters for Follow Tour. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+
+    def circle_apply(self):
+
+        try:
+            self.fields = self.field_indices(self.ActiveLayer)
+            # make a dictionary of all of the camera parameters
+            flyto = {'name': None, 'flyToMode': None, 'duration': None}
+            lookat = {'longitude': None, 'latitude': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'heading' : None,'tilt' : None, 'range': None, 'duration': None, 'startheading': None, 'rotations': None}
+            lookatAlpha = {'longitude': 'a', 'latitude': 'b', 'altitude' : 'c', 'altitudemode': 'd','gxaltitudemode' : 'e','heading' : 'f','tilt' : 'g', 'range': 'h', 'duration': 'i', 'startheading': 'j', 'rotations': 'k'}
+            lookattemp = {}
+
+            flyto['name'] = self.dlg.ui.lineEdit_tourname.text()
+            flyto['flyToMode'] = self.dlg.ui.comboBox_flyto_mode.currentText()
+            flyto['duration'] = self.dlg.ui.lineEdit_flyto_duration.text()
+
+            lookat['altitude'] = self.dlg.ui.lineEdit_visualization_circle_altitude.text()
+            lookat['altitudemode'] = self.dlg.ui.comboBox_circle_altitudemode.currentText()
+            lookat['gxaltitudemode'] = self.dlg.ui.comboBox_circle_gxaltitudemode.currentText()
+            lookat['range'] = self.dlg.ui.lineEdit__visualization_circle_range.text()
+            lookat['tilt'] = self.dlg.ui.lineEdit__visualization_circle_tilt.text()
+            lookat['duration'] = self.dlg.ui.lineEdit__visualization_circle_duration.text()
+            lookat['startheading'] = self.dlg.ui.lineEdit__visualization_circle_start_heading.text()
+            lookat['rotations'] = self.dlg.ui.lineEdit__visualization_circle_rotations.text()
+
+            # calculate heading
+            cordslist = []  # alist of tuples. [(x,y), (x,y)]
+            altitudelist = []
+            self.selectList = []  #[[id, (x,y), altitude]]
+            selectflyto = []
+            xlist = []
+            ylist = []
+
+            try:
+                for f in self.ActiveLayer.selectedFeatures():          #getFeatures():
+                    geom = f.geometry()
+                    if lookat['altitudemode'] == 'relativeToModel':
+                        modelfield = eval(f.attributes()[self.fields['model']])
+                        if not lookat['altitude']:
+                            alt = 0
+                        else:
+                            alt = float(lookat['altitude'])
+                        altitudelist.append(float(modelfield['altitude']) + alt)
+                        altinum = float(modelfield['altitude']) + alt
+                        self.selectList.append([f.id(), geom.asPoint(), round(altinum,2)])
+                        xlist.append(geom.asPoint()[0]); ylist.append(geom.asPoint()[1])
+                    else:
+                        self.selectList.append([f.id(), geom.asPoint()])
+                        xlist.append(geom.asPoint()[0]); ylist.append(geom.asPoint()[1])
+                # sort self.selectList by fid
+                def getKey(item):
+                    return item[0]
+                self.selectList = sorted(self.selectList, key=getKey)  #[[id, (x,y), altitude]]
+
+                #calculate the centroid
+                BigXY = (round(numpy.mean(xlist),5),round(numpy.mean(ylist),5))
+
+            except:
+                self.logger.exception(traceback.format_exc())
+                self.iface.messageBar().pushMessage("Error", "Failed to apply lookat view parameters for Follow Tour. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+            try:
+                self.ActiveLayer.beginEditCommand("LookAt Editing")
+                if len(self.selectList) >= 1:
+                    self.ActiveLayer.beginEditCommand("LookAt Editing")
+                    for i,f in enumerate(self.selectList):
+                        if i > 0:
+                            break
+                        if len(f) == 3:
+                            lookat['altitude'] = f[2]
+                        lookat['longitude'] = BigXY[0]; lookat['latitude'] = BigXY[1]
+                        for key,value in lookat.iteritems():
+                            lookattemp[lookatAlpha[key]] = value
+                        self.ActiveLayer.changeAttributeValue(f[0], self.fields['lookat'], str(lookattemp))
+                        self.ActiveLayer.changeAttributeValue(f[0], self.fields['flyto'], str(flyto))
+                    self.ActiveLayer.endEditCommand()
+                else:
+                    QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "Please select points in the active layer to be edited." )
+            except:
+                self.ActiveLayer.destroyEditCommand()
+                self.logger.error('lookat_apply destroy edit session')
+                self.logger.exception(traceback.format_exc())
+                self.iface.messageBar().pushMessage("Error", "Failed to apply lookat view parameters. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+        except:
+            global NOW, pointid, ClockDateTime
+            NOW = None; pointid = None; ClockDateTime = None
+            trace = traceback.format_exc()
+            if self.logging == True:
+                self.logger.error('lookat_apply function error')
+                self.logger.exception(trace)
+            self.iface.messageBar().pushMessage("Error", "Failed to apply lookat view parameters for Follow Tour. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+
     def follow_apply(self):
         try:
             self.fields = self.field_indices(self.ActiveLayer)
@@ -1076,6 +1249,26 @@ class MilkMachine:
                 self.dlg.ui.lineEdit__visualization_follow_follow_angle.setEnabled(True)
                 self.dlg.ui.lineEdit__visualization_follow_smoother.setEnabled(True)
 
+                # LookAt
+                self.dlg.ui.lineEdit_visualization_lookat_altitude.setEnabled(True)
+                self.dlg.ui.comboBox_lookat_altitudemode.setEnabled(True)
+                self.dlg.ui.comboBox_lookat_gxaltitudemode.setEnabled(True)
+                self.dlg.ui.lineEdit__visualization_lookat_range.setEnabled(True)
+                self.dlg.ui.lineEdit__visualization_lookat_heading.setEnabled(True)
+                self.dlg.ui.lineEdit__visualization_lookat_tilt.setEnabled(True)
+                self.dlg.ui.pushButton_lookat_apply.setEnabled(True)
+
+                # Circle Around
+                self.dlg.ui.lineEdit_visualization_circle_altitude.setEnabled(True)
+                self.dlg.ui.comboBox_circle_altitudemode.setEnabled(True)
+                self.dlg.ui.comboBox_circle_gxaltitudemode.setEnabled(True)
+                self.dlg.ui.lineEdit__visualization_circle_tilt.setEnabled(True)
+                self.dlg.ui.lineEdit__visualization_circle_range.setEnabled(True)
+                self.dlg.ui.lineEdit__visualization_circle_duration.setEnabled(True)
+                self.dlg.ui.lineEdit__visualization_circle_start_heading.setEnabled(True)
+                self.dlg.ui.lineEdit__visualization_circle_rotations.setEnabled(True)
+                self.dlg.ui.pushButton_circle_apply.setEnabled(True)
+
         else:  # checkbox is false, clear shit out
             self.dlg.ui.lineEdit_tourname.setEnabled(False)
             self.dlg.ui.comboBox_flyto_mode.setEnabled(False)
@@ -1106,6 +1299,30 @@ class MilkMachine:
             self.dlg.ui.pushButton_follow_apply.setEnabled(False)
             self.dlg.ui.lineEdit__visualization_follow_follow_angle.setEnabled(False)
             self.dlg.ui.lineEdit__visualization_follow_smoother.setEnabled(False)
+
+            # LookAt
+            self.dlg.ui.lineEdit_visualization_lookat_altitude.setEnabled(False)
+            self.dlg.ui.comboBox_lookat_altitudemode.setEnabled(False)
+            self.dlg.ui.comboBox_lookat_gxaltitudemode.setEnabled(False)
+            self.dlg.ui.lineEdit__visualization_lookat_range.setEnabled(False)
+            self.dlg.ui.lineEdit__visualization_lookat_heading.setEnabled(False)
+            self.dlg.ui.lineEdit__visualization_lookat_tilt.setEnabled(False)
+            self.dlg.ui.pushButton_lookat_apply.setEnabled(False)
+
+            # Circle Around
+            self.dlg.ui.lineEdit_visualization_circle_altitude.setEnabled(False)
+            self.dlg.ui.comboBox_circle_altitudemode.setEnabled(False)
+            self.dlg.ui.comboBox_circle_gxaltitudemode.setEnabled(False)
+            self.dlg.ui.lineEdit__visualization_circle_tilt.setEnabled(False)
+            self.dlg.ui.lineEdit__visualization_circle_range.setEnabled(False)
+            self.dlg.ui.lineEdit__visualization_circle_duration.setEnabled(False)
+            self.dlg.ui.lineEdit__visualization_circle_start_heading.setEnabled(False)
+            self.dlg.ui.lineEdit__visualization_circle_rotations.setEnabled(False)
+            self.dlg.ui.pushButton_circle_apply.setEnabled(False)
+
+
+
+
 
     def camera_xy(self):
         xylist = []
@@ -1275,7 +1492,7 @@ class MilkMachine:
                 QgsVectorFileWriter.writeAsVectorFormat(kmllayer, shapepath_dup, "utf-8", None, "ESRI Shapefile")  # duplicate of original
                 #bring the shapefile back in, and render it on the map
                 shaper = QgsVectorLayer(shapepath, layername, "ogr")
-                shaper.dataProvider().addAttributes( [QgsField("datetime",QVariant.String), QgsField("audio",QVariant.String), QgsField("camera",QVariant.String), QgsField("flyto",QVariant.String), QgsField("iconstyle", QVariant.String), QgsField("labelstyle", QVariant.String), QgsField("model", QVariant.String) ] )
+                shaper.dataProvider().addAttributes( [QgsField("datetime",QVariant.String), QgsField("audio",QVariant.String), QgsField("camera",QVariant.String), QgsField("flyto",QVariant.String), QgsField("iconstyle", QVariant.String), QgsField("labelstyle", QVariant.String), QgsField("model", QVariant.String), QgsField("lookat", QVariant.String) ] )
                 shaper.updateFields()
 
 
@@ -2050,6 +2267,144 @@ class MilkMachine:
             for f in self.ActiveLayer.getFeatures(): #  QgsFeatureIterator #[u'2014/06/06 10:38:48', u'Time:10:38:48, Latitude: 39.965949, Longitude: -75.172239, Speed: 0.102851, Altitude: -3.756733']
                 currentatt = f.attributes()
 
+                if currentatt[self.fields['lookat']]:
+
+                    lookatBack = {'a':'longitude','b' :'latitude','c' :'altitude','d' :'altitudemode','e':'gxaltitudemode','f':'heading','g':'tilt','h' :'range','i' :'duration','j' :'startheading', 'k': 'rotations'}
+                    lookat = eval(currentatt[self.fields['lookat']])
+                    #convert back to full format
+                    newlookat = {}
+                    for kk,vv in lookat.iteritems():
+                        newlookat[lookatBack[kk]] = vv
+                    lookatdict = newlookat
+
+                    flytodict = eval(currentatt[self.fields['flyto']])
+
+                    if cc == 0:
+
+                        # First, put in a <Camera> that matches the same <Camera> at the beginning of the tour, that
+                        # there is no strange camera movement at the beginning.
+
+                        #firstcam_pnt = kml.newpoint()
+                        kml.document.lookat = simplekml.LookAt()
+
+
+                        # Create a tour and attach a playlist to it
+                        if flytodict['name']:
+                            tour = kml.newgxtour(name=flytodict['name'])
+                        else:
+                            tour = kml.newgxtour(name="Tour")
+
+                        playlist = tour.newgxplaylist()
+
+                        # Start time. Will be used for TimeSpan tags
+                        pointdate = currentatt[self.fields['datetime']].split(" ")[0]  #2014/06/06
+                        pointtime = currentatt[self.fields['datetime']].split(" ")[1] #10:38:48
+                        current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]) )
+                        self.CamStartTime = current_dt.strftime('%Y-%m-%dT%XZ')
+
+                        # Attach a gx:SoundCue to the playlist and delay playing by 2 second (sound clip is about 4 seconds long)
+                        if self.dlg.ui.lineEdit_export_audio.text():
+                            soundcue = playlist.newgxsoundcue()
+                            soundcue.href = self.dlg.ui.lineEdit_export_audio.text()
+                            soundcue.gxdelayedstart = self.audio_offset(self.dlg.ui.lineEdit_export_audio.text())
+
+
+                        cc += 1
+
+
+                    ##########################################
+                    ##########################################
+
+                    # Start time. Will be used for TimeSpan tags
+                    pointdate = currentatt[self.fields['datetime']].split(" ")[0]  #2014/06/06
+                    pointtime = currentatt[self.fields['datetime']].split(" ")[1] #10:38:48
+                    current_dt_end = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]) ) #+ datetime.timedelta(seconds=5)
+                    camendtime = current_dt_end.strftime('%Y-%m-%dT%XZ')
+
+                    if lookatdict['duration'] and lookatdict['startheading'] and lookatdict['rotations']:  # this is for a circle around
+                        self.logger.info('Here {0}'.format(lookatdict))
+                        if lookatdict['longitude'] and lookatdict['latitude'] and lookatdict['altitude'] and lookatdict['tilt'] and lookatdict['range']:
+                            self.logger.info('Here 2')
+                            circle_count = int(float(lookatdict['rotations']))
+                            if circle_count > 1:
+                                divisor = 36
+                            else:
+                                divisor = 37
+                            duration = (float(lookatdict['duration'])/circle_count)/divisor
+
+                            # Loop through Circle Count
+                            for x in range(circle_count):
+                                # Define the initial heading based on current heading
+                                heading = float(lookatdict['startheading'])
+                                # 360 Degrees/10 = 36 intervals to iterate through
+                                if x == range(circle_count)[-1]:
+                                    divisor = 37
+                                for y in range(0, divisor):
+                                    # New Fly To
+                                    flyto = playlist.newgxflyto(gxduration=duration)
+                                    if flytodict['flyToMode']:
+                                        flyto.gxflytomode = flytodict['flyToMode']
+                                    flyto.lookat.latitude = lookatdict['latitude']
+                                    flyto.lookat.longitude = lookatdict['longitude']
+                                    flyto.lookat.altitude =  lookatdict['altitude']
+                                    if lookatdict['altitudemode'] == 'absolute':
+                                        flyto.lookat.altitudemode = simplekml.AltitudeMode.absolute
+                                    if lookatdict['altitudemode'] == 'clampToGround':
+                                        flyto.lookat.altitudemode = simplekml.AltitudeMode.clamptoground
+                                    if lookatdict['altitudemode'] == 'relativeToGround':
+                                        flyto.lookat.altitudemode = simplekml.AltitudeMode.relativetoground
+                                    if lookatdict['altitudemode'] == 'relativeToPoint':
+                                        flyto.lookat.altitudemode = simplekml.AltitudeMode.relativetoground
+                                    if lookatdict['altitudemode'] == 'relativeToModel':
+                                        flyto.lookat.altitudemode = simplekml.AltitudeMode.relativetoground
+                                    flyto.lookat.tilt = lookatdict['tilt']
+                                    flyto.lookat.range = lookatdict['range']
+                                    flyto.lookat.heading = heading
+
+                                    # Time Span
+                                    flyto.lookat.gxtimespan.begin = self.CamStartTime
+                                    flyto.lookat.gxtimespan.end = camendtime
+
+                                    # adjust the heading by 10 degrees
+                                    heading = (heading + 10) % 360
+
+                    else:  # non circle around, just custom
+                        if lookatdict['longitude'] and lookatdict['latitude'] and lookatdict['altitude'] and lookatdict['heading'] and lookatdict['tilt'] and lookatdict['range']:
+                            if flytodict['duration']:
+                                flyto = playlist.newgxflyto(gxduration=float(flytodict['duration']))
+                            else:
+                                flyto = playlist.newgxflyto()
+                            if flytodict['flyToMode']:
+                                flyto.gxflytomode = flytodict['flyToMode']
+                            flyto.lookat.longitude = lookatdict['longitude']
+                            flyto.lookat.latitude = lookatdict['latitude']
+                            flyto.lookat.altitude = lookatdict['altitude']
+                            if lookatdict['altitudemode'] == 'absolute':
+                                flyto.lookat.altitudemode = simplekml.AltitudeMode.absolute
+                            if lookatdict['altitudemode'] == 'clampToGround':
+                                flyto.lookat.altitudemode = simplekml.AltitudeMode.clamptoground
+                            if lookatdict['altitudemode'] == 'relativeToGround':
+                                flyto.lookat.altitudemode = simplekml.AltitudeMode.relativetoground
+                            if lookatdict['altitudemode'] == 'relativeToPoint':
+                                flyto.lookat.altitudemode = simplekml.AltitudeMode.relativetoground
+                            if lookatdict['altitudemode'] == 'relativeToModel':
+                                flyto.lookat.altitudemode = simplekml.AltitudeMode.relativetoground
+                            flyto.lookat.heading = lookatdict['heading']
+                            flyto.lookat.tilt = lookatdict['tilt']
+                            flyto.lookat.range = lookatdict['range']
+                            if lookatdict['gxaltitudemode']:
+                                flyto.lookat.gxaltitudemode = lookatdict['gxaltitudemode']
+                            # Time Span
+                            flyto.lookat.gxtimespan.begin = self.CamStartTime
+                            flyto.lookat.gxtimespan.end = camendtime
+
+                    if cc == 1:  # this is the first thing, not camera
+                        kml.document.lookat = flyto.lookat
+
+
+                    cc+=1
+
+
                 if currentatt[self.fields['camera']]:
                         # camera = {'longitude': None, 'longitude_off': None, 'latitude': None, 'latitude_off': None,
                         # 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'gxhoriz' : None,
@@ -2063,7 +2418,6 @@ class MilkMachine:
                         for kk,vv in camera.iteritems():
                             newcam[cameraBack[kk]] = vv
                         cameradict = newcam
-
 
                         flytodict = eval(currentatt[self.fields['flyto']])
 
@@ -2087,7 +2441,7 @@ class MilkMachine:
                         pointtime = currentatt[self.fields['datetime']].split(" ")[1] #10:38:48
                         current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]) )
                         current_dt_end = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]) ) #+ datetime.timedelta(seconds=5)
-                        CamStartTime = current_dt.strftime('%Y-%m-%dT%XZ')
+                        self.CamStartTime = current_dt.strftime('%Y-%m-%dT%XZ')
                         camendtime = current_dt_end.strftime('%Y-%m-%dT%XZ')
 
 
@@ -2228,7 +2582,7 @@ class MilkMachine:
                             flyto.camera.tilt = cameradict['tilt']
 
                         # Time Span
-                        flyto.camera.gxtimespan.begin = CamStartTime
+                        flyto.camera.gxtimespan.begin = self.CamStartTime
                         flyto.camera.gxtimespan.end = camendtime
 
 
@@ -2366,13 +2720,18 @@ class MilkMachine:
                             flyto.camera.tilt = float(cameradict['tilt'])
 
                         # Time Span
-                        flyto.camera.gxtimespan.begin = CamStartTime
+                        flyto.camera.gxtimespan.begin = self.CamStartTime
                         flyto.camera.gxtimespan.end = camendtime
 
                         cc += 1
 
                     #kml.document.camera = simplekml.Camera()
                     #kml.document.camera = flyto.camera
+
+
+
+
+
             ###############################3
             ## Points
             cc = 0
@@ -2706,15 +3065,22 @@ class MilkMachine:
             self.dlg.ui.comboBox_flyto_mode.addItem(hh)
 
         self.dlg.ui.comboBox_altitudemode.clear()
+        self.dlg.ui.comboBox_lookat_altitudemode.clear()
+        self.dlg.ui.comboBox_circle_altitudemode.clear()
         altitudemode = [None, 'absolute', 'clampToGround', 'relativeToGround', 'relativeToModel']
         for alt in altitudemode:
             self.dlg.ui.comboBox_altitudemode.addItem(alt)
+            self.dlg.ui.comboBox_lookat_altitudemode.addItem(alt)
+            self.dlg.ui.comboBox_circle_altitudemode.addItem(alt)
 
         self.dlg.ui.comboBox_gxaltitudemode.clear()
+        self.dlg.ui.comboBox_circle_gxaltitudemode.clear()
+        self.dlg.ui.comboBox_lookat_gxaltitudemode.clear()
         gxaltitudemode = [None, 'clampToSeaFloor', 'relativeToSeaFloor']
         for gxalt in gxaltitudemode:
             self.dlg.ui.comboBox_gxaltitudemode.addItem(gxalt)
-
+            self.dlg.ui.comboBox_circle_gxaltitudemode.addItem(gxalt)
+            self.dlg.ui.comboBox_lookat_gxaltitudemode.addItem(gxalt)
         # Follow Behind Combo Boxes
         self.dlg.ui.comboBox_follow_altitudemode.clear()
         for alt in altitudemode:
@@ -2808,6 +3174,19 @@ class MilkMachine:
         self.dlg.ui.lineEdit__visualization_follow_tilt.setText(None)
         self.dlg.ui.lineEdit__visualization_follow_range.setText(None)
 
+        # LookAt
+        self.dlg.ui.lineEdit_visualization_lookat_altitude.setText(None)
+        self.dlg.ui.lineEdit__visualization_lookat_range.setText(None)
+        self.dlg.ui.lineEdit__visualization_lookat_heading.setText(None)
+        self.dlg.ui.lineEdit__visualization_lookat_tilt.setText(None)
+
+        # Circle Around
+        self.dlg.ui.lineEdit_visualization_circle_altitude.setText(None)
+        self.dlg.ui.lineEdit__visualization_circle_tilt.setText(None)
+        self.dlg.ui.lineEdit__visualization_circle_range.setText(None)
+        self.dlg.ui.lineEdit__visualization_circle_duration.setText(None)
+        self.dlg.ui.lineEdit__visualization_circle_start_heading.setText(None)
+        self.dlg.ui.lineEdit__visualization_circle_rotations.setText(None)
 
         # Tour
         self.dlg.ui.lineEdit_tourname.setEnabled(False)
@@ -2839,6 +3218,27 @@ class MilkMachine:
         self.dlg.ui.pushButton_follow_apply.setEnabled(False)
         self.dlg.ui.lineEdit__visualization_follow_follow_angle.setEnabled(False)
         self.dlg.ui.lineEdit__visualization_follow_smoother.setEnabled(False)
+
+        # LookAt
+        self.dlg.ui.lineEdit_visualization_lookat_altitude.setEnabled(False)
+        self.dlg.ui.comboBox_lookat_altitudemode.setEnabled(False)
+        self.dlg.ui.comboBox_lookat_gxaltitudemode.setEnabled(False)
+        self.dlg.ui.lineEdit__visualization_lookat_range.setEnabled(False)
+        self.dlg.ui.lineEdit__visualization_lookat_heading.setEnabled(False)
+        self.dlg.ui.lineEdit__visualization_lookat_tilt.setEnabled(False)
+        self.dlg.ui.pushButton_lookat_apply.setEnabled(False)
+
+        # Circle Around
+        self.dlg.ui.lineEdit_visualization_circle_altitude.setEnabled(False)
+        self.dlg.ui.comboBox_circle_altitudemode.setEnabled(False)
+        self.dlg.ui.comboBox_circle_gxaltitudemode.setEnabled(False)
+        self.dlg.ui.lineEdit__visualization_circle_tilt.setEnabled(False)
+        self.dlg.ui.lineEdit__visualization_circle_range.setEnabled(False)
+        self.dlg.ui.lineEdit__visualization_circle_duration.setEnabled(False)
+        self.dlg.ui.lineEdit__visualization_circle_start_heading.setEnabled(False)
+        self.dlg.ui.lineEdit__visualization_circle_rotations.setEnabled(False)
+        self.dlg.ui.pushButton_circle_apply.setEnabled(False)
+
 
         # Placemarks/Rendering
 
