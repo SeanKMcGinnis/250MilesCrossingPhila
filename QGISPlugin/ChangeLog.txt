@@ -71,4 +71,11 @@ Bug Fix:	The custom camera function is was not fully obfuscating the camera dict
 Commit #24
 
 Task:		Create a <LookAt> tab in the Tour tab of Milk Machine. The <LookAt> tab has two modes; "custom" and "circle around". Both automatically calculate latitude and longitude. In custom mode, the user can select 1 or more points and apply a custom <LookAt> to each. If multiple points are selected, lat/long for each <LookAt> will be the lat/long of that point/model. In "circle around" mode, 1 or more points can also be selected. If multiple points are selected, MM calculates the geometric centroid of the selected points for the <LookAt> lat/long. If only 1 point is selected, it's lat/long will be the lat/long for the <LookAt>. "circle around" also has some parameter for customizing the number of rotations, starting heading, and duration.
-Bug Fix:	After deleting points, the sync does not recognize the new point parameters. It needs to re-read the table and reset values based on edits that have taken place.
+
+--------------------------------------------
+Commit #25
+
+Task:		Change all text to Tahoma
+Task:		Update the "sync" button info box to indicate the row number.
+Task:		Filtering added with 3 point filters; linear, quadratic, and moving average.
+

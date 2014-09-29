@@ -43,6 +43,14 @@ import re, os, StringIO
 import math
 import numpy
 
+from scipy import interpolate
+from scipy import stats
+import numpy as np
+import matplotlib.pyplot as plt
+from numpy import linspace,exp
+from numpy.random import randn
+from scipy.interpolate import UnivariateSpline
+from pylab import *
 
 #--------------------------------------------------------------------------------
 NOW = None
@@ -172,6 +180,8 @@ class MilkMachine:
         QObject.connect(self.dlg.ui.lineEdit__visualization_follow_range,SIGNAL("editingFinished()"),self.tiltpopulate)
         QObject.connect(self.dlg.ui.pushButton_lookat_apply, SIGNAL("clicked()"), self.lookat_apply)
         QObject.connect(self.dlg.ui.pushButton_circle_apply, SIGNAL("clicked()"), self.circle_apply)
+        QObject.connect(self.dlg.ui.checkBox_filtering_edit,SIGNAL("stateChanged(int)"),self.filtercheck)
+        QObject.connect(self.dlg.ui.pushButton_filtering_apply, SIGNAL("clicked()"), self.filtering_apply)
     ############################################################################
     ## SLOTS
 
@@ -203,6 +213,201 @@ class MilkMachine:
 
     def google_earth(self):
         pass
+
+    ############################################################################
+    ############################################################################
+    ## Filtering
+    ############################################################################
+    def filtering_apply(self):
+        try:
+            selectList = []  #[[id, (x,y), altitude]]
+            for f in self.ActiveLayer.selectedFeatures():
+                geom = f.geometry()
+                selectList.append([f.id(), geom.asPoint()])
+            # sort self.selectList by fid
+            def getKey(item):
+                return item[0]
+            selectList = sorted(selectList, key=getKey)  #[[id, (x,y), altitude]]
+            # turn the coordinates into numpy arrays
+            xarr = []; yarr = []
+            for val in selectList:
+                xarr.append(val[1][0]);yarr.append(val[1][1])
+            ptx = np.array(xarr); pty = np.array(yarr)
+
+            if self.dlg.ui.radioButton_filtering_moving.isChecked():  # rolling mean
+                window = self.dlg.ui.spinBox_filtering_moving.value() # this needs to be odd or throw an error.
+                if (window % 2 == 0): #even
+                    self.iface.messageBar().pushMessage("Error", "Window size must be an odd integer", level=QgsMessageBar.CRITICAL, duration=7)
+                else: #odd
+                    xroll = TeatDip.rolling_window(ptx, window); yroll = TeatDip.rolling_window(pty, window)
+                    xmean = []; ymean = []
+                    pad = (window - 1)/2
+                    counter = 0
+                    for i in range(pad):
+                        xmean.append(ptx[i])
+                        counter += 1
+                    for xx in xroll:
+                        xmean.append(np.mean(xx))
+                        counter += 1
+                    lastx = ptx[-pad:]
+                    for l in lastx:
+                        xmean.append(l)
+
+                    counter = 0
+                    for i in range(pad):
+                        ymean.append(pty[i])
+                        counter += 1
+                    for yy in yroll:
+                        ymean.append(np.mean(yy))
+                        counter += 1
+                    lasty = pty[-pad:]
+                    for l in lasty:
+                        ymean.append(l)
+
+                    if self.dlg.ui.checkBox_filtering_showplot.isChecked():
+                        plt.plot(ptx,pty, 'b.', markersize=15)
+                        plt.plot(xmean,ymean,'r-',linewidth=2)
+                        plt.plot(xmean,ymean,'r.',markersize=15)
+                        plt.xlabel('Longitude', size=10); plt.ylabel('Latitude', size=10); plt.axis('equal')
+                        plt.title("Filtering: Blue = Original, Red = Filtered", size=20)
+                        plt.show()
+
+                    #self.logger.info('len ptx: {0}, len filtered: {1}, len selected: {2}'.format(len(ptx),len(xmean), len(selectList)))
+
+                    self.ActiveLayer.startEditing()
+                    self.ActiveLayer.beginEditCommand('Moving Average Filter')
+                    for i,f in enumerate(selectList):    #[[id, (x,y), altitude]]
+
+                        fet = QgsGeometry.fromPoint(QgsPoint(xmean[i],ymean[i]))
+                        self.ActiveLayer.changeGeometry(f[0],fet)
+
+                    self.ActiveLayer.endEditCommand()
+                    self.canvas.refresh()
+
+                    self.iface.messageBar().pushMessage("Success", "Applied interpolation to points", level=QgsMessageBar.INFO, duration=5)
+
+            if self.dlg.ui.radioButton_filtering_linear.isChecked():  # Linear Regression
+                slope, intercept, r_value, p_value, std_err = stats.linregress(ptx,pty)
+                (m,b) = polyfit(ptx,pty,1)
+                yp = polyval([m,b],ptx)
+
+                if self.dlg.ui.checkBox_filtering_showplot.isChecked():
+                    plt.plot(ptx,pty, 'b.', markersize=15)
+                    plt.plot(ptx,yp,'r-',linewidth=2)
+                    plt.plot(ptx,yp,'r.', markersize=15)
+                    plt.xlabel('Longitude', size=10); plt.ylabel('Latitude', size=10); plt.axis('equal')
+                    plt.title("Filtering: Blue = Original, Red = Filtered", size=20)
+                    plt.show()
+
+                self.ActiveLayer.startEditing()
+                self.ActiveLayer.beginEditCommand('Linear Filter')
+                for i,f in enumerate(selectList):    #[[id, (x,y), altitude]]
+
+                    fet = QgsGeometry.fromPoint(QgsPoint(ptx[i],yp[i]))
+                    self.ActiveLayer.changeGeometry(f[0],fet)
+
+                self.ActiveLayer.endEditCommand()
+                self.canvas.refresh()
+
+                self.iface.messageBar().pushMessage("Success", "Applied interpolation to points", level=QgsMessageBar.INFO, duration=5)
+
+
+            if self.dlg.ui.radioButton_filtering_quad.isChecked():  # Quadratic Regression
+                slope, intercept, r_value, p_value, std_err = stats.linregress(ptx,pty)
+                (a,b,c) = polyfit(ptx,pty,2)
+                yp = polyval([a,b,c],ptx)
+
+                if self.dlg.ui.checkBox_filtering_showplot.isChecked():
+                    plt.plot(ptx,pty, 'b.', markersize=15)
+                    plt.plot(ptx,yp,'r-',linewidth=2)
+                    plt.plot(ptx,yp,'r.', markersize=15)
+                    plt.xlabel('Longitude', size=10); plt.ylabel('Latitude', size=10); plt.axis('equal')
+                    plt.title("Filtering: Blue = Original, Red = Filtered", size=20)
+                    plt.show()
+
+                self.ActiveLayer.startEditing()
+                self.ActiveLayer.beginEditCommand('Quadratic Filter')
+                for i,f in enumerate(selectList):    #[[id, (x,y), altitude]]
+
+                    fet = QgsGeometry.fromPoint(QgsPoint(ptx[i],yp[i]))
+                    self.ActiveLayer.changeGeometry(f[0],fet)
+
+                self.ActiveLayer.endEditCommand()
+                self.canvas.refresh()
+
+
+                self.iface.messageBar().pushMessage("Success", "Applied quadratic interpolation to points", level=QgsMessageBar.INFO, duration=5)
+
+
+
+
+        except:
+            self.dlg.ui.checkBox_filtering_edit.setChecked(False)
+            global NOW, pointid, ClockDateTime
+            NOW = None; pointid = None; ClockDateTime = None
+            trace = traceback.format_exc()
+            if self.logging == True:
+                self.logger.error('filtering function error')
+                self.logger.exception(trace)
+            self.iface.messageBar().pushMessage("Error", "Filtering function error. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+
+    def filtercheck(self,state):  # the checkbox is checked or unchecked for vis Editing
+        try:
+
+            if self.dlg.ui.checkBox_filtering_edit.isChecked():  # the checkbox is check for vis Editing
+
+                self.ActiveLayer = self.iface.activeLayer()
+                if self.ActiveLayer:
+                    self.fields = self.field_indices(self.ActiveLayer)
+                    if not self.ActiveLayer.isEditable():  # the layer is not editable
+                        QMessageBox.information(self.iface.mainWindow(),"Filtering Error", 'The currently active layer is not in an "Edit Session".' )
+                        self.dlg.ui.checkBox_time_edit.setChecked(False)
+                    else:  # cleared for editing...
+
+                        # Get the curretly selected feature
+                        self.cLayer = self.iface.mapCanvas().currentLayer()
+                        self.selectList = []
+                        features = self.cLayer.selectedFeatures()
+                        for f in features:
+                            self.selectList.append(f.id())  #[u'689',u'2014-06-06 13:30:54']  #[u'2014/06/06 10:30:10', u'Time:10:30:10, Latitude: 39.966531, Longitude: -75.172003, Speed: 3.382047, Altitude: 1.596764']
+                        if len(self.selectList) >= 1:
+
+                            # filters
+                            self.dlg.ui.radioButton_filtering_linear.setEnabled(True)
+                            self.dlg.ui.radioButton_filtering_quad.setEnabled(True)
+                            self.dlg.ui.radioButton_filtering_moving.setEnabled(True)
+                            self.dlg.ui.spinBox_filtering_moving.setEnabled(True)
+
+                            # Apply Button
+                            self.dlg.ui.pushButton_filtering_apply.setEnabled(True)
+                            self.dlg.ui.checkBox_filtering_showplot.setEnabled(True)
+
+                        else:
+                            QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "Please select points in the active layer to be edited." )
+
+            else:  # checkbox is false, clear shit out
+
+                # filters
+                self.dlg.ui.radioButton_filtering_linear.setEnabled(False)
+                self.dlg.ui.radioButton_filtering_quad.setEnabled(False)
+                self.dlg.ui.radioButton_filtering_moving.setEnabled(False)
+                self.dlg.ui.spinBox_filtering_moving.setEnabled(False)
+
+                # Apply Button
+                self.dlg.ui.pushButton_filtering_apply.setEnabled(False)
+                self.dlg.ui.checkBox_filtering_showplot.setEnabled(False)
+
+        except:
+            self.dlg.ui.checkBox_filtering_edit.setChecked(False)
+            global NOW, pointid, ClockDateTime
+            NOW = None; pointid = None; ClockDateTime = None
+            trace = traceback.format_exc()
+            if self.logging == True:
+                self.logger.error('filtering function error')
+                self.logger.exception(trace)
+            self.iface.messageBar().pushMessage("Error", "Failed to turn on filtering fields. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
 
 
     ############################################################################
@@ -2009,6 +2214,7 @@ class MilkMachine:
                             pointdate = currentatt[self.fields['datetime']].split(" ")[0]  #2014/06/06
                             pointtime = currentatt[self.fields['datetime']].split(" ")[1]
                             current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
+                            matchrow = []
                             if cc == 0:
                                 track_start_dt = current_dt
                                 if current_dt == self.audio_start:
@@ -2030,6 +2236,7 @@ class MilkMachine:
                                 geom = f.geometry()  # QgsGeometry object, get the geometry
                                 if geom.type() == QGis.Point:
                                     matchdict['coordinates'] = geom.asPoint() #(-75.1722,39.9659)
+                                matchrow = cc
                                 break
                             cc += 1
 
@@ -2070,7 +2277,7 @@ class MilkMachine:
                     if matchdict:
                         #make a marker in memory
 
-                        QMessageBox.information(self.iface.mainWindow(),"Audio File Sync Info", 'The audio starts at {0}\nStarting point in track is FID: {1}\nCoordinates: {2}\n\nTrack starts at: {3}'.format(self.audio_start.strftime("%x %X"), matchdict['fid'], str(matchdict['coordinates']),track_start_dt.strftime("%x %X") ) )
+                        QMessageBox.information(self.iface.mainWindow(),"Audio File Sync Info", 'The audio starts at {0}\nStarting point in track is FID: {1}, Row #: {2}\nCoordinates: {3}\n\nTrack starts at: {4}'.format(self.audio_start.strftime("%x %X"), matchdict['fid'],matchrow, str(matchdict['coordinates']),track_start_dt.strftime("%x %X") ) )
 
                         # create layer
                         lname = self.aLayer.name() + '_audio_start'
@@ -3301,3 +3508,15 @@ class MilkMachine:
 
         # Apply Buttons
         self.dlg.ui.pushButton_time_apply_startend.setEnabled(False)
+
+        ###################
+        # Filtering
+        # filters
+        self.dlg.ui.radioButton_filtering_linear.setEnabled(False)
+        self.dlg.ui.radioButton_filtering_quad.setEnabled(False)
+        self.dlg.ui.radioButton_filtering_moving.setEnabled(False)
+        self.dlg.ui.spinBox_filtering_moving.setEnabled(False)
+
+        # Apply Button
+        self.dlg.ui.pushButton_filtering_apply.setEnabled(False)
+        self.dlg.ui.checkBox_filtering_showplot.setEnabled(False)
