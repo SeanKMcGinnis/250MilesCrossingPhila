@@ -41,16 +41,20 @@ import logging
 import platform
 import re, os, StringIO
 import math
-import numpy
 
 from scipy import interpolate
 from scipy import stats
 import numpy as np
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 from numpy import linspace,exp
 from numpy.random import randn
 from scipy.interpolate import UnivariateSpline
-from pylab import *
+#from pylab import *
+
+UserOs = platform.platform()
+WindOs = re.search('Windows', UserOs, re.I)
+
+
 
 #--------------------------------------------------------------------------------
 NOW = None
@@ -96,6 +100,14 @@ class MilkMachine:
         self.dlg.timer.timeout.connect(self.Time)
 
         self.lastdirectory = ''
+
+        if WindOs:
+            if WindOs.group() == 'Windows':
+                self.os = 'Windows'
+            else:
+                self.os = 'other'
+        else:
+            self.os = 'other'
 
 
     def initGui(self):
@@ -182,6 +194,13 @@ class MilkMachine:
         QObject.connect(self.dlg.ui.pushButton_circle_apply, SIGNAL("clicked()"), self.circle_apply)
         QObject.connect(self.dlg.ui.checkBox_filtering_edit,SIGNAL("stateChanged(int)"),self.filtercheck)
         QObject.connect(self.dlg.ui.pushButton_filtering_apply, SIGNAL("clicked()"), self.filtering_apply)
+
+        ## Fonts
+##        font = QFont()
+##        font.setPointSize(6)
+##        self.dlg.ui.buttonImportGPS.setFont(font)
+
+
     ############################################################################
     ## SLOTS
 
@@ -220,6 +239,8 @@ class MilkMachine:
     ############################################################################
     def filtering_apply(self):
         try:
+            if self.os == 'Windows':
+                import matplotlib.pyplot as plt
             selectList = []  #[[id, (x,y), altitude]]
             for f in self.ActiveLayer.selectedFeatures():
                 geom = f.geometry()
@@ -264,7 +285,7 @@ class MilkMachine:
                     for l in lasty:
                         ymean.append(l)
 
-                    if self.dlg.ui.checkBox_filtering_showplot.isChecked():
+                    if self.dlg.ui.checkBox_filtering_showplot.isChecked() and self.os == 'Windows':
                         plt.plot(ptx,pty, 'b.', markersize=15)
                         plt.plot(xmean,ymean,'r-',linewidth=2)
                         plt.plot(xmean,ymean,'r.',markersize=15)
@@ -287,11 +308,11 @@ class MilkMachine:
                     self.iface.messageBar().pushMessage("Success", "Applied interpolation to points", level=QgsMessageBar.INFO, duration=5)
 
             if self.dlg.ui.radioButton_filtering_linear.isChecked():  # Linear Regression
-                slope, intercept, r_value, p_value, std_err = stats.linregress(ptx,pty)
-                (m,b) = polyfit(ptx,pty,1)
-                yp = polyval([m,b],ptx)
+                #slope, intercept, r_value, p_value, std_err = stats.linregress(ptx,pty)
+                (m,b) = np.polyfit(ptx,pty,1)
+                yp = np.polyval([m,b],ptx)
 
-                if self.dlg.ui.checkBox_filtering_showplot.isChecked():
+                if self.dlg.ui.checkBox_filtering_showplot.isChecked() and self.os == 'Windows':
                     plt.plot(ptx,pty, 'b.', markersize=15)
                     plt.plot(ptx,yp,'r-',linewidth=2)
                     plt.plot(ptx,yp,'r.', markersize=15)
@@ -313,11 +334,11 @@ class MilkMachine:
 
 
             if self.dlg.ui.radioButton_filtering_quad.isChecked():  # Quadratic Regression
-                slope, intercept, r_value, p_value, std_err = stats.linregress(ptx,pty)
-                (a,b,c) = polyfit(ptx,pty,2)
-                yp = polyval([a,b,c],ptx)
+                #slope, intercept, r_value, p_value, std_err = stats.linregress(ptx,pty)
+                (a,b,c) = np.polyfit(ptx,pty,2)
+                yp = np.polyval([a,b,c],ptx)
 
-                if self.dlg.ui.checkBox_filtering_showplot.isChecked():
+                if self.dlg.ui.checkBox_filtering_showplot.isChecked() and self.os == 'Windows':
                     plt.plot(ptx,pty, 'b.', markersize=15)
                     plt.plot(ptx,yp,'r-',linewidth=2)
                     plt.plot(ptx,yp,'r.', markersize=15)
@@ -381,7 +402,8 @@ class MilkMachine:
 
                             # Apply Button
                             self.dlg.ui.pushButton_filtering_apply.setEnabled(True)
-                            self.dlg.ui.checkBox_filtering_showplot.setEnabled(True)
+                            if self.os == 'Windows':
+                                self.dlg.ui.checkBox_filtering_showplot.setEnabled(True)
 
                         else:
                             QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "Please select points in the active layer to be edited." )
@@ -1111,7 +1133,7 @@ class MilkMachine:
                 self.selectList = sorted(self.selectList, key=getKey)  #[[id, (x,y), altitude]]
 
                 #calculate the centroid
-                BigXY = (round(numpy.mean(xlist),5),round(numpy.mean(ylist),5))
+                BigXY = (round(np.mean(xlist),5),round(np.mean(ylist),5))
 
             except:
                 self.logger.exception(traceback.format_exc())
