@@ -194,7 +194,7 @@ class MilkMachine:
         QObject.connect(self.dlg.ui.pushButton_circle_apply, SIGNAL("clicked()"), self.circle_apply)
         QObject.connect(self.dlg.ui.checkBox_filtering_edit,SIGNAL("stateChanged(int)"),self.filtercheck)
         QObject.connect(self.dlg.ui.pushButton_filtering_apply, SIGNAL("clicked()"), self.filtering_apply)
-
+        QObject.connect(self.dlg.ui.lineEdit_visualization_circle_altitude,SIGNAL("editingFinished()"),self.durationpopulate)
         ## Fonts
 ##        font = QFont()
 ##        font.setPointSize(6)
@@ -211,6 +211,10 @@ class MilkMachine:
             angle = round(math.degrees(math.acos(altitude/ranger)),1)
             self.dlg.ui.lineEdit__visualization_follow_tilt.setText(str(angle))
 
+    def durationpopulate(self):
+        if self.dlg.ui.lineEdit_visualization_circle_altitude.text():
+            allfeats = self.ActiveLayer.selectedFeaturesIds()
+            self.dlg.ui.lineEdit__visualization_circle_duration.setText(str(len(allfeats)))
 
     # generic function for finding the idices of qgsvector layers
     def field_indices(self, qgsvectorlayer):
@@ -1099,7 +1103,7 @@ class MilkMachine:
             lookat['gxaltitudemode'] = self.dlg.ui.comboBox_circle_gxaltitudemode.currentText()
             lookat['range'] = self.dlg.ui.lineEdit__visualization_circle_range.text()
             lookat['tilt'] = self.dlg.ui.lineEdit__visualization_circle_tilt.text()
-            lookat['duration'] = self.dlg.ui.lineEdit__visualization_circle_duration.text()
+            #lookat['duration'] = self.dlg.ui.lineEdit__visualization_circle_duration.text()
             lookat['startheading'] = self.dlg.ui.lineEdit__visualization_circle_start_heading.text()
             lookat['rotations'] = self.dlg.ui.lineEdit__visualization_circle_rotations.text()
 
@@ -1111,6 +1115,8 @@ class MilkMachine:
             xlist = []
             ylist = []
 
+            allfeats = self.ActiveLayer.selectedFeaturesIds()
+            lookat['duration'] = len(allfeats)
             try:
                 for f in self.ActiveLayer.selectedFeatures():          #getFeatures():
                     geom = f.geometry()
@@ -1134,6 +1140,7 @@ class MilkMachine:
 
                 #calculate the centroid
                 BigXY = (round(np.mean(xlist),5),round(np.mean(ylist),5))
+
 
             except:
                 self.logger.exception(traceback.format_exc())
@@ -1491,7 +1498,7 @@ class MilkMachine:
                 self.dlg.ui.comboBox_circle_gxaltitudemode.setEnabled(True)
                 self.dlg.ui.lineEdit__visualization_circle_tilt.setEnabled(True)
                 self.dlg.ui.lineEdit__visualization_circle_range.setEnabled(True)
-                self.dlg.ui.lineEdit__visualization_circle_duration.setEnabled(True)
+                #self.dlg.ui.lineEdit__visualization_circle_duration.setEnabled(True)
                 self.dlg.ui.lineEdit__visualization_circle_start_heading.setEnabled(True)
                 self.dlg.ui.lineEdit__visualization_circle_rotations.setEnabled(True)
                 self.dlg.ui.pushButton_circle_apply.setEnabled(True)
@@ -2550,7 +2557,7 @@ class MilkMachine:
                     current_dt_end = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]) ) #+ datetime.timedelta(seconds=5)
                     camendtime = current_dt_end.strftime('%Y-%m-%dT%XZ')
 
-                    if lookatdict['duration'] and lookatdict['startheading'] and lookatdict['rotations']:  # this is for a circle around
+                    if lookatdict['startheading'] and lookatdict['rotations']:  # lookatdict['duration']  this is for a circle around
                         self.logger.info('Here {0}'.format(lookatdict))
                         if lookatdict['longitude'] and lookatdict['latitude'] and lookatdict['altitude'] and lookatdict['tilt'] and lookatdict['range']:
                             self.logger.info('Here 2')
@@ -2560,6 +2567,15 @@ class MilkMachine:
                             else:
                                 divisor = 37
                             duration = (float(lookatdict['duration'])/circle_count)/divisor
+
+                            # divide the time span into chunks to be attached to each
+##                            # Start time. Will be used for TimeSpan tags
+##                            pointdate = currentatt[self.fields['datetime']].split(" ")[0]  #2014/06/06
+##                            pointtime = currentatt[self.fields['datetime']].split(" ")[1] #10:38:48
+##                            current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]) )
+##                            self.CamStartTime = current_dt.strftime('%Y-%m-%dT%XZ')
+
+                            timekeeper = current_dt_end
 
                             # Loop through Circle Count
                             for x in range(circle_count):
@@ -2592,7 +2608,9 @@ class MilkMachine:
 
                                     # Time Span
                                     flyto.lookat.gxtimespan.begin = self.CamStartTime
-                                    flyto.lookat.gxtimespan.end = camendtime
+                                    flyto.lookat.gxtimespan.end = timekeeper.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+
+                                    timekeeper = timekeeper + datetime.timedelta(seconds = duration)
 
                                     # adjust the heading by 10 degrees
                                     heading = (heading + 10) % 360

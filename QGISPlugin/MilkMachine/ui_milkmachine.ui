@@ -2190,7 +2190,7 @@
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Create a custom or automated &amp;quot;Circle Around&amp;quot; &amp;lt;LookAt&amp;gt; visualization.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_6">
        <attribute name="title">
