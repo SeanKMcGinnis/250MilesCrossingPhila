@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\Edward\.qgis2\python\plugins\MilkMachine\ui_milkmachine.ui'
 #
-# Created: Tue Sep 30 20:38:45 2014
+# Created: Wed Oct 01 21:15:30 2014
 #      by: PyQt4 UI code generator 4.10.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -1128,7 +1128,7 @@ class Ui_MilkMachine(object):
         self.retranslateUi(MilkMachine)
         self.tabWidget.setCurrentIndex(0)
         self.tabWidget_2.setCurrentIndex(0)
-        self.tabWidget_3.setCurrentIndex(0)
+        self.tabWidget_3.setCurrentIndex(1)
         QtCore.QObject.connect(self.buttonboxOkCancel, QtCore.SIGNAL(_fromUtf8("accepted()")), MilkMachine.accept)
         QtCore.QObject.connect(self.buttonboxOkCancel, QtCore.SIGNAL(_fromUtf8("rejected()")), MilkMachine.reject)
         QtCore.QMetaObject.connectSlotsByName(MilkMachine)
