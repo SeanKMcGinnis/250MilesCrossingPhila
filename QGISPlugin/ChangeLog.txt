@@ -85,3 +85,10 @@ Commit #27
 Bug Fix:	Size policy changes for labels and buttons. Hoping that "fixed" "fixed" works
 Bug Fix:	The matplotlib library is not that same as the one on Windows, so no plotting!!. Only works on windows.
 Bug Fix:	numpy on Mac is an older version, so I can't call scipy/numpy as pylab. Call as numpy.
+
+--------------------------------------------
+Commit #28
+
+Task:		Upgrade the "circle around" to match the duration of the selected points. "duration" option is disabled, but autopopulates based on # selected features.
+
+Still scratching my head on the font sizing. I may need to do some manual resizing if the user is on a Mac. Maybe.
