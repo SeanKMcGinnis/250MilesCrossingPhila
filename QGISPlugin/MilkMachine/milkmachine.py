@@ -195,11 +195,12 @@ class MilkMachine:
         QObject.connect(self.dlg.ui.checkBox_filtering_edit,SIGNAL("stateChanged(int)"),self.filtercheck)
         QObject.connect(self.dlg.ui.pushButton_filtering_apply, SIGNAL("clicked()"), self.filtering_apply)
         QObject.connect(self.dlg.ui.lineEdit_visualization_circle_altitude,SIGNAL("editingFinished()"),self.durationpopulate)
-        ## Fonts
-##        font = QFont()
-##        font.setPointSize(6)
-##        self.dlg.ui.buttonImportGPS.setFont(font)
 
+        # Fonts
+        if self.os == 'other':
+            font = QFont()
+            font.setPointSize(9)
+            self.dlg.ui.tabWidget.setFont(font)
 
     ############################################################################
     ## SLOTS
