@@ -92,3 +92,12 @@ Commit #28
 Task:		Upgrade the "circle around" to match the duration of the selected points. "duration" option is disabled, but autopopulates based on # selected features.
 
 Still scratching my head on the font sizing. I may need to do some manual resizing if the user is on a Mac. Maybe.
+
+--------------------------------------------
+Commit #30
+
+Task:		"Symolize | Select" tab for symbolizing similar <Camera> views in the "symbcamera" field. This iterates through and finds <Camera> views that are the same and are consecutive. This will create a value in the "symbcamera" field that will be the tour name and some number. Ex: "tour1", "tour1_1".
+Task: 		Create a select mouse that can select and identify <Camera> field values. Only selects 1 at a time. Will display the formatted values in the text edit box below the checkbox.
+Task:		"ToCustom" button. If the user likes the values that have been selected by the camera click/identify, pressing the "ToCustom" button will auto-populate the values over to the fields in the "Custom" tab.
+Task:		"ToFollow" button. If the user likes the values that have been selected by the camera click/identify, pressing the "ToFollow" button will auto-populate the values over to the fields in the "Follow" tab.
+Task:		"Development" tab deprecated.
