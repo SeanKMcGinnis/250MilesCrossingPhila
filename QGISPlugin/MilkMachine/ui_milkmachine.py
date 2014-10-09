@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\Edward\.qgis2\python\plugins\MilkMachine\ui_milkmachine.ui'
 #
-# Created: Wed Oct 08 21:04:21 2014
+# Created: Wed Oct 08 21:14:09 2014
 #      by: PyQt4 UI code generator 4.10.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -35,6 +35,7 @@ class Ui_MilkMachine(object):
         font.setFamily(_fromUtf8("Tahoma"))
         font.setPointSize(8)
         self.tabWidget.setFont(font)
+        self.tabWidget.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.tabWidget.setAcceptDrops(False)
         self.tabWidget.setTabShape(QtGui.QTabWidget.Rounded)
         self.tabWidget.setElideMode(QtCore.Qt.ElideNone)
@@ -1000,8 +1001,8 @@ class Ui_MilkMachine(object):
 
         self.retranslateUi(MilkMachine)
         self.tabWidget.setCurrentIndex(0)
-        self.tabWidget_2.setCurrentIndex(2)
-        self.tabWidget_3.setCurrentIndex(1)
+        self.tabWidget_2.setCurrentIndex(0)
+        self.tabWidget_3.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MilkMachine)
         MilkMachine.setTabOrder(self.tabWidget, self.buttonImportGPS)
         MilkMachine.setTabOrder(self.buttonImportGPS, self.lineEdit_ImportGPS)

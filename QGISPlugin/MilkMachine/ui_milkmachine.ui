@@ -34,6 +34,9 @@
      <pointsize>8</pointsize>
     </font>
    </property>
+   <property name="cursor">
+    <cursorShape>ArrowCursor</cursorShape>
+   </property>
    <property name="acceptDrops">
     <bool>false</bool>
    </property>
@@ -1420,7 +1423,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_4">
        <attribute name="title">
@@ -2300,7 +2303,7 @@
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Create a custom or automated &amp;quot;Circle Around&amp;quot; &amp;lt;LookAt&amp;gt; visualization.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_6">
        <attribute name="title">
