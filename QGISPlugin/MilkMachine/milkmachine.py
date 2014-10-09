@@ -157,13 +157,15 @@ class MilkMachine:
         # Order of the fields in the shapefile
         self.fields ={}
 
+        # for the selected point
+        self.selectedCamera = None
 
         QObject.connect(self.dlg.ui.chkActivate,SIGNAL("stateChanged(int)"),self.changeActive)
         QObject.connect(self.dlg.ui.buttonImportGPS, SIGNAL("clicked()"), self.browseOpen)
         QObject.connect(self.dlg.ui.buttonDrawTrack, SIGNAL("clicked()"), self.drawtrack)
         QObject.connect(self.dlg.ui.buttonExportTrack, SIGNAL("clicked()"), self.exportToFile)
-        QObject.connect(self.iface.legendInterface(), SIGNAL("itemRemoved()"), self.removeCombo)  #currentIndexChanged(int)
-        QObject.connect(self.iface.legendInterface(), SIGNAL("itemAdded(QModelIndex)"), self.addedCombo)
+        #QObject.connect(self.iface.legendInterface(), SIGNAL("itemRemoved()"), self.removeCombo)  #currentIndexChanged(int)
+        #QObject.connect(self.iface.legendInterface(), SIGNAL("itemAdded(QModelIndex)"), self.addedCombo)
         QObject.connect(self.dlg.ui.buttonImport_audio, SIGNAL("clicked()"), self.browseOpenAudio)
         QObject.connect(self.dlg.ui.pushButton_clearAudio1, SIGNAL("clicked()"), self.clearaudio1)
         QObject.connect(self.dlg.ui.pushButton_Audio1, SIGNAL("clicked()"), self.playAudio1)
@@ -195,6 +197,9 @@ class MilkMachine:
         QObject.connect(self.dlg.ui.checkBox_filtering_edit,SIGNAL("stateChanged(int)"),self.filtercheck)
         QObject.connect(self.dlg.ui.pushButton_filtering_apply, SIGNAL("clicked()"), self.filtering_apply)
         QObject.connect(self.dlg.ui.lineEdit_visualization_circle_altitude,SIGNAL("editingFinished()"),self.durationpopulate)
+        QObject.connect(self.dlg.ui.pushButton_visualization_camera_symbolize, SIGNAL("clicked()"), self.camera_symbolize)
+        QObject.connect(self.dlg.ui.pushButton_visualization_camera_tofollow, SIGNAL("clicked()"), self.tofollow)
+        QObject.connect(self.dlg.ui.pushButton_visualization_camera_tocustom, SIGNAL("clicked()"), self.tocustom)
 
         # Fonts
         if self.os == 'other':
@@ -1006,6 +1011,167 @@ class MilkMachine:
     ## Tour / Visualization
     ############################################################################
 
+    def tofollow(self):
+##            cameraBack = {'a': 'longitude', 'b': 'longitude_off','c': 'latitude','d': 'latitude_off','e': 'altitude' ,'f': 'altitudemode', 'g': 'gxaltitudemode' ,'h': 'gxhoriz' ,'i': 'heading' ,'j': 'roll' ,'k': 'tilt' ,'l': 'range','m': 'follow_angle'}
+        try:
+
+            if self.selectedCamera:
+                if self.selectedCamera['e']:
+                    self.dlg.ui.lineEdit_visualization_follow_altitude.setText(str(self.selectedCamera['e']))
+                if self.selectedCamera['f']:
+                    altitudemode = [None, 'absolute', 'clampToGround', 'relativeToGround', 'relativeToModel']
+                    c = 0
+                    for alt in altitudemode:
+                        if self.selectedCamera['f'] == alt:
+                            self.dlg.ui.comboBox_follow_altitudemode.setCurrentIndex(c)
+                        c += 1
+                if self.selectedCamera['g']:
+                    gxaltitudemode = [None, 'clampToSeaFloor', 'relativeToSeaFloor']
+                    c = 0
+                    for alt in gxaltitudemode:
+                        if self.selectedCamera['g'] == alt:
+                            self.dlg.ui.comboBox_follow_gxaltitudemode.setCurrentIndex(c)
+                        c += 1
+
+                if self.selectedCamera['h']:
+                    self.dlg.ui.lineEdit__visualization_follow_gxhoriz.setText(str(self.selectedCamera['h']))
+                if self.selectedCamera['k']:
+                    self.dlg.ui.lineEdit__visualization_follow_tilt.setText(str(self.selectedCamera['k']))
+                if self.selectedCamera['l']:
+                    self.dlg.ui.lineEdit__visualization_follow_range.setText(str(self.selectedCamera['l']))
+                if self.selectedCamera['m']:
+                    self.dlg.ui.lineEdit__visualization_follow_follow_angle.setText(str(self.selectedCamera['m']))
+                self.iface.messageBar().pushMessage("Success", "Applied the camera settings to the follow tab fields", level=QgsMessageBar.INFO, duration=5)
+
+        except:
+            if self.logging == True:
+                self.logger.error('tofollow')
+                self.logger.exception(traceback.format_exc())
+            self.iface.messageBar().pushMessage("Error", "Failed to create tofollow. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+
+
+    def tocustom(self):
+##            cameraBack = {'a': 'longitude', 'b': 'longitude_off','c': 'latitude','d': 'latitude_off','e': 'altitude' ,'f': 'altitudemode', 'g': 'gxaltitudemode' ,'h': 'gxhoriz' ,'i': 'heading' ,'j': 'roll' ,'k': 'tilt' ,'l': 'range','m': 'follow_angle'}
+        try:
+
+            if self.selectedCamera:
+                if self.selectedCamera['a']:
+                    self.dlg.ui.lineEdit_visualization_camera_longitude.setText(str(self.selectedCamera['a']))
+                if self.selectedCamera['b']:
+                    self.dlg.ui.lineEdit_visualization_camera_longitude_off.setText(str(self.selectedCamera['b']))
+                if self.selectedCamera['c']:
+                    self.dlg.ui.lineEdit_visualization_camera_latitude.setText(str(self.selectedCamera['c']))
+                if self.selectedCamera['d']:
+                    self.dlg.ui.lineEdit_visualization_camera_latitude_off.setText(str(self.selectedCamera['d']))
+                if self.selectedCamera['e']:
+                    self.dlg.ui.lineEdit_visualization_camera_altitude.setText(str(self.selectedCamera['e']))
+                if self.selectedCamera['f']:
+                    altitudemode = [None, 'absolute', 'clampToGround', 'relativeToGround', 'relativeToModel']
+                    c = 0
+                    for alt in altitudemode:
+                        if self.selectedCamera['f'] == alt:
+                            self.dlg.ui.comboBox_altitudemode.setCurrentIndex(c)
+                        c += 1
+                if self.selectedCamera['g']:
+                    gxaltitudemode = [None, 'clampToSeaFloor', 'relativeToSeaFloor']
+                    c = 0
+                    for alt in gxaltitudemode:
+                        if self.selectedCamera['g'] == alt:
+                            self.dlg.ui.comboBox_gxaltitudemode.setCurrentIndex(c)
+                        c += 1
+
+                if self.selectedCamera['h']:
+                    self.dlg.ui.lineEdit__visualization_camera_gxhoriz.setText(str(self.selectedCamera['h']))
+                if self.selectedCamera['i']:
+                    self.dlg.ui.lineEdit__visualization_camera_heading.setText(str(self.selectedCamera['i']))
+                if self.selectedCamera['j']:
+                    self.dlg.ui.lineEdit__visualization_camera_roll.setText(str(self.selectedCamera['j']))
+                if self.selectedCamera['k']:
+                    self.dlg.ui.lineEdit__visualization_camera_tilt.setText(str(self.selectedCamera['k']))
+
+                self.iface.messageBar().pushMessage("Success", "Applied the camera settings to the custom tab fields", level=QgsMessageBar.INFO, duration=5)
+
+        except:
+            if self.logging == True:
+                self.logger.error('tofollow')
+                self.logger.exception(traceback.format_exc())
+            self.iface.messageBar().pushMessage("Error", "Failed to create tofollow. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+
+    def camera_symbolize(self):
+
+#            cameraBack = {'e': 'altitude' ,'f': 'altitudemode', 'g': 'gxaltitudemode' ,'h': 'gxhoriz' ,'i': 'heading' ,'j': 'roll' ,'k': 'tilt' ,'l': 'range','m': 'follow_angle'}
+
+        try:
+            self.fields = self.field_indices(self.ActiveLayer)   #symbcamera
+            allfids = self.ActiveLayer.allFeatureIds()
+
+##                shaper.startEditing()
+##                shaper.beginEditCommand('datetime')
+##                for i,v in enumerate(fid_dt):
+##                    shaper.changeAttributeValue(i, idx, v)
+##                shaper.endEditCommand()
+##                shaper.commitChanges()
+
+
+
+            allfeats1 = self.ActiveLayer.getFeatures()
+
+            featlist = []
+            for feat1 in allfeats1:
+                featlist.append([feat1.attributes(),feat1.id()])
+            self.logger.info('hello')
+            allfeats = self.ActiveLayer.getFeatures()
+            cnt = 0; cntatt = 0;
+            for feat in allfeats:
+                self.logger.info('cnt {0}'.format(cnt))
+                if cnt > 0:
+                    currentatt = feat.attributes(); lastatt = featlist[cnt-1][0]
+                    self.logger.info('here {0}, {1}'.format(currentatt,lastatt))
+                    if currentatt:
+                        if currentatt[self.fields['flyto']] and currentatt[self.fields['camera']]:
+                            self.logger.info('here@@@@@@ {0}, {1}'.format(currentatt[self.fields['flyto']],currentatt[self.fields['camera']]))
+                            flytodict = eval(currentatt[self.fields['flyto']])
+                            cameradict = eval(currentatt[self.fields['camera']])
+                            flytodict.pop('a',None);flytodict.pop('b',None);flytodict.pop('c',None);flytodict.pop('d',None);
+                            cameradict.pop('a',None);cameradict.pop('b',None);cameradict.pop('c',None);cameradict.pop('d',None);cameradict.pop('i',None);
+                            self.logger.info(flytodict)
+                            # not look at the last row
+                            if lastatt:
+                                self.logger.info('lastatt {0}'.format(lastatt))
+                                if lastatt[self.fields['flyto']] and lastatt[self.fields['camera']]:
+
+                                    flytodict2 = eval(lastatt[self.fields['flyto']])
+                                    cameradict2 = eval(lastatt[self.fields['camera']])
+                                    flytodict2.pop('a',None);flytodict2.pop('b',None);flytodict2.pop('c',None);flytodict2.pop('d',None);
+                                    cameradict2.pop('a',None);cameradict2.pop('b',None);cameradict2.pop('c',None);cameradict2.pop('d',None);cameradict2.pop('i',None);
+                                    self.logger.info('here!!!!!!!! {0}'.format(cameradict))
+                                    self.logger.info('here!!!!!!!! {0}'.format(cameradict2))
+                                    self.logger.info('hereCCCCC {0}, {1}'.format(cmp(flytodict,flytodict2),cmp(cameradict,cameradict2)))
+                                    if cmp(cameradict,cameradict2) == 0: # they are the same
+                                        pass
+                                    else:
+                                        cntatt += 1
+
+                            if flytodict and cameradict:
+                                name = flytodict['name'] + "_" + str(cntatt)
+                                if name:
+                                    self.ActiveLayer.changeAttributeValue(feat.id(), self.fields['symbtour'], str(name))
+                cnt += 1
+
+            self.iface.messageBar().pushMessage("Success", "Applied tour name to the 'symbcamera' field. Use these categories for symbolization.", level=QgsMessageBar.INFO, duration=5)
+        except:
+            global NOW, pointid, ClockDateTime
+            NOW = None; pointid = None; ClockDateTime = None
+            trace = traceback.format_exc()
+            if self.logging == True:
+                self.logger.error('camera_symbolize')
+                self.logger.exception(trace)
+            self.iface.messageBar().pushMessage("Error", "Failed to create symbolization for the camera tour(s). Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+
+
     def lookat_apply(self):
         try:
             self.fields = self.field_indices(self.ActiveLayer)
@@ -1504,6 +1670,12 @@ class MilkMachine:
                 self.dlg.ui.lineEdit__visualization_circle_rotations.setEnabled(True)
                 self.dlg.ui.pushButton_circle_apply.setEnabled(True)
 
+                # Symbolize Select
+                self.dlg.ui.pushButton_visualization_camera_symbolize.setEnabled(True)
+                self.dlg.ui.pushButton_visualization_camera_tofollow.setEnabled(True)
+                self.dlg.ui.pushButton_visualization_camera_tocustom.setEnabled(True)
+
+
         else:  # checkbox is false, clear shit out
             self.dlg.ui.lineEdit_tourname.setEnabled(False)
             self.dlg.ui.comboBox_flyto_mode.setEnabled(False)
@@ -1555,7 +1727,10 @@ class MilkMachine:
             self.dlg.ui.lineEdit__visualization_circle_rotations.setEnabled(False)
             self.dlg.ui.pushButton_circle_apply.setEnabled(False)
 
-
+            # Symbolize Select
+            self.dlg.ui.pushButton_visualization_camera_symbolize.setEnabled(False)
+            self.dlg.ui.pushButton_visualization_camera_tofollow.setEnabled(False)
+            self.dlg.ui.pushButton_visualization_camera_tocustom.setEnabled(False)
 
 
 
@@ -1727,7 +1902,7 @@ class MilkMachine:
                 QgsVectorFileWriter.writeAsVectorFormat(kmllayer, shapepath_dup, "utf-8", None, "ESRI Shapefile")  # duplicate of original
                 #bring the shapefile back in, and render it on the map
                 shaper = QgsVectorLayer(shapepath, layername, "ogr")
-                shaper.dataProvider().addAttributes( [QgsField("datetime",QVariant.String), QgsField("audio",QVariant.String), QgsField("camera",QVariant.String), QgsField("flyto",QVariant.String), QgsField("iconstyle", QVariant.String), QgsField("labelstyle", QVariant.String), QgsField("model", QVariant.String), QgsField("lookat", QVariant.String) ] )
+                shaper.dataProvider().addAttributes( [QgsField("datetime",QVariant.String), QgsField("audio",QVariant.String), QgsField("camera",QVariant.String), QgsField("flyto",QVariant.String), QgsField("iconstyle", QVariant.String), QgsField("labelstyle", QVariant.String), QgsField("model", QVariant.String), QgsField("lookat", QVariant.String) , QgsField("symbtour", QVariant.String)] )
                 shaper.updateFields()
 
 
@@ -2450,41 +2625,6 @@ class MilkMachine:
             self.logger.error('file_export_audio error')
             self.logger.exception(traceback.format_exc())
             self.iface.messageBar().pushMessage("Error", "Failed to import audio file. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
-
-
-    def addedCombo(self):
-        #QMessageBox.information( self.iface.mainWindow(),"Info", 'You added' )
-        self.dlg.ui.comboBox_export.clear()
-        #self.dlg.ui.comboBox_visualization_active.clear()
-        self.layerX = {}
-        ii = 0
-        for layer in self.iface.legendInterface().layers():
-            self.dlg.ui.comboBox_export.addItem(layer.name())
-            #self.dlg.ui.comboBox_visualization_active.addItem(layer.name())
-            self.layerX[layer.name()] = {'layer source': layer.source()}
-            self.layerX[layer.name()] = {'index': ii}
-            ii += 1
-##            lty = layer.type()
-##            if lty is not None:
-##                if layer.type() == 0:#QgsMapLayer.VectorLayer:
-##                    self.dlg.ui.comboBox_export.addItem(layer.name())
-
-    def removeCombo(self):
-        #QMessageBox.information( self.iface.mainWindow(),"Info", 'You removed' )
-        self.dlg.ui.comboBox_export.clear()
-        #self.dlg.ui.comboBox_visualization_active.clear()
-        self.layerX = {}
-        ii = 0
-        for layer in self.iface.legendInterface().layers():
-            self.dlg.ui.comboBox_export.addItem(layer.name())
-            #self.dlg.ui.comboBox_visualization_active.addItem(layer.name())
-            self.layerX[layer.name()] = {'layer source': layer.source()}
-            self.layerX[layer.name()] = {'index': ii}
-            ii += 1
-##            lty = layer.type()
-##            if lty is not None:
-##                if layer.type() == 0:#QgsMapLayer.VectorLayer:
-##                    self.dlg.ui.comboBox_export.addItem(layer.name())
 
 
 
@@ -3237,27 +3377,54 @@ class MilkMachine:
 
 
     def handleMouseDown(self, point, button):
-        self.dlg.clearTextBrowser()
-        self.dlg.setTextBrowser(str(point.x()) + " , " +str(point.y()))
-        #QMessageBox.information( self.iface.mainWindow(),"Info", "X,Y = %s,%s" % (str(point.x()),str(point.y())) )
+        self.dlg.ui.txtFeedback.clear()
 
     def selectFeature(self, point, button):
-        #QMessageBox.information( self.iface.mainWindow(),"Info", "in selectFeature function ININ" )
-        # setup the provider select to filter results based on a rectangle
-        pntGeom = QgsGeometry.fromPoint(point)
-        # scale-dependent buffer of 2 pixels-worth of map units
-        pntBuff = pntGeom.buffer( (self.canvas.mapUnitsPerPixel() * 2),0)
-        rect = pntBuff.boundingBox()
-        # get currentLayer and dataProvider
-        cLayer = self.canvas.currentLayer()
 
-        layerlist = []
-        layerdatasource = []
-        for layer in self.iface.legendInterface().layers():
-            layerlist.append(layer.name())
-            layerdatasource.append(layer.source())
+        try:
+            self.fields = self.field_indices(self.ActiveLayer)
+            #QMessageBox.information( self.iface.mainWindow(),"Info", "in selectFeature function ININ" )
+            # setup the provider select to filter results based on a rectangle
+            pntGeom = QgsGeometry.fromPoint(point)
+            # scale-dependent buffer of 2 pixels-worth of map units
+            pntBuff = pntGeom.buffer( (self.canvas.mapUnitsPerPixel() * 2),0)
+            rect = pntBuff.boundingBox()
+            # get currentLayer and dataProvider
+            cLayer = self.canvas.currentLayer()
+            self.ActiveLayer.removeSelection()
+            self.ActiveLayer.select(rect,False)
 
-        QMessageBox.information( self.iface.mainWindow(),"Info", str(layerlist) + str(layerdatasource) )
+            cameraBack = {'a': 'longitude', 'b': 'longitude_off','c': 'latitude','d': 'latitude_off','e': 'altitude' ,'f': 'altitudemode', 'g': 'gxaltitudemode' ,'h': 'gxhoriz' ,'i': 'heading' ,'j': 'roll' ,'k': 'tilt' ,'l': 'range','m': 'follow_angle'}
+            for f in self.ActiveLayer.selectedFeatures():
+                currentatt = f.attributes()
+                if currentatt:
+                    if currentatt[self.fields['camera']]:
+                        cameradict = eval(currentatt[self.fields['camera']])
+                        display = ''
+                        for key,val in cameradict.iteritems():
+                            display = display + str(cameraBack[key]) + ": " + str(val) + "\n"
+                        display = display + "Raw: " + currentatt[self.fields['camera']]
+                        self.dlg.ui.txtFeedback.setText(display)
+                        self.selectedCamera = cameradict
+
+
+        except:
+            if self.logging == True:
+                self.logger.error('selectFeature')
+                self.logger.exception(traceback.format_exc())
+            self.iface.messageBar().pushMessage("Error", "selectFeature error. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+
+##
+
+
+##        layerlist = []
+##        layerdatasource = []
+##        for layer in self.iface.legendInterface().layers():
+##            layerlist.append(layer.name())
+##            layerdatasource.append(layer.source())
+
+        #QMessageBox.information( self.iface.mainWindow(),"Info", str(layerlist) + str(layerdatasource) )
 
 
     ############################################################################
@@ -3293,18 +3460,6 @@ class MilkMachine:
         #if a layer is active, put it in the viz entry
         self.active_layer()
 
-        # Populate the Export combo box
-        self.layerX = {}
-        ii = 0
-        self.dlg.ui.comboBox_export.clear()
-        #self.dlg.ui.comboBox_visualization_active.clear()
-        for layer in self.iface.legendInterface().layers():
-            if layer.type() == QgsMapLayer.VectorLayer:
-                self.dlg.ui.comboBox_export.addItem(layer.name())
-                #self.dlg.ui.comboBox_visualization_active.addItem(layer.name())
-                self.layerX[layer.name()] = {'layer source': layer.source()}
-                self.layerX[layer.name()] = {'index': ii}
-                ii += 1
 
         # Populate the Visualization Camera Combo boxes
         self.dlg.ui.comboBox_flyto_mode.clear()
@@ -3487,6 +3642,10 @@ class MilkMachine:
         self.dlg.ui.lineEdit__visualization_circle_rotations.setEnabled(False)
         self.dlg.ui.pushButton_circle_apply.setEnabled(False)
 
+        # Symbolize Select
+        self.dlg.ui.pushButton_visualization_camera_symbolize.setEnabled(False)
+        self.dlg.ui.pushButton_visualization_camera_tofollow.setEnabled(False)
+        self.dlg.ui.pushButton_visualization_camera_tocustom.setEnabled(False)
 
         # Placemarks/Rendering
 

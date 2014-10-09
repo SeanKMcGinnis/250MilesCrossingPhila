@@ -34,6 +34,9 @@
      <pointsize>8</pointsize>
     </font>
    </property>
+   <property name="cursor">
+    <cursorShape>ArrowCursor</cursorShape>
+   </property>
    <property name="acceptDrops">
     <bool>false</bool>
    </property>
@@ -1469,7 +1472,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>tilt:</string>
+         <string>*tilt:</string>
         </property>
        </widget>
        <widget class="QLineEdit" name="lineEdit_visualization_camera_longitude">
@@ -1501,7 +1504,7 @@
          </rect>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Latitude of the virtual camera. Degrees north or south of the Equator (0 degrees). Values range from −90 degrees to 90 degrees.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Latitude offset (in meters) from the point location.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_32">
@@ -1635,7 +1638,7 @@
          </rect>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Longitude of the virtual camera (eye point). Angular distance in degrees, relative to the Prime Meridian. Values west of the Meridian range from −180 to 0 degrees. Values east of the Meridian range from 0 to 180 degrees.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Longitude offset (in meters) from the point location.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_7">
@@ -1673,7 +1676,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>altitude:</string>
+         <string>*altitude:</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_8">
@@ -1692,7 +1695,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>heading:</string>
+         <string>*heading:</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_5">
@@ -1711,7 +1714,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>altitudemode:</string>
+         <string>*altitudemode:</string>
         </property>
        </widget>
        <widget class="QComboBox" name="comboBox_gxaltitudemode">
@@ -2128,6 +2131,116 @@
         </property>
        </widget>
       </widget>
+      <widget class="QWidget" name="tab_8">
+       <attribute name="title">
+        <string>Symbolize | Select</string>
+       </attribute>
+       <widget class="QPushButton" name="pushButton_visualization_camera_symbolize">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>10</y>
+          <width>75</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Clicking this button will populate the &amp;quot;symbcamera&amp;quot; field with the names of the &amp;quot;Tour&amp;quot; which have the same settings. The tour name will be appended with a number, which will match other rows if they are the same values and are next to one another. The camera fields that are compared to determine if they are the same are; &amp;quot;altitude&amp;quot;, &amp;quot;altitudemode&amp;quot;,&amp;quot;gxaltitudemode&amp;quot;,&amp;quot;gxhoriz&amp;quot;, &amp;quot;'roll&amp;quot; , &amp;quot;tilt&amp;quot;, &amp;quot;range&amp;quot;, and &amp;quot;follow_angle&amp;quot;.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt; If no tour camera is set for the row, then nothing will be placed there. Once complete, the user can change the symbology in the &amp;quot;Style&amp;quot; tab to set custom symbols to represent the different tour elements that are the same. The active layer must be in an edit session.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="text">
+         <string>Symbolize</string>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="chkActivate">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>50</y>
+          <width>171</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When selected, the user can use the mouse to select a point. The text window below will show the results.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="text">
+         <string>Enable Camera Point Select</string>
+        </property>
+       </widget>
+       <widget class="QTextEdit" name="txtFeedback">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>80</y>
+          <width>151</width>
+          <height>151</height>
+         </rect>
+        </property>
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Resultf of the &amp;quot;click &amp;amp; identify&amp;quot; using the camera point selector.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+       <widget class="Line" name="line">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>40</y>
+          <width>251</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_visualization_camera_tofollow">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>180</y>
+          <width>75</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Apply the &amp;lt;Camera&amp;gt; settings in the results window to the fields in the &amp;quot;Follow&amp;quot; tab.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="text">
+         <string>To Follow</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_visualization_camera_tocustom">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>210</y>
+          <width>75</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Apply the &amp;lt;Camera&amp;gt; settings in the results window to the fields in the &amp;quot;Follow&amp;quot; tab.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="text">
+         <string>To Custom</string>
+        </property>
+       </widget>
+      </widget>
      </widget>
     </widget>
     <widget class="QLabel" name="label_13">
@@ -2190,7 +2303,7 @@
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Create a custom or automated &amp;quot;Circle Around&amp;quot; &amp;lt;LookAt&amp;gt; visualization.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_6">
        <attribute name="title">
@@ -3235,447 +3348,6 @@
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="tab">
-    <attribute name="title">
-     <string>Development</string>
-    </attribute>
-    <widget class="QTextEdit" name="txtFeedback">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>430</x>
-       <y>60</y>
-       <width>171</width>
-       <height>31</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="chkActivate">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>440</x>
-       <y>20</y>
-       <width>171</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Activate
-(check)</string>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="comboBox_export">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>430</x>
-       <y>130</y>
-       <width>111</width>
-       <height>31</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QDialogButtonBox" name="buttonboxOkCancel">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>430</x>
-       <y>100</y>
-       <width>171</width>
-       <height>32</height>
-      </rect>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_43">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>30</y>
-       <width>111</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Lucida Sans</family>
-      </font>
-     </property>
-     <property name="text">
-      <string>Text Label</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton">
-     <property name="geometry">
-      <rect>
-       <x>160</x>
-       <y>30</y>
-       <width>91</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Lucida Sans</family>
-      </font>
-     </property>
-     <property name="text">
-      <string>PushButton</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_2">
-     <property name="geometry">
-      <rect>
-       <x>160</x>
-       <y>60</y>
-       <width>91</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Arial</family>
-      </font>
-     </property>
-     <property name="text">
-      <string>PushButton</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_45">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>60</y>
-       <width>111</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Arial</family>
-      </font>
-     </property>
-     <property name="text">
-      <string>Text Label</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_46">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>90</y>
-       <width>111</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Georgia</family>
-      </font>
-     </property>
-     <property name="text">
-      <string>Text Label</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_3">
-     <property name="geometry">
-      <rect>
-       <x>160</x>
-       <y>90</y>
-       <width>91</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Georgia</family>
-      </font>
-     </property>
-     <property name="text">
-      <string>PushButton</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_47">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>120</y>
-       <width>111</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Tahoma</family>
-      </font>
-     </property>
-     <property name="text">
-      <string>Text Label</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_4">
-     <property name="geometry">
-      <rect>
-       <x>160</x>
-       <y>120</y>
-       <width>91</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Tahoma</family>
-      </font>
-     </property>
-     <property name="text">
-      <string>PushButton</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_48">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>150</y>
-       <width>111</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Times New Roman</family>
-      </font>
-     </property>
-     <property name="text">
-      <string>Text Label</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_5">
-     <property name="geometry">
-      <rect>
-       <x>160</x>
-       <y>150</y>
-       <width>91</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Times New Roman</family>
-      </font>
-     </property>
-     <property name="text">
-      <string>PushButton</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_52">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>190</y>
-       <width>111</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Verdana</family>
-      </font>
-     </property>
-     <property name="text">
-      <string>Text Label</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_6">
-     <property name="geometry">
-      <rect>
-       <x>160</x>
-       <y>190</y>
-       <width>91</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Verdana</family>
-      </font>
-     </property>
-     <property name="text">
-      <string>PushButton</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_62">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>220</y>
-       <width>111</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Microsoft Sans Serif</family>
-      </font>
-     </property>
-     <property name="text">
-      <string>Text Label</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_7">
-     <property name="geometry">
-      <rect>
-       <x>160</x>
-       <y>220</y>
-       <width>91</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Microsoft Sans Serif</family>
-       <weight>50</weight>
-       <bold>false</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>PushButton</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_63">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>250</y>
-       <width>111</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>MS Shell Dlg 2</family>
-       <pointsize>6</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Text Label</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_8">
-     <property name="geometry">
-      <rect>
-       <x>160</x>
-       <y>250</y>
-       <width>91</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>MS Shell Dlg 2</family>
-       <pointsize>6</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>PushButton</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_64">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>280</y>
-       <width>111</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>MS Shell Dlg 2</family>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Text Label</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_9">
-     <property name="geometry">
-      <rect>
-       <x>160</x>
-       <y>280</y>
-       <width>91</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>MS Shell Dlg 2</family>
-       <pointsize>10</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>PushButton</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_65">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>310</y>
-       <width>111</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>MS Shell Dlg 2</family>
-       <pointsize>12</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Text Label</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_10">
-     <property name="geometry">
-      <rect>
-       <x>160</x>
-       <y>310</y>
-       <width>91</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>MS Shell Dlg 2</family>
-       <pointsize>12</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>PushButton</string>
-     </property>
-    </widget>
-   </widget>
   </widget>
  </widget>
  <tabstops>
@@ -3742,6 +3414,11 @@
   <tabstop>lineEdit__visualization_follow_follow_angle</tabstop>
   <tabstop>lineEdit__visualization_follow_smoother</tabstop>
   <tabstop>pushButton_follow_apply</tabstop>
+  <tabstop>pushButton_visualization_camera_symbolize</tabstop>
+  <tabstop>chkActivate</tabstop>
+  <tabstop>txtFeedback</tabstop>
+  <tabstop>pushButton_visualization_camera_tofollow</tabstop>
+  <tabstop>pushButton_visualization_camera_tocustom</tabstop>
   <tabstop>tabWidget_3</tabstop>
   <tabstop>lineEdit_visualization_lookat_altitude</tabstop>
   <tabstop>comboBox_lookat_altitudemode</tabstop>
@@ -3765,8 +3442,8 @@
   <tabstop>radioButton_filtering_quad</tabstop>
   <tabstop>radioButton_filtering_moving</tabstop>
   <tabstop>spinBox_filtering_moving</tabstop>
-  <tabstop>checkBox_filtering_showplot</tabstop>
   <tabstop>pushButton_filtering_apply</tabstop>
+  <tabstop>checkBox_filtering_showplot</tabstop>
   <tabstop>lineEdit_time_active</tabstop>
   <tabstop>checkBox_time_edit</tabstop>
   <tabstop>checkBox_time_before</tabstop>
@@ -3780,57 +3457,10 @@
   <tabstop>buttonExportTrack</tabstop>
   <tabstop>pushButton_TrackInfo</tabstop>
   <tabstop>pushButton_google_earth</tabstop>
-  <tabstop>chkActivate</tabstop>
-  <tabstop>txtFeedback</tabstop>
-  <tabstop>buttonboxOkCancel</tabstop>
-  <tabstop>comboBox_export</tabstop>
-  <tabstop>pushButton</tabstop>
-  <tabstop>pushButton_2</tabstop>
-  <tabstop>pushButton_3</tabstop>
-  <tabstop>pushButton_4</tabstop>
-  <tabstop>pushButton_5</tabstop>
-  <tabstop>pushButton_6</tabstop>
-  <tabstop>pushButton_7</tabstop>
-  <tabstop>pushButton_8</tabstop>
-  <tabstop>pushButton_9</tabstop>
-  <tabstop>pushButton_10</tabstop>
   <tabstop>checkBox_import_indicator</tabstop>
  </tabstops>
  <resources>
   <include location="resources.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>buttonboxOkCancel</sender>
-   <signal>accepted()</signal>
-   <receiver>MilkMachine</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonboxOkCancel</sender>
-   <signal>rejected()</signal>
-   <receiver>MilkMachine</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
