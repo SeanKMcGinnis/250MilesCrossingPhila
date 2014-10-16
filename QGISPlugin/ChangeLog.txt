@@ -101,3 +101,8 @@ Task: 		Create a select mouse that can select and identify <Camera> field values
 Task:		"ToCustom" button. If the user likes the values that have been selected by the camera click/identify, pressing the "ToCustom" button will auto-populate the values over to the fields in the "Custom" tab.
 Task:		"ToFollow" button. If the user likes the values that have been selected by the camera click/identify, pressing the "ToFollow" button will auto-populate the values over to the fields in the "Follow" tab.
 Task:		"Development" tab deprecated.
+
+--------------------------------------------
+Commit #31
+
+Task:		Add Z axis filtering (altitude). This required another field to hold the altitude values ("altitude"). Only moving average filtering can be performed on the altitude values in the filtering tab. If you have to update a layer that already has altitude values, it is suggested to rebuild the layer since there is now an additional field that needs to be built on import.
