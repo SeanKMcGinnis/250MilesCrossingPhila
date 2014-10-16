@@ -249,75 +249,112 @@ class MilkMachine:
     ############################################################################
     def filtering_apply(self):
         try:
+            self.ActiveLayer = self.iface.activeLayer()
+            self.fields = self.field_indices(self.ActiveLayer)
             if self.os == 'Windows':
                 import matplotlib.pyplot as plt
             selectList = []  #[[id, (x,y), altitude]]
             for f in self.ActiveLayer.selectedFeatures():
                 geom = f.geometry()
-                selectList.append([f.id(), geom.asPoint()])
+                alt = f.attributes()[self.fields['altitude']]
+                selectList.append([f.id(), geom.asPoint(), alt])
             # sort self.selectList by fid
             def getKey(item):
                 return item[0]
             selectList = sorted(selectList, key=getKey)  #[[id, (x,y), altitude]]
             # turn the coordinates into numpy arrays
-            xarr = []; yarr = []
+            xarr = []; yarr = []; zarr = []
             for val in selectList:
-                xarr.append(val[1][0]);yarr.append(val[1][1])
-            ptx = np.array(xarr); pty = np.array(yarr)
+                xarr.append(val[1][0]);yarr.append(val[1][1]);zarr.append(val[2])
+            ptx = np.array(xarr); pty = np.array(yarr); ptz = np.array(zarr)
 
+            self.logger.info('ptz: {0}'.format(ptz[1:100]))
             if self.dlg.ui.radioButton_filtering_moving.isChecked():  # rolling mean
                 window = self.dlg.ui.spinBox_filtering_moving.value() # this needs to be odd or throw an error.
                 if (window % 2 == 0): #even
                     self.iface.messageBar().pushMessage("Error", "Window size must be an odd integer", level=QgsMessageBar.CRITICAL, duration=7)
                 else: #odd
-                    xroll = TeatDip.rolling_window(ptx, window); yroll = TeatDip.rolling_window(pty, window)
-                    xmean = []; ymean = []
-                    pad = (window - 1)/2
-                    counter = 0
-                    for i in range(pad):
-                        xmean.append(ptx[i])
-                        counter += 1
-                    for xx in xroll:
-                        xmean.append(np.mean(xx))
-                        counter += 1
-                    lastx = ptx[-pad:]
-                    for l in lastx:
-                        xmean.append(l)
 
-                    counter = 0
-                    for i in range(pad):
-                        ymean.append(pty[i])
-                        counter += 1
-                    for yy in yroll:
-                        ymean.append(np.mean(yy))
-                        counter += 1
-                    lasty = pty[-pad:]
-                    for l in lasty:
-                        ymean.append(l)
+                    # If XY filtering
+                    if self.dlg.ui.radioButton_filtering_xy.isChecked():
+                        xroll = TeatDip.rolling_window(ptx, window); yroll = TeatDip.rolling_window(pty, window)
+                        xmean = []; ymean = []
+                        pad = (window - 1)/2
+                        counter = 0
+                        for i in range(pad):
+                            xmean.append(ptx[i])
+                            counter += 1
+                        for xx in xroll:
+                            xmean.append(np.mean(xx))
+                            counter += 1
+                        lastx = ptx[-pad:]
+                        for l in lastx:
+                            xmean.append(l)
 
-                    if self.dlg.ui.checkBox_filtering_showplot.isChecked() and self.os == 'Windows':
-                        plt.plot(ptx,pty, 'b.', markersize=15)
-                        plt.plot(xmean,ymean,'r-',linewidth=2)
-                        plt.plot(xmean,ymean,'r.',markersize=15)
-                        plt.xlabel('Longitude', size=10); plt.ylabel('Latitude', size=10); plt.axis('equal')
-                        plt.title("Filtering: Blue = Original, Red = Filtered", size=20)
-                        plt.show()
+                        counter = 0
+                        for i in range(pad):
+                            ymean.append(pty[i])
+                            counter += 1
+                        for yy in yroll:
+                            ymean.append(np.mean(yy))
+                            counter += 1
+                        lasty = pty[-pad:]
+                        for l in lasty:
+                            ymean.append(l)
 
-                    #self.logger.info('len ptx: {0}, len filtered: {1}, len selected: {2}'.format(len(ptx),len(xmean), len(selectList)))
+                        if self.dlg.ui.checkBox_filtering_showplot.isChecked() and self.os == 'Windows':
+                            plt.plot(ptx,pty, 'b.', markersize=15)
+                            plt.plot(xmean,ymean,'r-',linewidth=2)
+                            plt.plot(xmean,ymean,'r.',markersize=15)
+                            plt.xlabel('Longitude', size=10); plt.ylabel('Latitude', size=10); plt.axis('equal')
+                            plt.title("Filtering: Blue = Original, Red = Filtered", size=20)
+                            plt.show()
 
-                    self.ActiveLayer.startEditing()
-                    self.ActiveLayer.beginEditCommand('Moving Average Filter')
-                    for i,f in enumerate(selectList):    #[[id, (x,y), altitude]]
+                        #self.logger.info('len ptx: {0}, len filtered: {1}, len selected: {2}'.format(len(ptx),len(xmean), len(selectList)))
 
-                        fet = QgsGeometry.fromPoint(QgsPoint(xmean[i],ymean[i]))
-                        self.ActiveLayer.changeGeometry(f[0],fet)
+                        self.ActiveLayer.startEditing()
+                        self.ActiveLayer.beginEditCommand('Moving Average Filter')
+                        for i,f in enumerate(selectList):    #[[id, (x,y), altitude]]
 
-                    self.ActiveLayer.endEditCommand()
-                    self.canvas.refresh()
+                            fet = QgsGeometry.fromPoint(QgsPoint(xmean[i],ymean[i]))
+                            self.ActiveLayer.changeGeometry(f[0],fet)
 
-                    self.iface.messageBar().pushMessage("Success", "Applied interpolation to points", level=QgsMessageBar.INFO, duration=5)
+                        self.ActiveLayer.endEditCommand()
+                        self.canvas.refresh()
 
-            if self.dlg.ui.radioButton_filtering_linear.isChecked():  # Linear Regression
+                        self.iface.messageBar().pushMessage("Success", "Applied interpolation to XY points", level=QgsMessageBar.INFO, duration=5)
+
+                    # z filtering
+                    if self.dlg.ui.radioButton_filtering_z.isChecked():
+                        zroll = TeatDip.rolling_window(ptz, window)
+                        self.logger.info('zroll: {0}'.format(zroll[1:100]))
+                        zmean = []
+                        pad = (window - 1)/2
+                        counter = 0
+                        for i in range(pad):
+                            zmean.append(ptz[i])
+                            counter += 1
+                        for zz in zroll:
+                            zmean.append(np.mean(zz))
+                            counter += 1
+                        lastz = ptz[-pad:]
+                        for l in lastz:
+                            zmean.append(l)
+
+                        self.logger.info('zmean: {0}'.format(zmean[1:100]))
+
+                        self.ActiveLayer.startEditing()
+                        self.ActiveLayer.beginEditCommand('Moving Average Filter')
+                        for i,f in enumerate(selectList):    #[[id, (x,y), altitude]]
+                            self.ActiveLayer.changeAttributeValue(f[0], self.fields['altitude'], round(float(zmean[i]),2))
+                            self.logger.info('zmain i {0}'.format(zmean[i]))
+                        self.ActiveLayer.endEditCommand()
+                        self.canvas.refresh()
+
+                        self.iface.messageBar().pushMessage("Success", "Applied interpolation to Z points", level=QgsMessageBar.INFO, duration=5)
+
+
+            if self.dlg.ui.radioButton_filtering_linear.isChecked() and self.dlg.ui.radioButton_filtering_xy.isChecked():  # Linear Regression
                 #slope, intercept, r_value, p_value, std_err = stats.linregress(ptx,pty)
                 (m,b) = np.polyfit(ptx,pty,1)
                 yp = np.polyval([m,b],ptx)
@@ -342,8 +379,11 @@ class MilkMachine:
 
                 self.iface.messageBar().pushMessage("Success", "Applied interpolation to points", level=QgsMessageBar.INFO, duration=5)
 
+            elif self.dlg.ui.radioButton_filtering_linear.isChecked() and self.dlg.ui.radioButton_filtering_z.isChecked():
+                self.iface.messageBar().pushMessage("Error", "Linear can only be used for X,Y filtering", level=QgsMessageBar.CRITICAL, duration=7)
 
-            if self.dlg.ui.radioButton_filtering_quad.isChecked():  # Quadratic Regression
+
+            if self.dlg.ui.radioButton_filtering_quad.isChecked() and self.dlg.ui.radioButton_filtering_xy.isChecked():  # Quadratic Regression
                 #slope, intercept, r_value, p_value, std_err = stats.linregress(ptx,pty)
                 (a,b,c) = np.polyfit(ptx,pty,2)
                 yp = np.polyval([a,b,c],ptx)
@@ -369,8 +409,8 @@ class MilkMachine:
 
                 self.iface.messageBar().pushMessage("Success", "Applied quadratic interpolation to points", level=QgsMessageBar.INFO, duration=5)
 
-
-
+            elif self.dlg.ui.radioButton_filtering_quad.isChecked() and self.dlg.ui.radioButton_filtering_z.isChecked():
+                self.iface.messageBar().pushMessage("Error", "Quadratic can only be used for X,Y filtering", level=QgsMessageBar.CRITICAL, duration=7)
 
         except:
             self.dlg.ui.checkBox_filtering_edit.setChecked(False)
@@ -405,6 +445,8 @@ class MilkMachine:
                         if len(self.selectList) >= 1:
 
                             # filters
+                            self.dlg.ui.radioButton_filtering_xy.setEnabled(True)
+                            self.dlg.ui.radioButton_filtering_z.setEnabled(True)
                             self.dlg.ui.radioButton_filtering_linear.setEnabled(True)
                             self.dlg.ui.radioButton_filtering_quad.setEnabled(True)
                             self.dlg.ui.radioButton_filtering_moving.setEnabled(True)
@@ -421,6 +463,8 @@ class MilkMachine:
             else:  # checkbox is false, clear shit out
 
                 # filters
+                self.dlg.ui.radioButton_filtering_xy.setEnabled(False)
+                self.dlg.ui.radioButton_filtering_z.setEnabled(False)
                 self.dlg.ui.radioButton_filtering_linear.setEnabled(False)
                 self.dlg.ui.radioButton_filtering_quad.setEnabled(False)
                 self.dlg.ui.radioButton_filtering_moving.setEnabled(False)
@@ -753,6 +797,7 @@ class MilkMachine:
         try:
             self.ActiveLayer = self.iface.activeLayer()
             self.fields = self.field_indices(self.ActiveLayer)
+            self.logger.info('self fields {0}'.format(self.fields))
             # make a dictionary of all icon parameters
             model = {'link': None, 'longitude': None, 'latitude': None, 'altitude' : None, 'scale': None}
 
@@ -770,16 +815,17 @@ class MilkMachine:
             features = self.cLayer.selectedFeatures()
             for f in features: #QgsFeature
                 self.selectList.append(f.id())  #[u'689',u'2014-06-06 13:30:54']  #[u'2014/06/06 10:30:10', u'Time:10:30:10, Latitude: 39.966531, Longitude: -75.172003, Speed: 3.382047, Altitude: 1.596764']
-                try:
-                    model_altitude.append(f.attributes()[self.fields['descriptio']].split(",")[4].split(': ')[1])
-                except:
-                    try:
-                        model_altitude.append(f.attributes()[self.fields['Descriptio']].split(",")[4].split(': ')[1])
-                    except:
-                        self.logger.error('model_apply destroy edit session')
-                        self.logger.exception(traceback.format_exc())
-                        self.logger.info('self.fields keys {0}'.format(self.fields.keys))
-                        self.iface.messageBar().pushMessage("Error", "Failed to apply model style parameters. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+                model_altitude.append(f.attributes()[self.fields['altitude']])
+##                try:
+##                    model_altitude.append(f.attributes()[self.fields['descriptio']].split(",")[4].split(': ')[1])
+##                except:
+##                    try:
+##                        model_altitude.append(f.attributes()[self.fields['Descriptio']].split(",")[4].split(': ')[1])
+##                    except:
+##                        self.logger.error('model_apply destroy edit session')
+##                        self.logger.exception(traceback.format_exc())
+##                        self.logger.info('self.fields keys {0}'.format(self.fields.keys))
+##                        self.iface.messageBar().pushMessage("Error", "Failed to apply model style parameters. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
 
             try:
                 if len(self.selectList) >= 1:
@@ -1902,7 +1948,7 @@ class MilkMachine:
                 QgsVectorFileWriter.writeAsVectorFormat(kmllayer, shapepath_dup, "utf-8", None, "ESRI Shapefile")  # duplicate of original
                 #bring the shapefile back in, and render it on the map
                 shaper = QgsVectorLayer(shapepath, layername, "ogr")
-                shaper.dataProvider().addAttributes( [QgsField("datetime",QVariant.String), QgsField("audio",QVariant.String), QgsField("camera",QVariant.String), QgsField("flyto",QVariant.String), QgsField("iconstyle", QVariant.String), QgsField("labelstyle", QVariant.String), QgsField("model", QVariant.String), QgsField("lookat", QVariant.String) , QgsField("symbtour", QVariant.String)] )
+                shaper.dataProvider().addAttributes( [QgsField("datetime",QVariant.String), QgsField("audio",QVariant.String), QgsField("camera",QVariant.String), QgsField("flyto",QVariant.String), QgsField("iconstyle", QVariant.String), QgsField("labelstyle", QVariant.String), QgsField("model", QVariant.String), QgsField("lookat", QVariant.String) , QgsField("symbtour", QVariant.String), QgsField("altitude",QVariant.Double)])
                 shaper.updateFields()
 
 
@@ -1923,29 +1969,24 @@ class MilkMachine:
                 # calculate the datetime field
                 idx = self.fields['datetime']  #feature.attributes()[idx]
                 fid_dt = []
+                model_altitude = []
                 cc = 0
                 for f in shaper.getFeatures():
-                    currentatt = f.attributes()[0]
+                    currentatt = f.attributes()[0]  # this should be self.fields['Name']
                     pointdate = currentatt.split(" ")[0]  #2014/06/06
                     pointtime = currentatt.split(" ")[1]
                     current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
                     fid_dt.append(current_dt.strftime("%Y/%m/%d %X"))
-##                    dt = current_dt.strftime("%Y/%m/%d %X")
-##                    attrs = {idx : dt}
-##                    shaper.dataProvider().changeAttributeValues({ cc : attrs })
+                    try:
+                        model_altitude.append([f.id(), round(float(f.attributes()[self.fields['descriptio']].split(",")[4].split(': ')[1]),2) ])
+                    except:
+                        try:
+                            model_altitude.append([f.id(), round(float(f.attributes()[self.fields['Descriptio']].split(",")[4].split(': ')[1]),2)])
+                        except:
+                            model_altitude.append([f.id(),None])
+
                     cc += 1
 
-##                self.ActiveLayer.beginEditCommand("Rendering Editing")
-##                if len(self.selectList) >= 1:
-##                    self.ActiveLayer.beginEditCommand("Rendering Editing")
-##                    for f in self.selectList:
-##                        self.ActiveLayer.changeAttributeValue(f, self.fields['model'], str(model))
-##                    self.ActiveLayer.updateFields()
-##                    self.ActiveLayer.endEditCommand()
-
-##                for i,v in enumerate(fid_dt):
-##                    attrs = {idx : v}
-##                    shaper.dataProvider().changeAttributeValues({ i : attrs })
 
                 shaper.startEditing()
                 shaper.beginEditCommand('datetime')
@@ -1953,6 +1994,15 @@ class MilkMachine:
                     shaper.changeAttributeValue(i, idx, v)
                 shaper.endEditCommand()
                 shaper.commitChanges()
+
+                shaper.startEditing()
+                shaper.beginEditCommand('altitude')
+                for i,v in enumerate(model_altitude):
+                    shaper.changeAttributeValue(v[0], self.fields['altitude'], v[1])
+                shaper.endEditCommand()
+                shaper.commitChanges()
+
+
 
 
                 # make the line shapefile
@@ -3712,6 +3762,8 @@ class MilkMachine:
         ###################
         # Filtering
         # filters
+        self.dlg.ui.radioButton_filtering_xy.setEnabled(False)
+        self.dlg.ui.radioButton_filtering_z.setEnabled(False)
         self.dlg.ui.radioButton_filtering_linear.setEnabled(False)
         self.dlg.ui.radioButton_filtering_quad.setEnabled(False)
         self.dlg.ui.radioButton_filtering_moving.setEnabled(False)

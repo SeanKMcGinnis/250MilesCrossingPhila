@@ -2843,139 +2843,252 @@
       <string>Filter Points</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_filtering_apply">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
+    <widget class="QFrame" name="frame">
      <property name="geometry">
       <rect>
-       <x>110</x>
-       <y>220</y>
-       <width>61</width>
-       <height>23</height>
+       <x>50</x>
+       <y>190</y>
+       <width>240</width>
+       <height>200</height>
       </rect>
      </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Apply the selected filter to the selected points in the active layer. To roll back these edits, select &amp;quot;Cancel for selected layer&amp;quot; in the editor options.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
      </property>
-     <property name="text">
-      <string>Apply</string>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
      </property>
-     <property name="icon">
-      <iconset resource="resources.qrc">
-       <normaloff>:/plugins/milkmachine/triangle.png</normaloff>:/plugins/milkmachine/triangle.png</iconset>
-     </property>
+     <widget class="QCheckBox" name="checkBox_filtering_showplot">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>160</y>
+        <width>81</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If selected, a scatterplot will be created to show the original and filtered points. Currently on supported on Windows.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Show Plot</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_66">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>120</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Window Size:</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioButton_filtering_linear">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>40</y>
+        <width>141</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;After selecting a number of points within an edit session, the linear regression filter will place all points along a line. The line is fit using a least squares regression.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Linear</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioButton_filtering_quad">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>65</y>
+        <width>82</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;After selecting a number of points within an edit session, the quadratic regression filter will place all points along a line. The line is fit using a least squares regression.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Quadratic</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="spinBox_filtering_moving">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>120</y>
+        <width>42</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;An odd positive integer.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="minimum">
+       <number>3</number>
+      </property>
+      <property name="singleStep">
+       <number>2</number>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_filtering_apply">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>160</y>
+        <width>61</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Apply the selected filter to the selected points in the active layer. To roll back these edits, select &amp;quot;Cancel for selected layer&amp;quot; in the editor options.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Apply</string>
+      </property>
+      <property name="icon">
+       <iconset resource="resources.qrc">
+        <normaloff>:/plugins/milkmachine/triangle.png</normaloff>:/plugins/milkmachine/triangle.png</iconset>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioButton_filtering_moving">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>90</y>
+        <width>111</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;After selecting a number of points within an edit session, the moving average filter will apply a moving window average to the points. The window will exclude the points on the end, since the window will not be able to &amp;quot;see&amp;quot; past the selection. Those points at the beginning and end will not change their coordinates. The window must be an odd integer in order for the window to be centered on each point. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Moving Average</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_43">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>10</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Filtering Options</string>
+      </property>
+     </widget>
     </widget>
-    <widget class="QRadioButton" name="radioButton_filtering_linear">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
+    <widget class="QFrame" name="frame_2">
      <property name="geometry">
       <rect>
-       <x>110</x>
-       <y>70</y>
-       <width>141</width>
-       <height>20</height>
+       <x>50</x>
+       <y>110</y>
+       <width>240</width>
+       <height>80</height>
       </rect>
      </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;After selecting a number of points within an edit session, the linear regression filter will place all points along a line. The line is fit using a least squares regression.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
      </property>
-     <property name="text">
-      <string>Linear</string>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
      </property>
-    </widget>
-    <widget class="QRadioButton" name="radioButton_filtering_moving">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>120</y>
-       <width>111</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;After selecting a number of points within an edit session, the moving average filter will apply a moving window average to the points. The window will exclude the points on the end, since the window will not be able to &amp;quot;see&amp;quot; past the selection. Those points at the beginning and end will not change their coordinates. The window must be an odd integer in order for the window to be centered on each point. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="text">
-      <string>Moving Average</string>
-     </property>
-    </widget>
-    <widget class="QRadioButton" name="radioButton_filtering_quad">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>95</y>
-       <width>82</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;After selecting a number of points within an edit session, the quadratic regression filter will place all points along a line. The line is fit using a least squares regression.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="text">
-      <string>Quadratic</string>
-     </property>
-    </widget>
-    <widget class="QSpinBox" name="spinBox_filtering_moving">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>220</x>
-       <y>150</y>
-       <width>42</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;An odd positive integer.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="minimum">
-      <number>3</number>
-     </property>
-     <property name="singleStep">
-      <number>2</number>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_66">
-     <property name="geometry">
-      <rect>
-       <x>140</x>
-       <y>150</y>
-       <width>81</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Window Size:</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="checkBox_filtering_showplot">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>220</y>
-       <width>81</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If selected, a scatterplot will be created to show the original and filtered points. Currently on supported on Windows.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="text">
-      <string>Show Plot</string>
-     </property>
+     <widget class="QLabel" name="label_45">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>20</y>
+        <width>131</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Choose Filtering Axis</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioButton_filtering_xy">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>50</y>
+        <width>41</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Filter the X and Y axis (i.e. the longitude and latitude axes, respectively). This will filter the actual QGIS X and Y point locations (not found in the attribute table).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>X, Y</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioButton_filtering_z">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>50</y>
+        <width>82</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Filter the Z axis (i.e. altitude). This filters the &amp;quot;altitude&amp;quot; field.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Z</string>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_2">
@@ -3438,12 +3551,14 @@
   <tabstop>pushButton_circle_apply</tabstop>
   <tabstop>lineEdit_filtering_active</tabstop>
   <tabstop>checkBox_filtering_edit</tabstop>
+  <tabstop>radioButton_filtering_xy</tabstop>
+  <tabstop>radioButton_filtering_z</tabstop>
   <tabstop>radioButton_filtering_linear</tabstop>
   <tabstop>radioButton_filtering_quad</tabstop>
   <tabstop>radioButton_filtering_moving</tabstop>
   <tabstop>spinBox_filtering_moving</tabstop>
-  <tabstop>pushButton_filtering_apply</tabstop>
   <tabstop>checkBox_filtering_showplot</tabstop>
+  <tabstop>pushButton_filtering_apply</tabstop>
   <tabstop>lineEdit_time_active</tabstop>
   <tabstop>checkBox_time_edit</tabstop>
   <tabstop>checkBox_time_before</tabstop>
