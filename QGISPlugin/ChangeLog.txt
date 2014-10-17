@@ -106,3 +106,9 @@ Task:		"Development" tab deprecated.
 Commit #31
 
 Task:		Add Z axis filtering (altitude). This required another field to hold the altitude values ("altitude"). Only moving average filtering can be performed on the altitude values in the filtering tab. If you have to update a layer that already has altitude values, it is suggested to rebuild the layer since there is now an additional field that needs to be built on import.
+
+--------------------------------------------
+Commit #32
+
+Task:		Remove conflicts between <Camera> and <LookAt>. If a custom <Camera> or follow behind is applied, then any conflicting <LookAt> will be removed from the "lookat" field. Likewise for <LookAt>.
+Task:		Success messages for "Apply" buttons.
