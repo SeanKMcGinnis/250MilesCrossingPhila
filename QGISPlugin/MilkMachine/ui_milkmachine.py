@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\Edward\.qgis2\python\plugins\MilkMachine\ui_milkmachine.ui'
 #
-# Created: Wed Oct 15 21:52:56 2014
+# Created: Thu Oct 16 21:22:05 2014
 #      by: PyQt4 UI code generator 4.10.2
 #
 # WARNING! All changes made in this file will be lost!

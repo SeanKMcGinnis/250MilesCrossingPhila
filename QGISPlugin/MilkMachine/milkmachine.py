@@ -733,7 +733,7 @@ class MilkMachine:
                     self.ActiveLayer.endEditCommand()
 ##                    self.ActiveLayer.endEditCommand()
 
-
+            self.iface.messageBar().pushMessage("Success", "Time modification applied.", level=QgsMessageBar.INFO, duration=5)
 
 
         except:
@@ -846,7 +846,7 @@ class MilkMachine:
                 self.logger.exception(traceback.format_exc())
                 self.iface.messageBar().pushMessage("Error", "Failed to apply model style parameters. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
 
-
+            self.iface.messageBar().pushMessage("Success", "Model applied to selected points.", level=QgsMessageBar.INFO, duration=5)
 
         except:
             global NOW, pointid, ClockDateTime
@@ -998,6 +998,8 @@ class MilkMachine:
                 self.logger.error('icon_apply destroy edit session')
                 self.logger.exception(traceback.format_exc())
                 self.iface.messageBar().pushMessage("Error", "Failed to apply icon style parameters. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+            self.iface.messageBar().pushMessage("Success", "Icon applied.", level=QgsMessageBar.INFO, duration=5)
         except:
             global NOW, pointid, ClockDateTime
             NOW = None; pointid = None; ClockDateTime = None
@@ -1042,6 +1044,8 @@ class MilkMachine:
                 self.logger.error('label_apply destroy edit session')
                 self.logger.exception(traceback.format_exc())
                 self.iface.messageBar().pushMessage("Error", "Failed to apply label style parameters. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+            self.iface.messageBar().pushMessage("Success", "Label applied.", level=QgsMessageBar.INFO, duration=5)
 
         except:
             global NOW, pointid, ClockDateTime
@@ -1278,6 +1282,7 @@ class MilkMachine:
                             lookattemp[lookatAlpha[key]] = value
                         self.ActiveLayer.changeAttributeValue(f[0], self.fields['lookat'], str(lookattemp))
                         self.ActiveLayer.changeAttributeValue(f[0], self.fields['flyto'], str(flyto))
+                        self.ActiveLayer.changeAttributeValue(f[0], self.fields['camera'], '')
                     self.ActiveLayer.endEditCommand()
                 else:
                     QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "Please select points in the active layer to be edited." )
@@ -1286,6 +1291,8 @@ class MilkMachine:
                 self.logger.error('lookat_apply destroy edit session')
                 self.logger.exception(traceback.format_exc())
                 self.iface.messageBar().pushMessage("Error", "Failed to apply lookat view parameters. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+            self.iface.messageBar().pushMessage("Success", "LookAt applied, any conflicting Camera removed.", level=QgsMessageBar.INFO, duration=5)
 
         except:
             global NOW, pointid, ClockDateTime
@@ -1364,15 +1371,17 @@ class MilkMachine:
                 if len(self.selectList) >= 1:
                     self.ActiveLayer.beginEditCommand("LookAt Editing")
                     for i,f in enumerate(self.selectList):
-                        if i > 0:
-                            break
-                        if len(f) == 3:
-                            lookat['altitude'] = f[2]
-                        lookat['longitude'] = BigXY[0]; lookat['latitude'] = BigXY[1]
-                        for key,value in lookat.iteritems():
-                            lookattemp[lookatAlpha[key]] = value
-                        self.ActiveLayer.changeAttributeValue(f[0], self.fields['lookat'], str(lookattemp))
-                        self.ActiveLayer.changeAttributeValue(f[0], self.fields['flyto'], str(flyto))
+                        if i == 0:
+                            if len(f) == 3:
+                                lookat['altitude'] = f[2]
+                            lookat['longitude'] = BigXY[0]; lookat['latitude'] = BigXY[1]
+                            for key,value in lookat.iteritems():
+                                lookattemp[lookatAlpha[key]] = value
+                            self.ActiveLayer.changeAttributeValue(f[0], self.fields['lookat'], str(lookattemp))
+                            self.ActiveLayer.changeAttributeValue(f[0], self.fields['flyto'], str(flyto))
+                            self.ActiveLayer.changeAttributeValue(f[0], self.fields['camera'], '')
+                        else:
+                            self.ActiveLayer.changeAttributeValue(f[0], self.fields['camera'], '')
                     self.ActiveLayer.endEditCommand()
                 else:
                     QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "Please select points in the active layer to be edited." )
@@ -1381,6 +1390,9 @@ class MilkMachine:
                 self.logger.error('lookat_apply destroy edit session')
                 self.logger.exception(traceback.format_exc())
                 self.iface.messageBar().pushMessage("Error", "Failed to apply lookat view parameters. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+            self.iface.messageBar().pushMessage("Success", "Circle Around applied, any conflicting Camera removed.", level=QgsMessageBar.INFO, duration=5)
+
 
         except:
             global NOW, pointid, ClockDateTime
@@ -1519,10 +1531,8 @@ class MilkMachine:
                             cameratemp[cameraAlpha[key]] = value
 
                         self.ActiveLayer.changeAttributeValue(f[0], self.fields['camera'], str(cameratemp))
-
-                        #self.ActiveLayer.changeAttributeValue(f[0], self.fields['flyto'], str(flyto))
                         self.ActiveLayer.changeAttributeValue(f[0], self.fields['flyto'], str(newlistwithflyto[i]))
-
+                        self.ActiveLayer.changeAttributeValue(f[0], self.fields['lookat'], '') # get rid of lookats
                     self.ActiveLayer.endEditCommand()
                 else:
                     QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "Please select points in the active layer to be edited." )
@@ -1532,6 +1542,7 @@ class MilkMachine:
                 self.logger.exception(traceback.format_exc())
                 self.iface.messageBar().pushMessage("Error", "Failed to apply camera view parameters for Follow Tour. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
 
+            self.iface.messageBar().pushMessage("Success", "Follow Behind applied, any conflicting Lookat removed", level=QgsMessageBar.INFO, duration=5)
 
 
         except:
@@ -1869,8 +1880,8 @@ class MilkMachine:
                             cameratemp[cameraAlpha[key]] = value
 
                         self.ActiveLayer.changeAttributeValue(f, self.fields['camera'], str(cameratemp))
-                        #self.ActiveLayer.changeAttributeValue(f, self.fields['camera'], str(camera))
                         self.ActiveLayer.changeAttributeValue(f, self.fields['flyto'], str(flyto))
+                        self.ActiveLayer.changeAttributeValue(f, self.fields['lookat'], '') # get rid of lookats
                     #self.ActiveLayer.updateFields()
                     self.ActiveLayer.endEditCommand()
                 else:
@@ -1881,7 +1892,7 @@ class MilkMachine:
                 self.logger.exception(traceback.format_exc())
                 self.iface.messageBar().pushMessage("Error", "Failed to apply camera view parameters. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
 
-
+            self.iface.messageBar().pushMessage("Success", "Camera applied, any conflicting LookAt removed.", level=QgsMessageBar.INFO, duration=5)
 
         except:
             global NOW, pointid, ClockDateTime
