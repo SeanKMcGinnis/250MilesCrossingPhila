@@ -112,3 +112,13 @@ Commit #32
 
 Task:		Remove conflicts between <Camera> and <LookAt>. If a custom <Camera> or follow behind is applied, then any conflicting <LookAt> will be removed from the "lookat" field. Likewise for <LookAt>.
 Task:		Success messages for "Apply" buttons.
+
+--------------------------------------------
+Commit #33
+
+Task:		Updated the linear regression to a geometric mean regression (i.e. Type II).
+Task:		Provided the ability to weigh each axis in the linear regression to enable total control over how the regression affects the points.
+Task:		Added the ability to "Scale" the Z (altitude) values. The user must provide at least one value. If one is left blank it will default to the current max/min value.
+Task:		Switches were put in so that only filters that apply to X,Y are enabled and Z are enabled.
+Task:		Success messages put into the filters.
+Task:		Plotting for Scaling was built (the others need improvement).
