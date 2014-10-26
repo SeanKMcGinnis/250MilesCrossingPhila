@@ -200,6 +200,8 @@ class MilkMachine:
         QObject.connect(self.dlg.ui.pushButton_visualization_camera_symbolize, SIGNAL("clicked()"), self.camera_symbolize)
         QObject.connect(self.dlg.ui.pushButton_visualization_camera_tofollow, SIGNAL("clicked()"), self.tofollow)
         QObject.connect(self.dlg.ui.pushButton_visualization_camera_tocustom, SIGNAL("clicked()"), self.tocustom)
+        QObject.connect(self.dlg.ui.radioButton_filtering_xy,SIGNAL("toggled(bool)"),self.xycheck)
+        QObject.connect(self.dlg.ui.radioButton_filtering_z,SIGNAL("toggled(bool)"),self.zcheck)
 
         # Fonts
         if self.os == 'other':
@@ -353,16 +355,31 @@ class MilkMachine:
 
                         self.iface.messageBar().pushMessage("Success", "Applied interpolation to Z points", level=QgsMessageBar.INFO, duration=5)
 
+            # Linear Regression ------------------
+            if self.dlg.ui.radioButton_filtering_linear.isChecked() and self.dlg.ui.radioButton_filtering_xy.isChecked():
+                xweight = float(self.dlg.ui.doubleSpinBox_filtering_xweight.value())
+                yweight = float(self.dlg.ui.doubleSpinBox_filtering_yweight.value())
 
-            if self.dlg.ui.radioButton_filtering_linear.isChecked() and self.dlg.ui.radioButton_filtering_xy.isChecked():  # Linear Regression
                 #slope, intercept, r_value, p_value, std_err = stats.linregress(ptx,pty)
                 (m,b) = np.polyfit(ptx,pty,1)
-                yp = np.polyval([m,b],ptx)
+                yp = np.polyval([m,b],ptx)  # ptx, yp
+
+                (m2,b2) = np.polyfit(pty,ptx,1)
+                xp = np.polyval([m2,b2],pty)  #xp, pty
+
+                xdiff = (xp - ptx) / float(2)
+                ydiff = (yp - pty) / float(2)
+                xgeo = ptx + (xdiff * xweight)
+                ygeo = pty + (ydiff * yweight)
+
 
                 if self.dlg.ui.checkBox_filtering_showplot.isChecked() and self.os == 'Windows':
                     plt.plot(ptx,pty, 'b.', markersize=15)
                     plt.plot(ptx,yp,'r-',linewidth=2)
                     plt.plot(ptx,yp,'r.', markersize=15)
+                    plt.plot(xp,pty,'g-',linewidth=2)
+                    plt.plot(xp,pty,'g.', markersize=15)
+                    plt.plot(xgeo,ygeo,'m.', markersize=15)
                     plt.xlabel('Longitude', size=10); plt.ylabel('Latitude', size=10); plt.axis('equal')
                     plt.title("Filtering: Blue = Original, Red = Filtered", size=20)
                     plt.show()
@@ -370,10 +387,8 @@ class MilkMachine:
                 self.ActiveLayer.startEditing()
                 self.ActiveLayer.beginEditCommand('Linear Filter')
                 for i,f in enumerate(selectList):    #[[id, (x,y), altitude]]
-
-                    fet = QgsGeometry.fromPoint(QgsPoint(ptx[i],yp[i]))
+                    fet = QgsGeometry.fromPoint(QgsPoint(xgeo[i],ygeo[i]))  #fet = QgsGeometry.fromPoint(QgsPoint(ptx[i],yp[i]))
                     self.ActiveLayer.changeGeometry(f[0],fet)
-
                 self.ActiveLayer.endEditCommand()
                 self.canvas.refresh()
 
@@ -382,8 +397,8 @@ class MilkMachine:
             elif self.dlg.ui.radioButton_filtering_linear.isChecked() and self.dlg.ui.radioButton_filtering_z.isChecked():
                 self.iface.messageBar().pushMessage("Error", "Linear can only be used for X,Y filtering", level=QgsMessageBar.CRITICAL, duration=7)
 
-
-            if self.dlg.ui.radioButton_filtering_quad.isChecked() and self.dlg.ui.radioButton_filtering_xy.isChecked():  # Quadratic Regression
+            # Quadratic Regression ------------------
+            if self.dlg.ui.radioButton_filtering_quad.isChecked() and self.dlg.ui.radioButton_filtering_xy.isChecked():
                 #slope, intercept, r_value, p_value, std_err = stats.linregress(ptx,pty)
                 (a,b,c) = np.polyfit(ptx,pty,2)
                 yp = np.polyval([a,b,c],ptx)
@@ -412,6 +427,49 @@ class MilkMachine:
             elif self.dlg.ui.radioButton_filtering_quad.isChecked() and self.dlg.ui.radioButton_filtering_z.isChecked():
                 self.iface.messageBar().pushMessage("Error", "Quadratic can only be used for X,Y filtering", level=QgsMessageBar.CRITICAL, duration=7)
 
+            # Z Scaling ------------------
+            if self.dlg.ui.radioButton_filtering_zscale.isChecked() and self.dlg.ui.radioButton_filtering_z.isChecked():
+                zmin = np.min(ptz)
+                zmax = np.max(ptz)
+                zmintext = self.dlg.ui.lineEdit_filtering_min.text()
+                zmaxtext = self.dlg.ui.lineEdit_filtering_max.text()
+                if not zmintext and not zmaxtext:
+                    self.iface.messageBar().pushMessage("Error", "No values specified for Z Range", level=QgsMessageBar.CRITICAL, duration=7)
+                elif zmintext or zmaxtext:
+                    if zmintext:
+                        zmin2 = float(zmintext)
+                    else:
+                        zmin2 = zmin
+                    if zmaxtext:
+                        zmax2 = float(zmaxtext)
+                    else:
+                        zmax2 = zmax
+                    curr_range = abs(zmin - zmax)
+                    new_range = abs(zmin2 - zmax2)
+
+                    # center the range on 0
+                    ptz_centered = ptz - (zmax - zmin)*0.5
+                    # calculate the scale factor
+                    scaleX = new_range/curr_range
+                    # scale the centered data
+                    ptz_scaled = ptz_centered * scaleX
+                    # recenter the data using the middle of the range
+                    new_mid = zmax2 - (abs(zmin2 - zmax2)/2)
+                    ptz_new = (zmax2 - np.max(ptz_scaled)) + ptz_scaled
+
+                    if self.dlg.ui.checkBox_filtering_showplot.isChecked() and self.os == 'Windows':
+                        plt.plot(ptz,'b-',linewidth=2, label="Orginal")
+                        plt.plot(ptz, 'b.', markersize=15)
+                        plt.plot(ptz_new,'r-',linewidth=2, label="Scaled")
+                        plt.plot(ptz_new,'r.', markersize=15)
+                        plt.xlabel('Time', size=10); plt.ylabel('Altitude', size=10); plt.axis('equal')
+                        plt.title("Original; Min: {0}, Max: {1}, Range: {2}\nScaled; Min: {3}, Max: {4}, Range: {5}".format(np.min(ptz), np.max(ptz), curr_range, np.min(ptz_new), np.max(ptz_new), abs(np.min(ptz_new)-np.max(ptz_new))), size=12)
+                        plt.legend()
+                        plt.show()
+
+                    self.iface.messageBar().pushMessage("Success", "Applied Z Scaling to points.", level=QgsMessageBar.INFO, duration=5)
+
+
         except:
             self.dlg.ui.checkBox_filtering_edit.setChecked(False)
             global NOW, pointid, ClockDateTime
@@ -421,6 +479,61 @@ class MilkMachine:
                 self.logger.error('filtering function error')
                 self.logger.exception(trace)
             self.iface.messageBar().pushMessage("Error", "Filtering function error. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+    def xycheck(self,checked):
+        try:
+            if self.dlg.ui.radioButton_filtering_xy.isChecked():
+                self.dlg.ui.radioButton_filtering_linear.setEnabled(True)
+                self.dlg.ui.label_46.setEnabled(True)
+                self.dlg.ui.doubleSpinBox_filtering_xweight.setEnabled(True)
+                self.dlg.ui.label_47.setEnabled(True)
+                self.dlg.ui.label_66.setEnabled(True)
+                self.dlg.ui.doubleSpinBox_filtering_yweight.setEnabled(True)
+                self.dlg.ui.radioButton_filtering_quad.setEnabled(True)
+                self.dlg.ui.radioButton_filtering_moving.setEnabled(True)
+                self.dlg.ui.spinBox_filtering_moving.setEnabled(True)
+
+                self.dlg.ui.radioButton_filtering_zscale.setEnabled(False)
+                self.dlg.ui.label_48.setEnabled(False)
+                self.dlg.ui.lineEdit_filtering_min.setEnabled(False)
+                self.dlg.ui.label_52.setEnabled(False)
+                self.dlg.ui.lineEdit_filtering_max.setEnabled(False)
+        except:
+            self.dlg.ui.checkBox_filtering_edit.setChecked(False)
+            global NOW, pointid, ClockDateTime
+            NOW = None; pointid = None; ClockDateTime = None
+            if self.logging == True:
+                self.logger.error('filtering zcheck error')
+                self.logger.exception(traceback.format_exc())
+            self.iface.messageBar().pushMessage("Error", "Failed to turn on filtering fields. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+    def zcheck(self,checked):
+        try:
+            if self.dlg.ui.radioButton_filtering_z.isChecked():
+                # filters
+                self.dlg.ui.radioButton_filtering_linear.setEnabled(False)
+                self.dlg.ui.label_46.setEnabled(False)
+                self.dlg.ui.doubleSpinBox_filtering_xweight.setEnabled(False)
+                self.dlg.ui.label_47.setEnabled(False)
+                self.dlg.ui.label_66.setEnabled(False)
+                self.dlg.ui.doubleSpinBox_filtering_yweight.setEnabled(False)
+                self.dlg.ui.radioButton_filtering_quad.setEnabled(False)
+
+                self.dlg.ui.radioButton_filtering_moving.setEnabled(True)
+                self.dlg.ui.spinBox_filtering_moving.setEnabled(True)
+                self.dlg.ui.radioButton_filtering_zscale.setEnabled(True)
+                self.dlg.ui.label_48.setEnabled(True)
+                self.dlg.ui.lineEdit_filtering_min.setEnabled(True)
+                self.dlg.ui.label_52.setEnabled(True)
+                self.dlg.ui.lineEdit_filtering_max.setEnabled(True)
+        except:
+            self.dlg.ui.checkBox_filtering_edit.setChecked(False)
+            global NOW, pointid, ClockDateTime
+            NOW = None; pointid = None; ClockDateTime = None
+            if self.logging == True:
+                self.logger.error('filtering zcheck error')
+                self.logger.exception(traceback.format_exc())
+            self.iface.messageBar().pushMessage("Error", "Failed to turn on filtering fields. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
 
 
     def filtercheck(self,state):  # the checkbox is checked or unchecked for vis Editing
@@ -448,10 +561,21 @@ class MilkMachine:
                             self.dlg.ui.radioButton_filtering_xy.setEnabled(True)
                             self.dlg.ui.radioButton_filtering_z.setEnabled(True)
                             self.dlg.ui.radioButton_filtering_linear.setEnabled(True)
+                            self.dlg.ui.label_46.setEnabled(True)
+                            self.dlg.ui.doubleSpinBox_filtering_xweight.setEnabled(True)
+                            self.dlg.ui.label_47.setEnabled(True)
+                            self.dlg.ui.label_66.setEnabled(True)
+                            self.dlg.ui.doubleSpinBox_filtering_yweight.setEnabled(True)
                             self.dlg.ui.radioButton_filtering_quad.setEnabled(True)
                             self.dlg.ui.radioButton_filtering_moving.setEnabled(True)
                             self.dlg.ui.spinBox_filtering_moving.setEnabled(True)
 
+                            if self.dlg.ui.radioButton_filtering_z.isChecked():
+                                self.dlg.ui.radioButton_filtering_zscale.setEnabled(True)
+                                self.dlg.ui.label_48.setEnabled(True)
+                                self.dlg.ui.lineEdit_filtering_min.setEnabled(True)
+                                self.dlg.ui.label_52.setEnabled(True)
+                                self.dlg.ui.lineEdit_filtering_max.setEnabled(True)
                             # Apply Button
                             self.dlg.ui.pushButton_filtering_apply.setEnabled(True)
                             if self.os == 'Windows':
@@ -466,10 +590,19 @@ class MilkMachine:
                 self.dlg.ui.radioButton_filtering_xy.setEnabled(False)
                 self.dlg.ui.radioButton_filtering_z.setEnabled(False)
                 self.dlg.ui.radioButton_filtering_linear.setEnabled(False)
+                self.dlg.ui.label_46.setEnabled(False)
+                self.dlg.ui.doubleSpinBox_filtering_xweight.setEnabled(False)
+                self.dlg.ui.label_47.setEnabled(False)
+                self.dlg.ui.label_66.setEnabled(False)
+                self.dlg.ui.doubleSpinBox_filtering_yweight.setEnabled(False)
                 self.dlg.ui.radioButton_filtering_quad.setEnabled(False)
                 self.dlg.ui.radioButton_filtering_moving.setEnabled(False)
                 self.dlg.ui.spinBox_filtering_moving.setEnabled(False)
-
+                self.dlg.ui.radioButton_filtering_zscale.setEnabled(False)
+                self.dlg.ui.label_48.setEnabled(False)
+                self.dlg.ui.lineEdit_filtering_min.setEnabled(False)
+                self.dlg.ui.label_52.setEnabled(False)
+                self.dlg.ui.lineEdit_filtering_max.setEnabled(False)
                 # Apply Button
                 self.dlg.ui.pushButton_filtering_apply.setEnabled(False)
                 self.dlg.ui.checkBox_filtering_showplot.setEnabled(False)
@@ -3776,10 +3909,19 @@ class MilkMachine:
         self.dlg.ui.radioButton_filtering_xy.setEnabled(False)
         self.dlg.ui.radioButton_filtering_z.setEnabled(False)
         self.dlg.ui.radioButton_filtering_linear.setEnabled(False)
+        self.dlg.ui.label_46.setEnabled(False)
+        self.dlg.ui.doubleSpinBox_filtering_xweight.setEnabled(False)
+        self.dlg.ui.label_47.setEnabled(False)
+        self.dlg.ui.label_66.setEnabled(False)
+        self.dlg.ui.doubleSpinBox_filtering_yweight.setEnabled(False)
         self.dlg.ui.radioButton_filtering_quad.setEnabled(False)
         self.dlg.ui.radioButton_filtering_moving.setEnabled(False)
         self.dlg.ui.spinBox_filtering_moving.setEnabled(False)
-
+        self.dlg.ui.radioButton_filtering_zscale.setEnabled(False)
+        self.dlg.ui.label_48.setEnabled(False)
+        self.dlg.ui.lineEdit_filtering_min.setEnabled(False)
+        self.dlg.ui.label_52.setEnabled(False)
+        self.dlg.ui.lineEdit_filtering_max.setEnabled(False)
         # Apply Button
         self.dlg.ui.pushButton_filtering_apply.setEnabled(False)
         self.dlg.ui.checkBox_filtering_showplot.setEnabled(False)
