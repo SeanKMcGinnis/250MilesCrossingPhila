@@ -349,7 +349,6 @@ class MilkMachine:
                         self.ActiveLayer.beginEditCommand('Moving Average Filter')
                         for i,f in enumerate(selectList):    #[[id, (x,y), altitude]]
                             self.ActiveLayer.changeAttributeValue(f[0], self.fields['altitude'], round(float(zmean[i]),2))
-                            self.logger.info('zmain i {0}'.format(zmean[i]))
                         self.ActiveLayer.endEditCommand()
                         self.canvas.refresh()
 
@@ -414,13 +413,10 @@ class MilkMachine:
                 self.ActiveLayer.startEditing()
                 self.ActiveLayer.beginEditCommand('Quadratic Filter')
                 for i,f in enumerate(selectList):    #[[id, (x,y), altitude]]
-
                     fet = QgsGeometry.fromPoint(QgsPoint(ptx[i],yp[i]))
                     self.ActiveLayer.changeGeometry(f[0],fet)
-
                 self.ActiveLayer.endEditCommand()
                 self.canvas.refresh()
-
 
                 self.iface.messageBar().pushMessage("Success", "Applied quadratic interpolation to points", level=QgsMessageBar.INFO, duration=5)
 
@@ -466,6 +462,15 @@ class MilkMachine:
                         plt.title("Original; Min: {0}, Max: {1}, Range: {2}\nScaled; Min: {3}, Max: {4}, Range: {5}".format(np.min(ptz), np.max(ptz), curr_range, np.min(ptz_new), np.max(ptz_new), abs(np.min(ptz_new)-np.max(ptz_new))), size=12)
                         plt.legend()
                         plt.show()
+
+
+                    self.ActiveLayer.startEditing()
+                    self.ActiveLayer.beginEditCommand('Z Scaling')
+                    for i,f in enumerate(selectList):    #[[id, (x,y), altitude]]
+                        self.ActiveLayer.changeAttributeValue(f[0], self.fields['altitude'], round(float(ptz_new[i]),2))
+                    self.ActiveLayer.endEditCommand()
+                    self.canvas.refresh()
+                    self.logger.info('ptz_new: {0}'.format(ptz_new))
 
                     self.iface.messageBar().pushMessage("Success", "Applied Z Scaling to points.", level=QgsMessageBar.INFO, duration=5)
 

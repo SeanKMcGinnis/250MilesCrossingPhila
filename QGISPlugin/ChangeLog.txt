@@ -122,3 +122,8 @@ Task:		Added the ability to "Scale" the Z (altitude) values. The user must provi
 Task:		Switches were put in so that only filters that apply to X,Y are enabled and Z are enabled.
 Task:		Success messages put into the filters.
 Task:		Plotting for Scaling was built (the others need improvement).
+
+--------------------------------------------
+Commit #34
+
+Bug Fix:	Z scale filter not working. Updated the edit cursor.
