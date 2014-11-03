@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\Edward\.qgis2\python\plugins\MilkMachine\ui_milkmachine.ui'
 #
-# Created: Sun Nov 02 20:24:52 2014
+# Created: Mon Nov 03 13:20:30 2014
 #      by: PyQt4 UI code generator 4.10.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -916,6 +916,7 @@ class Ui_MilkMachine(object):
         self.groupBox_cameraview_2.setGeometry(QtCore.QRect(320, 120, 311, 301))
         self.groupBox_cameraview_2.setObjectName(_fromUtf8("groupBox_cameraview_2"))
         self.tabWidget_3 = QtGui.QTabWidget(self.groupBox_cameraview_2)
+        self.tabWidget_3.setEnabled(True)
         self.tabWidget_3.setGeometry(QtCore.QRect(7, 20, 301, 271))
         self.tabWidget_3.setObjectName(_fromUtf8("tabWidget_3"))
         self.tab_6 = QtGui.QWidget()
@@ -1012,7 +1013,7 @@ class Ui_MilkMachine(object):
         self.label_58.setObjectName(_fromUtf8("label_58"))
         self.pushButton_circle_apply = QtGui.QPushButton(self.tab_7)
         self.pushButton_circle_apply.setEnabled(False)
-        self.pushButton_circle_apply.setGeometry(QtCore.QRect(110, 215, 61, 23))
+        self.pushButton_circle_apply.setGeometry(QtCore.QRect(117, 215, 61, 23))
         self.pushButton_circle_apply.setIcon(icon7)
         self.pushButton_circle_apply.setObjectName(_fromUtf8("pushButton_circle_apply"))
         self.label_59 = QtGui.QLabel(self.tab_7)
@@ -1036,6 +1037,13 @@ class Ui_MilkMachine(object):
         self.label_61 = QtGui.QLabel(self.tab_7)
         self.label_61.setGeometry(QtCore.QRect(20, 165, 101, 16))
         self.label_61.setObjectName(_fromUtf8("label_61"))
+        self.label_62 = QtGui.QLabel(self.tab_7)
+        self.label_62.setGeometry(QtCore.QRect(20, 190, 101, 16))
+        self.label_62.setObjectName(_fromUtf8("label_62"))
+        self.comboBox_visualization_direction = QtGui.QComboBox(self.tab_7)
+        self.comboBox_visualization_direction.setEnabled(False)
+        self.comboBox_visualization_direction.setGeometry(QtCore.QRect(117, 190, 101, 20))
+        self.comboBox_visualization_direction.setObjectName(_fromUtf8("comboBox_visualization_direction"))
         self.tabWidget_3.addTab(self.tab_7, _fromUtf8(""))
         self.tabWidget.addTab(self.tab_visualization, _fromUtf8(""))
         self.tab_export = QtGui.QWidget()
@@ -1087,7 +1095,7 @@ class Ui_MilkMachine(object):
         self.retranslateUi(MilkMachine)
         self.tabWidget.setCurrentIndex(0)
         self.tabWidget_2.setCurrentIndex(0)
-        self.tabWidget_3.setCurrentIndex(1)
+        self.tabWidget_3.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MilkMachine)
         MilkMachine.setTabOrder(self.tabWidget, self.buttonImportGPS)
         MilkMachine.setTabOrder(self.buttonImportGPS, self.lineEdit_ImportGPS)
@@ -1441,6 +1449,8 @@ class Ui_MilkMachine(object):
         self.lineEdit__visualization_circle_rotations.setToolTip(_translate("MilkMachine", "<html><head/><body><p>Number (integer &gt; 0) of &quot;Circle Around&quot; rotations. For example, 1 would yield 1 full rotation around the &lt;LookAt&gt; point. A value of 3 would yeild 3 rotations around the &lt;LookAt&gt; point.</p></body></html>", None))
         self.lineEdit__visualization_circle_rotations.setText(_translate("MilkMachine", "1", None))
         self.label_61.setText(_translate("MilkMachine", "*number rotations:", None))
+        self.label_62.setText(_translate("MilkMachine", "*direction:", None))
+        self.comboBox_visualization_direction.setToolTip(_translate("MilkMachine", "<html><head/><body><p>Rotation direction of the circle around. clockwise or counterclockwise.</p></body></html>", None))
         self.tabWidget_3.setTabText(self.tabWidget_3.indexOf(self.tab_7), _translate("MilkMachine", "Circle Around", None))
         self.tabWidget_3.setTabToolTip(self.tabWidget_3.indexOf(self.tab_7), _translate("MilkMachine", "<html><head/><body><p>The &quot;Circle Around&quot; visualization creates 1 (or more) full rotations around 1 point or a selection of points. If there is a selection of mulitple points, then Milk Machine will find the geometric centroid of those points and that location will be used for the &lt;LookAt&gt;. If only 1 point is selected Latitude and longitude will be automatically calculated (i.e. the x,y of the point).</p></body></html>", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_visualization), _translate("MilkMachine", "Tour", None))

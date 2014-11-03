@@ -25360,3 +25360,166 @@ TypeError: 'long' object has no attribute '__getitem__'
 2014-11-02 21:28:44,104 - milkmachine - INFO - Here {'altitudemode': u'relativeToModel', 'rotations': u'3', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17053, 'duration': 84, 'range': u'20', 'latitude': 39.96577, 'startheading': u'0', 'heading': None}
 2014-11-02 21:29:41,013 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
 2014-11-02 21:29:41,051 - milkmachine - INFO - Here {'altitudemode': u'relativeToModel', 'rotations': u'6', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17053, 'duration': 84, 'range': u'20', 'latitude': 39.96577, 'startheading': u'0', 'heading': None}
+2014-11-02 21:47:18,168 - milkmachine - INFO - Clicked Cancel
+2014-11-03 07:56:57,025 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 07:56:57,025 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 07:56:57,025 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 07:56:57,025 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 08:03:31,983 - milkmachine - INFO - Clicked Cancel
+2014-11-03 08:31:39,983 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 08:31:39,983 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 08:31:39,984 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 08:31:39,984 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 08:38:01,835 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 08:38:01,874 - milkmachine - INFO - Here {'altitudemode': u'relativeToModel', 'rotations': u'2', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17053, 'duration': 84, 'range': u'20', 'latitude': 39.96577, 'startheading': u'0', 'heading': None}
+2014-11-03 08:40:30,802 - milkmachine - INFO - Clicked Cancel
+2014-11-03 08:42:14,158 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 08:42:14,160 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 08:42:14,160 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 08:42:14,160 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 08:42:41,000 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 08:42:41,039 - milkmachine - INFO - Here {'altitudemode': u'relativeToModel', 'rotations': u'2', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17053, 'duration': 84, 'range': u'20', 'latitude': 39.96577, 'startheading': u'0', 'heading': None}
+2014-11-03 08:45:41,384 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 08:45:41,424 - milkmachine - INFO - Here {'altitudemode': u'relativeToModel', 'rotations': u'2', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17053, 'duration': 84, 'range': u'20', 'latitude': 39.96577, 'startheading': u'0', 'heading': None}
+2014-11-03 08:54:29,119 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 08:54:29,157 - milkmachine - INFO - Here {'altitudemode': u'relativeToModel', 'rotations': u'3', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17053, 'duration': 84, 'range': u'20', 'latitude': 39.96577, 'startheading': u'0', 'heading': None}
+2014-11-03 08:56:42,536 - milkmachine - INFO - Clicked Cancel
+2014-11-03 08:56:44,769 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 08:56:44,769 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 08:56:44,769 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 08:56:44,769 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 08:57:07,859 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 08:57:07,898 - milkmachine - INFO - Here {'altitudemode': u'relativeToModel', 'rotations': u'1', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17053, 'duration': 84, 'range': u'20', 'latitude': 39.96577, 'startheading': u'0', 'heading': None}
+2014-11-03 08:58:02,892 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 08:58:02,931 - milkmachine - INFO - Here {'altitudemode': u'relativeToModel', 'rotations': u'10', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17053, 'duration': 84, 'range': u'20', 'latitude': 39.96577, 'startheading': u'0', 'heading': None}
+2014-11-03 09:42:49,970 - milkmachine - INFO - Clicked Cancel
+2014-11-03 09:48:45,944 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 09:48:45,944 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 09:48:45,944 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 09:48:45,944 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 09:48:45,960 - milkmachine - INFO - Quit Milk Machine
+2014-11-03 09:48:46,019 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 09:48:46,019 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 09:48:46,019 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 09:48:46,020 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 09:51:29,825 - milkmachine - INFO - Clicked Cancel
+2014-11-03 09:51:32,898 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 09:51:32,898 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 09:51:32,898 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 09:51:32,898 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 09:54:50,176 - milkmachine - INFO - Clicked Cancel
+2014-11-03 09:54:52,729 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 09:54:52,730 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 09:54:52,730 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 09:54:52,730 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 10:10:52,252 - milkmachine - INFO - Clicked Cancel
+2014-11-03 10:10:55,476 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 10:10:55,477 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 10:10:55,477 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 10:10:55,477 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 10:11:29,145 - milkmachine - ERROR - lookat_apply destroy edit session
+2014-11-03 10:11:29,148 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1518, in circle_apply
+    lookattemp[lookatAlpha[key]] = value
+KeyError: 'direction'
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1518, in circle_apply
+    lookattemp[lookatAlpha[key]] = value
+KeyError: 'direction'
+2014-11-03 10:14:40,401 - milkmachine - INFO - Clicked Cancel
+2014-11-03 10:14:44,091 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 10:14:44,091 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 10:14:44,091 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 10:14:44,092 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 10:15:07,437 - milkmachine - ERROR - lookat_apply function error
+2014-11-03 10:15:07,437 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1468, in circle_apply
+    lookat['direction'] = self.dlg.ui.lineEdit__visualization_lookat_tilt.currentText()
+AttributeError: 'QLineEdit' object has no attribute 'currentText'
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1468, in circle_apply
+    lookat['direction'] = self.dlg.ui.lineEdit__visualization_lookat_tilt.currentText()
+AttributeError: 'QLineEdit' object has no attribute 'currentText'
+2014-11-03 12:36:34,387 - milkmachine - INFO - Clicked Cancel
+2014-11-03 12:36:38,845 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 12:36:38,845 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 12:36:38,845 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 12:36:38,846 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 12:37:14,033 - milkmachine - ERROR - lookat_apply destroy edit session
+2014-11-03 12:37:14,038 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1519, in circle_apply
+    lookattemp[lookatAlpha[key]] = value
+KeyError: 'direction'
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 1519, in circle_apply
+    lookattemp[lookatAlpha[key]] = value
+KeyError: 'direction'
+2014-11-03 12:39:05,193 - milkmachine - INFO - Clicked Cancel
+2014-11-03 12:39:09,561 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 12:39:09,561 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 12:39:09,561 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 12:39:09,561 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 12:39:37,986 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 12:39:38,025 - milkmachine - INFO - Here {'direction': u'counterclockwise', 'altitudemode': u'relativeToModel', 'rotations': u'1', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17053, 'duration': 84, 'range': u'20', 'latitude': 39.96577, 'startheading': u'0', 'heading': None}
+2014-11-03 12:44:40,198 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 12:44:40,236 - milkmachine - INFO - Here {'direction': u'counterclockwise', 'altitudemode': u'relativeToModel', 'rotations': u'2', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17053, 'duration': 84, 'range': u'20', 'latitude': 39.96577, 'startheading': u'0', 'heading': None}
+2014-11-03 12:46:29,288 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 12:46:29,326 - milkmachine - INFO - Here {'direction': u'counterclockwise', 'altitudemode': u'relativeToModel', 'rotations': u'10', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17053, 'duration': 84, 'range': u'20', 'latitude': 39.96577, 'startheading': u'0', 'heading': None}
+2014-11-03 12:56:34,368 - milkmachine - INFO - Clicked Cancel
+2014-11-03 12:56:38,476 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 12:56:38,476 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 12:56:38,477 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 12:56:38,477 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 12:57:04,046 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 12:57:04,084 - milkmachine - INFO - Here {'direction': u'counterclockwise', 'altitudemode': u'relativeToModel', 'rotations': u'1', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17053, 'duration': 84, 'range': u'20', 'latitude': 39.96577, 'startheading': u'0', 'heading': None}
+2014-11-03 13:02:21,921 - milkmachine - INFO - Clicked Cancel
+2014-11-03 13:02:26,880 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 13:02:26,880 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 13:02:26,880 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 13:02:26,881 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 13:02:53,450 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 13:02:53,490 - milkmachine - INFO - Here {'direction': u'counterclockwise', 'altitudemode': u'relativeToModel', 'rotations': u'1', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17053, 'duration': 84, 'range': u'20', 'latitude': 39.96577, 'startheading': u'0', 'heading': None}
+2014-11-03 13:07:54,575 - milkmachine - INFO - Clicked Cancel
+2014-11-03 13:07:59,918 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 13:07:59,920 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 13:07:59,920 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 13:07:59,920 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 13:08:23,562 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 13:08:23,599 - milkmachine - INFO - Here {'direction': u'counterclockwise', 'altitudemode': u'relativeToModel', 'rotations': u'1', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17053, 'duration': 84, 'range': u'20', 'latitude': 39.96577, 'startheading': u'0', 'heading': None}
+2014-11-03 13:10:27,996 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 13:10:28,035 - milkmachine - INFO - Here {'direction': u'counterclockwise', 'altitudemode': u'relativeToModel', 'rotations': u'2', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17053, 'duration': 84, 'range': u'20', 'latitude': 39.96577, 'startheading': u'0', 'heading': None}
+2014-11-03 13:11:36,101 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 13:11:36,138 - milkmachine - INFO - Here {'direction': u'counterclockwise', 'altitudemode': u'relativeToModel', 'rotations': u'3', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17053, 'duration': 84, 'range': u'20', 'latitude': 39.96577, 'startheading': u'0', 'heading': None}
+2014-11-03 13:12:42,792 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 13:12:42,831 - milkmachine - INFO - Here {'direction': u'counterclockwise', 'altitudemode': u'relativeToModel', 'rotations': u'10', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17053, 'duration': 84, 'range': u'20', 'latitude': 39.96577, 'startheading': u'0', 'heading': None}
+2014-11-03 13:20:39,775 - milkmachine - INFO - Clicked Cancel
+2014-11-03 13:20:44,694 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 13:20:44,694 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 13:20:44,694 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 13:20:44,694 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 13:21:30,857 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 13:21:30,857 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 13:21:30,857 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 13:21:30,857 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 13:21:30,858 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 13:21:30,858 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 13:21:30,858 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 13:21:30,858 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 13:21:30,868 - milkmachine - INFO - Quit Milk Machine
+2014-11-03 13:21:30,868 - milkmachine - INFO - Quit Milk Machine
+2014-11-03 13:21:30,905 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 13:21:30,905 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 13:21:30,905 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 13:21:30,905 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 13:21:30,905 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 13:21:30,905 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 13:21:30,905 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 13:21:30,905 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 13:21:55,400 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 13:21:55,400 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 13:21:55,457 - milkmachine - INFO - Here {'direction': u'clockwise', 'altitudemode': u'relativeToModel', 'rotations': u'1', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17053, 'duration': 84, 'range': u'20', 'latitude': 39.96577, 'startheading': u'0', 'heading': None}
+2014-11-03 13:21:55,457 - milkmachine - INFO - Here {'direction': u'clockwise', 'altitudemode': u'relativeToModel', 'rotations': u'1', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17053, 'duration': 84, 'range': u'20', 'latitude': 39.96577, 'startheading': u'0', 'heading': None}
+2014-11-03 13:23:14,022 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 13:23:14,022 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 13:23:14,059 - milkmachine - INFO - Here {'direction': u'clockwise', 'altitudemode': u'relativeToModel', 'rotations': u'2', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17053, 'duration': 84, 'range': u'20', 'latitude': 39.96577, 'startheading': u'0', 'heading': None}
+2014-11-03 13:23:14,059 - milkmachine - INFO - Here {'direction': u'clockwise', 'altitudemode': u'relativeToModel', 'rotations': u'2', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17053, 'duration': 84, 'range': u'20', 'latitude': 39.96577, 'startheading': u'0', 'heading': None}
