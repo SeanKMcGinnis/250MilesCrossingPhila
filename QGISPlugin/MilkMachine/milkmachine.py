@@ -1855,7 +1855,7 @@ class MilkMachine:
                 self.dlg.ui.pushButton_lookat_apply.setEnabled(True)
 
                 # Circle Around
-                self.dlg.ui.lineEdit_visualization_circle_altitude.setEnabled(True)
+                #self.dlg.ui.lineEdit_visualization_circle_altitude.setEnabled(True)
                 self.dlg.ui.comboBox_circle_altitudemode.setEnabled(True)
                 self.dlg.ui.comboBox_circle_gxaltitudemode.setEnabled(True)
                 self.dlg.ui.lineEdit__visualization_circle_tilt.setEnabled(True)
@@ -2900,13 +2900,13 @@ class MilkMachine:
                     if lookatdict['startheading'] and lookatdict['rotations']:  # lookatdict['duration']  this is for a circle around
                         self.logger.info('Here {0}'.format(lookatdict))
                         if lookatdict['longitude'] and lookatdict['latitude'] and lookatdict['altitude'] and lookatdict['tilt'] and lookatdict['range']:
-                            self.logger.info('Here 2')
                             circle_count = int(float(lookatdict['rotations']))
                             if circle_count > 1:
-                                divisor = 36
+                                divisor = 36  #36
+                                duration = float(lookatdict['duration'])/(circle_count * (divisor+1))
                             else:
-                                divisor = 37
-                            duration = (float(lookatdict['duration'])/circle_count)/divisor
+                                divisor = 36
+                                duration = (float(lookatdict['duration'])/circle_count)/(divisor+1)
 
                             # divide the time span into chunks to be attached to each
 ##                            # Start time. Will be used for TimeSpan tags
@@ -2920,11 +2920,15 @@ class MilkMachine:
                             # Loop through Circle Count
                             for x in range(circle_count):
                                 # Define the initial heading based on current heading
-                                heading = float(lookatdict['startheading'])
-                                # 360 Degrees/10 = 36 intervals to iterate through
-                                if x == range(circle_count)[-1]:
+                                if x == 0:
+                                    heading = float(lookatdict['startheading'])
                                     divisor = 37
-                                for y in range(0, divisor):
+                                else:
+                                    divisor = 36
+                                # 360 Degrees/10 = 36 intervals to iterate through
+##                                if x == range(circle_count)[-1]:
+##                                    divisor = 37
+                                for y in range(divisor):
                                     # New Fly To
                                     flyto = playlist.newgxflyto(gxduration=duration)
                                     if flytodict['flyToMode']:
