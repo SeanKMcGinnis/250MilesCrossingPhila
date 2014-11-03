@@ -196,7 +196,7 @@ class MilkMachine:
         QObject.connect(self.dlg.ui.pushButton_circle_apply, SIGNAL("clicked()"), self.circle_apply)
         QObject.connect(self.dlg.ui.checkBox_filtering_edit,SIGNAL("stateChanged(int)"),self.filtercheck)
         QObject.connect(self.dlg.ui.pushButton_filtering_apply, SIGNAL("clicked()"), self.filtering_apply)
-        QObject.connect(self.dlg.ui.lineEdit_visualization_circle_altitude,SIGNAL("editingFinished()"),self.durationpopulate)
+        QObject.connect(self.dlg.ui.lineEdit__visualization_circle_tilt,SIGNAL("editingFinished()"),self.durationpopulate)
         QObject.connect(self.dlg.ui.pushButton_visualization_camera_symbolize, SIGNAL("clicked()"), self.camera_symbolize)
         QObject.connect(self.dlg.ui.pushButton_visualization_camera_tofollow, SIGNAL("clicked()"), self.tofollow)
         QObject.connect(self.dlg.ui.pushButton_visualization_camera_tocustom, SIGNAL("clicked()"), self.tocustom)
@@ -1365,8 +1365,8 @@ class MilkMachine:
             self.fields = self.field_indices(self.ActiveLayer)
             # make a dictionary of all of the camera parameters
             flyto = {'name': None, 'flyToMode': None, 'duration': None}
-            lookat = {'longitude': None, 'latitude': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'heading' : None,'tilt' : None, 'range': None, 'duration': None, 'startheading': None, 'rotations': None}
-            lookatAlpha = {'longitude': 'a', 'latitude': 'b', 'altitude' : 'c', 'altitudemode': 'd','gxaltitudemode' : 'e','heading' : 'f','tilt' : 'g', 'range': 'h', 'duration': 'i', 'startheading': 'j', 'rotations': 'k'}
+            lookat = {'longitude': None, 'latitude': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'heading' : None,'tilt' : None, 'range': None, 'duration': None, 'startheading': None, 'rotations': None, 'direction': None}
+            lookatAlpha = {'longitude': 'a', 'latitude': 'b', 'altitude' : 'c', 'altitudemode': 'd','gxaltitudemode' : 'e','heading' : 'f','tilt' : 'g', 'range': 'h', 'duration': 'i', 'startheading': 'j', 'rotations': 'k', 'l': 'direction'}
             lookattemp = {}
 
             flyto['name'] = self.dlg.ui.lineEdit_tourname.text()
@@ -1379,6 +1379,7 @@ class MilkMachine:
             lookat['range'] = self.dlg.ui.lineEdit__visualization_lookat_range.text()
             lookat['heading'] = self.dlg.ui.lineEdit__visualization_lookat_heading.text()
             lookat['tilt'] = self.dlg.ui.lineEdit__visualization_lookat_tilt.text()
+
 
             # calculate heading
             cordslist = []  # alist of tuples. [(x,y), (x,y)]
@@ -1448,8 +1449,8 @@ class MilkMachine:
             self.fields = self.field_indices(self.ActiveLayer)
             # make a dictionary of all of the camera parameters
             flyto = {'name': None, 'flyToMode': None, 'duration': None}
-            lookat = {'longitude': None, 'latitude': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'heading' : None,'tilt' : None, 'range': None, 'duration': None, 'startheading': None, 'rotations': None}
-            lookatAlpha = {'longitude': 'a', 'latitude': 'b', 'altitude' : 'c', 'altitudemode': 'd','gxaltitudemode' : 'e','heading' : 'f','tilt' : 'g', 'range': 'h', 'duration': 'i', 'startheading': 'j', 'rotations': 'k'}
+            lookat = {'longitude': None, 'latitude': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'heading' : None,'tilt' : None, 'range': None, 'duration': None, 'startheading': None, 'rotations': None, 'direction': None}
+            lookatAlpha = {'longitude': 'a', 'latitude': 'b', 'altitude' : 'c', 'altitudemode': 'd','gxaltitudemode' : 'e','heading' : 'f','tilt' : 'g', 'range': 'h', 'duration': 'i', 'startheading': 'j', 'rotations': 'k', 'direction': 'l'}
             lookattemp = {}
 
             flyto['name'] = self.dlg.ui.lineEdit_tourname.text()
@@ -1464,6 +1465,7 @@ class MilkMachine:
             #lookat['duration'] = self.dlg.ui.lineEdit__visualization_circle_duration.text()
             lookat['startheading'] = self.dlg.ui.lineEdit__visualization_circle_start_heading.text()
             lookat['rotations'] = self.dlg.ui.lineEdit__visualization_circle_rotations.text()
+            lookat['direction'] = self.dlg.ui.comboBox_visualization_direction.currentText()
 
             # calculate heading
             cordslist = []  # alist of tuples. [(x,y), (x,y)]
@@ -1864,6 +1866,7 @@ class MilkMachine:
                 self.dlg.ui.lineEdit__visualization_circle_start_heading.setEnabled(True)
                 self.dlg.ui.lineEdit__visualization_circle_rotations.setEnabled(True)
                 self.dlg.ui.pushButton_circle_apply.setEnabled(True)
+                self.dlg.ui.comboBox_visualization_direction.setEnabled(True)
 
                 # Symbolize Select
                 self.dlg.ui.pushButton_visualization_camera_symbolize.setEnabled(True)
@@ -1921,6 +1924,7 @@ class MilkMachine:
             self.dlg.ui.lineEdit__visualization_circle_start_heading.setEnabled(False)
             self.dlg.ui.lineEdit__visualization_circle_rotations.setEnabled(False)
             self.dlg.ui.pushButton_circle_apply.setEnabled(False)
+            self.dlg.ui.comboBox_visualization_direction.setEnabled(False)
 
             # Symbolize Select
             self.dlg.ui.pushButton_visualization_camera_symbolize.setEnabled(False)
@@ -2844,8 +2848,7 @@ class MilkMachine:
                 currentatt = f.attributes()
 
                 if currentatt[self.fields['lookat']]:
-
-                    lookatBack = {'a':'longitude','b' :'latitude','c' :'altitude','d' :'altitudemode','e':'gxaltitudemode','f':'heading','g':'tilt','h' :'range','i' :'duration','j' :'startheading', 'k': 'rotations'}
+                    lookatBack = {'a':'longitude','b' :'latitude','c' :'altitude','d' :'altitudemode','e':'gxaltitudemode','f':'heading','g':'tilt','h' :'range','i' :'duration','j' :'startheading', 'k': 'rotations', 'l': 'direction'}
                     lookat = eval(currentatt[self.fields['lookat']])
                     #convert back to full format
                     newlookat = {}
@@ -2903,10 +2906,12 @@ class MilkMachine:
                             circle_count = int(float(lookatdict['rotations']))
                             if circle_count > 1:
                                 divisor = 36  #36
-                                duration = float(lookatdict['duration'])/(circle_count * (divisor+1))
+                                duration = (float(lookatdict['duration'])-1)/(circle_count * divisor)
                             else:
                                 divisor = 36
-                                duration = (float(lookatdict['duration'])/circle_count)/(divisor+1)
+                                duration = (float(lookatdict['duration'])-1)/divisor
+                                #duration = (float(lookatdict['duration'])-1)/(circle_count * divisor)
+                                #duration = (float(lookatdict['duration'])/circle_count)/(divisor+1)
 
                             # divide the time span into chunks to be attached to each
 ##                            # Start time. Will be used for TimeSpan tags
@@ -2957,7 +2962,10 @@ class MilkMachine:
                                     timekeeper = timekeeper + datetime.timedelta(seconds = duration)
 
                                     # adjust the heading by 10 degrees
-                                    heading = (heading + 10) % 360
+                                    if lookatdict['direction'] == 'clockwise':
+                                        heading = (heading + 10) % 360
+                                    if lookatdict['direction'] == 'counterclockwise':
+                                        heading = (heading - 10) % 360
 
                     else:  # non circle around, just custom
                         if lookatdict['longitude'] and lookatdict['latitude'] and lookatdict['altitude'] and lookatdict['heading'] and lookatdict['tilt'] and lookatdict['range']:
@@ -3696,6 +3704,11 @@ class MilkMachine:
         for gxalt in gxaltitudemode:
             self.dlg.ui.comboBox_follow_gxaltitudemode.addItem(gxalt)
 
+        # circle around direction combo box
+        self.dlg.ui.comboBox_visualization_direction.clear()
+        direction = ['clockwise', 'counterclockwise']
+        for dir in direction:
+            self.dlg.ui.comboBox_visualization_direction.addItem(dir)
 
         # Populate the Rendering Combo Box
         self.dlg.ui.comboBox_rendering_icon_color.clear()
@@ -3844,6 +3857,7 @@ class MilkMachine:
         self.dlg.ui.lineEdit__visualization_circle_start_heading.setEnabled(False)
         self.dlg.ui.lineEdit__visualization_circle_rotations.setEnabled(False)
         self.dlg.ui.pushButton_circle_apply.setEnabled(False)
+        self.dlg.ui.comboBox_visualization_direction.setEnabled(False)
 
         # Symbolize Select
         self.dlg.ui.pushButton_visualization_camera_symbolize.setEnabled(False)

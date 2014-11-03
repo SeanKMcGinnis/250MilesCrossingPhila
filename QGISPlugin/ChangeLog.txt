@@ -127,3 +127,14 @@ Task:		Plotting for Scaling was built (the others need improvement).
 Commit #34
 
 Bug Fix:	Z scale filter not working. Updated the edit cursor.
+
+--------------------------------------------
+Commit #35
+
+Bug Fix:	Circle around time error when > 1 rotation.
+
+--------------------------------------------
+Commit #36
+
+Bug Fix:	Continuation of circle around bug fixes.
+Task: 		Add counterclockwise/clockwise combobox.
