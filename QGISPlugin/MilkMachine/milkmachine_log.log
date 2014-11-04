@@ -25523,3 +25523,60 @@ KeyError: 'direction'
 2014-11-03 13:23:14,022 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
 2014-11-03 13:23:14,059 - milkmachine - INFO - Here {'direction': u'clockwise', 'altitudemode': u'relativeToModel', 'rotations': u'2', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17053, 'duration': 84, 'range': u'20', 'latitude': 39.96577, 'startheading': u'0', 'heading': None}
 2014-11-03 13:23:14,059 - milkmachine - INFO - Here {'direction': u'clockwise', 'altitudemode': u'relativeToModel', 'rotations': u'2', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17053, 'duration': 84, 'range': u'20', 'latitude': 39.96577, 'startheading': u'0', 'heading': None}
+2014-11-03 13:29:22,872 - milkmachine - INFO - Clicked Cancel
+2014-11-03 13:29:22,872 - milkmachine - INFO - Clicked Cancel
+2014-11-03 18:48:34,200 - milkmachine - INFO - Quit Milk Machine
+2014-11-03 18:48:38,440 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 18:48:38,440 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 18:48:38,441 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 18:48:38,441 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 18:48:38,441 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 18:48:38,441 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 18:48:38,441 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 18:48:38,441 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 18:49:10,183 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 18:49:10,183 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 18:49:10,187 - milkmachine - INFO - Here {'direction': u'clockwise', 'altitudemode': u'relativeToModel', 'rotations': u'1', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17232, 'duration': 72, 'range': u'20', 'latitude': 39.96593, 'startheading': u'0', 'heading': None}
+2014-11-03 18:49:10,187 - milkmachine - INFO - Here {'direction': u'clockwise', 'altitudemode': u'relativeToModel', 'rotations': u'1', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17232, 'duration': 72, 'range': u'20', 'latitude': 39.96593, 'startheading': u'0', 'heading': None}
+2014-11-03 18:59:24,427 - milkmachine - INFO - Clicked Cancel
+2014-11-03 18:59:24,427 - milkmachine - INFO - Clicked Cancel
+2014-11-03 18:59:27,003 - milkmachine - INFO - Quit Milk Machine
+2014-11-03 18:59:31,680 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 18:59:31,680 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 18:59:31,680 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 18:59:31,680 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 18:59:31,680 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 18:59:31,680 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 18:59:31,680 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 18:59:31,680 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 18:59:53,283 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 18:59:53,283 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 18:59:53,288 - milkmachine - INFO - Here {'direction': u'clockwise', 'altitudemode': u'relativeToModel', 'rotations': u'1', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17232, 'duration': 72, 'range': u'20', 'latitude': 39.96593, 'startheading': u'0', 'heading': None}
+2014-11-03 18:59:53,288 - milkmachine - INFO - Here {'direction': u'clockwise', 'altitudemode': u'relativeToModel', 'rotations': u'1', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17232, 'duration': 72, 'range': u'20', 'latitude': 39.96593, 'startheading': u'0', 'heading': None}
+2014-11-03 19:05:18,118 - milkmachine - INFO - Clicked Cancel
+2014-11-03 19:05:18,118 - milkmachine - INFO - Clicked Cancel
+2014-11-03 19:05:21,017 - milkmachine - INFO - Quit Milk Machine
+2014-11-03 19:05:25,309 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 19:05:25,309 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 19:05:25,309 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 19:05:25,309 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 19:05:25,311 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 19:05:25,311 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-11-03 19:05:25,311 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 19:05:25,311 - milkmachine - INFO - Milk Machine plugin initialized
+2014-11-03 19:05:49,224 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 19:05:49,224 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 19:05:49,229 - milkmachine - INFO - Here {'direction': u'clockwise', 'altitudemode': u'relativeToModel', 'rotations': u'1', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17232, 'duration': 72, 'range': u'20', 'latitude': 39.96593, 'startheading': u'0', 'heading': None}
+2014-11-03 19:05:49,229 - milkmachine - INFO - Here {'direction': u'clockwise', 'altitudemode': u'relativeToModel', 'rotations': u'1', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17232, 'duration': 72, 'range': u'20', 'latitude': 39.96593, 'startheading': u'0', 'heading': None}
+2014-11-03 19:07:48,269 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 19:07:48,269 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 19:07:48,273 - milkmachine - INFO - Here {'direction': u'clockwise', 'altitudemode': u'relativeToModel', 'rotations': u'2', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17232, 'duration': 72, 'range': u'20', 'latitude': 39.96593, 'startheading': u'0', 'heading': None}
+2014-11-03 19:07:48,273 - milkmachine - INFO - Here {'direction': u'clockwise', 'altitudemode': u'relativeToModel', 'rotations': u'2', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17232, 'duration': 72, 'range': u'20', 'latitude': 39.96593, 'startheading': u'0', 'heading': None}
+2014-11-03 19:22:22,161 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 19:22:22,161 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 19:22:22,164 - milkmachine - INFO - Here {'direction': u'clockwise', 'altitudemode': u'relativeToModel', 'rotations': u'3', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17232, 'duration': 72, 'range': u'20', 'latitude': 39.96593, 'startheading': u'0', 'heading': None}
+2014-11-03 19:22:22,164 - milkmachine - INFO - Here {'direction': u'clockwise', 'altitudemode': u'relativeToModel', 'rotations': u'3', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17232, 'duration': 72, 'range': u'20', 'latitude': 39.96593, 'startheading': u'0', 'heading': None}
+2014-11-03 19:23:33,895 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 19:23:33,895 - milkmachine - INFO - {u'Name': 0, u'Descriptio': 1, u'labelstyle': 7, u'datetime': 2, u'iconstyle': 6, u'camera': 4, u'lookat': 9, u'symbtour': 10, u'altitude': 11, u'model': 8, u'audio': 3, u'flyto': 5}
+2014-11-03 19:23:33,900 - milkmachine - INFO - Here {'direction': u'clockwise', 'altitudemode': u'relativeToModel', 'rotations': u'10', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17232, 'duration': 72, 'range': u'20', 'latitude': 39.96593, 'startheading': u'0', 'heading': None}
+2014-11-03 19:23:33,900 - milkmachine - INFO - Here {'direction': u'clockwise', 'altitudemode': u'relativeToModel', 'rotations': u'10', 'tilt': u'60', 'altitude': 1.0, 'gxaltitudemode': u'', 'longitude': -75.17232, 'duration': 72, 'range': u'20', 'latitude': 39.96593, 'startheading': u'0', 'heading': None}

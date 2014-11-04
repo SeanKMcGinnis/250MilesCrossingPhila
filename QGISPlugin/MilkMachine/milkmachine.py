@@ -2906,10 +2906,15 @@ class MilkMachine:
                             circle_count = int(float(lookatdict['rotations']))
                             if circle_count > 1:
                                 divisor = 36  #36
-                                duration = (float(lookatdict['duration'])-1)/(circle_count * divisor)
+                                bottomnum = (divisor+1) + ((circle_count-1)*divisor)
+                                duration = (float(lookatdict['duration']))/bottomnum
+                                timsspanDur = (float(lookatdict['duration']))/(circle_count * divisor)
+                                #duration = (float(lookatdict['duration']))/(circle_count * divisor)
                             else:
                                 divisor = 36
-                                duration = (float(lookatdict['duration'])-1)/divisor
+                                duration = (float(lookatdict['duration']))/(circle_count * (divisor+1))
+                                timsspanDur = (float(lookatdict['duration']))/(circle_count * divisor)
+                                #duration = (float(lookatdict['duration'])-1)/divisor
                                 #duration = (float(lookatdict['duration'])-1)/(circle_count * divisor)
                                 #duration = (float(lookatdict['duration'])/circle_count)/(divisor+1)
 
@@ -2959,7 +2964,7 @@ class MilkMachine:
                                     flyto.lookat.gxtimespan.begin = self.CamStartTime
                                     flyto.lookat.gxtimespan.end = timekeeper.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
 
-                                    timekeeper = timekeeper + datetime.timedelta(seconds = duration)
+                                    timekeeper = timekeeper + datetime.timedelta(seconds = timsspanDur)
 
                                     # adjust the heading by 10 degrees
                                     if lookatdict['direction'] == 'clockwise':
