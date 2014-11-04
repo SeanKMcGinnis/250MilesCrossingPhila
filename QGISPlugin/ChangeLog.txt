@@ -138,3 +138,8 @@ Commit #36
 
 Bug Fix:	Continuation of circle around bug fixes.
 Task: 		Add counterclockwise/clockwise combobox.
+
+--------------------------------------------
+Commit #37
+
+Bug Fix:	Continuation of circle around bug fixes. Disconnected the <TimeStamp> from the duration. Consistent results with 1,2,3, and 10 circle arounds. Tested with the first 72 points of "around the block" (points 0 - 71). This starts at 10:08:54 and ends at 10:10:06. In GE, each tour ends at 10:10:06 and the duration is 1:12 for each test.
