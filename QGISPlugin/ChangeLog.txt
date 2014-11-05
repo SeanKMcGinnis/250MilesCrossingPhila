@@ -143,3 +143,10 @@ Task: 		Add counterclockwise/clockwise combobox.
 Commit #37
 
 Bug Fix:	Continuation of circle around bug fixes. Disconnected the <TimeStamp> from the duration. Consistent results with 1,2,3, and 10 circle arounds. Tested with the first 72 points of "around the block" (points 0 - 71). This starts at 10:08:54 and ends at 10:10:06. In GE, each tour ends at 10:10:06 and the duration is 1:12 for each test.
+
+--------------------------------------------
+Commit #38
+
+Bug Fix:	Change the duration calculation in "circle around" to be the time difference between the start and the end of the selected points
+Task:		On "editcomplete" signal for any line edit in "circle around", the "duration" will recalculate (just in case the selection was changed). Also on "apply"
+Task:		Provide user with a warning when overwriting an existing circle around with another circle around. The user will be prompted to either overwrite the existing lookat cells, or to cancel. The conflicting circle around will be deleted.

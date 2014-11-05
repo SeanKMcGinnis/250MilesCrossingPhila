@@ -197,6 +197,10 @@ class MilkMachine:
         QObject.connect(self.dlg.ui.checkBox_filtering_edit,SIGNAL("stateChanged(int)"),self.filtercheck)
         QObject.connect(self.dlg.ui.pushButton_filtering_apply, SIGNAL("clicked()"), self.filtering_apply)
         QObject.connect(self.dlg.ui.lineEdit__visualization_circle_tilt,SIGNAL("editingFinished()"),self.durationpopulate)
+        QObject.connect(self.dlg.ui.lineEdit__visualization_circle_range,SIGNAL("editingFinished()"),self.durationpopulate)
+        QObject.connect(self.dlg.ui.lineEdit__visualization_circle_start_heading,SIGNAL("editingFinished()"),self.durationpopulate)
+        QObject.connect(self.dlg.ui.lineEdit__visualization_circle_rotations,SIGNAL("editingFinished()"),self.durationpopulate)
+
         QObject.connect(self.dlg.ui.pushButton_visualization_camera_symbolize, SIGNAL("clicked()"), self.camera_symbolize)
         QObject.connect(self.dlg.ui.pushButton_visualization_camera_tofollow, SIGNAL("clicked()"), self.tofollow)
         QObject.connect(self.dlg.ui.pushButton_visualization_camera_tocustom, SIGNAL("clicked()"), self.tocustom)
@@ -212,17 +216,6 @@ class MilkMachine:
     ############################################################################
     ## SLOTS
 
-    def tiltpopulate(self):
-        if self.dlg.ui.lineEdit_visualization_follow_altitude.text() and self.dlg.ui.lineEdit__visualization_follow_range.text() and not self.dlg.ui.lineEdit__visualization_follow_tilt.text():
-            altitude = float(self.dlg.ui.lineEdit_visualization_follow_altitude.text())
-            ranger = float(self.dlg.ui.lineEdit__visualization_follow_range.text())
-            angle = round(math.degrees(math.acos(altitude/ranger)),1)
-            self.dlg.ui.lineEdit__visualization_follow_tilt.setText(str(angle))
-
-    def durationpopulate(self):
-        if self.dlg.ui.lineEdit_visualization_circle_altitude.text():
-            allfeats = self.ActiveLayer.selectedFeaturesIds()
-            self.dlg.ui.lineEdit__visualization_circle_duration.setText(str(len(allfeats)))
 
     # generic function for finding the idices of qgsvector layers
     def field_indices(self, qgsvectorlayer):
@@ -240,6 +233,33 @@ class MilkMachine:
         return dt
         #fid_dt.append(current_dt.strftime("%Y/%m/%d %X"))
 
+    def tiltpopulate(self):
+        if self.dlg.ui.lineEdit_visualization_follow_altitude.text() and self.dlg.ui.lineEdit__visualization_follow_range.text() and not self.dlg.ui.lineEdit__visualization_follow_tilt.text():
+            altitude = float(self.dlg.ui.lineEdit_visualization_follow_altitude.text())
+            ranger = float(self.dlg.ui.lineEdit__visualization_follow_range.text())
+            angle = round(math.degrees(math.acos(altitude/ranger)),1)
+            self.dlg.ui.lineEdit__visualization_follow_tilt.setText(str(angle))
+
+    def durationpopulate(self):
+        if self.dlg.ui.lineEdit_visualization_circle_altitude.text():
+            self.ActiveLayer = self.iface.activeLayer()
+            self.fields = self.field_indices(self.ActiveLayer)
+            features = self.ActiveLayer.selectedFeatures()
+            selected = []
+            for f in features:
+                selected.append([f.id(), f.attributes()[self.fields['datetime']]])
+
+            def getKey(item):
+                return item[0]
+            selected = sorted(selected, key=getKey)  #[[id, (x,y), altitude]]
+            first = selected[0][1]; last = selected[-1][1]
+
+            sel_start_dt = self.to_dt(first)
+            sel_end_dt = self.to_dt(last)
+            diff = sel_end_dt - sel_start_dt
+            self.logger.info('durationpop: {0}, {1}, {2}'.format(sel_start_dt, sel_end_dt, diff.seconds))
+            self.logger.info('selected: {0}'.format(selected))
+            self.dlg.ui.lineEdit__visualization_circle_duration.setText(str(diff.seconds))
 
 
     def google_earth(self):
@@ -1446,6 +1466,8 @@ class MilkMachine:
     def circle_apply(self):
 
         try:
+
+            self.durationpopulate()
             self.fields = self.field_indices(self.ActiveLayer)
             # make a dictionary of all of the camera parameters
             flyto = {'name': None, 'flyToMode': None, 'duration': None}
@@ -1462,7 +1484,7 @@ class MilkMachine:
             lookat['gxaltitudemode'] = self.dlg.ui.comboBox_circle_gxaltitudemode.currentText()
             lookat['range'] = self.dlg.ui.lineEdit__visualization_circle_range.text()
             lookat['tilt'] = self.dlg.ui.lineEdit__visualization_circle_tilt.text()
-            #lookat['duration'] = self.dlg.ui.lineEdit__visualization_circle_duration.text()
+            lookat['duration'] = self.dlg.ui.lineEdit__visualization_circle_duration.text()
             lookat['startheading'] = self.dlg.ui.lineEdit__visualization_circle_start_heading.text()
             lookat['rotations'] = self.dlg.ui.lineEdit__visualization_circle_rotations.text()
             lookat['direction'] = self.dlg.ui.comboBox_visualization_direction.currentText()
@@ -1475,11 +1497,14 @@ class MilkMachine:
             xlist = []
             ylist = []
 
-            allfeats = self.ActiveLayer.selectedFeaturesIds()
-            lookat['duration'] = len(allfeats)
+            conflict = (False, None) # is there a conflict with an existing circle around???
             try:
                 for f in self.ActiveLayer.selectedFeatures():          #getFeatures():
                     geom = f.geometry()
+                    clookat = f.attributes()[self.fields['lookat']]
+                    self.logger.info('clookat {0}'.format(clookat))
+                    if clookat == 'circlearound':
+                        conflict = (True, f.id())
                     if lookat['altitudemode'] == 'relativeToModel':
                         modelfield = eval(f.attributes()[self.fields['model']])
                         if not lookat['altitude']:
@@ -1506,32 +1531,126 @@ class MilkMachine:
                 self.logger.exception(traceback.format_exc())
                 self.iface.messageBar().pushMessage("Error", "Failed to apply lookat view parameters for Follow Tour. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
 
-            try:
-                self.ActiveLayer.beginEditCommand("LookAt Editing")
-                if len(self.selectList) >= 1:
-                    self.ActiveLayer.beginEditCommand("LookAt Editing")
-                    for i,f in enumerate(self.selectList):
-                        if i == 0:
-                            if len(f) == 3:
-                                lookat['altitude'] = f[2]
-                            lookat['longitude'] = BigXY[0]; lookat['latitude'] = BigXY[1]
-                            for key,value in lookat.iteritems():
-                                lookattemp[lookatAlpha[key]] = value
-                            self.ActiveLayer.changeAttributeValue(f[0], self.fields['lookat'], str(lookattemp))
-                            self.ActiveLayer.changeAttributeValue(f[0], self.fields['flyto'], str(flyto))
-                            self.ActiveLayer.changeAttributeValue(f[0], self.fields['camera'], '')
-                        else:
-                            self.ActiveLayer.changeAttributeValue(f[0], self.fields['camera'], '')
-                    self.ActiveLayer.endEditCommand()
-                else:
-                    QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "Please select points in the active layer to be edited." )
-            except:
-                self.ActiveLayer.destroyEditCommand()
-                self.logger.error('lookat_apply destroy edit session')
-                self.logger.exception(traceback.format_exc())
-                self.iface.messageBar().pushMessage("Error", "Failed to apply lookat view parameters. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+            if conflict[0]:
 
-            self.iface.messageBar().pushMessage("Success", "Circle Around applied, any conflicting Camera removed.", level=QgsMessageBar.INFO, duration=5)
+                # find the indices of the last lookat flyto
+                self.cLayer = self.iface.mapCanvas().currentLayer()
+                AllList = []
+                allfeats = self.cLayer.getFeatures()
+                for feat in allfeats:
+                    cff = feat.attributes()[self.fields['lookat']]
+                    AllList.append([feat.id(), cff])
+                # sort self.selectList by fid
+                def getKey(item):
+                    return item[0]
+                AllList = sorted(AllList, key=getKey)
+
+                circleList = []
+                for ii,vv in enumerate(AllList):
+                    if vv[1]:
+                        if vv[1][0] == '{' or vv[1] == 'circlearound':
+                            circleList.append(vv[0])
+
+                self.logger.info('circleList {0}'.format(circleList))
+
+                circArr = []
+                lenc = len(circleList)-1
+                for dd,gg in enumerate(circleList):
+                    try:
+                        if dd == lenc:
+                            diff = int(gg) - int(circleList[dd-1])
+                        else:
+                            diff = int(circleList[dd+1]) - int(gg)
+                        if diff == 1:
+                            if not 'seq' in locals():
+                                seq = []
+                            if dd == lenc:
+                                seq.append(gg)
+                            else:
+                                seq.append(gg); seq.append(circleList[dd+1])
+                                self.logger.info('seq {0}'.format(seq))
+                        else:
+                            try:
+                                circArr.append(seq)
+                                del seq
+                            except:
+                                self.logger.info(traceback.format_exc())
+                                del seq
+                        if diff == 1 and dd == lenc:
+                            try:
+                                circArr.append(seq)
+                            except:
+                                pass
+
+
+                    except:
+                        self.logger.info(traceback.format_exc())
+
+                self.logger.info('circArr {0}'.format(circArr))
+
+                # check wich ones will be reset
+                for val in circArr:
+                    for v in val:
+                        if conflict[1] == v:
+                            BadOnes = val
+
+                self.logger.info('BadOnes: {0}'.format(BadOnes))
+
+                circleMsg = QMessageBox(self.iface.mainWindow())
+                circleMsg.setWindowTitle('Circle Around Conflict')
+                circleMsg.setText('A circle around already exists. Overwriting will delete the conflicting circle around. Overwrite or cancel?')
+                circleMsg.addButton(QPushButton('Overwrite'), QMessageBox.YesRole)
+                #circleMsg.addButton(QPushButton('Reject'), QMessageBox.NoRole)
+                circleMsg.addButton(QPushButton('Cancel'), QMessageBox.RejectRole)
+                ret = circleMsg.exec_();
+                circleMsgCB = circleMsg.clickedButton()
+                self.logger.info('clicked button: {0}, {1}'.format(circleMsgCB, ret))
+
+                if ret == 0:
+                    #erase the conflict
+                    self.ActiveLayer.beginEditCommand("LookAt Editing Remove Conflict")
+                    for i,f in enumerate(BadOnes):
+                        self.ActiveLayer.changeAttributeValue(f, self.fields['flyto'], '')
+                        self.ActiveLayer.changeAttributeValue(f, self.fields['camera'], '')
+                        self.ActiveLayer.changeAttributeValue(f, self.fields['lookat'], '')
+                    self.ActiveLayer.endEditCommand()
+
+            else:
+                ret = 0
+
+            if ret == 0:
+
+                try:
+                    self.ActiveLayer.beginEditCommand("LookAt Editing")
+                    if len(self.selectList) >= 1:
+                        self.ActiveLayer.beginEditCommand("LookAt Editing")
+                        for i,f in enumerate(self.selectList):
+                            if i == 0:
+                                if len(f) == 3:
+                                    lookat['altitude'] = f[2]
+                                lookat['longitude'] = BigXY[0]; lookat['latitude'] = BigXY[1]
+                                for key,value in lookat.iteritems():
+                                    lookattemp[lookatAlpha[key]] = value
+                                self.ActiveLayer.changeAttributeValue(f[0], self.fields['lookat'], str(lookattemp))
+                                self.ActiveLayer.changeAttributeValue(f[0], self.fields['flyto'], str(flyto))
+                                self.ActiveLayer.changeAttributeValue(f[0], self.fields['camera'], '')
+                            else: # clear out the opposing cameras and flyto's
+                                self.ActiveLayer.changeAttributeValue(f[0], self.fields['flyto'], '')
+                                self.ActiveLayer.changeAttributeValue(f[0], self.fields['camera'], '')
+                                self.ActiveLayer.changeAttributeValue(f[0], self.fields['lookat'], 'circlearound')
+                        self.ActiveLayer.endEditCommand()
+                    else:
+                        QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "Please select points in the active layer to be edited." )
+                except:
+                    self.ActiveLayer.destroyEditCommand()
+                    self.logger.error('lookat_apply destroy edit session')
+                    self.logger.exception(traceback.format_exc())
+                    self.iface.messageBar().pushMessage("Error", "Failed to apply lookat view parameters. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+
+                self.iface.messageBar().pushMessage("Success", "Circle Around applied, any conflicting Camera removed.", level=QgsMessageBar.INFO, duration=5)
+
+            else:
+                self.iface.messageBar().pushMessage("Canceled", "Circle Around Canceled.", level=QgsMessageBar.INFO, duration=5)
 
 
         except:
@@ -2847,7 +2966,7 @@ class MilkMachine:
             for f in self.ActiveLayer.getFeatures(): #  QgsFeatureIterator #[u'2014/06/06 10:38:48', u'Time:10:38:48, Latitude: 39.965949, Longitude: -75.172239, Speed: 0.102851, Altitude: -3.756733']
                 currentatt = f.attributes()
 
-                if currentatt[self.fields['lookat']]:
+                if currentatt[self.fields['lookat']] and currentatt[self.fields['lookat']] != 'circlearound':
                     lookatBack = {'a':'longitude','b' :'latitude','c' :'altitude','d' :'altitudemode','e':'gxaltitudemode','f':'heading','g':'tilt','h' :'range','i' :'duration','j' :'startheading', 'k': 'rotations', 'l': 'direction'}
                     lookat = eval(currentatt[self.fields['lookat']])
                     #convert back to full format
