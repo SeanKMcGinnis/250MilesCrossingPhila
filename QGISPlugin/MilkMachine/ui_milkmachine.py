@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\Edward\.qgis2\python\plugins\MilkMachine\ui_milkmachine.ui'
 #
-# Created: Mon Nov 03 13:20:30 2014
+# Created: Tue Nov 04 20:13:13 2014
 #      by: PyQt4 UI code generator 4.10.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -1231,6 +1231,7 @@ class Ui_MilkMachine(object):
         self.pushButton_sync.setToolTip(_translate("MilkMachine", "<html><head/><body><p>Syncronize the audio with the GPS track. Press the button while a track is selected that matches the audio file and a marker will be produced that shows where the audio starts in the GPS track.<br/></p></body></html>", None))
         self.checkBox_headoftrack.setToolTip(_translate("MilkMachine", "<html><head/><body><p>If checked, a green marker is drawn when the &quot;Draw Track&quot; button is pressed to indicate where the track starts.</p></body></html>", None))
         self.checkBox_headoftrack.setText(_translate("MilkMachine", "Draw \"Head of Track\"", None))
+        self.checkBox_import_indicator.setToolTip(_translate("MilkMachine", "<html><head/><body><p>If checked, QGIS will &quot;select&quot; the point that matches the time on the audio file. The map will move along with the audio.</p></body></html>", None))
         self.checkBox_import_indicator.setText(_translate("MilkMachine", "Indicate Selected Point", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_import), _translate("MilkMachine", "Import and Sync", None))
         self.tabWidget.setTabToolTip(self.tabWidget.indexOf(self.tab_import), _translate("MilkMachine", "<html><head/><body><p>Import raw .kml files and render as an ESRI shapefile for editing, and import audio files for interactive time syncronization.</p></body></html>", None))
