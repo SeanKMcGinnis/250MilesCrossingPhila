@@ -259,7 +259,7 @@ class MilkMachine:
             diff = sel_end_dt - sel_start_dt
             self.logger.info('durationpop: {0}, {1}, {2}'.format(sel_start_dt, sel_end_dt, diff.seconds))
             self.logger.info('selected: {0}'.format(selected))
-            self.dlg.ui.lineEdit__visualization_circle_duration.setText(str(diff.seconds))
+            self.dlg.ui.lineEdit__visualization_circle_duration.setText(str(diff.seconds+1))
 
 
     def google_earth(self):
@@ -3798,14 +3798,14 @@ class MilkMachine:
 
         # Populate the Visualization Camera Combo boxes
         self.dlg.ui.comboBox_flyto_mode.clear()
-        flytomodelist = [None, 'smooth', 'bounce']
+        flytomodelist = ['smooth', 'bounce']
         for hh in flytomodelist:
             self.dlg.ui.comboBox_flyto_mode.addItem(hh)
 
         self.dlg.ui.comboBox_altitudemode.clear()
         self.dlg.ui.comboBox_lookat_altitudemode.clear()
         self.dlg.ui.comboBox_circle_altitudemode.clear()
-        altitudemode = [None, 'absolute', 'clampToGround', 'relativeToGround', 'relativeToModel']
+        altitudemode = ['relativeToModel', 'absolute', 'clampToGround', 'relativeToGround']
         for alt in altitudemode:
             self.dlg.ui.comboBox_altitudemode.addItem(alt)
             self.dlg.ui.comboBox_lookat_altitudemode.addItem(alt)

@@ -2577,6 +2577,9 @@
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Distance in meters from the point. Since the &amp;quot;Follow Behind&amp;quot; is following the sequence of points, the &amp;quot;range&amp;quot; is the distance between the camera and the point (or row in the table) that is corresponds to. This is the same as the &amp;quot;range&amp;quot; for a KML &amp;lt;LookAt&amp;gt;.&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/plugins/milkmachine/camera.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
+        <property name="text">
+         <string>15</string>
+        </property>
        </widget>
        <widget class="QLineEdit" name="lineEdit__visualization_follow_tilt">
         <property name="enabled">
@@ -2592,6 +2595,9 @@
         </property>
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rotation, in degrees, of the camera around the &lt;span style=&quot; font-style:italic;&quot;&gt;X&lt;/span&gt; axis. A value of 0 indicates that the view is aimed straight down toward the earth (the most common case). A value for 90 for &amp;lt;tilt&amp;gt; indicates that the view is aimed toward the horizon. Values greater than 90 indicate that the view is pointed up into the sky. Values for &amp;lt;tilt&amp;gt; are clamped at +180 degrees. &lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/plugins/milkmachine/camera.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="text">
+         <string>48</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_37">
@@ -2722,6 +2728,9 @@
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vertical distance of the camera from the earth's surface, in meters. Interpreted according to the Camera's &amp;lt;altitudeMode&amp;gt; or &amp;lt;gx:altitudeMode&amp;gt;. If &amp;lt;altitudemode&amp;gt; is relativeToModel, then this is the vertical distance from the model.&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/plugins/milkmachine/camera.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
+        <property name="text">
+         <string>10</string>
+        </property>
        </widget>
        <widget class="QLabel" name="label_36">
         <property name="geometry">
@@ -2788,7 +2797,7 @@
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Number of models to look forward in order to calculate the mean angle. Each angle in the calculation is the compass angle between the current model (n) and all of the models between n and the smoother parameter. The effect is a smoothed camera heading. The larger the smoother, the more smooth the heading will be. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
-         <string>1</string>
+         <string>10</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_41">
