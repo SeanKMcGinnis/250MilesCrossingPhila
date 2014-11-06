@@ -150,3 +150,9 @@ Commit #38
 Bug Fix:	Change the duration calculation in "circle around" to be the time difference between the start and the end of the selected points
 Task:		On "editcomplete" signal for any line edit in "circle around", the "duration" will recalculate (just in case the selection was changed). Also on "apply"
 Task:		Provide user with a warning when overwriting an existing circle around with another circle around. The user will be prompted to either overwrite the existing lookat cells, or to cancel. The conflicting circle around will be deleted.
+
+--------------------------------------------
+Commit #39
+
+Bug Fix:	circle around duration was off by 1 sec due to datetime.datetime timedelta. Changed to add 1 sec.
+Task:		Apply default values; flytomode: smooth, follow behind altitude: 10, altitudeMode: relativetoModel, follow behind range: 15, smoother: 10

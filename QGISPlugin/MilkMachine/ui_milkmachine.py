@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\Edward\.qgis2\python\plugins\MilkMachine\ui_milkmachine.ui'
 #
-# Created: Tue Nov 04 20:13:13 2014
+# Created: Wed Nov 05 21:29:11 2014
 #      by: PyQt4 UI code generator 4.10.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -1376,7 +1376,9 @@ class Ui_MilkMachine(object):
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_4), _translate("MilkMachine", "Custom", None))
         self.tabWidget_2.setTabToolTip(self.tabWidget_2.indexOf(self.tab_4), _translate("MilkMachine", "<html><head/><body><p>Create a camera within a tour at the selected point, or at numerous selected points.</p></body></html>", None))
         self.lineEdit__visualization_follow_range.setToolTip(_translate("MilkMachine", "<html><head/><body><p>Distance in meters from the point. Since the &quot;Follow Behind&quot; is following the sequence of points, the &quot;range&quot; is the distance between the camera and the point (or row in the table) that is corresponds to. This is the same as the &quot;range&quot; for a KML &lt;LookAt&gt;.</p><p><img src=\":/plugins/milkmachine/camera.png\"/></p></body></html>", None))
+        self.lineEdit__visualization_follow_range.setText(_translate("MilkMachine", "15", None))
         self.lineEdit__visualization_follow_tilt.setToolTip(_translate("MilkMachine", "<html><head/><body><p>Rotation, in degrees, of the camera around the <span style=\" font-style:italic;\">X</span> axis. A value of 0 indicates that the view is aimed straight down toward the earth (the most common case). A value for 90 for &lt;tilt&gt; indicates that the view is aimed toward the horizon. Values greater than 90 indicate that the view is pointed up into the sky. Values for &lt;tilt&gt; are clamped at +180 degrees. </p><p><img src=\":/plugins/milkmachine/camera.png\"/></p></body></html>", None))
+        self.lineEdit__visualization_follow_tilt.setText(_translate("MilkMachine", "48", None))
         self.label_37.setText(_translate("MilkMachine", "*altitude:", None))
         self.label_39.setText(_translate("MilkMachine", "*range:", None))
         self.lineEdit__visualization_follow_gxhoriz.setToolTip(_translate("MilkMachine", "Rotation about the x axis. <float>", None))
@@ -1386,12 +1388,13 @@ class Ui_MilkMachine(object):
         self.label_35.setText(_translate("MilkMachine", "gxhorizfov:", None))
         self.comboBox_follow_gxaltitudemode.setToolTip(_translate("MilkMachine", "<html><head/><body><p>A KML extension in the <a href=\"https://developers.google.com/kml/documentation/kmlreference#kmlextensions\"><span style=\" text-decoration: underline; color:#0000ff;\">Google extension namespace</span></a>, allowing altitudes relative to the sea floor. Values are: </p><ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">relativeToSeaFloor</span> - Interprets the &lt;altitude&gt; as a value in meters above the sea floor. If the point is above land rather than sea, the &lt;altitude&gt; will be interpreted as being above the ground. </li><li style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">clampToSeaFloor</span> - The &lt;altitude&gt; specification is ignored, and the Camera will be positioned on the sea floor. If the point is on land rather than at sea, the Camera will be positioned on the ground. </li></ul><p><br/></p></body></html>", None))
         self.lineEdit_visualization_follow_altitude.setToolTip(_translate("MilkMachine", "<html><head/><body><p>Vertical distance of the camera from the earth\'s surface, in meters. Interpreted according to the Camera\'s &lt;altitudeMode&gt; or &lt;gx:altitudeMode&gt;. If &lt;altitudemode&gt; is relativeToModel, then this is the vertical distance from the model.</p><p><img src=\":/plugins/milkmachine/camera.png\"/></p></body></html>", None))
+        self.lineEdit_visualization_follow_altitude.setText(_translate("MilkMachine", "10", None))
         self.label_36.setText(_translate("MilkMachine", "*altitudemode:", None))
         self.pushButton_follow_apply.setToolTip(_translate("MilkMachine", "<html><head/><body><p>Apply the camera view changes to the active layer. &quot;Tour Name&quot; and &quot;FlyTo mode apply to this tool. To roll back these edits, select &quot;Cancel for selected layer&quot; in the editor options.</p></body></html>", None))
         self.pushButton_follow_apply.setText(_translate("MilkMachine", "Apply", None))
         self.label_40.setText(_translate("MilkMachine", "smoother:", None))
         self.lineEdit__visualization_follow_smoother.setToolTip(_translate("MilkMachine", "<html><head/><body><p>Number of models to look forward in order to calculate the mean angle. Each angle in the calculation is the compass angle between the current model (n) and all of the models between n and the smoother parameter. The effect is a smoothed camera heading. The larger the smoother, the more smooth the heading will be. </p></body></html>", None))
-        self.lineEdit__visualization_follow_smoother.setText(_translate("MilkMachine", "1", None))
+        self.lineEdit__visualization_follow_smoother.setText(_translate("MilkMachine", "10", None))
         self.label_41.setText(_translate("MilkMachine", "follow angle:", None))
         self.lineEdit__visualization_follow_follow_angle.setToolTip(_translate("MilkMachine", "<html><head/><body><p>The compass angle of the &lt;Camera&gt; relative to the point (0-360 degrees).</p><p>If the follow angle is 0, then the camera will be in front of the model. </p><p>If the follow angle is 90, then the camera will be starboard of the model.</p><p>If the follow angle is 180, then the camera will be behind (following) the model.</p><p>If the follow angle is 270, then the camera will be port of the model. </p><p><img src=\":/plugins/milkmachine/followangle.png\"/></p></body></html>", None))
         self.lineEdit__visualization_follow_follow_angle.setText(_translate("MilkMachine", "180", None))
