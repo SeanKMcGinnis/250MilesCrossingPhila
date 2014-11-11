@@ -235,10 +235,14 @@ class MilkMachine:
 
     def tiltpopulate(self):
         if self.dlg.ui.lineEdit_visualization_follow_altitude.text() and self.dlg.ui.lineEdit__visualization_follow_range.text() and not self.dlg.ui.lineEdit__visualization_follow_tilt.text():
-            altitude = float(self.dlg.ui.lineEdit_visualization_follow_altitude.text())
-            ranger = float(self.dlg.ui.lineEdit__visualization_follow_range.text())
-            angle = round(math.degrees(math.acos(altitude/ranger)),1)
-            self.dlg.ui.lineEdit__visualization_follow_tilt.setText(str(angle))
+            try:
+                altitude = float(self.dlg.ui.lineEdit_visualization_follow_altitude.text())
+                ranger = float(self.dlg.ui.lineEdit__visualization_follow_range.text())
+                angle = round(math.degrees(math.acos(altitude/ranger)),1)
+                self.dlg.ui.lineEdit__visualization_follow_tilt.setText(str(angle))
+            except:
+                if self.logging == True:
+                    self.logger.exception(traceback.format_exc())
 
     def durationpopulate(self):
         if self.dlg.ui.lineEdit_visualization_circle_altitude.text():
@@ -337,10 +341,8 @@ class MilkMachine:
                         self.ActiveLayer.startEditing()
                         self.ActiveLayer.beginEditCommand('Moving Average Filter')
                         for i,f in enumerate(selectList):    #[[id, (x,y), altitude]]
-
                             fet = QgsGeometry.fromPoint(QgsPoint(xmean[i],ymean[i]))
                             self.ActiveLayer.changeGeometry(f[0],fet)
-
                         self.ActiveLayer.endEditCommand()
                         self.canvas.refresh()
 
@@ -415,6 +417,30 @@ class MilkMachine:
 
             elif self.dlg.ui.radioButton_filtering_linear.isChecked() and self.dlg.ui.radioButton_filtering_z.isChecked():
                 self.iface.messageBar().pushMessage("Error", "Linear can only be used for X,Y filtering", level=QgsMessageBar.CRITICAL, duration=7)
+
+            # Centering ------------------
+            if self.dlg.ui.radioButton_filtering_center.isChecked() and self.dlg.ui.radioButton_filtering_xy.isChecked():
+                weight = float(self.dlg.ui.doubleSpinBox_filtering_center_weight.value())
+
+                # calculate the centroid.
+                ptx_mean = np.mean(ptx); pty_mean = np.mean(pty)
+                xdist = ptx_mean - ptx; ydist = pty_mean - pty
+                xnew = ptx + (xdist * weight); ynew = pty + (ydist * weight)
+
+                self.ActiveLayer.startEditing()
+                self.ActiveLayer.beginEditCommand('Moving Average Filter')
+                for i,f in enumerate(selectList):    #[[id, (x,y), altitude]]
+                    fet = QgsGeometry.fromPoint(QgsPoint(xnew[i],ynew[i]))
+                    self.ActiveLayer.changeGeometry(f[0],fet)
+                self.ActiveLayer.endEditCommand()
+                self.canvas.refresh()
+
+                if self.dlg.ui.checkBox_filtering_showplot.isChecked() and self.os == 'Windows':
+                    plt.plot(ptx,pty, 'b.', markersize=15)
+                    plt.plot(xnew, ynew,'r.', markersize=15)
+                    plt.xlabel('Longitude', size=10); plt.ylabel('Latitude', size=10); plt.axis('equal')
+                    plt.title("Filtering: Blue = Original, Red = Filtered, Weight = {0}".format(weight), size=20)
+                    plt.show()
 
             # Quadratic Regression ------------------
             if self.dlg.ui.radioButton_filtering_quad.isChecked() and self.dlg.ui.radioButton_filtering_xy.isChecked():
@@ -514,6 +540,9 @@ class MilkMachine:
                 self.dlg.ui.label_47.setEnabled(True)
                 self.dlg.ui.label_66.setEnabled(True)
                 self.dlg.ui.doubleSpinBox_filtering_yweight.setEnabled(True)
+                self.dlg.ui.radioButton_filtering_center.setEnabled(True)
+                self.dlg.ui.label_63.setEnabled(True)
+                self.dlg.ui.doubleSpinBox_filtering_center_weight.setEnabled(True)
                 self.dlg.ui.radioButton_filtering_quad.setEnabled(True)
                 self.dlg.ui.radioButton_filtering_moving.setEnabled(True)
                 self.dlg.ui.spinBox_filtering_moving.setEnabled(True)
@@ -542,8 +571,10 @@ class MilkMachine:
                 self.dlg.ui.label_47.setEnabled(False)
                 self.dlg.ui.label_66.setEnabled(False)
                 self.dlg.ui.doubleSpinBox_filtering_yweight.setEnabled(False)
+                self.dlg.ui.radioButton_filtering_center.setEnabled(False)
+                self.dlg.ui.label_63.setEnabled(False)
+                self.dlg.ui.doubleSpinBox_filtering_center_weight.setEnabled(False)
                 self.dlg.ui.radioButton_filtering_quad.setEnabled(False)
-
                 self.dlg.ui.radioButton_filtering_moving.setEnabled(True)
                 self.dlg.ui.spinBox_filtering_moving.setEnabled(True)
                 self.dlg.ui.radioButton_filtering_zscale.setEnabled(True)
@@ -591,6 +622,9 @@ class MilkMachine:
                             self.dlg.ui.label_47.setEnabled(True)
                             self.dlg.ui.label_66.setEnabled(True)
                             self.dlg.ui.doubleSpinBox_filtering_yweight.setEnabled(True)
+                            self.dlg.ui.radioButton_filtering_center.setEnabled(True)
+                            self.dlg.ui.label_63.setEnabled(True)
+                            self.dlg.ui.doubleSpinBox_filtering_center_weight.setEnabled(True)
                             self.dlg.ui.radioButton_filtering_quad.setEnabled(True)
                             self.dlg.ui.radioButton_filtering_moving.setEnabled(True)
                             self.dlg.ui.spinBox_filtering_moving.setEnabled(True)
@@ -620,6 +654,9 @@ class MilkMachine:
                 self.dlg.ui.label_47.setEnabled(False)
                 self.dlg.ui.label_66.setEnabled(False)
                 self.dlg.ui.doubleSpinBox_filtering_yweight.setEnabled(False)
+                self.dlg.ui.radioButton_filtering_center.setEnabled(False)
+                self.dlg.ui.label_63.setEnabled(False)
+                self.dlg.ui.doubleSpinBox_filtering_center_weight.setEnabled(False)
                 self.dlg.ui.radioButton_filtering_quad.setEnabled(False)
                 self.dlg.ui.radioButton_filtering_moving.setEnabled(False)
                 self.dlg.ui.spinBox_filtering_moving.setEnabled(False)
@@ -1667,9 +1704,9 @@ class MilkMachine:
         try:
             self.fields = self.field_indices(self.ActiveLayer)
             # make a dictionary of all of the camera parameters
-            camera = {'longitude': None, 'longitude_off': None, 'latitude': None, 'latitude_off': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'gxhoriz' : None,'heading' : None,'roll' : None,'tilt' : None, 'range': None, 'follow_angle': None}
-            cameraAlpha = {'longitude': 'a', 'longitude_off': 'b', 'latitude': 'c', 'latitude_off': 'd', 'altitude' : 'e', 'altitudemode': 'f','gxaltitudemode' : 'g','gxhoriz' : 'h','heading' : 'i','roll' : 'j','tilt' : 'k', 'range': 'l', 'follow_angle': 'm'}
-            cameraBack = {'a': 'longitude', 'b': 'longitude_off','c': 'latitude','d': 'latitude_off','e': 'altitude' ,'f': 'altitudemode', 'g': 'gxaltitudemode' ,'h': 'gxhoriz' ,'i': 'heading' ,'j': 'roll' ,'k': 'tilt' ,'l': 'range','m': 'follow_angle'}
+            camera = {'longitude': None, 'longitude_off': None, 'latitude': None, 'latitude_off': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'gxhoriz' : None,'heading' : None,'roll' : None,'tilt' : None, 'range': None, 'follow_angle': None, 'streetview': None}
+            cameraAlpha = {'longitude': 'a', 'longitude_off': 'b', 'latitude': 'c', 'latitude_off': 'd', 'altitude' : 'e', 'altitudemode': 'f','gxaltitudemode' : 'g','gxhoriz' : 'h','heading' : 'i','roll' : 'j','tilt' : 'k', 'range': 'l', 'follow_angle': 'm', 'streetview': 'n'}
+            cameraBack = {'a': 'longitude', 'b': 'longitude_off','c': 'latitude','d': 'latitude_off','e': 'altitude' ,'f': 'altitudemode', 'g': 'gxaltitudemode' ,'h': 'gxhoriz' ,'i': 'heading' ,'j': 'roll' ,'k': 'tilt' ,'l': 'range','m': 'follow_angle', 'n': 'streetview'}
 
             cameratemp = {}
             flyto = {'name': None, 'flyToMode': None, 'duration': None}
@@ -1688,7 +1725,8 @@ class MilkMachine:
             camera['tilt'] = self.dlg.ui.lineEdit__visualization_follow_tilt.text()
             camera['range'] = self.dlg.ui.lineEdit__visualization_follow_range.text()
             camera['follow_angle'] = self.dlg.ui.lineEdit__visualization_follow_follow_angle.text()
-
+            if self.dlg.ui.checkBox_visualization_follow_streetview.isChecked():
+                camera['streetview'] = True
 
             # Calculate Heading !! Select All Features in the Current Layer !!
             forward_int = int(self.dlg.ui.lineEdit__visualization_follow_smoother.text())  # default to 1
@@ -2079,7 +2117,9 @@ class MilkMachine:
             # make a dictionary of all of the camera parameters
             flyto = {'name': None, 'flyToMode': None, 'duration': None}
             camera = {'longitude': None, 'longitude_off': None, 'latitude': None, 'latitude_off': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'gxhoriz' : None,'heading' : None,'roll' : None,'tilt' : None, 'range': None, 'follow_angle': None}
-            cameraAlpha = {'longitude': 'a', 'longitude_off': 'b', 'latitude': 'c', 'latitude_off': 'd', 'altitude' : 'e', 'altitudemode': 'f','gxaltitudemode' : 'g','gxhoriz' : 'h','heading' : 'i','roll' : 'j','tilt' : 'k', 'range': 'l', 'follow_angle': 'm'}
+            cameraAlpha = {'longitude': 'a', 'longitude_off': 'b', 'latitude': 'c', 'latitude_off': 'd', 'altitude' : 'e', 'altitudemode': 'f','gxaltitudemode' : 'g','gxhoriz' : 'h','heading' : 'i','roll' : 'j','tilt' : 'k', 'range': 'l', 'follow_angle': 'm', 'streetview': 'n'}
+
+
             cameratemp = {}
 
             flyto['name'] = self.dlg.ui.lineEdit_tourname.text()
@@ -3135,7 +3175,7 @@ class MilkMachine:
 
                     if cc == 0:  # establish this as the start of the tour
                         camera = eval(currentatt[self.fields['camera']])
-                        cameraBack = {'a': 'longitude', 'b': 'longitude_off','c': 'latitude','d': 'latitude_off','e': 'altitude' ,'f': 'altitudemode', 'g': 'gxaltitudemode' ,'h': 'gxhoriz' ,'i': 'heading' ,'j': 'roll' ,'k': 'tilt' ,'l': 'range','m': 'follow_angle'}
+                        cameraBack = {'a': 'longitude', 'b': 'longitude_off','c': 'latitude','d': 'latitude_off','e': 'altitude' ,'f': 'altitudemode', 'g': 'gxaltitudemode' ,'h': 'gxhoriz' ,'i': 'heading' ,'j': 'roll' ,'k': 'tilt' ,'l': 'range','m': 'follow_angle', 'n': 'streetview'}
                         #convert back to full format
                         newcam = {}
                         for kk,vv in camera.iteritems():
@@ -3316,7 +3356,7 @@ class MilkMachine:
 
                     else:  # everything after zero camera
                         camera = eval(currentatt[self.fields['camera']])
-                        cameraBack = {'a': 'longitude', 'b': 'longitude_off','c': 'latitude','d': 'latitude_off','e': 'altitude' ,'f': 'altitudemode', 'g': 'gxaltitudemode' ,'h': 'gxhoriz' ,'i': 'heading' ,'j': 'roll' ,'k': 'tilt' ,'l': 'range','m': 'follow_angle'}
+                        cameraBack = {'a': 'longitude', 'b': 'longitude_off','c': 'latitude','d': 'latitude_off','e': 'altitude' ,'f': 'altitudemode', 'g': 'gxaltitudemode' ,'h': 'gxhoriz' ,'i': 'heading' ,'j': 'roll' ,'k': 'tilt' ,'l': 'range','m': 'follow_angle', 'n': 'streetview'}
                         #convert back to full format
                         newcam = {}
                         for kk,vv in camera.iteritems():
@@ -3445,6 +3485,11 @@ class MilkMachine:
                         # Time Span
                         flyto.camera.gxtimespan.begin = self.CamStartTime
                         flyto.camera.gxtimespan.end = camendtime
+
+                        # Gx Viewer Options
+##                        if cameradict['streetview']:
+##                            gxview = simplekml.GxViewerOptions(name=simplekml.GxOption.streetview, enabled = True)
+
 
                         cc += 1
 
@@ -3729,7 +3774,7 @@ class MilkMachine:
             self.ActiveLayer.removeSelection()
             self.ActiveLayer.select(rect,False)
 
-            cameraBack = {'a': 'longitude', 'b': 'longitude_off','c': 'latitude','d': 'latitude_off','e': 'altitude' ,'f': 'altitudemode', 'g': 'gxaltitudemode' ,'h': 'gxhoriz' ,'i': 'heading' ,'j': 'roll' ,'k': 'tilt' ,'l': 'range','m': 'follow_angle'}
+            cameraBack = {'a': 'longitude', 'b': 'longitude_off','c': 'latitude','d': 'latitude_off','e': 'altitude' ,'f': 'altitudemode', 'g': 'gxaltitudemode' ,'h': 'gxhoriz' ,'i': 'heading' ,'j': 'roll' ,'k': 'tilt' ,'l': 'range','m': 'follow_angle', 'n': 'streetview'}
             for f in self.ActiveLayer.selectedFeatures():
                 currentatt = f.attributes()
                 if currentatt:
@@ -4061,6 +4106,9 @@ class MilkMachine:
         self.dlg.ui.label_47.setEnabled(False)
         self.dlg.ui.label_66.setEnabled(False)
         self.dlg.ui.doubleSpinBox_filtering_yweight.setEnabled(False)
+        self.dlg.ui.radioButton_filtering_center.setEnabled(False)
+        self.dlg.ui.label_63.setEnabled(False)
+        self.dlg.ui.doubleSpinBox_filtering_center_weight.setEnabled(False)
         self.dlg.ui.radioButton_filtering_quad.setEnabled(False)
         self.dlg.ui.radioButton_filtering_moving.setEnabled(False)
         self.dlg.ui.spinBox_filtering_moving.setEnabled(False)

@@ -14,6 +14,9 @@
 		<file>triangle.png</file>	
 		<file>folder.png</file>	
 		<file>followangle.png</file>
-		<file>camera.png</file>		
+		<file>camera.png</file>	
+		<file>uncentered.png</file>	
+		<file>centered.png</file>		
+		<file>lookat.png</file>			
     </qresource>
 </RCC>
