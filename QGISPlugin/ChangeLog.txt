@@ -156,3 +156,9 @@ Commit #39
 
 Bug Fix:	circle around duration was off by 1 sec due to datetime.datetime timedelta. Changed to add 1 sec.
 Task:		Apply default values; flytomode: smooth, follow behind altitude: 10, altitudeMode: relativetoModel, follow behind range: 15, smoother: 10
+
+--------------------------------------------
+Commit #40
+
+Task:		Added the "Magically Center" option to the filtering options for x,y filtering. There is a scaling/weighting factor to enable to the user to choose how much the points move.
+Bug Fix:	ZeroDivisionError fix for the follow behind tiltpopulate function

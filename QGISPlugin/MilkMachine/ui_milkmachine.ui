@@ -729,7 +729,7 @@
       <rect>
        <x>50</x>
        <y>130</y>
-       <width>441</width>
+       <width>471</width>
        <height>291</height>
       </rect>
      </property>
@@ -800,7 +800,7 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>100</y>
+        <y>70</y>
         <width>82</width>
         <height>22</height>
        </rect>
@@ -809,7 +809,7 @@
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;After selecting a number of points within an edit session, the quadratic regression filter will place all points along a line. The line is fit using a least squares regression.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="text">
-       <string>Quadratic</string>
+       <string>Spline</string>
       </property>
      </widget>
      <widget class="QSpinBox" name="spinBox_filtering_moving">
@@ -922,7 +922,7 @@
        </rect>
       </property>
       <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Longitude&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="text">
        <string>X Weight:</string>
@@ -941,7 +941,7 @@
        </rect>
       </property>
       <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Latitude&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="text">
        <string>Y Weight:</string>
@@ -1084,7 +1084,7 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>70</y>
+        <y>100</y>
         <width>121</width>
         <height>22</height>
        </rect>
@@ -1103,13 +1103,13 @@
       <property name="geometry">
        <rect>
         <x>180</x>
-        <y>70</y>
+        <y>100</y>
         <width>51</width>
         <height>22</height>
        </rect>
       </property>
       <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Longitude&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="text">
        <string>Weight:</string>
@@ -1122,13 +1122,92 @@
       <property name="geometry">
        <rect>
         <x>230</x>
-        <y>70</y>
+        <y>100</y>
         <width>51</width>
         <height>22</height>
        </rect>
       </property>
       <property name="toolTip">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use the weght to adjust the centering of the selected points. The values range from 0-1. If 1, the values will all be placed at the geometric center. If 0.5, the values will be place 50% between the original value and the geometric center.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="decimals">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <double>1.000000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>0.100000000000000</double>
+      </property>
+      <property name="value">
+       <double>1.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_64">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>70</y>
+        <width>51</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Method:</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox_filtering_spline">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>70</y>
+        <width>91</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;In mathematics, a spline is a numeric function that is piecewise-defined by polynomial functions, and which possesses a sufficiently high degree of smoothness at the places where the polynomial pieces connect (which are known as knots).&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Quadratic&lt;/span&gt; - Used a quadratic (i.e. 2nd order polynomial) function to create the smoothing spline.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Cubic&lt;/span&gt; -  Used a cubic (i.e. 3nd order polynomial) function to create the smoothing spline.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;4th Order&lt;/span&gt; - 4th order polynomial function.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;5th Order&lt;/span&gt; - 5th order polynomial function.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_65">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>70</y>
+        <width>51</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Weight:</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="doubleSpinBox_filtering_spline_weight">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>70</y>
+        <width>51</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use the weight to adjust the spline smoother. The values range from 0-1. If 1, the values will be placed along the line. If 0.5, the values will be place 50% between the original value and the estimated value.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="decimals">
        <number>1</number>
@@ -3791,16 +3870,18 @@
   <tabstop>radioButton_filtering_linear</tabstop>
   <tabstop>doubleSpinBox_filtering_xweight</tabstop>
   <tabstop>doubleSpinBox_filtering_yweight</tabstop>
+  <tabstop>radioButton_filtering_quad</tabstop>
+  <tabstop>comboBox_filtering_spline</tabstop>
+  <tabstop>doubleSpinBox_filtering_spline_weight</tabstop>
   <tabstop>radioButton_filtering_center</tabstop>
   <tabstop>doubleSpinBox_filtering_center_weight</tabstop>
-  <tabstop>radioButton_filtering_quad</tabstop>
   <tabstop>radioButton_filtering_moving</tabstop>
   <tabstop>spinBox_filtering_moving</tabstop>
   <tabstop>radioButton_filtering_zscale</tabstop>
   <tabstop>lineEdit_filtering_min</tabstop>
   <tabstop>lineEdit_filtering_max</tabstop>
-  <tabstop>pushButton_filtering_apply</tabstop>
   <tabstop>checkBox_filtering_showplot</tabstop>
+  <tabstop>pushButton_filtering_apply</tabstop>
   <tabstop>lineEdit_rendering_active</tabstop>
   <tabstop>checkBox_rendering_edit</tabstop>
   <tabstop>comboBox_rendering_icon_color</tabstop>
@@ -3820,8 +3901,8 @@
   <tabstop>lineEdit_rendering_model_longitude</tabstop>
   <tabstop>pushButton_rendering_model_xy</tabstop>
   <tabstop>lineEdit_rendering_model_latitude</tabstop>
-  <tabstop>checkBox_rendering_model_z</tabstop>
   <tabstop>lineEdit_rendering_model_altitude</tabstop>
+  <tabstop>checkBox_rendering_model_z</tabstop>
   <tabstop>lineEdit_rendering_model_scale</tabstop>
   <tabstop>pushButton_rendering_model_apply</tabstop>
   <tabstop>lineEdit_visualization_active</tabstop>
