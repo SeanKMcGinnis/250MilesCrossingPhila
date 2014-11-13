@@ -442,29 +442,61 @@ class MilkMachine:
                     plt.title("Filtering: Blue = Original, Red = Filtered, Weight = {0}".format(weight), size=20)
                     plt.show()
 
-            # Quadratic Regression ------------------
+            # Spline Regression ------------------
             if self.dlg.ui.radioButton_filtering_quad.isChecked() and self.dlg.ui.radioButton_filtering_xy.isChecked():
                 #slope, intercept, r_value, p_value, std_err = stats.linregress(ptx,pty)
-                (a,b,c) = np.polyfit(ptx,pty,2)
-                yp = np.polyval([a,b,c],ptx)
+                method = self.dlg.ui.comboBox_filtering_spline.currentText()
+                sweight = float(self.dlg.ui.doubleSpinBox_filtering_spline_weight.value())
+                methdict = {'Quadratic': 2, 'Cubic': 3, '4th Order': 4, '5th Order': 5}
+                meth = methdict[method]
+
+                # resort selectList by x. x has to be increasing!
+                def getKeyX(item):
+                    return item[1][0]
+                selectListX = selectList
+                selectListX = sorted(selectListX, key=getKeyX)  #[[id, (x,y), altitude]]
+                # turn the coordinates into numpy arrays
+                xarr = []; yarr = [];
+                for val in selectListX:
+                    xarr.append(val[1][0]);yarr.append(val[1][1])
+                ptx = np.array(xarr); pty = np.array(yarr)
+
+                s = UnivariateSpline(ptx,pty, k=meth, s=5e8)
+                #s = interpolate.interp1d(ptx,pty, kind=meth, assume_sorted=False)
+                ys = s(ptx)
+                diff = ys - pty
+                ynew = pty + (diff * sweight)
+                # get rid of nan
+                for i,v in enumerate(ynew):
+                    if np.isnan(v):
+                        ynew[i] = pty[i]
+
+                self.logger.info('pty: {0}'.format(pty))
+                self.logger.info('ys: {0}'.format(ys))
+                self.logger.info('ynew: {0}'.format(ynew))
+                self.logger.info('ptx: {0}'.format(ptx))
+                self.logger.info('selectListX: {0}'.format(selectListX))
+##                (a,b,c) = np.polyfit(ptx,pty,2)
+##                yp = np.polyval([a,b,c],ptx)
 
                 if self.dlg.ui.checkBox_filtering_showplot.isChecked() and self.os == 'Windows':
                     plt.plot(ptx,pty, 'b.', markersize=15)
-                    plt.plot(ptx,yp,'r-',linewidth=2)
-                    plt.plot(ptx,yp,'r.', markersize=15)
+                    #plt.plot(ptx,ys, 'g.', markersize=15)
+                    plt.plot(ptx,ynew,'r-',linewidth=2)
+                    plt.plot(ptx,ynew,'r.', markersize=15)
                     plt.xlabel('Longitude', size=10); plt.ylabel('Latitude', size=10); plt.axis('equal')
                     plt.title("Filtering: Blue = Original, Red = Filtered", size=20)
                     plt.show()
 
                 self.ActiveLayer.startEditing()
                 self.ActiveLayer.beginEditCommand('Quadratic Filter')
-                for i,f in enumerate(selectList):    #[[id, (x,y), altitude]]
-                    fet = QgsGeometry.fromPoint(QgsPoint(ptx[i],yp[i]))
+                for i,f in enumerate(selectListX):    #[[id, (x,y), altitude]]
+                    fet = QgsGeometry.fromPoint(QgsPoint(ptx[i],ynew[i]))
                     self.ActiveLayer.changeGeometry(f[0],fet)
                 self.ActiveLayer.endEditCommand()
                 self.canvas.refresh()
 
-                self.iface.messageBar().pushMessage("Success", "Applied quadratic interpolation to points", level=QgsMessageBar.INFO, duration=5)
+                self.iface.messageBar().pushMessage("Success", "Applied spline interpolation to points", level=QgsMessageBar.INFO, duration=5)
 
             elif self.dlg.ui.radioButton_filtering_quad.isChecked() and self.dlg.ui.radioButton_filtering_z.isChecked():
                 self.iface.messageBar().pushMessage("Error", "Quadratic can only be used for X,Y filtering", level=QgsMessageBar.CRITICAL, duration=7)
@@ -540,6 +572,10 @@ class MilkMachine:
                 self.dlg.ui.label_47.setEnabled(True)
                 self.dlg.ui.label_66.setEnabled(True)
                 self.dlg.ui.doubleSpinBox_filtering_yweight.setEnabled(True)
+                self.dlg.ui.label_64.setEnabled(True)
+                self.dlg.ui.comboBox_filtering_spline.setEnabled(True)
+                self.dlg.ui.label_65.setEnabled(True)
+                self.dlg.ui.doubleSpinBox_filtering_spline_weight.setEnabled(True)
                 self.dlg.ui.radioButton_filtering_center.setEnabled(True)
                 self.dlg.ui.label_63.setEnabled(True)
                 self.dlg.ui.doubleSpinBox_filtering_center_weight.setEnabled(True)
@@ -571,6 +607,10 @@ class MilkMachine:
                 self.dlg.ui.label_47.setEnabled(False)
                 self.dlg.ui.label_66.setEnabled(False)
                 self.dlg.ui.doubleSpinBox_filtering_yweight.setEnabled(False)
+                self.dlg.ui.label_64.setEnabled(False)
+                self.dlg.ui.comboBox_filtering_spline.setEnabled(False)
+                self.dlg.ui.label_65.setEnabled(False)
+                self.dlg.ui.doubleSpinBox_filtering_spline_weight.setEnabled(False)
                 self.dlg.ui.radioButton_filtering_center.setEnabled(False)
                 self.dlg.ui.label_63.setEnabled(False)
                 self.dlg.ui.doubleSpinBox_filtering_center_weight.setEnabled(False)
@@ -622,6 +662,10 @@ class MilkMachine:
                             self.dlg.ui.label_47.setEnabled(True)
                             self.dlg.ui.label_66.setEnabled(True)
                             self.dlg.ui.doubleSpinBox_filtering_yweight.setEnabled(True)
+                            self.dlg.ui.label_64.setEnabled(True)
+                            self.dlg.ui.comboBox_filtering_spline.setEnabled(True)
+                            self.dlg.ui.label_65.setEnabled(True)
+                            self.dlg.ui.doubleSpinBox_filtering_spline_weight.setEnabled(True)
                             self.dlg.ui.radioButton_filtering_center.setEnabled(True)
                             self.dlg.ui.label_63.setEnabled(True)
                             self.dlg.ui.doubleSpinBox_filtering_center_weight.setEnabled(True)
@@ -654,6 +698,10 @@ class MilkMachine:
                 self.dlg.ui.label_47.setEnabled(False)
                 self.dlg.ui.label_66.setEnabled(False)
                 self.dlg.ui.doubleSpinBox_filtering_yweight.setEnabled(False)
+                self.dlg.ui.label_64.setEnabled(False)
+                self.dlg.ui.comboBox_filtering_spline.setEnabled(False)
+                self.dlg.ui.label_65.setEnabled(False)
+                self.dlg.ui.doubleSpinBox_filtering_spline_weight.setEnabled(False)
                 self.dlg.ui.radioButton_filtering_center.setEnabled(False)
                 self.dlg.ui.label_63.setEnabled(False)
                 self.dlg.ui.doubleSpinBox_filtering_center_weight.setEnabled(False)
@@ -3864,6 +3912,12 @@ class MilkMachine:
             self.dlg.ui.comboBox_gxaltitudemode.addItem(gxalt)
             self.dlg.ui.comboBox_circle_gxaltitudemode.addItem(gxalt)
             self.dlg.ui.comboBox_lookat_gxaltitudemode.addItem(gxalt)
+
+        # Filtering
+        splinelist = ['Quadratic', 'Cubic', '4th Order', '5th Order']
+        for spline in splinelist:
+            self.dlg.ui.comboBox_filtering_spline.addItem(spline)
+
         # Follow Behind Combo Boxes
         self.dlg.ui.comboBox_follow_altitudemode.clear()
         for alt in altitudemode:
@@ -4106,6 +4160,10 @@ class MilkMachine:
         self.dlg.ui.label_47.setEnabled(False)
         self.dlg.ui.label_66.setEnabled(False)
         self.dlg.ui.doubleSpinBox_filtering_yweight.setEnabled(False)
+        self.dlg.ui.label_64.setEnabled(False)
+        self.dlg.ui.comboBox_filtering_spline.setEnabled(False)
+        self.dlg.ui.label_65.setEnabled(False)
+        self.dlg.ui.doubleSpinBox_filtering_spline_weight.setEnabled(False)
         self.dlg.ui.radioButton_filtering_center.setEnabled(False)
         self.dlg.ui.label_63.setEnabled(False)
         self.dlg.ui.doubleSpinBox_filtering_center_weight.setEnabled(False)
