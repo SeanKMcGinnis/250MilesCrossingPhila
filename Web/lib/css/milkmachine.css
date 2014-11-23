@@ -1,0 +1,86 @@
+body{
+	font-family: 'Montserrat', sans-serif;
+	color: #FEFDFB
+}
+a{
+	color: #1143F3;
+	text-decoration:underline
+}
+a:hover, a:focus{
+	color: #1143F3; 
+}
+.title-block{
+	font-size: 40pt;
+	line-height: 28pt;
+	padding-bottom: 5pt;
+}
+.subtitle-block{
+	font-size: 17pt;
+}
+#linkPanel{
+    padding-top: 20px;
+}
+#contentPanel{
+    padding-top: 24px;
+}
+.body-text{
+	font-weight: 400;
+}
+.container{
+	width: 970px !important;
+}
+.logo-image{
+	width: 271px;
+	height:auto;
+}
+.top-row{
+	padding-top: 40px;
+}
+.grid{
+	height:90px;
+	padding-right:4px;
+	padding-left:4px;
+}
+.grid-cell{
+	width:80px;
+	text-align:center;
+	vertical-align:middle;
+}
+.result-table{
+	margin-left:10px;
+}
+.padded{
+	margin-left: 20px;
+}
+.last-image{
+	margin-left: 7px;
+}
+.track-marker{
+	width: 38px;
+	height: auto;
+}
+.track-padding{
+	padding-top:16px;
+}
+.incomplete{
+	opacity: 0.3;
+    filter: alpha(opacity=30); /* For IE8 and earlier */
+}
+.first-cell{
+	padding-left: 8px
+}
+.popover-content, .popover-title{
+	color: #0F0F0F;
+}
+.arrow{
+	display:none !important;
+}
+.ui-dialog{
+	opacity:0.75;
+}
+.ui-widget{
+	font-size: 1.0em
+}
+.block{
+	display:block
+}

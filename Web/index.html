@@ -1,107 +1,264 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- Safari iOS - apps only -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <!-- Chrome for Android - NEW! -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="apple-touch-icon" href="../images/brand.png">
-    <link rel="shortcut icon" href="../images/favicon.ico">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-    <title>250 Miles Crossing Philadelphia</title>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
-    <!-- Bootstrap core CSS -->
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+	<head>
 
-    <!-- Custom styles for this template -->
-    <link href="lib/css/style.css" rel="stylesheet">
+		<title>250 Miles Crossing Philadelphia</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<!--link rel="stylesheet" href="lib/css/style.css" type="text/css" /-->
+		<link rel="stylesheet" href="lib/css/supersized.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="lib/css/supersized.shutter.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="lib/js/jquery-ui-1.11.2/jquery-ui.min.css" type="text/css" >
+		<link rel="stylesheet" href="lib/css/bootstrap.css" type="text/css" media="screen" />
+		<link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="lib/css/milkmachine.css" type="text/css" rel="stylesheet" >
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		
+		  ga('create', 'UA-57025305-1', 'auto');
+		  ga('send', 'pageview');
+		
+		</script>
+	</head>
 
-    <!-- Bootstrap-map-js -->
-    <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.9/js/esri/css/esri.css">   
-    <link rel="stylesheet" type="text/css" href="lib/css/bootstrapmap.css">   
-
-    <style type="text/css">
-
-      #mapDiv {
-        min-height: 100%; 
-        max-height: 100%; 
-      }
-
-    </style>
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="../bootstrap_v3/docs-assets/js/html5shiv.js"></script>
-      <script src="../bootstrap_v3/docs-assets/js/respond.min.js"></script>
-    <![endif]-->
-  </head>
-
-  <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="http://www.250miles.net/">250 Miles Crossing Philadelphia</a>
+<body>
+    <div class="container">
+        <div class="row top-row">
+            <div class="col-xs-4 grid">
+                <div class="title-block">250 Miles</div>
+                <div class="subtitle-block">Crossing Philadelphia</div>
+            </div>
+            <div class="col-xs-8 grid">
+            	<table class="result-table" width="100%">
+            		<tr>
+            			<td class="grid-cell"></td>
+            			<td class="grid-cell"></td>
+            			<td class="grid-cell"></td>
+            			<td class="grid-cell"></td>
+            			<td class="grid-cell" id="grid1"></td>
+            			<td class="grid-cell" id="grid2"></td>
+            		</tr>
+            	</table>
+            </div>
         </div>
-      </div>
+        <div class="row">
+            <div class="col-xs-4 grid first-cell" style="padding-top: 15px;">
+                <h4>Map / <a href="http://www.250miles.net" >Blog</a></h4>
+            </div>
+            <div class="col-xs-8 grid">
+            	<table class="result-table" width="100%">
+            		<tr>
+            			<td class="grid-cell" id="grid3"></td>
+            			<td class="grid-cell" id="grid4"></td>
+            			<td class="grid-cell" id="grid5"></td>
+            			<td class="grid-cell" id="grid6"></td>
+            			<td class="grid-cell" id="grid7"></td>
+            			<td class="grid-cell" id="grid8"></td>
+            		</tr>
+            	</table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4 grid first-cell body-text" style="padding-top: 15px;">
+                Click on one of the areas on<br>the map to discover daily life<br>in the city in whole new way.
+            </div>
+            <div class="col-xs-8 grid">
+            	<table class="result-table" width="100%">
+            		<tr>
+            			<td class="grid-cell" ></td>
+            			<td class="grid-cell" id="grid9"></td>
+            			<td class="grid-cell" id="grid10"></td>
+            			<td class="grid-cell" id="grid11"></td>
+            			<td class="grid-cell" id="grid12"></td>
+            			<td class="grid-cell" id="grid13"></td>
+            		</tr>
+            	</table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-8 col-xs-offset-4 grid" >
+            	<table class="result-table" width="100%">
+            		<tr>
+            			<td class="grid-cell" id="grid14"></td>
+            			<td class="grid-cell" id="grid15"></td>
+            			<td class="grid-cell" id="grid16"></td>
+            			<td class="grid-cell" id="grid17"></td>
+            			<td class="grid-cell" ></td>
+            			<td class="grid-cell" ></td>
+            		</tr>
+            	</table>
+            </div>
+        </div>
+        <div class="row">
+        	<div class="col-xs-8 col-xs-offset-4 grid" >
+            	<table class="result-table" width="100%">
+            		<tr>
+            			<td class="grid-cell" ></td>
+            			<td class="grid-cell" id="grid18"></td>
+            			<td class="grid-cell" id="grid19"></td>
+            			<td class="grid-cell" id="grid20"></td>
+            			<td class="grid-cell" ></td>
+            			<td class="grid-cell" ></td>
+            		</tr>
+            	</table>
+            </div>
+        </div>
+        <div class="row">
+        	<div class="col-xs-8 col-xs-offset-4 grid" >
+            	<table class="result-table" width="100%">
+            		<tr>
+            			<td class="grid-cell" ></td>
+            			<td class="grid-cell" id="grid21"></td>
+            			<td class="grid-cell" id="grid22"></td>
+            			<td class="grid-cell" id="grid23"></td>
+            			<td class="grid-cell" id="grid24"></td>
+            			<td class="grid-cell" ></td>
+            		</tr>
+            	</table>
+            </div>
+        </div>
     </div>
-
-    <!-- Bootstrap-map-js -->
-    <div id="mapDiv"></div>
+    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script type="text/javascript" src="lib/js/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="lib/js/supersized.3.2.7.min.js"></script>
+    <script type="text/javascript" src="lib/css/supersized.shutter.min.js"></script>
+    <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="lib/js/grids.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
     <script type="text/javascript">
-        var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
-        var dojoConfig = {
-            //The location.pathname.replace() logic below may look confusing but all its doing is
-            // enabling us to load the api from a CDN and load local modules from the correct location.
-            packages: [{
-                name: "application",
-                location: package_path + '/lib/js'
-            }, {
-                name: "bootstrap",
-                location: "//rawgit.com/xsokev/Dojo-Bootstrap/master"
-            }]
-        };
-    </script>
-    <script src="http://js.arcgis.com/3.9compact"></script>
-    <script>
-        require(["esri/map", "esri/dijit/Scalebar",
-        		"esri/symbols/SimpleLineSymbol",
-        		"esri/renderers/SimpleRenderer",
-        		"esri/Color",
-				"esri/layers/FeatureLayer", "esri/layers/ArcGISTiledMapServiceLayer",
-        		"application/bootstrapmap", "dojo/query",
-				"dojo/touch", "bootstrap/Collapse", "bootstrap/Dropdown", "dojo/domReady!"], 
-          function( Map, Scalebar,
-          			SimpleLineSymbol,
-          			SimpleRenderer,
-          			Color,
-          			FeatureLayer, ArcGISTiledMapServiceLayer,
-					BootstrapMap, query, touch) {
-            // <!-- Get a reference to the ArcGIS Map class -->
-            var map = BootstrapMap.create("mapDiv",{
-              center:[-75.137,40.005],
-              zoom:11
+            jQuery(function($){
+                $.supersized({
+                    slideshow               :   1,
+                    autoplay                :   1,
+                    start_slide             :   1,
+                    stop_loop               :   0,
+                    random                  :   0,
+                    slide_interval          :   2500,
+                    transition              :   0,
+                    transition_speed        :   1000,
+                    new_window              :   1,
+                    pause_hover             :   0,
+                    keyboard_nav            :   1,
+                    performance             :   1,
+                    image_protect           :   1,
+                    min_width               :   0,
+                    min_height              :   0,
+                    vertical_center         :   1,
+                    horizontal_center       :   1,
+                    fit_always              :   0,
+                    fit_portrait            :   1,
+                    fit_landscape           :   0,
+                    slide_links             :   false,
+                    thumb_links             :   0,
+                    thumbnail_navigation    :   0,
+                    slides                  :   bgImages,
+                    progress_bar            :   0,                         
+                    mouse_scrub             :   0
+                    
+                });
+            	$.each(grids.features, function(index, val){
+            		var grid = 'grid' + val.attributes.Id,
+            			tracks = val.tracks,
+            			trackCount = tracks.length;
+        			if(tracks !== undefined){
+        				$.each(tracks, function(index, track){
+        					var atts = [],
+        						// Has the track been completed
+        						status 			= track.complete,
+        						// Buid the img & attributes
+        						img 			= document.createElement('img'),
+        						id 				= document.createAttribute('id'),
+        						src 			= document.createAttribute('src'),
+        						cssClass 		= document.createAttribute('class'),
+        						cssVal 			= 'track-marker',
+        						idVal 			= 'img' + track.Id,
+        						// Build the ID Window
+        						dlgAtts 		= [],
+        						dlgIdVal		= 'dlg' + track.Id,
+        						dlg 			= document.createElement('div'),
+        						dlgId 			= document.createAttribute('id'),
+        						dlgTitle		= document.createAttribute('title'),
+        						trackTitle 		= track.title,
+        						dlgP			= document.createElement('p'),
+        						dlgPClass		= document.createAttribute('class'),
+        						linkAtts		= [],
+        						dlgLink			= document.createElement('a'),
+        						dlgHref 		= document.createAttribute('href'),
+        						dlgTarget 		= document.createAttribute('target'),
+        						dlgLinkClass	= document.createAttribute('class');
+        					// Set the image attributes
+        					id.value = idVal;
+        					src.value = 'lib/images/circle.png';
+        					if(trackCount === 3 && index === 0){cssVal += ' center-block';}
+        					if(trackCount === 3 && index === 2){cssVal += ' last-image';}
+        					if(trackCount === 2 && index === 1){cssVal += ' last-image';}
+							if (trackCount !== 3) {cssVal += ' track-padding';}
+        					if(!status){cssVal += ' incomplete';}
+        					cssClass.value = cssVal;
+        					atts.push(id);
+        					atts.push(src);
+        					atts.push(cssClass);
+        					$.each(atts, function(index, att){
+        						img.setAttributeNode(att);
+        					});
+        					document.getElementById(grid).appendChild(img);
+        					if(status){
+        						//Set the dialog Values
+	        					dlgId.value = dlgIdVal;
+	        					dlgTitle.value = trackTitle;
+	        					dlgAtts.push(dlgId);
+	        					dlgAtts.push(dlgTitle);
+	        					$.each(dlgAtts, function(index, at){
+	        						dlg.setAttributeNode(at);
+	        					});
+	        					dlgP.innerHTML = track.description;
+	        					dlgPClass.value = 'text-center';
+	        					dlgP.setAttributeNode(dlgPClass);
+	        					dlgTarget.value = '_blank';
+	        					dlgHref.value = 'tracks.html?file=' + track.filename;
+	        					dlgLinkClass.value = 'text-center block';
+	        					linkAtts.push(dlgTarget);
+	        					linkAtts.push(dlgHref);
+	        					linkAtts.push(dlgLinkClass);
+	        					dlgLink.innerHTML = 'Go to Google Earth Animation';
+	        					$.each(linkAtts, function(index,att){
+	        						dlgLink.setAttributeNode(att);
+	        					});
+	        					// Add the objects to the page
+	        					
+	        					document.getElementById(grid).appendChild(dlg);
+	        					dlg.appendChild(dlgP);
+	        					dlg.appendChild(dlgLink);
+	        					// Set the dialog options now that they are in the page
+	        					$('#' + dlgIdVal).dialog({
+	        						  autoOpen: false,
+								      show: {effect: "linear",duration: 1000},
+								      hide: {effect: "linear",duration: 1000},
+								      position: { my: "left-20 center+5", at: "right center", of: '#' + idVal },
+								      draggable: false
+	        					});
+	        					// Set the 'click' event of the image
+	        					$('#' + idVal).click(function(){
+	        						$('#' + dlgIdVal).dialog('open');
+	        					});
+        					}
+        					
+        					
+        				});
+        			}
+            			
+            	});
             });
-            var basemap = new ArcGISTiledMapServiceLayer("http://gis.phila.gov/arcgis/rest/services/BaseMaps/GrayBase_WM/MapServer");
-            map.addLayer(basemap);
-            var sym = new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([80,80,80]), 2)
-            var grid = new FeatureLayer("http://services2.arcgis.com/XVOqAjTOJ5P6ngMu/arcgis/rest/services/Philadelphia_Grid/FeatureServer/0",{
-            	
-            })
-            var rend = new SimpleRenderer(sym);
-            grid.renderer = rend;
-            map.addLayer(grid);
-
-            var scalebar = new Scalebar({
-              map: map,
-              scalebarUnit: "dual"
-            });
-        });
-    </script>
-  </body>
+        </script>
+</body>
 </html>
