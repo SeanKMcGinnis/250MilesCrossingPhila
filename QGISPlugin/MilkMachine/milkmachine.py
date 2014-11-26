@@ -6,8 +6,8 @@
  Process, edit, and scyncronize GPS and audio tracks with KML output
                               -------------------
         begin                : 2014-06-11
-        copyright            : (C) 2014 by polakvanbekkum
-        email                : marketst@gmail.com
+        copyright            : (C) 2014 by polakvanbekkum & Ed Farrell
+        email                : eddief77@yahoo.com
  ***************************************************************************/
 
 /***************************************************************************
@@ -1773,8 +1773,8 @@ class MilkMachine:
             camera['tilt'] = self.dlg.ui.lineEdit__visualization_follow_tilt.text()
             camera['range'] = self.dlg.ui.lineEdit__visualization_follow_range.text()
             camera['follow_angle'] = self.dlg.ui.lineEdit__visualization_follow_follow_angle.text()
-            if self.dlg.ui.checkBox_visualization_follow_streetview.isChecked():
-                camera['streetview'] = True
+            #if self.dlg.ui.checkBox_visualization_follow_streetview.isChecked():
+                #camera['streetview'] = True
 
             # Calculate Heading !! Select All Features in the Current Layer !!
             forward_int = int(self.dlg.ui.lineEdit__visualization_follow_smoother.text())  # default to 1
@@ -2449,7 +2449,7 @@ class MilkMachine:
     def browseOpenAudio(self):
         #QMessageBox.information( self.iface.mainWindow(),"Info", "You clicked browse" )
         #QFileDialog.getOpenFileName(QWidget parent=None, QString caption=QString(), QString directory=QString(), QString filter=QString(), QString selectedFilter=None, QFileDialog.Options options=0)
-        self.audiopath = QFileDialog.getOpenFileName(None, "Import Raw .wav Audio File",self.lastdirectory, "*.wav")
+        self.audiopath = QFileDialog.getOpenFileName(None, "Import Raw .wav Audio File",self.lastdirectory, "(*.wav .mp3)")
         if self.audiopath:
             self.lastdirectory = os.path.dirname(self.audiopath)
             self.dlg.ui.lineEdit_export_audio.setText(self.audiopath)
@@ -2993,7 +2993,7 @@ class MilkMachine:
             self.ActiveLayer = self.iface.activeLayer()
             if self.ActiveLayer:
                 self.fields = self.field_indices(self.ActiveLayer)
-                self.audio_export = QFileDialog.getOpenFileName(None, "Choose .wav file for .kmz export", self.lastdirectory, "*.wav")  #C:\Users\Edward\Documents\Philly250\Scratch
+                self.audio_export = QFileDialog.getOpenFileName(None, "Choose audio file for .kmz export", self.lastdirectory, "(*.wav *.mp3")  #C:\Users\Edward\Documents\Philly250\Scratch
                 if self.audio_export:
                     self.lastdirectory = os.path.dirname(self.audio_export)
 

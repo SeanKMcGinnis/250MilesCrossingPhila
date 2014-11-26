@@ -1,0 +1,6 @@
+# run this from the osgeo console
+pyuic4 -o "C:\Users\Edward\.qgis2\python\plugins\MilkMachine\ui_milkmachine.py" "C:\Users\Edward\.qgis2\python\plugins\MilkMachine\ui_milkmachine.ui"
+pyrcc4 -o "C:\Users\Edward\.qgis2\python\plugins\MilkMachine\resources_rc.py" "C:\Users\Edward\.qgis2\python\plugins\MilkMachine\resources.qrc"
+
+pyuic4 -o "/home/ed/.qgis2/python/plugins/MilkMachine/ui_milkmachine.py" "/home/ed/.qgis2/python/plugins/MilkMachine/ui_milkmachine.ui"
+pyrcc4 -o "/home/ed/.qgis2/python/plugins/MilkMachine/resources_rc.py" "/home/ed/.qgis2/python/plugins/MilkMachine/resources.qrc"

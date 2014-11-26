@@ -162,3 +162,16 @@ Commit #40
 
 Task:		Added the "Magically Center" option to the filtering options for x,y filtering. There is a scaling/weighting factor to enable to the user to choose how much the points move.
 Bug Fix:	ZeroDivisionError fix for the follow behind tiltpopulate function
+
+--------------------------------------------
+Commit #41
+
+This one may be lost due to losing my computer
+
+--------------------------------------------
+Commit #42
+
+Bug Fix:    Line 1776 and 1777 had a reference to streetview element that I commented out. This will cause an error when you apply tours.
+Task:         Enable support for .mp3 files
+Task:         Reordered the follow behind tab range and tilt input fields so that range comes before tilt (which is autopopulated).
+Task:         "altitudeMode" tooltip documentation matches the order of the combobox dropdown.
