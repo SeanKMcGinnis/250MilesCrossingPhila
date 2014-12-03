@@ -162,3 +162,8 @@ Commit #40
 
 Task:		Added the "Magically Center" option to the filtering options for x,y filtering. There is a scaling/weighting factor to enable to the user to choose how much the points move.
 Bug Fix:	ZeroDivisionError fix for the follow behind tiltpopulate function
+
+--------------------------------------------
+Commit #41
+
+Task:		Removed the "quadratic" interpolation from the filtering options. Replaced it with a weighted spline interpolator that accepts "Quadratic", "Cubic", 4th, and 5th order polynomial smoothers. The operates by regressing the Y axis (latitude) on the X axis (longitude), which means that X is the predictor and y is the dependent variable.
