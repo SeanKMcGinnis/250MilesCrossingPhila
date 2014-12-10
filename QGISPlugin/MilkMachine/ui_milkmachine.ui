@@ -72,7 +72,7 @@
      <property name="geometry">
       <rect>
        <x>460</x>
-       <y>100</y>
+       <y>127</y>
        <width>31</width>
        <height>30</height>
       </rect>
@@ -124,7 +124,7 @@
      <property name="geometry">
       <rect>
        <x>381</x>
-       <y>133</y>
+       <y>160</y>
        <width>91</width>
        <height>16</height>
       </rect>
@@ -149,7 +149,7 @@
      <property name="geometry">
       <rect>
        <x>420</x>
-       <y>100</y>
+       <y>127</y>
        <width>31</width>
        <height>30</height>
       </rect>
@@ -220,7 +220,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>150</y>
+       <y>177</y>
        <width>31</width>
        <height>30</height>
       </rect>
@@ -237,7 +237,7 @@
      <property name="geometry">
       <rect>
        <x>100</x>
-       <y>150</y>
+       <y>177</y>
        <width>131</width>
        <height>30</height>
       </rect>
@@ -259,7 +259,7 @@
      <property name="geometry">
       <rect>
        <x>60</x>
-       <y>150</y>
+       <y>177</y>
        <width>31</width>
        <height>30</height>
       </rect>
@@ -279,7 +279,7 @@
      <property name="geometry">
       <rect>
        <x>260</x>
-       <y>133</y>
+       <y>160</y>
        <width>111</width>
        <height>16</height>
       </rect>
@@ -301,7 +301,7 @@
      <property name="geometry">
       <rect>
        <x>240</x>
-       <y>150</y>
+       <y>177</y>
        <width>131</width>
        <height>30</height>
       </rect>
@@ -317,7 +317,7 @@
      <property name="geometry">
       <rect>
        <x>125</x>
-       <y>133</y>
+       <y>160</y>
        <width>101</width>
        <height>16</height>
       </rect>
@@ -339,7 +339,7 @@
      <property name="geometry">
       <rect>
        <x>380</x>
-       <y>150</y>
+       <y>177</y>
        <width>81</width>
        <height>30</height>
       </rect>
@@ -352,7 +352,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>100</y>
+       <y>127</y>
        <width>101</width>
        <height>30</height>
       </rect>
@@ -378,7 +378,7 @@
      <property name="geometry">
       <rect>
        <x>140</x>
-       <y>99</y>
+       <y>126</y>
        <width>271</width>
        <height>30</height>
       </rect>
@@ -391,7 +391,7 @@
      <property name="geometry">
       <rect>
        <x>500</x>
-       <y>100</y>
+       <y>127</y>
        <width>31</width>
        <height>30</height>
       </rect>
@@ -439,7 +439,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>190</y>
+       <y>217</y>
        <width>181</width>
        <height>20</height>
       </rect>
@@ -463,6 +463,36 @@
      </property>
      <property name="checked">
       <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="Line" name="line_3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>100</y>
+       <width>571</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_sync_point">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>540</x>
+       <y>120</y>
+       <width>91</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Indicate 
+Sync Point</string>
      </property>
     </widget>
    </widget>
@@ -2264,7 +2294,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab_4">
        <attribute name="title">
@@ -2303,7 +2333,7 @@
           <x>20</x>
           <y>186</y>
           <width>91</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="sizePolicy">
@@ -2386,7 +2416,7 @@
           <x>20</x>
           <y>102</y>
           <width>91</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="sizePolicy">
@@ -2405,7 +2435,7 @@
           <x>20</x>
           <y>18</y>
           <width>81</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="sizePolicy">
@@ -2440,7 +2470,7 @@
           <x>20</x>
           <y>39</y>
           <width>81</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="sizePolicy">
@@ -2488,7 +2518,7 @@
           <x>20</x>
           <y>123</y>
           <width>91</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="sizePolicy">
@@ -2507,7 +2537,7 @@
           <x>20</x>
           <y>60</y>
           <width>81</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="sizePolicy">
@@ -2526,7 +2556,7 @@
           <x>20</x>
           <y>144</y>
           <width>91</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="sizePolicy">
@@ -2545,7 +2575,7 @@
           <x>20</x>
           <y>81</y>
           <width>91</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="sizePolicy">
@@ -2644,7 +2674,7 @@
           <x>20</x>
           <y>165</y>
           <width>91</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="sizePolicy">
@@ -2754,7 +2784,7 @@
           <x>20</x>
           <y>18</y>
           <width>61</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="text">
@@ -2767,7 +2797,7 @@
           <x>20</x>
           <y>102</y>
           <width>41</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="text">
@@ -2812,7 +2842,7 @@
           <x>20</x>
           <y>60</y>
           <width>91</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="text">
@@ -2825,7 +2855,7 @@
           <x>20</x>
           <y>123</y>
           <width>41</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="text">
@@ -2838,7 +2868,7 @@
           <x>20</x>
           <y>81</y>
           <width>61</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="text">
@@ -2886,7 +2916,7 @@
           <x>20</x>
           <y>39</y>
           <width>81</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="text">
@@ -2922,7 +2952,7 @@
           <x>20</x>
           <y>165</y>
           <width>61</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="text">
@@ -2954,7 +2984,7 @@
           <x>20</x>
           <y>144</y>
           <width>71</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="text">
@@ -2978,6 +3008,38 @@
         </property>
         <property name="text">
          <string>180</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_67">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>186</y>
+          <width>101</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>heading offset:</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit__visualization_follow_hoffset">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>186</y>
+          <width>101</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Number of models to look forward in order to calculate the mean angle. Each angle in the calculation is the compass angle between the current model (n) and all of the models between n and the smoother parameter. The effect is a smoothed camera heading. The larger the smoother, the more smooth the heading will be. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="text">
+         <string>0</string>
         </property>
        </widget>
       </widget>
@@ -3156,7 +3218,7 @@
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Create a custom or automated &amp;quot;Circle Around&amp;quot; &amp;lt;LookAt&amp;gt; visualization.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_6">
        <attribute name="title">
@@ -3171,7 +3233,7 @@
           <x>20</x>
           <y>123</y>
           <width>91</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="text">
@@ -3203,7 +3265,7 @@
           <x>20</x>
           <y>60</y>
           <width>91</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="text">
@@ -3216,7 +3278,7 @@
           <x>20</x>
           <y>18</y>
           <width>81</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="text">
@@ -3229,7 +3291,7 @@
           <x>20</x>
           <y>102</y>
           <width>91</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="text">
@@ -3242,7 +3304,7 @@
           <x>20</x>
           <y>39</y>
           <width>91</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="text">
@@ -3351,7 +3413,7 @@
           <x>20</x>
           <y>81</y>
           <width>41</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="text">
@@ -3420,7 +3482,7 @@
           <x>20</x>
           <y>18</y>
           <width>61</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="text">
@@ -3433,7 +3495,7 @@
           <x>20</x>
           <y>102</y>
           <width>41</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="text">
@@ -3462,7 +3524,7 @@
           <x>20</x>
           <y>60</y>
           <width>91</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="text">
@@ -3475,7 +3537,7 @@
           <x>20</x>
           <y>81</y>
           <width>41</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="text">
@@ -3523,7 +3585,7 @@
           <x>20</x>
           <y>39</y>
           <width>81</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="text">
@@ -3559,7 +3621,7 @@
           <x>20</x>
           <y>144</y>
           <width>81</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="text">
@@ -3591,7 +3653,7 @@
           <x>20</x>
           <y>123</y>
           <width>71</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="text">
@@ -3639,7 +3701,7 @@
           <x>20</x>
           <y>165</y>
           <width>101</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="text">
@@ -3652,7 +3714,7 @@
           <x>20</x>
           <y>190</y>
           <width>101</width>
-          <height>16</height>
+          <height>20</height>
          </rect>
         </property>
         <property name="text">
@@ -3935,6 +3997,7 @@
   <tabstop>lineEdit__visualization_follow_tilt</tabstop>
   <tabstop>lineEdit__visualization_follow_follow_angle</tabstop>
   <tabstop>lineEdit__visualization_follow_smoother</tabstop>
+  <tabstop>lineEdit__visualization_follow_hoffset</tabstop>
   <tabstop>pushButton_follow_apply</tabstop>
   <tabstop>pushButton_visualization_camera_symbolize</tabstop>
   <tabstop>chkActivate</tabstop>
@@ -3965,6 +4028,7 @@
   <tabstop>buttonExportTrack</tabstop>
   <tabstop>pushButton_TrackInfo</tabstop>
   <tabstop>pushButton_google_earth</tabstop>
+  <tabstop>checkBox_sync_point</tabstop>
  </tabstops>
  <resources>
   <include location="resources.qrc"/>

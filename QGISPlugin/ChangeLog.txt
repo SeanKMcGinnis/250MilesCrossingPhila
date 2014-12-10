@@ -121,3 +121,9 @@ Bug Fix: Line 1776 and 1777 had a reference to streetview element that I comment
 Task: Enable support for .mp3 files
 Task: Reordered the follow behind tab range and tilt input fields so that range comes before tilt (which is autopopulated).
 Task: "altitudeMode" tooltip documentation matches the order of the combobox dropdown.
+--------------------------------------------
+Commit #43
+Task: On "Sync" button. The user will be informed if the audio lines up with the track start time, or not. 
+Task: On "Sync" button. Added the "Indicate Sync Point" checkbox so that the user can control if the "sync" point is shown or not. This should reduce repetitive layers being drawn.
+Task: Upgraded from simplekml 1.2.3 to 1.2.4
+Task: Package mutagen, gpxpy, and simplekml with MilkMachine
