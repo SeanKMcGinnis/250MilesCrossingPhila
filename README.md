@@ -2,6 +2,8 @@
 
 Code and components developed to support the 250 Miles Crossing Philadelphia project
 
+http://www.250miles.net/
+
 ##Milk Machine QGIS Python Plugin
 
 The plugin can be found in the QGISPlugin folder. It is being developed in Python 2.7.5 64 bit, which is the native Python distribution for Quantum GIS (QGIS). The plugin was developed under QGIS 2.4, and has had minimal testing on QGIS 2.6. The plugin is compatible with Windows, Mac OSX, and Linux.
@@ -29,4 +31,12 @@ user directory under windows. In QGIS go to Plugins > Manage and Install Plugins
 it to appear in the QGIS toolbar.
 
 ###Dependencies
+
+###Credits/Funding Sources
+
+University City Science Center
+Wexford Science + Technology
+Philadelphia Redevelopment Authority
+Drexel University
+
 
