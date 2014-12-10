@@ -1,177 +1,129 @@
 Change Log
 --------------------------------------------
 Commit #15
-
-Bug Fix: 	"Follow Behind" tab was disabled when all points were selected in active layer
-Task:		Enabled audio to be attached to kml/kmz when the end is beyond the length of the the GPS track
-Task:		Added datetime field. Populated on import with YYYY/MM/DD HH:MM:SS
-Task:		Changed all date and time references to point to the datetime field
-Task:		Enabled the audio sync to populate the "audio" field without being in an edit session
-Task:		Time tab. Edit selected time and before/after the selected time.
-
+Bug Fix: "Follow Behind" tab was disabled when all points were selected in active layer
+Task: Enabled audio to be attached to kml/kmz when the end is beyond the length of the the GPS track
+Task: Added datetime field. Populated on import with YYYY/MM/DD HH:MM:SS
+Task: Changed all date and time references to point to the datetime field
+Task: Enabled the audio sync to populate the "audio" field without being in an edit session
+Task: Time tab. Edit selected time and before/after the selected time.
 --------------------------------------------
 Commit #16
-
-Bug Fix: 	<TimeSpan> was defaulting to 5 seconds. Fixed to be 1 second.
-Bug Fix:	<Camera> heading was 180 degrees off what it should be.
-Task:		Added "relativeToModel" tag in the <altitude> for <Camera>. This means that the altitude will be relative to the 'altitude' tag in the <Model>, and that <Model> must be populated before attempting to use this setting.
-Task: 		Added a yellow marker that indicates the selected point in an audio tour in QGIS
-
+Bug Fix: <TimeSpan> was defaulting to 5 seconds. Fixed to be 1 second.
+Bug Fix: <Camera> heading was 180 degrees off what it should be.
+Task: Added "relativeToModel" tag in the <altitude> for <Camera>. This means that the altitude will be relative to the 'altitude' tag in the <Model>, and that <Model> must be populated before attempting to use this setting.
+Task: Added a yellow marker that indicates the selected point in an audio tour in QGIS
 --------------------------------------------
 Commit #17
-
-Bug Fix:	On windows, "Description" field formats as "Descriptio". On MAC, it format to "descriptio". MM handles both now.
-
+Bug Fix: On windows, "Description" field formats as "Descriptio". On MAC, it format to "descriptio". MM handles both now.
 --------------------------------------------
 Commit #18
-
-Bug Fix:	Tab order on "Tour" tab.
-Task:		Check box for presence of yellow indicator over selected point in audio sync.
-Bug Fix: 	If audio start time matches exactly with time of first GPS point: a) we get no notification window (window that gives audio and track info), b) MM does not generate a 'play-head', c) the audio does not play automatically when you click the play button
-Task:		"play" button is disabled when it is pressed. To enable it, press "stop" button.
-
+Bug Fix: Tab order on "Tour" tab.
+Task: Check box for presence of yellow indicator over selected point in audio sync.
+Bug Fix: If audio start time matches exactly with time of first GPS point: a) we get no notification window (window that gives audio and track info), b) MM does not generate a 'play-head', c) the audio does not play automatically when you click the play button
+Task: "play" button is disabled when it is pressed. To enable it, press "stop" button.
 --------------------------------------------
 Commit #19
-
-Bug Fix: 	Create <Camera> in the <document> before the <Tour> so that there are no strange camera actions.
-Task:		Make the "Follow Behind" applicable to a selection of points rather than automatically selecting the whole track
-Task:		Create a "smoother" field in "Follow Behind" tour so that the camera heading will take the mean angles of the points ahead of it.
-Task:		Create a "follow angle" field in "Follow Behind" tour. This field is the angle between the point and the camera. This enables the user to place the camera anywhere (0-360 degrees) around the model.
-Task: 		Suggest a tilt angle based on the altitude and range values. This auto populates.
-
+Bug Fix: Create <Camera> in the <document> before the <Tour> so that there are no strange camera actions.
+Task: Make the "Follow Behind" applicable to a selection of points rather than automatically selecting the whole track
+Task: Create a "smoother" field in "Follow Behind" tour so that the camera heading will take the mean angles of the points ahead of it.
+Task: Create a "follow angle" field in "Follow Behind" tour. This field is the angle between the point and the camera. This enables the user to place the camera anywhere (0-360 degrees) around the model.
+Task: Suggest a tilt angle based on the altitude and range values. This auto populates.
 --------------------------------------------
 Commit #20
-
-Task:		Allow for gaps in time in the <FlyTo> duration parameter. duration = time(n+1) - time(n)
-Task:		Pre-populate last known folder directory, for all browsing dialog boxes.
-Task:		Make the audio import file path the same as the export audio path.
-
+Task: Allow for gaps in time in the <FlyTo> duration parameter. duration = time(n+1) - time(n)
+Task: Pre-populate last known folder directory, for all browsing dialog boxes.
+Task: Make the audio import file path the same as the export audio path.
 --------------------------------------------
 Commit #21
-
-Bug Fix: 	The audio delay calculation was not firing since I was only inheriting the path from the import, rather than doind the calculation on the export tab.
-
+Bug Fix: The audio delay calculation was not firing since I was only inheriting the path from the import, rather than doind the calculation on the export tab.
 --------------------------------------------
 Commit #22
-
-Task:		The MM sync tab now behaves like GE. If there is a time gap between points, MM will continue to add time in the "Audio Clock Time" and "Duration Into Audio" time boxes. However, the FID box will stay static as well as the selected point on the map. These will again change, once the gps point timestamp matches the audio clock.
-
+Task: The MM sync tab now behaves like GE. If there is a time gap between points, MM will continue to add time in the "Audio Clock Time" and "Duration Into Audio" time boxes. However, the FID box will stay static as well as the selected point on the map. These will again change, once the gps point timestamp matches the audio clock.
 --------------------------------------------
 Commit #22
-
-Bug Fix:  	The 'camera' field exceeds the maximum character limit of 254 sometimes. This means that QGIS cuts of extra characters when saving as a shapefile. However, during and edit session the field will hold the extra characters. This allows a safe export in MM. There is no error in QGIS for the extra characters. The solution is to code all of the parameters. This brings the camera field down to about 180 characters.
-Bug Fix:	The 'tilt' field needs only to autopopulate when it is empty, not when the user enters a value. This stops it from overwriting the user values.
-
+Bug Fix: The 'camera' field exceeds the maximum character limit of 254 sometimes. This means that QGIS cuts of extra characters when saving as a shapefile. However, during and edit session the field will hold the extra characters. This allows a safe export in MM. There is no error in QGIS for the extra characters. The solution is to code all of the parameters. This brings the camera field down to about 180 characters.
+Bug Fix: The 'tilt' field needs only to autopopulate when it is empty, not when the user enters a value. This stops it from overwriting the user values.
 --------------------------------------------
 Commit #23
-
-Bug Fix:	The custom camera function is was not fully obfuscating the camera dictionary. Result was writing the full dictionary, and it was still getting cut off by the 254 character limit.
-
+Bug Fix: The custom camera function is was not fully obfuscating the camera dictionary. Result was writing the full dictionary, and it was still getting cut off by the 254 character limit.
 --------------------------------------------
 Commit #24
-
-Task:		Create a <LookAt> tab in the Tour tab of Milk Machine. The <LookAt> tab has two modes; "custom" and "circle around". Both automatically calculate latitude and longitude. In custom mode, the user can select 1 or more points and apply a custom <LookAt> to each. If multiple points are selected, lat/long for each <LookAt> will be the lat/long of that point/model. In "circle around" mode, 1 or more points can also be selected. If multiple points are selected, MM calculates the geometric centroid of the selected points for the <LookAt> lat/long. If only 1 point is selected, it's lat/long will be the lat/long for the <LookAt>. "circle around" also has some parameter for customizing the number of rotations, starting heading, and duration.
-
+Task: Create a <LookAt> tab in the Tour tab of Milk Machine. The <LookAt> tab has two modes; "custom" and "circle around". Both automatically calculate latitude and longitude. In custom mode, the user can select 1 or more points and apply a custom <LookAt> to each. If multiple points are selected, lat/long for each <LookAt> will be the lat/long of that point/model. In "circle around" mode, 1 or more points can also be selected. If multiple points are selected, MM calculates the geometric centroid of the selected points for the <LookAt> lat/long. If only 1 point is selected, it's lat/long will be the lat/long for the <LookAt>. "circle around" also has some parameter for customizing the number of rotations, starting heading, and duration.
 --------------------------------------------
 Commit #26
-
-Task:		Change all text to Tahoma
-Task:		Update the "sync" button info box to indicate the row number.
-Task:		Filtering added with 3 point filters; linear, quadratic, and moving average.
-
+Task: Change all text to Tahoma
+Task: Update the "sync" button info box to indicate the row number.
+Task: Filtering added with 3 point filters; linear, quadratic, and moving average.
 --------------------------------------------
 Commit #27
-
-Bug Fix:	Size policy changes for labels and buttons. Hoping that "fixed" "fixed" works
-Bug Fix:	The matplotlib library is not that same as the one on Windows, so no plotting!!. Only works on windows.
-Bug Fix:	numpy on Mac is an older version, so I can't call scipy/numpy as pylab. Call as numpy.
-
+Bug Fix: Size policy changes for labels and buttons. Hoping that "fixed" "fixed" works
+Bug Fix: The matplotlib library is not that same as the one on Windows, so no plotting!!. Only works on windows.
+Bug Fix: numpy on Mac is an older version, so I can't call scipy/numpy as pylab. Call as numpy.
 --------------------------------------------
 Commit #28
-
-Task:		Upgrade the "circle around" to match the duration of the selected points. "duration" option is disabled, but autopopulates based on # selected features.
-
+Task: Upgrade the "circle around" to match the duration of the selected points. "duration" option is disabled, but autopopulates based on # selected features.
 Still scratching my head on the font sizing. I may need to do some manual resizing if the user is on a Mac. Maybe.
-
 --------------------------------------------
 Commit #30
-
-Task:		"Symolize | Select" tab for symbolizing similar <Camera> views in the "symbcamera" field. This iterates through and finds <Camera> views that are the same and are consecutive. This will create a value in the "symbcamera" field that will be the tour name and some number. Ex: "tour1", "tour1_1".
-Task: 		Create a select mouse that can select and identify <Camera> field values. Only selects 1 at a time. Will display the formatted values in the text edit box below the checkbox.
-Task:		"ToCustom" button. If the user likes the values that have been selected by the camera click/identify, pressing the "ToCustom" button will auto-populate the values over to the fields in the "Custom" tab.
-Task:		"ToFollow" button. If the user likes the values that have been selected by the camera click/identify, pressing the "ToFollow" button will auto-populate the values over to the fields in the "Follow" tab.
-Task:		"Development" tab deprecated.
-
+Task: "Symolize | Select" tab for symbolizing similar <Camera> views in the "symbcamera" field. This iterates through and finds <Camera> views that are the same and are consecutive. This will create a value in the "symbcamera" field that will be the tour name and some number. Ex: "tour1", "tour1_1".
+Task: Create a select mouse that can select and identify <Camera> field values. Only selects 1 at a time. Will display the formatted values in the text edit box below the checkbox.
+Task: "ToCustom" button. If the user likes the values that have been selected by the camera click/identify, pressing the "ToCustom" button will auto-populate the values over to the fields in the "Custom" tab.
+Task: "ToFollow" button. If the user likes the values that have been selected by the camera click/identify, pressing the "ToFollow" button will auto-populate the values over to the fields in the "Follow" tab.
+Task: "Development" tab deprecated.
 --------------------------------------------
 Commit #31
-
-Task:		Add Z axis filtering (altitude). This required another field to hold the altitude values ("altitude"). Only moving average filtering can be performed on the altitude values in the filtering tab. If you have to update a layer that already has altitude values, it is suggested to rebuild the layer since there is now an additional field that needs to be built on import.
-
+Task: Add Z axis filtering (altitude). This required another field to hold the altitude values ("altitude"). Only moving average filtering can be performed on the altitude values in the filtering tab. If you have to update a layer that already has altitude values, it is suggested to rebuild the layer since there is now an additional field that needs to be built on import.
 --------------------------------------------
 Commit #32
-
-Task:		Remove conflicts between <Camera> and <LookAt>. If a custom <Camera> or follow behind is applied, then any conflicting <LookAt> will be removed from the "lookat" field. Likewise for <LookAt>.
-Task:		Success messages for "Apply" buttons.
-
+Task: Remove conflicts between <Camera> and <LookAt>. If a custom <Camera> or follow behind is applied, then any conflicting <LookAt> will be removed from the "lookat" field. Likewise for <LookAt>.
+Task: Success messages for "Apply" buttons.
 --------------------------------------------
 Commit #33
-
-Task:		Updated the linear regression to a geometric mean regression (i.e. Type II).
-Task:		Provided the ability to weigh each axis in the linear regression to enable total control over how the regression affects the points.
-Task:		Added the ability to "Scale" the Z (altitude) values. The user must provide at least one value. If one is left blank it will default to the current max/min value.
-Task:		Switches were put in so that only filters that apply to X,Y are enabled and Z are enabled.
-Task:		Success messages put into the filters.
-Task:		Plotting for Scaling was built (the others need improvement).
-
+Task: Updated the linear regression to a geometric mean regression (i.e. Type II).
+Task: Provided the ability to weigh each axis in the linear regression to enable total control over how the regression affects the points.
+Task: Added the ability to "Scale" the Z (altitude) values. The user must provide at least one value. If one is left blank it will default to the current max/min value.
+Task: Switches were put in so that only filters that apply to X,Y are enabled and Z are enabled.
+Task: Success messages put into the filters.
+Task: Plotting for Scaling was built (the others need improvement).
 --------------------------------------------
 Commit #34
-
-Bug Fix:	Z scale filter not working. Updated the edit cursor.
-
+Bug Fix: Z scale filter not working. Updated the edit cursor.
 --------------------------------------------
 Commit #35
-
-Bug Fix:	Circle around time error when > 1 rotation.
-
+Bug Fix: Circle around time error when > 1 rotation.
 --------------------------------------------
 Commit #36
-
-Bug Fix:	Continuation of circle around bug fixes.
-Task: 		Add counterclockwise/clockwise combobox.
-
+Bug Fix: Continuation of circle around bug fixes.
+Task: Add counterclockwise/clockwise combobox.
 --------------------------------------------
 Commit #37
-
-Bug Fix:	Continuation of circle around bug fixes. Disconnected the <TimeStamp> from the duration. Consistent results with 1,2,3, and 10 circle arounds. Tested with the first 72 points of "around the block" (points 0 - 71). This starts at 10:08:54 and ends at 10:10:06. In GE, each tour ends at 10:10:06 and the duration is 1:12 for each test.
-
+Bug Fix: Continuation of circle around bug fixes. Disconnected the <TimeStamp> from the duration. Consistent results with 1,2,3, and 10 circle arounds. Tested with the first 72 points of "around the block" (points 0 - 71). This starts at 10:08:54 and ends at 10:10:06. In GE, each tour ends at 10:10:06 and the duration is 1:12 for each test.
 --------------------------------------------
 Commit #38
-
-Bug Fix:	Change the duration calculation in "circle around" to be the time difference between the start and the end of the selected points
-Task:		On "editcomplete" signal for any line edit in "circle around", the "duration" will recalculate (just in case the selection was changed). Also on "apply"
-Task:		Provide user with a warning when overwriting an existing circle around with another circle around. The user will be prompted to either overwrite the existing lookat cells, or to cancel. The conflicting circle around will be deleted.
-
+Bug Fix: Change the duration calculation in "circle around" to be the time difference between the start and the end of the selected points
+Task: On "editcomplete" signal for any line edit in "circle around", the "duration" will recalculate (just in case the selection was changed). Also on "apply"
+Task: Provide user with a warning when overwriting an existing circle around with another circle around. The user will be prompted to either overwrite the existing lookat cells, or to cancel. The conflicting circle around will be deleted.
 --------------------------------------------
 Commit #39
-
-Bug Fix:	circle around duration was off by 1 sec due to datetime.datetime timedelta. Changed to add 1 sec.
-Task:		Apply default values; flytomode: smooth, follow behind altitude: 10, altitudeMode: relativetoModel, follow behind range: 15, smoother: 10
-
+Bug Fix: circle around duration was off by 1 sec due to datetime.datetime timedelta. Changed to add 1 sec.
+Task: Apply default values; flytomode: smooth, follow behind altitude: 10, altitudeMode: relativetoModel, follow behind range: 15, smoother: 10
 --------------------------------------------
 Commit #40
-
-Task:		Added the "Magically Center" option to the filtering options for x,y filtering. There is a scaling/weighting factor to enable to the user to choose how much the points move.
-Bug Fix:	ZeroDivisionError fix for the follow behind tiltpopulate function
-
+Task: Added the "Magically Center" option to the filtering options for x,y filtering. There is a scaling/weighting factor to enable to the user to choose how much the points move.
+Bug Fix: ZeroDivisionError fix for the follow behind tiltpopulate function
 --------------------------------------------
 Commit #41
-
 This one may be lost due to losing my computer
-
 --------------------------------------------
 Commit #42
-
-Bug Fix:    Line 1776 and 1777 had a reference to streetview element that I commented out. This will cause an error when you apply tours.
-Task:         Enable support for .mp3 files
-Task:         Reordered the follow behind tab range and tilt input fields so that range comes before tilt (which is autopopulated).
-Task:         "altitudeMode" tooltip documentation matches the order of the combobox dropdown.
+Bug Fix: Line 1776 and 1777 had a reference to streetview element that I commented out. This will cause an error when you apply tours.
+Task: Enable support for .mp3 files
+Task: Reordered the follow behind tab range and tilt input fields so that range comes before tilt (which is autopopulated).
+Task: "altitudeMode" tooltip documentation matches the order of the combobox dropdown.
+--------------------------------------------
+Commit #43
+Task: On "Sync" button. The user will be informed if the audio lines up with the track start time, or not. 
+Task: On "Sync" button. Added the "Indicate Sync Point" checkbox so that the user can control if the "sync" point is shown or not. This should reduce repetitive layers being drawn.
+Task: Upgraded from simplekml 1.2.3 to 1.2.4
+Task: Package mutagen, gpxpy, and simplekml with MilkMachine

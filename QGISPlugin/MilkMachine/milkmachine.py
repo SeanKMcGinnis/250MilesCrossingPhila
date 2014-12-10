@@ -34,6 +34,7 @@ os.sys.path.append(os.path.dirname(__file__))
 import gpxpy
 import gpxpy.gpx
 import simplekml
+from mutagen.mp3 import MP3
 import time, datetime, wave
 import TeatDip
 import subprocess
@@ -261,8 +262,6 @@ class MilkMachine:
             sel_start_dt = self.to_dt(first)
             sel_end_dt = self.to_dt(last)
             diff = sel_end_dt - sel_start_dt
-            self.logger.info('durationpop: {0}, {1}, {2}'.format(sel_start_dt, sel_end_dt, diff.seconds))
-            self.logger.info('selected: {0}'.format(selected))
             self.dlg.ui.lineEdit__visualization_circle_duration.setText(str(diff.seconds+1))
 
 
@@ -294,7 +293,7 @@ class MilkMachine:
                 xarr.append(val[1][0]);yarr.append(val[1][1]);zarr.append(val[2])
             ptx = np.array(xarr); pty = np.array(yarr); ptz = np.array(zarr)
 
-            self.logger.info('ptz: {0}'.format(ptz[1:100]))
+
             if self.dlg.ui.radioButton_filtering_moving.isChecked():  # rolling mean
                 window = self.dlg.ui.spinBox_filtering_moving.value() # this needs to be odd or throw an error.
                 if (window % 2 == 0): #even
@@ -336,8 +335,6 @@ class MilkMachine:
                             plt.title("Filtering: Blue = Original, Red = Filtered", size=20)
                             plt.show()
 
-                        #self.logger.info('len ptx: {0}, len filtered: {1}, len selected: {2}'.format(len(ptx),len(xmean), len(selectList)))
-
                         self.ActiveLayer.startEditing()
                         self.ActiveLayer.beginEditCommand('Moving Average Filter')
                         for i,f in enumerate(selectList):    #[[id, (x,y), altitude]]
@@ -351,7 +348,6 @@ class MilkMachine:
                     # z filtering
                     if self.dlg.ui.radioButton_filtering_z.isChecked():
                         zroll = TeatDip.rolling_window(ptz, window)
-                        self.logger.info('zroll: {0}'.format(zroll[1:100]))
                         zmean = []
                         pad = (window - 1)/2
                         counter = 0
@@ -364,8 +360,6 @@ class MilkMachine:
                         lastz = ptz[-pad:]
                         for l in lastz:
                             zmean.append(l)
-
-                        self.logger.info('zmean: {0}'.format(zmean[1:100]))
 
                         self.ActiveLayer.startEditing()
                         self.ActiveLayer.beginEditCommand('Moving Average Filter')
@@ -471,11 +465,11 @@ class MilkMachine:
                     if np.isnan(v):
                         ynew[i] = pty[i]
 
-                self.logger.info('pty: {0}'.format(pty))
-                self.logger.info('ys: {0}'.format(ys))
-                self.logger.info('ynew: {0}'.format(ynew))
-                self.logger.info('ptx: {0}'.format(ptx))
-                self.logger.info('selectListX: {0}'.format(selectListX))
+##                self.logger.info('pty: {0}'.format(pty))
+##                self.logger.info('ys: {0}'.format(ys))
+##                self.logger.info('ynew: {0}'.format(ynew))
+##                self.logger.info('ptx: {0}'.format(ptx))
+##                self.logger.info('selectListX: {0}'.format(selectListX))
 ##                (a,b,c) = np.polyfit(ptx,pty,2)
 ##                yp = np.polyval([a,b,c],ptx)
 
@@ -548,7 +542,6 @@ class MilkMachine:
                         self.ActiveLayer.changeAttributeValue(f[0], self.fields['altitude'], round(float(ptz_new[i]),2))
                     self.ActiveLayer.endEditCommand()
                     self.canvas.refresh()
-                    self.logger.info('ptz_new: {0}'.format(ptz_new))
 
                     self.iface.messageBar().pushMessage("Success", "Applied Z Scaling to points.", level=QgsMessageBar.INFO, duration=5)
 
@@ -859,27 +852,21 @@ class MilkMachine:
             sel_start_dt = self.to_dt(sel_start)
             sel_end_dt = self.to_dt(sel_end)
 
-            self.logger.info(layer_start)
-            self.logger.info(layer_end)
-            self.logger.info(sel_start)
-            self.logger.info(sel_end)
+##            self.logger.info(layer_start)
+##            self.logger.info(layer_end)
+##            self.logger.info(sel_start)
+##            self.logger.info(sel_end)
 
             seldiff = sel_end_dt - sel_start_dt
             newdiff = dt_end - dt_start
 
             currentinterval = round(float(len(selectfids)) / seldiff.seconds, 3) # how many pts per time
-            self.logger.info(currentinterval)
-
-            #newinterval = round(float(len(selectfids)) / newdiff.seconds,3)
             newinterval = round(newdiff.seconds / float((len(selectfids)-1)),3)
-            self.logger.info(newinterval)
 
             newtimelist = [dt_start]
             for i in range(len(selectfids)-1):
                 ct = newtimelist[i]
                 newtimelist.append(ct + datetime.timedelta(milliseconds = newinterval)) # add miliseconds to the time
-
-            self.logger.info(newtimelist)
 
             newtimelistround = [dt_start]
             for i,t in enumerate(newtimelist):
@@ -889,8 +876,6 @@ class MilkMachine:
                     rtime = dt_start + datetime.timedelta(seconds = calcsec)
                     #rtime = datetime.datetime(estime.year, estime.month, estime.day, estime.hour, estime.minute, calcsec)
                     newtimelistround.append(rtime)
-
-            self.logger.info(newtimelistround)
 
             self.ActiveLayer.startEditing()
             self.ActiveLayer.beginEditCommand('datetime edit selected')
@@ -910,8 +895,6 @@ class MilkMachine:
                         ct = newtimelist[i]
                         newtimelist.append(ct + datetime.timedelta(milliseconds = newinterval)) # add miliseconds to the time
 
-                    self.logger.info(newtimelist)
-
                     newtimelistround = [dt_start]
                     for i,t in enumerate(newtimelist):
                         if i > 0:
@@ -922,10 +905,6 @@ class MilkMachine:
 
                     newtimelistround.reverse() # revese the list
                     newtimelistround.pop()
-                    self.logger.info(newtimelistround)
-
-                    #allfids
-                    #selectfids
 
                     self.ActiveLayer.startEditing()
                     self.ActiveLayer.beginEditCommand('datetime edit before')
@@ -941,12 +920,9 @@ class MilkMachine:
 
                     difflen = allfids[-1] - selectfids[-1]
                     newtimelist = [dt_end]
-                    self.logger.info('dt end {0}'.format(dt_end))
                     for i in range(difflen):
                         ct = newtimelist[i]
                         newtimelist.append(ct + datetime.timedelta(milliseconds = newinterval)) # add miliseconds to the time
-
-                    self.logger.info(newtimelist)
 
                     newtimelistround = [dt_end]
                     for i,t in enumerate(newtimelist):
@@ -955,17 +931,10 @@ class MilkMachine:
                             calcsec = int(round(float(estime.microsecond) /1000))
                             rtime = dt_end + datetime.timedelta(seconds = calcsec)
                             newtimelistround.append(rtime)
-                    self.logger.info('newtimelistround {0}'.format(newtimelistround))
+
                     newtimelistround.reverse() # revese the list
                     newtimelistround.pop()
                     newtimelistround.reverse()
-                    self.logger.info('newtimelistround {0}'.format(newtimelistround))
-
-                    self.logger.info('len allfids {0}'.format(len(allfids)))
-                    self.logger.info('len select fids {0}'.format(len(selectfids)))
-                    self.logger.info(selectfids[-1])
-                    #allfids
-                    #selectfids
 
                     self.ActiveLayer.startEditing()
                     self.ActiveLayer.beginEditCommand('datetime edit after')
@@ -1040,7 +1009,6 @@ class MilkMachine:
         try:
             self.ActiveLayer = self.iface.activeLayer()
             self.fields = self.field_indices(self.ActiveLayer)
-            self.logger.info('self fields {0}'.format(self.fields))
             # make a dictionary of all icon parameters
             model = {'link': None, 'longitude': None, 'latitude': None, 'altitude' : None, 'scale': None}
 
@@ -1414,34 +1382,26 @@ class MilkMachine:
             featlist = []
             for feat1 in allfeats1:
                 featlist.append([feat1.attributes(),feat1.id()])
-            self.logger.info('hello')
             allfeats = self.ActiveLayer.getFeatures()
             cnt = 0; cntatt = 0;
             for feat in allfeats:
-                self.logger.info('cnt {0}'.format(cnt))
                 if cnt > 0:
                     currentatt = feat.attributes(); lastatt = featlist[cnt-1][0]
-                    self.logger.info('here {0}, {1}'.format(currentatt,lastatt))
                     if currentatt:
                         if currentatt[self.fields['flyto']] and currentatt[self.fields['camera']]:
-                            self.logger.info('here@@@@@@ {0}, {1}'.format(currentatt[self.fields['flyto']],currentatt[self.fields['camera']]))
+                            #self.logger.info('here@@@@@@ {0}, {1}'.format(currentatt[self.fields['flyto']],currentatt[self.fields['camera']]))
                             flytodict = eval(currentatt[self.fields['flyto']])
                             cameradict = eval(currentatt[self.fields['camera']])
                             flytodict.pop('a',None);flytodict.pop('b',None);flytodict.pop('c',None);flytodict.pop('d',None);
                             cameradict.pop('a',None);cameradict.pop('b',None);cameradict.pop('c',None);cameradict.pop('d',None);cameradict.pop('i',None);
-                            self.logger.info(flytodict)
                             # not look at the last row
                             if lastatt:
-                                self.logger.info('lastatt {0}'.format(lastatt))
-                                if lastatt[self.fields['flyto']] and lastatt[self.fields['camera']]:
 
+                                if lastatt[self.fields['flyto']] and lastatt[self.fields['camera']]:
                                     flytodict2 = eval(lastatt[self.fields['flyto']])
                                     cameradict2 = eval(lastatt[self.fields['camera']])
                                     flytodict2.pop('a',None);flytodict2.pop('b',None);flytodict2.pop('c',None);flytodict2.pop('d',None);
                                     cameradict2.pop('a',None);cameradict2.pop('b',None);cameradict2.pop('c',None);cameradict2.pop('d',None);cameradict2.pop('i',None);
-                                    self.logger.info('here!!!!!!!! {0}'.format(cameradict))
-                                    self.logger.info('here!!!!!!!! {0}'.format(cameradict2))
-                                    self.logger.info('hereCCCCC {0}, {1}'.format(cmp(flytodict,flytodict2),cmp(cameradict,cameradict2)))
                                     if cmp(cameradict,cameradict2) == 0: # they are the same
                                         pass
                                     else:
@@ -1587,7 +1547,6 @@ class MilkMachine:
                 for f in self.ActiveLayer.selectedFeatures():          #getFeatures():
                     geom = f.geometry()
                     clookat = f.attributes()[self.fields['lookat']]
-                    self.logger.info('clookat {0}'.format(clookat))
                     if clookat == 'circlearound':
                         conflict = (True, f.id())
                     if lookat['altitudemode'] == 'relativeToModel':
@@ -1636,7 +1595,7 @@ class MilkMachine:
                         if vv[1][0] == '{' or vv[1] == 'circlearound':
                             circleList.append(vv[0])
 
-                self.logger.info('circleList {0}'.format(circleList))
+                #self.logger.info('circleList {0}'.format(circleList))
 
                 circArr = []
                 lenc = len(circleList)-1
@@ -1653,13 +1612,13 @@ class MilkMachine:
                                 seq.append(gg)
                             else:
                                 seq.append(gg); seq.append(circleList[dd+1])
-                                self.logger.info('seq {0}'.format(seq))
+                                #self.logger.info('seq {0}'.format(seq))
                         else:
                             try:
                                 circArr.append(seq)
                                 del seq
                             except:
-                                self.logger.info(traceback.format_exc())
+                                #self.logger.info(traceback.format_exc())
                                 del seq
                         if diff == 1 and dd == lenc:
                             try:
@@ -1671,15 +1630,13 @@ class MilkMachine:
                     except:
                         self.logger.info(traceback.format_exc())
 
-                self.logger.info('circArr {0}'.format(circArr))
+                #self.logger.info('circArr {0}'.format(circArr))
 
                 # check wich ones will be reset
                 for val in circArr:
                     for v in val:
                         if conflict[1] == v:
                             BadOnes = val
-
-                self.logger.info('BadOnes: {0}'.format(BadOnes))
 
                 circleMsg = QMessageBox(self.iface.mainWindow())
                 circleMsg.setWindowTitle('Circle Around Conflict')
@@ -1689,7 +1646,6 @@ class MilkMachine:
                 circleMsg.addButton(QPushButton('Cancel'), QMessageBox.RejectRole)
                 ret = circleMsg.exec_();
                 circleMsgCB = circleMsg.clickedButton()
-                self.logger.info('clicked button: {0}, {1}'.format(circleMsgCB, ret))
 
                 if ret == 0:
                     #erase the conflict
@@ -1778,6 +1734,7 @@ class MilkMachine:
 
             # Calculate Heading !! Select All Features in the Current Layer !!
             forward_int = int(self.dlg.ui.lineEdit__visualization_follow_smoother.text())  # default to 1
+            hoffset = float(self.dlg.ui.lineEdit__visualization_follow_hoffset.text())
             #self.selectList = self.ActiveLayer.selectedFeaturesIds()  #list of all the feature ids
             layerlen = len(self.selectList)-1
             #self.ActiveLayer.setSelectedFeatures(self.selectList)  # select everything
@@ -1792,17 +1749,20 @@ class MilkMachine:
                 for f in self.ActiveLayer.selectedFeatures():          #getFeatures():
                     geom = f.geometry()
 
-                    if camera['altitudemode'] == 'relativeToModel':
-                        modelfield = eval(f.attributes()[self.fields['model']])
-                        if not camera['altitude']:
-                            alt = 0
+                    try:
+                        if camera['altitudemode'] == 'relativeToModel':
+                            modelfield = eval(f.attributes()[self.fields['model']])
+                            if not camera['altitude']:
+                                alt = 0
+                            else:
+                                alt = float(camera['altitude'])
+                            altitudelist.append(float(modelfield['altitude']) + alt)
+                            altinum = float(modelfield['altitude']) + alt
+                            self.selectList.append([f.id(), geom.asPoint(), altinum])
                         else:
-                            alt = float(camera['altitude'])
-                        altitudelist.append(float(modelfield['altitude']) + alt)
-                        altinum = float(modelfield['altitude']) + alt
-                        self.selectList.append([f.id(), geom.asPoint(), altinum])
-                    else:
-                        self.selectList.append([f.id(), geom.asPoint()])
+                            self.selectList.append([f.id(), geom.asPoint()])
+                    except:
+                        QMessageBox.warning( self.iface.mainWindow(),"Follow Behind Error", "Models have not been added. Please add models ('Placemarks' tab), and try again." )
 
                     # get the time vector in order to calculate duration of the flyto
                     currentatt = f.attributes()
@@ -1835,9 +1795,8 @@ class MilkMachine:
                 for i,v in enumerate(newdiff):
                     newlistwithflyto.append({'name': self.dlg.ui.lineEdit_tourname.text(), 'flyToMode': self.dlg.ui.comboBox_flyto_mode.currentText(), 'duration': v})
 
-                self.logger.info(newdiff)
-                for bb in newlistwithflyto:
-                    self.logger.info(bb)
+##                for bb in newlistwithflyto:
+##                    self.logger.info(bb)
 
             except:
                 #QMessageBox.warning( self.iface.mainWindow(),"Camera Altitude Error", "Please make sure that the 'model' field has 'altitude' values. This can be calculated in the 'Placemarks' tab for Models." )
@@ -1854,11 +1813,11 @@ class MilkMachine:
                     for ii in range(forward_int):
                         forwardlist.append(TeatDip.compass_bearing((v[1][1],v[1][0]),(self.selectList[i+ii+1][1][1] ,self.selectList[i+ii+1][1][0])))
                     #self.logger.info('list: {0}, mean: {1}'.format(forwardlist,TeatDip.mean_angle(forwardlist) ))
-                    headinglist.append(TeatDip.mean_angle(forwardlist))
+                    headinglist.append((TeatDip.mean_angle(forwardlist) + hoffset) % 360)
                     #headinglist.append(TeatDip.compass_bearing((cordslist[i-1][1] , cordslist[i-1][0]), (v[1],v[0])) )
                 else:
                     headinglist.append(headinglist[i-1])
-            #self.logger.info(headinglist)
+            self.logger.info('HEADINGLIST: {0}'.format(headinglist))
 
             try:
                 if len(self.selectList) >= 1:
@@ -1963,6 +1922,7 @@ class MilkMachine:
                 self.dlg.ui.lineEdit__visualization_camera_roll.setText(None)
                 self.dlg.ui.lineEdit__visualization_camera_tilt.setText(None)
 
+
                 #rendering
                 # Label style
                 self.dlg.ui.lineEdit_rendering_label_scale.setText(None)
@@ -2051,6 +2011,7 @@ class MilkMachine:
                 self.dlg.ui.pushButton_follow_apply.setEnabled(True)
                 self.dlg.ui.lineEdit__visualization_follow_follow_angle.setEnabled(True)
                 self.dlg.ui.lineEdit__visualization_follow_smoother.setEnabled(True)
+                self.dlg.ui.lineEdit__visualization_follow_hoffset.setEnabled(True)
 
                 # LookAt
                 self.dlg.ui.lineEdit_visualization_lookat_altitude.setEnabled(True)
@@ -2109,6 +2070,7 @@ class MilkMachine:
             self.dlg.ui.pushButton_follow_apply.setEnabled(False)
             self.dlg.ui.lineEdit__visualization_follow_follow_angle.setEnabled(False)
             self.dlg.ui.lineEdit__visualization_follow_smoother.setEnabled(False)
+            self.dlg.ui.lineEdit__visualization_follow_hoffset.setEnabled(False)
 
             # LookAt
             self.dlg.ui.lineEdit_visualization_lookat_altitude.setEnabled(False)
@@ -2447,9 +2409,7 @@ class MilkMachine:
 
 
     def browseOpenAudio(self):
-        #QMessageBox.information( self.iface.mainWindow(),"Info", "You clicked browse" )
-        #QFileDialog.getOpenFileName(QWidget parent=None, QString caption=QString(), QString directory=QString(), QString filter=QString(), QString selectedFilter=None, QFileDialog.Options options=0)
-        self.audiopath = QFileDialog.getOpenFileName(None, "Import Raw .wav Audio File",self.lastdirectory, "(*.wav .mp3)")
+        self.audiopath = QFileDialog.getOpenFileName(None, "Import Audio File",self.lastdirectory, "(*.wav *.mp3)")
         if self.audiopath:
             self.lastdirectory = os.path.dirname(self.audiopath)
             self.dlg.ui.lineEdit_export_audio.setText(self.audiopath)
@@ -2462,26 +2422,27 @@ class MilkMachine:
                 self.dlg.ui.pushButton_Audio1.setEnabled(True)
                 self.dlg.ui.pushButton_stop1.setEnabled(True)
                 self.dlg.ui.pushButton_sync.setEnabled(True)
+                self.dlg.ui.checkBox_sync_point.setEnabled(True)
 
                 self.line_audiopath = self.dlg.ui.lineEdit_InAudio1.text()
                 audioname_ext = self.line_audiopath.split('/')[-1]
                 audioname = audioname_ext.split('.')[0]
+                file_ext = audioname_ext.split('.')[1]
                 # Audio start date and time
 
-                w = wave.open(self.line_audiopath)
-                # Frame Rate of the Wave File
-                framerate = w.getframerate()
-                # Number of Frames in the File
-                frames = w.getnframes()
-                # Estimate length of the file by dividing frames/framerate
-                length = frames/framerate # seconds
-
+                if file_ext.lower() == "wav":
+                    w = wave.open(self.line_audiopath)
+                    framerate = w.getframerate()
+                    frames = w.getnframes()
+                    length = frames/framerate # seconds
+                if file_ext.lower() == "mp3":
+                    mp3 = MP3(self.line_audiopath)
+                    length = round(mp3.info.length) # seconds
 
                 self.audio_start = datetime.datetime(int(audioname[0:4]), int(audioname[4:6]), int(audioname[6:8]), int(audioname[8:10]), int(audioname[10:12]), int(audioname[12:14]))
                 # Audio end time. Add seconds to the start time
                 self.audio_end = self.audio_start + datetime.timedelta(seconds=length)
-
-                self.iface.messageBar().pushMessage("Success", ".wav file imported and ready to play: {0}".format(self.audiopath), level=QgsMessageBar.INFO, duration=5)
+                self.iface.messageBar().pushMessage("Success", "Audio file imported and ready to play: {0}".format(self.audiopath), level=QgsMessageBar.INFO, duration=5)
         except:
 
             global NOW, pointid, ClockDateTime
@@ -2505,6 +2466,7 @@ class MilkMachine:
                 self.dlg.ui.pushButton_Audio1.setEnabled(False)
                 self.dlg.ui.pushButton_stop1.setEnabled(False)
                 self.dlg.ui.pushButton_sync.setEnabled(False)
+                self.dlg.ui.checkBox_sync_point.setEnabled(False)
                 global NOW, pointid, ClockDateTime
                 NOW = None; pointid = None; ClockDateTime = None
                 self.audio_start = None
@@ -2597,7 +2559,7 @@ class MilkMachine:
                 else:
                     pause += 1
 
-                self.logger.info('pause: {0}, pauseBreak {1}, diffseconds: {2}'.format(pause, pauseBreak, diff.seconds))
+                #self.logger.info('pause: {0}, pauseBreak {1}, diffseconds: {2}'.format(pause, pauseBreak, diff.seconds))
 
             except:
 
@@ -2652,7 +2614,6 @@ class MilkMachine:
                     QMessageBox.warning( self.iface.mainWindow(),"Selected Layer Warning", "Please select the layer and starting point where you would like the audio to start." )
 
                 if len(selectList) == 1:
-                    self.logger.info('IN selectList: {0}'.format(selectList))
                     pointid = fid
                     pointdate = selectList[0][self.fields['datetime']].split(" ")[0]  #2014/06/06
                     pointtime = selectList[0][self.fields['datetime']].split(" ")[1]  #10:30:10
@@ -2665,21 +2626,17 @@ class MilkMachine:
                     # Start the video using VLC Media player. Start the video at the specified time
                     # in the video file...
 
-                    #start time of videofile
-                    # C:/Users/Edward/Documents/Philly250/Scratch/20140606100800.WAV
+                    file_ext = self.line_audiopath.split('.')[1]
+                    # Audio start date and time
 
-                    # Last Modified Time
-                    #mtime = time.ctime(os.path.getmtime(sample))
-                    # File Creation Time
-                    #ctime = time.ctime(os.path.getctime(sample))
-                    # Wave Object - ref: https://docs.python.org/3.4/library/wave.html
-                    w = wave.open(self.line_audiopath)
-                    # Frame Rate of the Wave File
-                    framerate = w.getframerate()
-                    # Number of Frames in the File
-                    frames = w.getnframes()
-                    # Estimate length of the file by dividing frames/framerate
-                    length = frames/framerate # seconds
+                    if file_ext.lower() == "wav":
+                        w = wave.open(self.line_audiopath)
+                        framerate = w.getframerate()
+                        frames = w.getnframes()
+                        length = frames/framerate # seconds
+                    if file_ext.lower() == "mp3":
+                        mp3 = MP3(self.line_audiopath)
+                        length = round(mp3.info.length) # seconds
 
                     jumptime = None
                     # if the start of the audio is before the start of the gps track
@@ -2701,7 +2658,6 @@ class MilkMachine:
                     if jumptime >= 0 and ClockDateTime:
                         # "C:\Program Files (x86)\VideoLAN\VLC\vlc.exe" file:///C:/Users/Edward/Documents/Philly250/Scratch/Nagra01-0003.WAV --start-time 5
                         #stime = 5
-                        self.logger.info('IN jumptime: {0}, ClockDateTime'.format(jumptime, ClockDateTime))
                         wav_path = "file:///" + self.line_audiopath
                         lan_vlc_path = "C:\Program Files (x86)\VideoLAN\VLC\vlc.exe"
                         #startupinfo = subprocess.STARTUPINFO()
@@ -2743,9 +2699,10 @@ class MilkMachine:
                         self.dlg.timer.start(1000)
 
                         #stdout, stderr = pp.communicate()
-                    self.logger.info('jumptime: {0}, ClockDateTime'.format(jumptime, ClockDateTime))
+                    #self.logger.info('jumptime: {0}, ClockDateTime'.format(jumptime, ClockDateTime))
                 else:
-                    self.logger.info('Out selectList: {0}'.format(selectList))
+                    pass
+                    #self.logger.info('Out selectList: {0}'.format(selectList))
 
         except:
             global NOW, pointid, ClockDateTime
@@ -2882,66 +2839,55 @@ class MilkMachine:
                             self.logger.exception(traceback.format_exc())
                             self.iface.messageBar().pushMessage("Error", "Failed to apply audio category values. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
 
-
-
-
-
                     except AttributeError:
                         QMessageBox.warning( self.iface.mainWindow(),"Selected Layer Warning", "Please select the layer that matches the audio track." )
 
                     if matchdict:
-                        #make a marker in memory
 
-                        QMessageBox.information(self.iface.mainWindow(),"Audio File Sync Info", 'The audio starts at {0}\nStarting point in track is FID: {1}, Row #: {2}\nCoordinates: {3}\n\nTrack starts at: {4}'.format(self.audio_start.strftime("%x %X"), matchdict['fid'],matchrow, str(matchdict['coordinates']),track_start_dt.strftime("%x %X") ) )
+                        at_time = None
+                        if matchrow == 0:
+                            at_time = True
+                        else:
+                            at_time = False
 
-                        # create layer
-                        lname = self.aLayer.name() + '_audio_start'
-                        vl = QgsVectorLayer("Point?crs=EPSG:4326", lname, "memory")
-                        pr = vl.dataProvider()
+                        QMessageBox.information(self.iface.mainWindow(),"Audio File Sync Info", 'Audio Start: {0}\nTrack Start: {1}\nStart point in track is FID: {2}, Row #: {3}\nCoordinates: {4}\n\nAudio & Track Start Time Match: {5}'.format(self.audio_start.strftime("%x %X"),track_start_dt.strftime("%x %X"), matchdict['fid'],matchrow, str(matchdict['coordinates']),at_time ) )
 
-                        # add fields
-                        pr.addAttributes( [ QgsField("name", QVariant.String),
-                                            QgsField("age",  QVariant.Int),
-                                            QgsField("size", QVariant.Double) ] )
+                        if self.dlg.ui.checkBox_sync_point.isChecked():
+                            # create layer
+                            lname = self.aLayer.name() + '_audio_start'
+                            vl = QgsVectorLayer("Point?crs=EPSG:4326", lname, "memory")
+                            pr = vl.dataProvider()
 
-                        # add a feature
-                        fet = QgsFeature()
-                        fet.setGeometry( QgsGeometry.fromPoint(QgsPoint(matchdict['coordinates'][0],matchdict['coordinates'][1])) )
-                        fet.setAttributes(["Johny", 2, 0.3])
-                        pr.addFeatures([fet])
+                            # add fields
+                            pr.addAttributes( [ QgsField("name", QVariant.String),
+                                                QgsField("age",  QVariant.Int),
+                                                QgsField("size", QVariant.Double) ] )
+                            # add a feature
+                            fet = QgsFeature()
+                            fet.setGeometry( QgsGeometry.fromPoint(QgsPoint(matchdict['coordinates'][0],matchdict['coordinates'][1])) )
+                            fet.setAttributes(["Johny", 2, 0.3])
+                            pr.addFeatures([fet])
+                            # get the symbol layer
+                            symbol_layerq = self.iface.activeLayer().rendererV2().symbols()[0].symbolLayer(0)
 
+                            # define the layer properties as a dict
+                            size2 = float(symbol_layerq.size()) * 2
+                            properties = {'size': str(size2), 'color': '0,0,255,255'}
 
-                        # get the symbol layer
-                        symbol_layerq = self.iface.activeLayer().rendererV2().symbols()[0].symbolLayer(0)
+                            # initalise a new symbol layer with those properties
+                            symbol_layer = QgsSimpleMarkerSymbolLayerV2.create(properties)
 
-                        # get the properties of the symbol layer
-                        self.logger.info('Size: {0}'.format( symbol_layerq.size()))
-                        self.logger.info('Color: {0}'.format(symbol_layerq.color().name()))
-
-
-                        # define the layer properties as a dict
-                        size2 = float(symbol_layerq.size()) * 2
-                        properties = {'size': str(size2), 'color': '0,0,255,255'}
-
-                        # initalise a new symbol layer with those properties
-                        symbol_layer = QgsSimpleMarkerSymbolLayerV2.create(properties)
-
-                        # replace the default symbol layer with the new symbol layer
-                        vl.rendererV2().symbols()[0].changeSymbolLayer(0, symbol_layer)
-                        vl.setLayerTransparency(30)
-                        vl.commitChanges()
-                        # update layer's extent when new features have been added
-                        # because change of extent in provider is not propagated to the layer
-                        vl.updateExtents()
-
-                        #starting_point_marker = self.iface.addVectorLayer('memory/' + vl)
-                        #self.iface.QgsMapLayerRegistry.instance().addMapLayer(vl)
-
-                        #starting_point_marker = self.iface.addVectorLayer(vl, 'layername', "ogr")
-                        QgsMapLayerRegistry.instance().addMapLayer(vl)
+                            # replace the default symbol layer with the new symbol layer
+                            vl.rendererV2().symbols()[0].changeSymbolLayer(0, symbol_layer)
+                            vl.setLayerTransparency(30)
+                            vl.commitChanges()
+                            # update layer's extent when new features have been added  # because change of extent in provider is not propagated to the layer
+                            vl.updateExtents()
+                            #starting_point_marker = self.iface.addVectorLayer('memory/' + vl)     #self.iface.QgsMapLayerRegistry.instance().addMapLayer(vl)
+                            #starting_point_marker = self.iface.addVectorLayer(vl, 'layername', "ogr")
+                            QgsMapLayerRegistry.instance().addMapLayer(vl)
                         self.iface.setActiveLayer(self.aLayer)
 
-                    #QMessageBox.information(self.iface.mainWindow(),"Audio File Info", str(self.audio_start) )
         except:
             trace = traceback.format_exc()
             self.logger.error('sync function error. row ')
@@ -3046,8 +2992,6 @@ class MilkMachine:
             kml = simplekml.Kml()
 
             self.fields = self.field_indices(self.ActiveLayer)
-
-            self.logger.info(self.fields)
             #################################
             ## Tour and Camera
 
@@ -3108,7 +3052,6 @@ class MilkMachine:
                     camendtime = current_dt_end.strftime('%Y-%m-%dT%XZ')
 
                     if lookatdict['startheading'] and lookatdict['rotations']:  # lookatdict['duration']  this is for a circle around
-                        self.logger.info('Here {0}'.format(lookatdict))
                         if lookatdict['longitude'] and lookatdict['latitude'] and lookatdict['altitude'] and lookatdict['tilt'] and lookatdict['range']:
                             circle_count = int(float(lookatdict['rotations']))
                             if circle_count > 1:
@@ -3121,17 +3064,6 @@ class MilkMachine:
                                 divisor = 36
                                 duration = (float(lookatdict['duration']))/(circle_count * (divisor+1))
                                 timsspanDur = (float(lookatdict['duration']))/(circle_count * divisor)
-                                #duration = (float(lookatdict['duration'])-1)/divisor
-                                #duration = (float(lookatdict['duration'])-1)/(circle_count * divisor)
-                                #duration = (float(lookatdict['duration'])/circle_count)/(divisor+1)
-
-                            # divide the time span into chunks to be attached to each
-##                            # Start time. Will be used for TimeSpan tags
-##                            pointdate = currentatt[self.fields['datetime']].split(" ")[0]  #2014/06/06
-##                            pointtime = currentatt[self.fields['datetime']].split(" ")[1] #10:38:48
-##                            current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]) )
-##                            self.CamStartTime = current_dt.strftime('%Y-%m-%dT%XZ')
-
                             timekeeper = current_dt_end
 
                             # Loop through Circle Count
@@ -3658,7 +3590,7 @@ class MilkMachine:
                                         loc.altitude = currentatt[self.fields['Descriptio']].split(",")[4].split(': ')[1]
                                     except:
                                         self.logger.error('export function error')
-                                        self.logger.info('self.fields keys {0}'.format(self.fields.keys))
+                                        #self.logger.info('self.fields keys {0}'.format(self.fields.keys))
                                         self.logger.exception(traceback.format_exc())
                                         self.iface.messageBar().pushMessage("Error", "exportToFile error. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
 
@@ -4060,6 +3992,7 @@ class MilkMachine:
         self.dlg.ui.pushButton_follow_apply.setEnabled(False)
         self.dlg.ui.lineEdit__visualization_follow_follow_angle.setEnabled(False)
         self.dlg.ui.lineEdit__visualization_follow_smoother.setEnabled(False)
+        self.dlg.ui.lineEdit__visualization_follow_hoffset.setEnabled(False)
 
         # LookAt
         self.dlg.ui.lineEdit_visualization_lookat_altitude.setEnabled(False)
