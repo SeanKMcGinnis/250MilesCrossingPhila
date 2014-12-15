@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\Edward\.qgis2\python\plugins\MilkMachine\ui_milkmachine.ui'
 #
-# Created: Tue Dec 09 20:58:36 2014
+# Created: Sun Dec 14 22:22:05 2014
 #      by: PyQt4 UI code generator 4.10.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -679,7 +679,7 @@ class Ui_MilkMachine(object):
         self.checkBox_visualization_edit.setGeometry(QtCore.QRect(240, 21, 111, 16))
         self.checkBox_visualization_edit.setObjectName(_fromUtf8("checkBox_visualization_edit"))
         self.groupBox = QtGui.QGroupBox(self.tab_visualization)
-        self.groupBox.setGeometry(QtCore.QRect(200, 50, 181, 71))
+        self.groupBox.setGeometry(QtCore.QRect(230, 50, 181, 71))
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.label_14 = QtGui.QLabel(self.groupBox)
         self.label_14.setGeometry(QtCore.QRect(10, 20, 61, 20))
@@ -953,7 +953,7 @@ class Ui_MilkMachine(object):
         self.pushButton_visualization_camera_tocustom.setObjectName(_fromUtf8("pushButton_visualization_camera_tocustom"))
         self.tabWidget_2.addTab(self.tab_8, _fromUtf8(""))
         self.label_13 = QtGui.QLabel(self.tab_visualization)
-        self.label_13.setGeometry(QtCore.QRect(20, 50, 61, 20))
+        self.label_13.setGeometry(QtCore.QRect(20, 70, 61, 20))
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -962,7 +962,7 @@ class Ui_MilkMachine(object):
         self.label_13.setObjectName(_fromUtf8("label_13"))
         self.lineEdit_tourname = QtGui.QLineEdit(self.tab_visualization)
         self.lineEdit_tourname.setEnabled(False)
-        self.lineEdit_tourname.setGeometry(QtCore.QRect(90, 50, 91, 20))
+        self.lineEdit_tourname.setGeometry(QtCore.QRect(90, 70, 91, 20))
         self.lineEdit_tourname.setObjectName(_fromUtf8("lineEdit_tourname"))
         self.groupBox_cameraview_2 = QtGui.QGroupBox(self.tab_visualization)
         self.groupBox_cameraview_2.setGeometry(QtCore.QRect(320, 120, 311, 301))
@@ -1010,7 +1010,7 @@ class Ui_MilkMachine(object):
         self.comboBox_lookat_altitudemode.setObjectName(_fromUtf8("comboBox_lookat_altitudemode"))
         self.pushButton_lookat_apply = QtGui.QPushButton(self.tab_6)
         self.pushButton_lookat_apply.setEnabled(False)
-        self.pushButton_lookat_apply.setGeometry(QtCore.QRect(110, 215, 61, 23))
+        self.pushButton_lookat_apply.setGeometry(QtCore.QRect(120, 215, 61, 23))
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -1065,7 +1065,7 @@ class Ui_MilkMachine(object):
         self.label_58.setObjectName(_fromUtf8("label_58"))
         self.pushButton_circle_apply = QtGui.QPushButton(self.tab_7)
         self.pushButton_circle_apply.setEnabled(False)
-        self.pushButton_circle_apply.setGeometry(QtCore.QRect(117, 215, 61, 23))
+        self.pushButton_circle_apply.setGeometry(QtCore.QRect(130, 215, 61, 23))
         self.pushButton_circle_apply.setIcon(icon7)
         self.pushButton_circle_apply.setObjectName(_fromUtf8("pushButton_circle_apply"))
         self.label_59 = QtGui.QLabel(self.tab_7)
@@ -1097,6 +1097,10 @@ class Ui_MilkMachine(object):
         self.comboBox_visualization_direction.setGeometry(QtCore.QRect(127, 190, 101, 20))
         self.comboBox_visualization_direction.setObjectName(_fromUtf8("comboBox_visualization_direction"))
         self.tabWidget_3.addTab(self.tab_7, _fromUtf8(""))
+        self.checkBox_visualization_streetview = QtGui.QCheckBox(self.tab_visualization)
+        self.checkBox_visualization_streetview.setEnabled(False)
+        self.checkBox_visualization_streetview.setGeometry(QtCore.QRect(70, 100, 121, 17))
+        self.checkBox_visualization_streetview.setObjectName(_fromUtf8("checkBox_visualization_streetview"))
         self.tabWidget.addTab(self.tab_visualization, _fromUtf8(""))
         self.tab_export = QtGui.QWidget()
         self.tab_export.setObjectName(_fromUtf8("tab_export"))
@@ -1146,8 +1150,8 @@ class Ui_MilkMachine(object):
 
         self.retranslateUi(MilkMachine)
         self.tabWidget.setCurrentIndex(0)
-        self.tabWidget_2.setCurrentIndex(2)
-        self.tabWidget_3.setCurrentIndex(1)
+        self.tabWidget_2.setCurrentIndex(0)
+        self.tabWidget_3.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MilkMachine)
         MilkMachine.setTabOrder(self.tabWidget, self.buttonImportGPS)
         MilkMachine.setTabOrder(self.buttonImportGPS, self.lineEdit_ImportGPS)
@@ -1297,8 +1301,9 @@ class Ui_MilkMachine(object):
         self.checkBox_headoftrack.setText(_translate("MilkMachine", "Draw \"Head of Track\"", None))
         self.checkBox_import_indicator.setToolTip(_translate("MilkMachine", "<html><head/><body><p>If checked, QGIS will &quot;select&quot; the point that matches the time on the audio file. The map will move along with the audio.</p></body></html>", None))
         self.checkBox_import_indicator.setText(_translate("MilkMachine", "Indicate Selected Point", None))
+        self.checkBox_sync_point.setToolTip(_translate("MilkMachine", "<html><head/><body><p>If selected, when the sync button is pushed, a blue point will be added to the map at the point that matches the audio start time. A red point will be added to the map at the point that matches the audio end time. </p></body></html>", None))
         self.checkBox_sync_point.setText(_translate("MilkMachine", "Indicate \n"
-"Sync Point", None))
+"Sync Points", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_import), _translate("MilkMachine", "Import and Sync", None))
         self.tabWidget.setTabToolTip(self.tabWidget.indexOf(self.tab_import), _translate("MilkMachine", "<html><head/><body><p>Import raw .kml files and render as an ESRI shapefile for editing, and import audio files for interactive time syncronization.</p></body></html>", None))
         self.dateTimeEdit_start.setDisplayFormat(_translate("MilkMachine", "M/d/yyyy hh:mm:ss AP", None))
@@ -1421,6 +1426,8 @@ class Ui_MilkMachine(object):
         self.groupBox.setTitle(_translate("MilkMachine", "FlyTo", None))
         self.label_14.setText(_translate("MilkMachine", "flyToMode:", None))
         self.label_15.setText(_translate("MilkMachine", "duration:", None))
+        self.lineEdit_flyto_duration.setToolTip(_translate("MilkMachine", "<html><head/><body><p>Duration (seconds) of the FlyTo, for both Camera and LookAt views.</p></body></html>", None))
+        self.lineEdit_flyto_duration.setText(_translate("MilkMachine", "1", None))
         self.groupBox_cameraview.setToolTip(_translate("MilkMachine", "<html><head/><body><p>Introduced with KML 2.2, <span style=\" font-family:\'Courier New,courier\';\">&lt;Camera&gt;</span> provides an additional way to specify the observer\'s viewpoint and associated view parameters. <span style=\" font-family:\'Courier New,courier\';\">&lt;Camera&gt;</span> is similar to <span style=\" font-family:\'Courier New,courier\';\">&lt;LookAt&gt;</span>, since both elements define the placement and orientation of a virtual camera that is viewing the Earth. The difference is that LookAt specifies the view in terms of the point of interest that is being viewed. Camera, in contrast, specifies the view in terms of the viewer\'s position and orientation. </p></body></html>", None))
         self.groupBox_cameraview.setTitle(_translate("MilkMachine", "Camera", None))
         self.pushButton_visualization_camera_xy.setToolTip(_translate("MilkMachine", "<html><head/><body><p>If one point is selected in the active layer, the &quot;x,y&quot; button will automatically fill the longitude and latitude location for the model using the coordinates from the selected point.</p></body></html>", None))
@@ -1480,7 +1487,7 @@ class Ui_MilkMachine(object):
         self.lineEdit__visualization_follow_hoffset.setText(_translate("MilkMachine", "0", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_5), _translate("MilkMachine", "Follow Behind", None))
         self.tabWidget_2.setTabToolTip(self.tabWidget_2.indexOf(self.tab_5), _translate("MilkMachine", "<html><head/><body><p>Create an automated tour with camera views that follow the sequence of the points in the GPS track.</p></body></html>", None))
-        self.pushButton_visualization_camera_symbolize.setToolTip(_translate("MilkMachine", "<html><head/><body><p>Clicking this button will populate the &quot;symbcamera&quot; field with the names of the &quot;Tour&quot; which have the same settings. The tour name will be appended with a number, which will match other rows if they are the same values and are next to one another. The camera fields that are compared to determine if they are the same are; &quot;altitude&quot;, &quot;altitudemode&quot;,&quot;gxaltitudemode&quot;,&quot;gxhoriz&quot;, &quot;\'roll&quot; , &quot;tilt&quot;, &quot;range&quot;, and &quot;follow_angle&quot;.</p><p><br/></p><p> If no tour camera is set for the row, then nothing will be placed there. Once complete, the user can change the symbology in the &quot;Style&quot; tab to set custom symbols to represent the different tour elements that are the same. The active layer must be in an edit session.</p></body></html>", None))
+        self.pushButton_visualization_camera_symbolize.setToolTip(_translate("MilkMachine", "<html><head/><body><p>Clicking this button will populate the &quot;symbtour&quot; field with the names of the &quot;Tour&quot; which have the same settings. The tour name will be appended with a number, which will match other rows if they are the same values and are next to one another. The camera fields that are compared to determine if they are the same are; &quot;altitude&quot;, &quot;altitudemode&quot;, &quot;gxaltitudemode&quot;, &quot;gxhoriz&quot;, &quot;roll&quot;, &quot;tilt&quot;, &quot;range&quot;, and &quot;follow_angle&quot;. Once complete, the user can change the symbology in the &quot;Style&quot; tab to set custom symbols to represent the different tour elements that are the same. The active layer must be in an edit session.</p><p>For example, there is a follow behind tour from row 0-100 and it is named &quot;followtour&quot;. If the user hits the &quot;Symbolize&quot; button, the values in the &quot;symbtour&quot; field (rows 0-100) will have values named like this;</p><p>followtour_0</p><p>followtour_1</p><p>followtour_2</p><p>...</p><p><br/></p></body></html>", None))
         self.pushButton_visualization_camera_symbolize.setText(_translate("MilkMachine", "Symbolize", None))
         self.chkActivate.setToolTip(_translate("MilkMachine", "<html><head/><body><p>When selected, the user can use the mouse to select a point. The text window below will show the results.</p></body></html>", None))
         self.chkActivate.setText(_translate("MilkMachine", "Enable Camera Point Select", None))
@@ -1537,6 +1544,7 @@ class Ui_MilkMachine(object):
         self.comboBox_visualization_direction.setToolTip(_translate("MilkMachine", "<html><head/><body><p>Rotation direction of the circle around. clockwise or counterclockwise.</p></body></html>", None))
         self.tabWidget_3.setTabText(self.tabWidget_3.indexOf(self.tab_7), _translate("MilkMachine", "Circle Around", None))
         self.tabWidget_3.setTabToolTip(self.tabWidget_3.indexOf(self.tab_7), _translate("MilkMachine", "<html><head/><body><p>The &quot;Circle Around&quot; visualization creates 1 (or more) full rotations around 1 point or a selection of points. If there is a selection of mulitple points, then Milk Machine will find the geometric centroid of those points and that location will be used for the &lt;LookAt&gt;. If only 1 point is selected Latitude and longitude will be automatically calculated (i.e. the x,y of the point).</p></body></html>", None))
+        self.checkBox_visualization_streetview.setText(_translate("MilkMachine", "StreetView Mode", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_visualization), _translate("MilkMachine", "Tour", None))
         self.buttonExportTrack.setToolTip(_translate("MilkMachine", "<html><head/><body><p>Export the selected track to .kml. If the active track is an ESRI shapefile point layer, the user will be able to export.</p></body></html>", None))
         self.buttonExportTrack.setText(_translate("MilkMachine", "Export Track", None))

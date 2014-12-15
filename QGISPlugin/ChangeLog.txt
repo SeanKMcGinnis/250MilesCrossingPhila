@@ -125,5 +125,16 @@ Task: "altitudeMode" tooltip documentation matches the order of the combobox dro
 Commit #43
 Task: On "Sync" button. The user will be informed if the audio lines up with the track start time, or not. 
 Task: On "Sync" button. Added the "Indicate Sync Point" checkbox so that the user can control if the "sync" point is shown or not. This should reduce repetitive layers being drawn.
-Task: Upgraded from simplekml 1.2.3 to 1.2.4
-Task: Package mutagen, gpxpy, and simplekml with MilkMachine
+Task: Package mutagen and gpxpy now ships with MilkMachine
+Task: Full support for .mp3 file integration.
+Task: Follow behind camera offset. This was first called "swirl" by Esther. The way this works is to apply a constant offset (in degrees) to the heading value. The heading value is calculated by MM, the offset is then added to each calculated heading (0-360)
+--------------------------------------------
+Commit #44
+Task: Update the heading offset and filter documentation
+Bug Fix: Values are repeating for the filter dropdown. Clear them out on MM restart.
+Task: MM now includes the "simplekml" 1.2.5 package. Now, the user does not need to worry about installing any third party Python packages!
+Task: Support for creating tours in GE "streetview". This is just a checkbox in the "Tour" tab, and it will make any tour run in "streetview".
+Task: Improve the "Symbolize" button tooltip to explain the functionality better.
+Task: "Audio End" sync point. If the "Indicate Sync Point" is checked and the end of the audio overlaps with the track, then a red circle will be placed over the point.
+Task: Models name and description includes the time/date stamp.
+Bug Fix: FlyTo duration tooltip documentation improved, and a default value set to 1 second. This duration is applied to both "custom" and "follow behind" Camera views, and "custom" LookAt view. This value is ignored by the "circle around" tour.

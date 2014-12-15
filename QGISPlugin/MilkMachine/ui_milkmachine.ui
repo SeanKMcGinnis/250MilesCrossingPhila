@@ -490,9 +490,12 @@
        <height>41</height>
       </rect>
      </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If selected, when the sync button is pushed, a blue point will be added to the map at the point that matches the audio start time. A red point will be added to the map at the point that matches the audio end time. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
      <property name="text">
       <string>Indicate 
-Sync Point</string>
+Sync Points</string>
      </property>
     </widget>
    </widget>
@@ -2195,7 +2198,7 @@ Sync Point</string>
     <widget class="QGroupBox" name="groupBox">
      <property name="geometry">
       <rect>
-       <x>200</x>
+       <x>230</x>
        <y>50</y>
        <width>181</width>
        <height>71</height>
@@ -2267,6 +2270,12 @@ Sync Point</string>
         <height>20</height>
        </rect>
       </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Duration (seconds) of the FlyTo, for both Camera and LookAt views.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>1</string>
+      </property>
      </widget>
     </widget>
     <widget class="QGroupBox" name="groupBox_cameraview">
@@ -2294,7 +2303,7 @@ Sync Point</string>
        </rect>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_4">
        <attribute name="title">
@@ -3060,7 +3069,7 @@ Sync Point</string>
          </rect>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Clicking this button will populate the &amp;quot;symbcamera&amp;quot; field with the names of the &amp;quot;Tour&amp;quot; which have the same settings. The tour name will be appended with a number, which will match other rows if they are the same values and are next to one another. The camera fields that are compared to determine if they are the same are; &amp;quot;altitude&amp;quot;, &amp;quot;altitudemode&amp;quot;,&amp;quot;gxaltitudemode&amp;quot;,&amp;quot;gxhoriz&amp;quot;, &amp;quot;'roll&amp;quot; , &amp;quot;tilt&amp;quot;, &amp;quot;range&amp;quot;, and &amp;quot;follow_angle&amp;quot;.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt; If no tour camera is set for the row, then nothing will be placed there. Once complete, the user can change the symbology in the &amp;quot;Style&amp;quot; tab to set custom symbols to represent the different tour elements that are the same. The active layer must be in an edit session.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Clicking this button will populate the &amp;quot;symbtour&amp;quot; field with the names of the &amp;quot;Tour&amp;quot; which have the same settings. The tour name will be appended with a number, which will match other rows if they are the same values and are next to one another. The camera fields that are compared to determine if they are the same are; &amp;quot;altitude&amp;quot;, &amp;quot;altitudemode&amp;quot;, &amp;quot;gxaltitudemode&amp;quot;, &amp;quot;gxhoriz&amp;quot;, &amp;quot;roll&amp;quot;, &amp;quot;tilt&amp;quot;, &amp;quot;range&amp;quot;, and &amp;quot;follow_angle&amp;quot;. Once complete, the user can change the symbology in the &amp;quot;Style&amp;quot; tab to set custom symbols to represent the different tour elements that are the same. The active layer must be in an edit session.&lt;/p&gt;&lt;p&gt;For example, there is a follow behind tour from row 0-100 and it is named &amp;quot;followtour&amp;quot;. If the user hits the &amp;quot;Symbolize&amp;quot; button, the values in the &amp;quot;symbtour&amp;quot; field (rows 0-100) will have values named like this;&lt;/p&gt;&lt;p&gt;followtour_0&lt;/p&gt;&lt;p&gt;followtour_1&lt;/p&gt;&lt;p&gt;followtour_2&lt;/p&gt;&lt;p&gt;...&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
          <string>Symbolize</string>
@@ -3159,7 +3168,7 @@ Sync Point</string>
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>50</y>
+       <y>70</y>
        <width>61</width>
        <height>20</height>
       </rect>
@@ -3181,7 +3190,7 @@ Sync Point</string>
      <property name="geometry">
       <rect>
        <x>90</x>
-       <y>50</y>
+       <y>70</y>
        <width>91</width>
        <height>20</height>
       </rect>
@@ -3218,7 +3227,7 @@ Sync Point</string>
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Create a custom or automated &amp;quot;Circle Around&amp;quot; &amp;lt;LookAt&amp;gt; visualization.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_6">
        <attribute name="title">
@@ -3384,7 +3393,7 @@ Sync Point</string>
         </property>
         <property name="geometry">
          <rect>
-          <x>110</x>
+          <x>120</x>
           <y>215</y>
           <width>61</width>
           <height>23</height>
@@ -3598,7 +3607,7 @@ Sync Point</string>
         </property>
         <property name="geometry">
          <rect>
-          <x>117</x>
+          <x>130</x>
           <y>215</y>
           <width>61</width>
           <height>23</height>
@@ -3739,6 +3748,22 @@ Sync Point</string>
        </widget>
       </widget>
      </widget>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_visualization_streetview">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>100</y>
+       <width>121</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>StreetView Mode</string>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_export">
