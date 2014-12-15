@@ -1430,8 +1430,8 @@ class MilkMachine:
             self.fields = self.field_indices(self.ActiveLayer)
             # make a dictionary of all of the camera parameters
             flyto = {'name': None, 'flyToMode': None, 'duration': None}
-            lookat = {'longitude': None, 'latitude': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'heading' : None,'tilt' : None, 'range': None, 'duration': None, 'startheading': None, 'rotations': None, 'direction': None}
-            lookatAlpha = {'longitude': 'a', 'latitude': 'b', 'altitude' : 'c', 'altitudemode': 'd','gxaltitudemode' : 'e','heading' : 'f','tilt' : 'g', 'range': 'h', 'duration': 'i', 'startheading': 'j', 'rotations': 'k', 'l': 'direction'}
+            lookat = {'longitude': None, 'latitude': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'heading' : None,'tilt' : None, 'range': None, 'duration': None, 'startheading': None, 'rotations': None, 'direction': None, 'streetview': None}
+            lookatAlpha = {'longitude': 'a', 'latitude': 'b', 'altitude' : 'c', 'altitudemode': 'd','gxaltitudemode' : 'e','heading' : 'f','tilt' : 'g', 'range': 'h', 'duration': 'i', 'startheading': 'j', 'rotations': 'k', 'direction': 'l', 'streetview': 'm'}
             lookattemp = {}
 
             flyto['name'] = self.dlg.ui.lineEdit_tourname.text()
@@ -1444,6 +1444,9 @@ class MilkMachine:
             lookat['range'] = self.dlg.ui.lineEdit__visualization_lookat_range.text()
             lookat['heading'] = self.dlg.ui.lineEdit__visualization_lookat_heading.text()
             lookat['tilt'] = self.dlg.ui.lineEdit__visualization_lookat_tilt.text()
+
+            if self.dlg.ui.checkBox_visualization_streetview.isChecked():
+                lookat['streetview'] = True
 
 
             # calculate heading
@@ -1516,8 +1519,9 @@ class MilkMachine:
             self.fields = self.field_indices(self.ActiveLayer)
             # make a dictionary of all of the camera parameters
             flyto = {'name': None, 'flyToMode': None, 'duration': None}
-            lookat = {'longitude': None, 'latitude': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'heading' : None,'tilt' : None, 'range': None, 'duration': None, 'startheading': None, 'rotations': None, 'direction': None}
-            lookatAlpha = {'longitude': 'a', 'latitude': 'b', 'altitude' : 'c', 'altitudemode': 'd','gxaltitudemode' : 'e','heading' : 'f','tilt' : 'g', 'range': 'h', 'duration': 'i', 'startheading': 'j', 'rotations': 'k', 'direction': 'l'}
+            lookat = {'longitude': None, 'latitude': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'heading' : None,'tilt' : None, 'range': None, 'duration': None, 'startheading': None, 'rotations': None, 'direction': None, 'streetview': None}
+            lookatAlpha = {'longitude': 'a', 'latitude': 'b', 'altitude' : 'c', 'altitudemode': 'd','gxaltitudemode' : 'e','heading' : 'f','tilt' : 'g', 'range': 'h', 'duration': 'i', 'startheading': 'j', 'rotations': 'k', 'direction': 'l', 'streetview': 'm'}
+
             lookattemp = {}
 
             flyto['name'] = self.dlg.ui.lineEdit_tourname.text()
@@ -1533,6 +1537,9 @@ class MilkMachine:
             lookat['startheading'] = self.dlg.ui.lineEdit__visualization_circle_start_heading.text()
             lookat['rotations'] = self.dlg.ui.lineEdit__visualization_circle_rotations.text()
             lookat['direction'] = self.dlg.ui.comboBox_visualization_direction.currentText()
+
+            if self.dlg.ui.checkBox_visualization_streetview.isChecked():
+                lookat['streetview'] = True
 
             # calculate heading
             cordslist = []  # alist of tuples. [(x,y), (x,y)]
@@ -1718,7 +1725,7 @@ class MilkMachine:
 
             flyto['name'] = self.dlg.ui.lineEdit_tourname.text()
             flyto['flyToMode'] = self.dlg.ui.comboBox_flyto_mode.currentText()
-            flyto['duration'] = 1 #self.dlg.ui.lineEdit_flyto_duration.text()
+            flyto['duration'] = self.dlg.ui.lineEdit_flyto_duration.text()
 
 
             # check for 'relativeToModel' in model field 'altitude' key
@@ -1729,8 +1736,8 @@ class MilkMachine:
             camera['tilt'] = self.dlg.ui.lineEdit__visualization_follow_tilt.text()
             camera['range'] = self.dlg.ui.lineEdit__visualization_follow_range.text()
             camera['follow_angle'] = self.dlg.ui.lineEdit__visualization_follow_follow_angle.text()
-            #if self.dlg.ui.checkBox_visualization_follow_streetview.isChecked():
-                #camera['streetview'] = True
+            if self.dlg.ui.checkBox_visualization_streetview.isChecked():
+                camera['streetview'] = True
 
             # Calculate Heading !! Select All Features in the Current Layer !!
             forward_int = int(self.dlg.ui.lineEdit__visualization_follow_smoother.text())  # default to 1
@@ -1996,6 +2003,7 @@ class MilkMachine:
 
                 # Tour
                 self.dlg.ui.lineEdit_tourname.setEnabled(True)
+                self.dlg.ui.checkBox_visualization_streetview.setEnabled(True)
 
                 # FlyTo
                 self.dlg.ui.comboBox_flyto_mode.setEnabled(True)
@@ -2042,6 +2050,7 @@ class MilkMachine:
 
         else:  # checkbox is false, clear shit out
             self.dlg.ui.lineEdit_tourname.setEnabled(False)
+            self.dlg.ui.checkBox_visualization_streetview.setEnabled(False)
             self.dlg.ui.comboBox_flyto_mode.setEnabled(False)
             self.dlg.ui.lineEdit_flyto_duration.setEnabled(False)
 
@@ -2126,9 +2135,8 @@ class MilkMachine:
             self.fields = self.field_indices(self.ActiveLayer)
             # make a dictionary of all of the camera parameters
             flyto = {'name': None, 'flyToMode': None, 'duration': None}
-            camera = {'longitude': None, 'longitude_off': None, 'latitude': None, 'latitude_off': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'gxhoriz' : None,'heading' : None,'roll' : None,'tilt' : None, 'range': None, 'follow_angle': None}
+            camera = {'longitude': None, 'longitude_off': None, 'latitude': None, 'latitude_off': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'gxhoriz' : None,'heading' : None,'roll' : None,'tilt' : None, 'range': None, 'follow_angle': None, 'streetview': None}
             cameraAlpha = {'longitude': 'a', 'longitude_off': 'b', 'latitude': 'c', 'latitude_off': 'd', 'altitude' : 'e', 'altitudemode': 'f','gxaltitudemode' : 'g','gxhoriz' : 'h','heading' : 'i','roll' : 'j','tilt' : 'k', 'range': 'l', 'follow_angle': 'm', 'streetview': 'n'}
-
 
             cameratemp = {}
 
@@ -2148,30 +2156,8 @@ class MilkMachine:
             camera['heading'] = self.dlg.ui.lineEdit__visualization_camera_heading.text()
             camera['roll'] = self.dlg.ui.lineEdit__visualization_camera_roll.text()
             camera['tilt'] = self.dlg.ui.lineEdit__visualization_camera_tilt.text()
-
-##            camera['a'] = self.dlg.ui.lineEdit_visualization_camera_longitude.text()
-##            camera['b'] = self.dlg.ui.lineEdit_visualization_camera_longitude_off.text()
-##            camera['c'] = self.dlg.ui.lineEdit_visualization_camera_latitude.text()
-##            camera['d'] = self.dlg.ui.lineEdit_visualization_camera_latitude_off.text()
-##            camera['e'] = self.dlg.ui.lineEdit_visualization_camera_altitude.text()
-##            camera['f'] = self.dlg.ui.comboBox_altitudemode.currentText()
-##            camera['g'] = self.dlg.ui.comboBox_gxaltitudemode.currentText()
-##            camera['h'] = self.dlg.ui.lineEdit__visualization_camera_gxhoriz.text()
-##            camera['i'] = self.dlg.ui.lineEdit__visualization_camera_heading.text()
-##            camera['j'] = self.dlg.ui.lineEdit__visualization_camera_roll.text()
-##            camera['k'] = self.dlg.ui.lineEdit__visualization_camera_tilt.text()
-
-            #QMessageBox.information(self.iface.mainWindow(),"Camera dict", str(camera) )
-
-##            # Populate the Visualization Camera Combo boxes
-##            self.dlg.ui.comboBox_altitudemode.clear()
-##            altitudemode = [None, 'absolute', 'clampToGround', 'relativeToGround']
-##            for alt in altitudemode:
-##                self.dlg.ui.comboBox_altitudemode.addItem(alt)
-##            self.dlg.ui.comboBox_gxaltitudemode.clear()
-##            gxaltitudemode = [None, 'clampToSeaFloor', 'relativeToSeaFloor']
-##            for gxalt in gxaltitudemode:
-##                self.dlg.ui.comboBox_gxaltitudemode.addItem(gxalt)
+            if self.dlg.ui.checkBox_visualization_streetview.isChecked():
+                camera['streetview'] = True
 
             # Get the curretly selected feature
             self.cLayer = self.iface.mapCanvas().currentLayer()
@@ -2179,7 +2165,6 @@ class MilkMachine:
             features = self.cLayer.selectedFeatures()
             for f in features:
                 self.selectList.append(f.id())  #[u'689',u'2014-06-06 13:30:54']  #[u'2014/06/06 10:30:10', u'Time:10:30:10, Latitude: 39.966531, Longitude: -75.172003, Speed: 3.382047, Altitude: 1.596764']
-
 
             try:
                 self.ActiveLayer.beginEditCommand("Camera Editing")
@@ -2226,7 +2211,6 @@ class MilkMachine:
         if self.gpsfile:
             self.lastdirectory = os.path.dirname(self.gpsfile)
 
-
         try:
             if self.gpsfile:
                 ftype = self.gpsfile.split(".")[-1]
@@ -2249,8 +2233,6 @@ class MilkMachine:
                 self.logger.exception(trace)
             self.iface.messageBar().pushMessage("Error", "Failed to import specified file. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
 
-
-
     def drawtrack(self):
 
         try:
@@ -2265,29 +2247,13 @@ class MilkMachine:
                 shapepath_line = self.gpsfile.split(".")[0] + '_line.shp'
                 shapepath_dup = self.gpsfile.split(".")[0] + '_duplicate.shp'
 
-
                 QgsVectorFileWriter.writeAsVectorFormat(kmllayer, shapepath, "utf-8", None, "ESRI Shapefile")  # working copy
                 QgsVectorFileWriter.writeAsVectorFormat(kmllayer, shapepath_dup, "utf-8", None, "ESRI Shapefile")  # duplicate of original
                 #bring the shapefile back in, and render it on the map
                 shaper = QgsVectorLayer(shapepath, layername, "ogr")
                 shaper.dataProvider().addAttributes( [QgsField("datetime",QVariant.String), QgsField("audio",QVariant.String), QgsField("camera",QVariant.String), QgsField("flyto",QVariant.String), QgsField("iconstyle", QVariant.String), QgsField("labelstyle", QVariant.String), QgsField("model", QVariant.String), QgsField("lookat", QVariant.String) , QgsField("symbtour", QVariant.String), QgsField("altitude",QVariant.Double)])
                 shaper.updateFields()
-
-
                 self.fields = self.field_indices(shaper)
-
-
-##                self.fields['Name'] = shaper.fieldNameIndex('Name')
-##                self.fields['Description'] = shaper.fieldNameIndex('Description')
-##                self.fields['datetime'] = shaper.fieldNameIndex('datetime')
-##                self.fields['audio'] = shaper.fieldNameIndex('audio')
-##                self.fields['camera'] = shaper.fieldNameIndex('camera')
-##                self.fields['flyto'] = shaper.fieldNameIndex('flyto')
-##                self.fields['iconstyle'] = shaper.fieldNameIndex('iconstyle')
-##                self.fields['labelstyle'] = shaper.fieldNameIndex('labelstyle')
-##                self.fields['model'] = shaper.fieldNameIndex('model')
-
-
                 # calculate the datetime field
                 idx = self.fields['datetime']  #feature.attributes()[idx]
                 fid_dt = []
@@ -2309,7 +2275,6 @@ class MilkMachine:
 
                     cc += 1
 
-
                 shaper.startEditing()
                 shaper.beginEditCommand('datetime')
                 for i,v in enumerate(fid_dt):
@@ -2324,9 +2289,6 @@ class MilkMachine:
                 shaper.endEditCommand()
                 shaper.commitChanges()
 
-
-
-
                 # make the line shapefile
                 ptlist = []
                 for f in shaper.getFeatures():
@@ -2339,7 +2301,6 @@ class MilkMachine:
                 QgsVectorFileWriter.writeAsVectorFormat(linelayer, shapepath_line, "utf-8", None, "ESRI Shapefile")
                 shaper_line = QgsVectorLayer(shapepath_line, layername, "ogr")
 
-
                 # define the layer properties as a dict
                 properties = {'size': '3.0'}
                 # initalise a new symbol layer with those properties
@@ -2349,7 +2310,6 @@ class MilkMachine:
                 shaper.commitChanges()
 
                 #kmllayer2 = self.iface.addVectorLayer(shapepath, layername, "ogr")
-
                 #kmlinpath = self.gpsfile + '|layername=WayPoints'
                 #kmllayer = self.iface.addVectorLayer(self.gpsfile, 'testkml', "ogr")
                 self.dlg.ui.buttonDrawTrack.setEnabled(False)
@@ -2778,9 +2738,9 @@ class MilkMachine:
 
                     self.fields = self.field_indices(self.aLayer)
                     matchdict = {}
+                    matchdict_end = {}
                     cc = 0
                     try:
-
                         for f in self.aLayer.getFeatures(): #  QgsFeatureIterator #[u'2014/06/06 10:38:48', u'Time:10:38:48, Latitude: 39.965949, Longitude: -75.172239, Speed: 0.102851, Altitude: -3.756733']
                             currentatt = f.attributes()
                             pointdate = currentatt[self.fields['datetime']].split(" ")[0]  #2014/06/06
@@ -2811,6 +2771,22 @@ class MilkMachine:
                                 matchrow = cc
                                 break
                             cc += 1
+
+                        for f in self.aLayer.getFeatures(): #  QgsFeatureIterator #[u'2014/06/06 10:38:48', u'Time:10:38:48, Latitude: 39.965949, Longitude: -75.172239, Speed: 0.102851, Altitude: -3.756733']
+                            currentatt = f.attributes()
+                            pointdate = currentatt[self.fields['datetime']].split(" ")[0]  #2014/06/06
+                            pointtime = currentatt[self.fields['datetime']].split(" ")[1]
+                            current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
+                            matchrow2 = []
+                            if current_dt == self.audio_end: # the track time and the audio start match
+                                #self.aLayer.setSelectedFeatures([int(f.id())])
+                                matchdict_end['fid'] = f.id()
+                                matchdict_end['attributes'] = currentatt
+                                geom = f.geometry()  # QgsGeometry object, get the geometry
+                                if geom.type() == QGis.Point:
+                                    matchdict_end['coordinates'] = geom.asPoint() #(-75.1722,39.9659)
+                                matchrow2 = cc
+                                break
 
                         # calculate the audio field
                         try:
@@ -2886,6 +2862,34 @@ class MilkMachine:
                             #starting_point_marker = self.iface.addVectorLayer('memory/' + vl)     #self.iface.QgsMapLayerRegistry.instance().addMapLayer(vl)
                             #starting_point_marker = self.iface.addVectorLayer(vl, 'layername', "ogr")
                             QgsMapLayerRegistry.instance().addMapLayer(vl)
+                        self.iface.setActiveLayer(self.aLayer)
+
+                    self.logger.info('matchdict end {0}'.format(matchdict_end))
+                    if matchdict_end:
+                        if self.dlg.ui.checkBox_sync_point.isChecked():
+                            # create layer
+                            lname2 = self.aLayer.name() + '_audio_end'
+                            v2 = QgsVectorLayer("Point?crs=EPSG:4326", lname2, "memory")
+                            pr = v2.dataProvider()
+                            # add a feature
+                            fet = QgsFeature()
+                            fet.setGeometry( QgsGeometry.fromPoint(QgsPoint(matchdict_end['coordinates'][0],matchdict_end['coordinates'][1])) )
+                            pr.addFeatures([fet])
+                            symbol_layerq = self.iface.activeLayer().rendererV2().symbols()[0].symbolLayer(0)
+
+                            # define the layer properties as a dict
+                            size2 = float(symbol_layerq.size()) * 2
+                            properties = {'size': str(size2), 'color': '255,0,0,255'} # red
+                            # initalise a new symbol layer with those properties
+                            symbol_layer = QgsSimpleMarkerSymbolLayerV2.create(properties)
+
+                            # replace the default symbol layer with the new symbol layer
+                            v2.rendererV2().symbols()[0].changeSymbolLayer(0, symbol_layer)
+                            v2.setLayerTransparency(30)
+                            v2.commitChanges()
+                            # update layer's extent when new features have been added  # because change of extent in provider is not propagated to the layer
+                            v2.updateExtents()
+                            QgsMapLayerRegistry.instance().addMapLayer(v2)
                         self.iface.setActiveLayer(self.aLayer)
 
         except:
@@ -2999,7 +3003,7 @@ class MilkMachine:
                 currentatt = f.attributes()
 
                 if currentatt[self.fields['lookat']] and currentatt[self.fields['lookat']] != 'circlearound':
-                    lookatBack = {'a':'longitude','b' :'latitude','c' :'altitude','d' :'altitudemode','e':'gxaltitudemode','f':'heading','g':'tilt','h' :'range','i' :'duration','j' :'startheading', 'k': 'rotations', 'l': 'direction'}
+                    lookatBack = {'a':'longitude','b' :'latitude','c' :'altitude','d' :'altitudemode','e':'gxaltitudemode','f':'heading','g':'tilt','h' :'range','i' :'duration','j' :'startheading', 'k': 'rotations', 'l': 'direction', 'm': 'streetview'}
                     lookat = eval(currentatt[self.fields['lookat']])
                     #convert back to full format
                     newlookat = {}
@@ -3111,6 +3115,7 @@ class MilkMachine:
                                     if lookatdict['direction'] == 'counterclockwise':
                                         heading = (heading - 10) % 360
 
+
                     else:  # non circle around, just custom
                         if lookatdict['longitude'] and lookatdict['latitude'] and lookatdict['altitude'] and lookatdict['heading'] and lookatdict['tilt'] and lookatdict['range']:
                             if flytodict['duration']:
@@ -3141,9 +3146,12 @@ class MilkMachine:
                             flyto.lookat.gxtimespan.begin = self.CamStartTime
                             flyto.lookat.gxtimespan.end = camendtime
 
+
+
                     if cc == 1:  # this is the first thing, not camera
                         kml.document.lookat = flyto.lookat
-
+                        if lookatdict['streetview']:
+                            kml.document.lookat.gxvieweroptions.newgxoption(name=simplekml.GxOption.streetview)
 
                     cc+=1
 
@@ -3258,14 +3266,6 @@ class MilkMachine:
                                 x_dist = math.sin(opp_rad) * leg_distance
                                 y_dist = math.cos(opp_rad) * leg_distance
 
-
-##                                self.logger.info('opp_rad {0}'.format(math.degrees(opp_rad)))
-##                                self.logger.info('heading_rad {0}'.format(math.degrees(heading_rad)))
-##                                self.logger.info('range {0}'.format(cameradict['range']))
-##                                self.logger.info('altitude {0}'.format(cameradict['altitude']))
-##                                self.logger.info('xdist {0}'.format(x_dist))
-##                                self.logger.info('ydist {0}'.format(y_dist))
-
                                 utm_camera = ((utmpt[0] + x_dist), (utmpt[1] + y_dist))
                                 wgs_camera = xform2.transform(QgsPoint(utm_camera[0], utm_camera[1]))
 
@@ -3331,6 +3331,8 @@ class MilkMachine:
 
                         #firstcam_pnt.camera = flyto.camera
                         kml.document.camera = flyto.camera
+                        if cameradict['streetview']:
+                            kml.document.camera.gxvieweroptions.newgxoption(name=simplekml.GxOption.streetview)
 
                         cc += 1
 
@@ -3406,17 +3408,6 @@ class MilkMachine:
                                 heading_rad = math.radians(float(cameradict['heading']))
                                 x_dist = math.sin(opp_rad) * leg_distance
                                 y_dist = math.cos(opp_rad) * leg_distance
-
-##                                self.logger.info('-----------------------')
-##                                self.logger.info('model xy {0}'.format((float(cameradict['longitude']),float(cameradict['latitude']))))
-##                                self.logger.info('utmptlist {0}'.format(utmptlist))
-##                                self.logger.info('opp_rad {0}'.format(math.degrees(opp_rad)))
-##                                self.logger.info('heading_rad {0}'.format(math.degrees(heading_rad)))
-##                                self.logger.info('range {0}'.format(cameradict['range']))
-##                                self.logger.info('altitude {0}'.format(cameradict['altitude']))
-##                                self.logger.info('xdist {0}'.format(x_dist))
-##                                self.logger.info('ydist {0}'.format(y_dist))
-##                                self.logger.info('utm_camera {0}'.format(utm_camera))
 
                                 utm_camera = ((utmpt[0] + x_dist), (utmpt[1] + y_dist))
                                 wgs_camera = xform2.transform(QgsPoint(utm_camera[0], utm_camera[1]))
@@ -3555,6 +3546,9 @@ class MilkMachine:
                     pointdate = currentatt[self.fields['datetime']].split(" ")[0]  #2014/06/06
                     pointtime = currentatt[self.fields['datetime']].split(" ")[1] #10:38:48
                     current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
+
+                    mdl.name = current_dt.strftime('%X %m/%d/%Y')
+                    mdl.description = current_dt.strftime('%X %m/%d/%Y')
 
                     #pnt = folder.newpoint(name=str(cc), coords=[(coords[0], coords[1])], description=str(currentatt[1]))
                     #pnt.timestamp.when = current_dt.strftime('%Y-%m-%dT%XZ')
@@ -3846,6 +3840,7 @@ class MilkMachine:
             self.dlg.ui.comboBox_lookat_gxaltitudemode.addItem(gxalt)
 
         # Filtering
+        self.dlg.ui.comboBox_filtering_spline.clear()
         splinelist = ['Quadratic', 'Cubic', '4th Order', '5th Order']
         for spline in splinelist:
             self.dlg.ui.comboBox_filtering_spline.addItem(spline)
@@ -3964,6 +3959,7 @@ class MilkMachine:
 
         # Tour
         self.dlg.ui.lineEdit_tourname.setEnabled(False)
+        self.dlg.ui.checkBox_visualization_streetview.setEnabled(False)
         # FlyTo
         self.dlg.ui.comboBox_flyto_mode.setEnabled(False)
         self.dlg.ui.lineEdit_flyto_duration.setEnabled(False)
