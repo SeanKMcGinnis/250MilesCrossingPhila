@@ -2756,6 +2756,7 @@ class MilkMachine:
                                     geom = f.geometry()  # QgsGeometry object, get the geometry
                                     if geom.type() == QGis.Point:
                                         matchdict['coordinates'] = geom.asPoint() #(-75.1722,39.9659)
+                                    matchrow = 0
                                     break
                                 elif current_dt > self.audio_start: # if it is the first attribute and there is no match and the track time is larger than the start of the audio.
                                     diff = current_dt - self.audio_start
@@ -2825,6 +2826,7 @@ class MilkMachine:
                             at_time = True
                         else:
                             at_time = False
+
 
                         QMessageBox.information(self.iface.mainWindow(),"Audio File Sync Info", 'Audio Start: {0}\nTrack Start: {1}\nStart point in track is FID: {2}, Row #: {3}\nCoordinates: {4}\n\nAudio & Track Start Time Match: {5}'.format(self.audio_start.strftime("%x %X"),track_start_dt.strftime("%x %X"), matchdict['fid'],matchrow, str(matchdict['coordinates']),at_time ) )
 
@@ -2906,20 +2908,22 @@ class MilkMachine:
     ############################################################################
 
     def audio_offset(self, audiopath):
-        # Audio Start and End
+        file_ext = audiopath.split('.')[1]
         audioname_ext = audiopath.split('/')[-1]
         audioname = audioname_ext.split('.')[0]
-        # Audio start date and time
-        w = wave.open(audiopath)
-        # Frame Rate of the Wave File
-        framerate = w.getframerate()
-        # Number of Frames in the File
-        frames = w.getnframes()
-        # Estimate length of the file by dividing frames/framerate
-        length = frames/framerate # seconds
         audio_start = datetime.datetime(int(audioname[0:4]), int(audioname[4:6]), int(audioname[6:8]), int(audioname[8:10]), int(audioname[10:12]), int(audioname[12:14]))
-        # Audio end time. Add seconds to the start time
-        audio_end = audio_start + datetime.timedelta(seconds=length)
+        if file_ext.lower() == "wav":
+            # Audio start date and time
+            w = wave.open(self.audio_export)
+            framerate = w.getframerate()
+            frames = w.getnframes()
+            length = frames/framerate # seconds
+            # Audio end time. Add seconds to the start time
+            audio_end = audio_start + datetime.timedelta(seconds=length)
+        if file_ext.lower() == "mp3":
+            mp3 = MP3(self.line_audiopath)
+            length = round(mp3.info.length) # seconds
+            audio_end = audio_start + datetime.timedelta(seconds=length)
 
         # Track start and end
         cc = 0
@@ -2948,20 +2952,22 @@ class MilkMachine:
                     self.lastdirectory = os.path.dirname(self.audio_export)
 
                 if self.audio_export:
-                    # Audio Start and End
+                    file_ext = self.audio_export.split('.')[1]
                     audioname_ext = self.audio_export.split('/')[-1]
                     audioname = audioname_ext.split('.')[0]
-                    # Audio start date and time
-                    w = wave.open(self.audio_export)
-                    # Frame Rate of the Wave File
-                    framerate = w.getframerate()
-                    # Number of Frames in the File
-                    frames = w.getnframes()
-                    # Estimate length of the file by dividing frames/framerate
-                    length = frames/framerate # seconds
                     audio_start = datetime.datetime(int(audioname[0:4]), int(audioname[4:6]), int(audioname[6:8]), int(audioname[8:10]), int(audioname[10:12]), int(audioname[12:14]))
-                    # Audio end time. Add seconds to the start time
-                    audio_end = audio_start + datetime.timedelta(seconds=length)
+                    if file_ext.lower() == "wav":
+                        # Audio start date and time
+                        w = wave.open(self.audio_export)
+                        framerate = w.getframerate()
+                        frames = w.getnframes()
+                        length = frames/framerate # seconds
+                        # Audio end time. Add seconds to the start time
+                        audio_end = audio_start + datetime.timedelta(seconds=length)
+                    if file_ext.lower() == "mp3":
+                        mp3 = MP3(self.line_audiopath)
+                        length = round(mp3.info.length) # seconds
+                        audio_end = audio_start + datetime.timedelta(seconds=length)
 
                     # Track start and end
                     cc = 0
