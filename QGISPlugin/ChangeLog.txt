@@ -138,3 +138,8 @@ Task: Improve the "Symbolize" button tooltip to explain the functionality better
 Task: "Audio End" sync point. If the "Indicate Sync Point" is checked and the end of the audio overlaps with the track, then a red circle will be placed over the point.
 Task: Models name and description includes the time/date stamp.
 Bug Fix: FlyTo duration tooltip documentation improved, and a default value set to 1 second. This duration is applied to both "custom" and "follow behind" Camera views, and "custom" LookAt view. This value is ignored by the "circle around" tour.
+--------------------------------------------
+Commit #45
+Bug Fix: Export with .mp3 fails. This was due to MM still trying to use the .wav library. Changed to mutagen, and export works.
+Bug Fix: When the audio and video have matching start times, the dialog box says "False". The variable "matchdict" was not being updated when the first row was a match.
+
