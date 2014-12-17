@@ -1715,9 +1715,9 @@ class MilkMachine:
         try:
             self.fields = self.field_indices(self.ActiveLayer)
             # make a dictionary of all of the camera parameters
-            camera = {'longitude': None, 'longitude_off': None, 'latitude': None, 'latitude_off': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'gxhoriz' : None,'heading' : None,'roll' : None,'tilt' : None, 'range': None, 'follow_angle': None, 'streetview': None}
-            cameraAlpha = {'longitude': 'a', 'longitude_off': 'b', 'latitude': 'c', 'latitude_off': 'd', 'altitude' : 'e', 'altitudemode': 'f','gxaltitudemode' : 'g','gxhoriz' : 'h','heading' : 'i','roll' : 'j','tilt' : 'k', 'range': 'l', 'follow_angle': 'm', 'streetview': 'n'}
-            cameraBack = {'a': 'longitude', 'b': 'longitude_off','c': 'latitude','d': 'latitude_off','e': 'altitude' ,'f': 'altitudemode', 'g': 'gxaltitudemode' ,'h': 'gxhoriz' ,'i': 'heading' ,'j': 'roll' ,'k': 'tilt' ,'l': 'range','m': 'follow_angle', 'n': 'streetview'}
+            camera = {'longitude': None, 'longitude_off': None, 'latitude': None, 'latitude_off': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'gxhoriz' : None,'heading' : None,'roll' : None,'tilt' : None, 'range': None, 'follow_angle': None, 'streetview': None, 'hoffset': None}
+            cameraAlpha = {'longitude': 'a', 'longitude_off': 'b', 'latitude': 'c', 'latitude_off': 'd', 'altitude' : 'e', 'altitudemode': 'f','gxaltitudemode' : 'g','gxhoriz' : 'h','heading' : 'i','roll' : 'j','tilt' : 'k', 'range': 'l', 'follow_angle': 'm', 'streetview': 'n', 'hoffset': 'o'}
+            cameraBack = {'a': 'longitude', 'b': 'longitude_off','c': 'latitude','d': 'latitude_off','e': 'altitude' ,'f': 'altitudemode', 'g': 'gxaltitudemode' ,'h': 'gxhoriz' ,'i': 'heading' ,'j': 'roll' ,'k': 'tilt' ,'l': 'range','m': 'follow_angle', 'n': 'streetview', 'o': 'hoffset'}
 
             cameratemp = {}
             flyto = {'name': None, 'flyToMode': None, 'duration': None}
@@ -1741,7 +1741,7 @@ class MilkMachine:
 
             # Calculate Heading !! Select All Features in the Current Layer !!
             forward_int = int(self.dlg.ui.lineEdit__visualization_follow_smoother.text())  # default to 1
-            hoffset = float(self.dlg.ui.lineEdit__visualization_follow_hoffset.text())
+            camera['hoffset'] = float(self.dlg.ui.lineEdit__visualization_follow_hoffset.text())
             #self.selectList = self.ActiveLayer.selectedFeaturesIds()  #list of all the feature ids
             layerlen = len(self.selectList)-1
             #self.ActiveLayer.setSelectedFeatures(self.selectList)  # select everything
@@ -1820,11 +1820,11 @@ class MilkMachine:
                     for ii in range(forward_int):
                         forwardlist.append(TeatDip.compass_bearing((v[1][1],v[1][0]),(self.selectList[i+ii+1][1][1] ,self.selectList[i+ii+1][1][0])))
                     #self.logger.info('list: {0}, mean: {1}'.format(forwardlist,TeatDip.mean_angle(forwardlist) ))
-                    headinglist.append((TeatDip.mean_angle(forwardlist) + hoffset) % 360)
+                    headinglist.append((TeatDip.mean_angle(forwardlist)) % 360)
                     #headinglist.append(TeatDip.compass_bearing((cordslist[i-1][1] , cordslist[i-1][0]), (v[1],v[0])) )
                 else:
                     headinglist.append(headinglist[i-1])
-            self.logger.info('HEADINGLIST: {0}'.format(headinglist))
+            #self.logger.info('HEADINGLIST: {0}'.format(headinglist))
 
             try:
                 if len(self.selectList) >= 1:
@@ -2135,8 +2135,8 @@ class MilkMachine:
             self.fields = self.field_indices(self.ActiveLayer)
             # make a dictionary of all of the camera parameters
             flyto = {'name': None, 'flyToMode': None, 'duration': None}
-            camera = {'longitude': None, 'longitude_off': None, 'latitude': None, 'latitude_off': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'gxhoriz' : None,'heading' : None,'roll' : None,'tilt' : None, 'range': None, 'follow_angle': None, 'streetview': None}
-            cameraAlpha = {'longitude': 'a', 'longitude_off': 'b', 'latitude': 'c', 'latitude_off': 'd', 'altitude' : 'e', 'altitudemode': 'f','gxaltitudemode' : 'g','gxhoriz' : 'h','heading' : 'i','roll' : 'j','tilt' : 'k', 'range': 'l', 'follow_angle': 'm', 'streetview': 'n'}
+            camera = {'longitude': None, 'longitude_off': None, 'latitude': None, 'latitude_off': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'gxhoriz' : None,'heading' : None,'roll' : None,'tilt' : None, 'range': None, 'follow_angle': None, 'streetview': None, 'hoffset': None}
+            cameraAlpha = {'longitude': 'a', 'longitude_off': 'b', 'latitude': 'c', 'latitude_off': 'd', 'altitude' : 'e', 'altitudemode': 'f','gxaltitudemode' : 'g','gxhoriz' : 'h','heading' : 'i','roll' : 'j','tilt' : 'k', 'range': 'l', 'follow_angle': 'm', 'streetview': 'n', 'hoffset': 'o'}
 
             cameratemp = {}
 
@@ -3169,7 +3169,8 @@ class MilkMachine:
 
                     if cc == 0:  # establish this as the start of the tour
                         camera = eval(currentatt[self.fields['camera']])
-                        cameraBack = {'a': 'longitude', 'b': 'longitude_off','c': 'latitude','d': 'latitude_off','e': 'altitude' ,'f': 'altitudemode', 'g': 'gxaltitudemode' ,'h': 'gxhoriz' ,'i': 'heading' ,'j': 'roll' ,'k': 'tilt' ,'l': 'range','m': 'follow_angle', 'n': 'streetview'}
+                        cameraBack = {'a': 'longitude', 'b': 'longitude_off','c': 'latitude','d': 'latitude_off','e': 'altitude' ,'f': 'altitudemode', 'g': 'gxaltitudemode' ,'h': 'gxhoriz' ,'i': 'heading' ,'j': 'roll' ,'k': 'tilt' ,'l': 'range','m': 'follow_angle', 'n': 'streetview', 'o': 'hoffset'}
+
                         #convert back to full format
                         newcam = {}
                         for kk,vv in camera.iteritems():
@@ -3322,7 +3323,10 @@ class MilkMachine:
                         if cameradict['heading']:
                             if cameradict['follow_angle']:
                                 newhead = math.degrees((math.radians(float(cameradict['heading'])) + follow_angle + math.pi) % (2 * math.pi))
-                                flyto.camera.heading = newhead
+                                if cameradict['hoffset']:
+                                    flyto.camera.heading = round((newhead + float(cameradict['hoffset'])) % 360, 1)
+                                else:
+                                    flyto.camera.heading = newhead
                             else:
                                 flyto.camera.heading = cameradict['heading']
                         if cameradict['roll']:
@@ -3344,7 +3348,9 @@ class MilkMachine:
 
                     else:  # everything after zero camera
                         camera = eval(currentatt[self.fields['camera']])
-                        cameraBack = {'a': 'longitude', 'b': 'longitude_off','c': 'latitude','d': 'latitude_off','e': 'altitude' ,'f': 'altitudemode', 'g': 'gxaltitudemode' ,'h': 'gxhoriz' ,'i': 'heading' ,'j': 'roll' ,'k': 'tilt' ,'l': 'range','m': 'follow_angle', 'n': 'streetview'}
+                        cameraBack = {'a': 'longitude', 'b': 'longitude_off','c': 'latitude','d': 'latitude_off','e': 'altitude' ,'f': 'altitudemode', 'g': 'gxaltitudemode' ,'h': 'gxhoriz' ,'i': 'heading' ,'j': 'roll' ,'k': 'tilt' ,'l': 'range','m': 'follow_angle', 'n': 'streetview', 'o': 'hoffset'}
+
+
                         #convert back to full format
                         newcam = {}
                         for kk,vv in camera.iteritems():
@@ -3451,7 +3457,10 @@ class MilkMachine:
                         if cameradict['heading']:
                             if cameradict['follow_angle']:
                                 newhead = math.degrees((math.radians(float(cameradict['heading'])) + follow_angle + math.pi) % (2 * math.pi))
-                                flyto.camera.heading = newhead
+                                if cameradict['hoffset']:
+                                    flyto.camera.heading = round((newhead + float(cameradict['hoffset'])) % 360, 1)
+                                else:
+                                    flyto.camera.heading = newhead
                             else:
                                 flyto.camera.heading = float(cameradict['heading'])
                         if cameradict['roll']:
@@ -3754,7 +3763,8 @@ class MilkMachine:
             self.ActiveLayer.removeSelection()
             self.ActiveLayer.select(rect,False)
 
-            cameraBack = {'a': 'longitude', 'b': 'longitude_off','c': 'latitude','d': 'latitude_off','e': 'altitude' ,'f': 'altitudemode', 'g': 'gxaltitudemode' ,'h': 'gxhoriz' ,'i': 'heading' ,'j': 'roll' ,'k': 'tilt' ,'l': 'range','m': 'follow_angle', 'n': 'streetview'}
+            cameraBack = {'a': 'longitude', 'b': 'longitude_off','c': 'latitude','d': 'latitude_off','e': 'altitude' ,'f': 'altitudemode', 'g': 'gxaltitudemode' ,'h': 'gxhoriz' ,'i': 'heading' ,'j': 'roll' ,'k': 'tilt' ,'l': 'range','m': 'follow_angle', 'n': 'streetview', 'o': 'hoffset'}
+
             for f in self.ActiveLayer.selectedFeatures():
                 currentatt = f.attributes()
                 if currentatt:

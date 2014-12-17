@@ -142,4 +142,6 @@ Bug Fix: FlyTo duration tooltip documentation improved, and a default value set 
 Commit #45
 Bug Fix: Export with .mp3 fails. This was due to MM still trying to use the .wav library. Changed to mutagen, and export works.
 Bug Fix: When the audio and video have matching start times, the dialog box says "False". The variable "matchdict" was not being updated when the first row was a match.
-
+--------------------------------------------
+Commit #46
+Bug Fix: The heading offset was doing the same function as the follow behind angle. This has been updated and tested, but should be tested further.
