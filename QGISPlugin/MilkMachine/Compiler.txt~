@@ -1,0 +1,3 @@
+# run this from the osgeo console
+pyuic4 -o "/home/ed/250MilesCrossingPhila/QGISPlugin/MilkMachine/ui_milkmachine.py" "/home/ed/250MilesCrossingPhila/QGISPlugin/MilkMachine/ui_milkmachine.ui"
+pyrcc4 -o "/home/ed/250MilesCrossingPhila/QGISPlugin/MilkMachine/resources_rc.py" "/home/ed/250MilesCrossingPhila/QGISPlugin/MilkMachine/resources.qrc"
