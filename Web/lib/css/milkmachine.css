@@ -3,19 +3,20 @@ body{
 	color: #FEFDFB
 }
 a{
-	color: #1143F3;
-	text-decoration:underline
+	color: #fefdfb;
+	text-decoration:none
+	font-size: 14pt;
 }
 a:hover, a:focus{
 	color: #1143F3; 
 }
 .title-block{
-	font-size: 40pt;
+	font-size: 44pt;
 	line-height: 28pt;
 	padding-bottom: 5pt;
 }
 .subtitle-block{
-	font-size: 17pt;
+	font-size: 18pt;
 }
 #linkPanel{
     padding-top: 20px;
@@ -63,8 +64,8 @@ a:hover, a:focus{
 	padding-top:16px;
 }
 .incomplete{
-	opacity: 0.3;
-    filter: alpha(opacity=30); /* For IE8 and earlier */
+	opacity: 0.5;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
 }
 .first-cell{
 	padding-left: 8px
@@ -80,6 +81,9 @@ a:hover, a:focus{
 }
 .ui-widget{
 	font-size: 1.0em
+}
+.ui-dialog-titlebar-close{
+	display:none;
 }
 .block{
 	display:block
