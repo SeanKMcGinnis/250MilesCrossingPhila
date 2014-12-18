@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/plugins/milkmachine" >
+        <file>icon.png</file>
+		<file>Import.png</file>
+		<file>Export.png</file>
+		<file>pencil.png</file>
+		<file>delete.png</file>
+		<file>Sound_alt.png</file>
+		<file>stop.png</file>
+		<file>play.png</file>
+		<file>question.png</file>
+		<file>synchronize.png</file>
+		<file>earth.png</file>
+		<file>triangle.png</file>	
+		<file>folder.png</file>	
+		<file>followangle.png</file>
+		<file>camera.png</file>	
+		<file>uncentered.png</file>	
+		<file>centered.png</file>		
+		<file>lookat.png</file>			
+    </qresource>
+</RCC>
