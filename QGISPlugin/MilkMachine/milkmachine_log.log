@@ -1400,3 +1400,41 @@ ValueError: invalid literal for int() with base 10: 'C:/U'
 2014-12-17 17:59:22,173 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
 2014-12-17 17:59:22,173 - milkmachine - INFO - Milk Machine plugin initialized
 2014-12-17 18:08:21,440 - milkmachine - INFO - Clicked Cancel
+2014-12-18 20:06:26,515 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-12-18 20:06:26,516 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-12-18 20:06:26,516 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-12-18 20:06:26,516 - milkmachine - INFO - Milk Machine plugin initialized
+2014-12-18 20:09:02,352 - milkmachine - ERROR - export function error
+2014-12-18 20:09:02,352 - milkmachine - ERROR - Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 3210, in exportToFile
+    soundcue.gxdelayedstart = self.audio_offset(self.dlg.ui.lineEdit_export_audio.text())
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2917, in audio_offset
+    w = wave.open(self.audio_export)
+AttributeError: MilkMachine instance has no attribute 'audio_export'
+Traceback (most recent call last):
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 3210, in exportToFile
+    soundcue.gxdelayedstart = self.audio_offset(self.dlg.ui.lineEdit_export_audio.text())
+  File "C:/Users/Edward/.qgis2/python/plugins\MilkMachine\milkmachine.py", line 2917, in audio_offset
+    w = wave.open(self.audio_export)
+AttributeError: MilkMachine instance has no attribute 'audio_export'
+2014-12-18 20:09:51,913 - milkmachine - INFO - Clicked Cancel
+2014-12-18 20:11:11,924 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-12-18 20:11:11,924 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-12-18 20:11:11,924 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-12-18 20:11:11,924 - milkmachine - INFO - Milk Machine plugin initialized
+2014-12-18 20:11:12,342 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-12-18 20:11:12,342 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-12-18 20:11:12,342 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-12-18 20:11:12,344 - milkmachine - INFO - Milk Machine plugin initialized
+2014-12-18 20:11:15,890 - milkmachine - INFO - Clicked Cancel
+2014-12-18 20:11:26,513 - milkmachine - INFO - Quit Milk Machine
+2014-12-18 20:13:27,828 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-12-18 20:13:27,828 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-12-18 20:13:27,828 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-12-18 20:13:27,828 - milkmachine - INFO - Milk Machine plugin initialized
+2014-12-18 20:15:07,506 - milkmachine - INFO - Clicked Cancel
+2014-12-18 20:15:09,378 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-12-18 20:15:09,378 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-12-18 20:15:09,378 - milkmachine - INFO - -----------------------------------------------------------------------------------------------------------------------------------------------
+2014-12-18 20:15:09,380 - milkmachine - INFO - Milk Machine plugin initialized
+2014-12-18 20:18:24,134 - milkmachine - INFO - Clicked Cancel
