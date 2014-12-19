@@ -2914,7 +2914,7 @@ class MilkMachine:
         audio_start = datetime.datetime(int(audioname[0:4]), int(audioname[4:6]), int(audioname[6:8]), int(audioname[8:10]), int(audioname[10:12]), int(audioname[12:14]))
         if file_ext.lower() == "wav":
             # Audio start date and time
-            w = wave.open(self.audio_export)
+            w = wave.open(audiopath)
             framerate = w.getframerate()
             frames = w.getnframes()
             length = frames/framerate # seconds
@@ -2947,7 +2947,7 @@ class MilkMachine:
             self.ActiveLayer = self.iface.activeLayer()
             if self.ActiveLayer:
                 self.fields = self.field_indices(self.ActiveLayer)
-                self.audio_export = QFileDialog.getOpenFileName(None, "Choose audio file for .kmz export", self.lastdirectory, "(*.wav *.mp3")  #C:\Users\Edward\Documents\Philly250\Scratch
+                self.audio_export = QFileDialog.getOpenFileName(None, "Choose audio file for .kmz export", self.lastdirectory, "(*.wav *.mp3)")  #C:\Users\Edward\Documents\Philly250\Scratch
                 if self.audio_export:
                     self.lastdirectory = os.path.dirname(self.audio_export)
 
