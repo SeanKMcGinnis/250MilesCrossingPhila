@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\Edward\.qgis2\python\plugins\MilkMachine\ui_milkmachine.ui'
 #
-# Created: Thu Dec 18 20:19:04 2014
+# Created: Mon Dec 22 21:41:50 2014
 #      by: PyQt4 UI code generator 4.10.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -1428,6 +1428,7 @@ class Ui_MilkMachine(object):
         self.label_15.setText(_translate("MilkMachine", "duration:", None))
         self.lineEdit_flyto_duration.setToolTip(_translate("MilkMachine", "<html><head/><body><p>Duration (seconds) of the FlyTo, for both Camera and LookAt views.</p></body></html>", None))
         self.lineEdit_flyto_duration.setText(_translate("MilkMachine", "1", None))
+        self.lineEdit_flyto_duration.setPlaceholderText(_translate("MilkMachine", "1", None))
         self.groupBox_cameraview.setToolTip(_translate("MilkMachine", "<html><head/><body><p>Introduced with KML 2.2, <span style=\" font-family:\'Courier New,courier\';\">&lt;Camera&gt;</span> provides an additional way to specify the observer\'s viewpoint and associated view parameters. <span style=\" font-family:\'Courier New,courier\';\">&lt;Camera&gt;</span> is similar to <span style=\" font-family:\'Courier New,courier\';\">&lt;LookAt&gt;</span>, since both elements define the placement and orientation of a virtual camera that is viewing the Earth. The difference is that LookAt specifies the view in terms of the point of interest that is being viewed. Camera, in contrast, specifies the view in terms of the viewer\'s position and orientation. </p></body></html>", None))
         self.groupBox_cameraview.setTitle(_translate("MilkMachine", "Camera", None))
         self.pushButton_visualization_camera_xy.setToolTip(_translate("MilkMachine", "<html><head/><body><p>If one point is selected in the active layer, the &quot;x,y&quot; button will automatically fill the longitude and latitude location for the model using the coordinates from the selected point.</p></body></html>", None))

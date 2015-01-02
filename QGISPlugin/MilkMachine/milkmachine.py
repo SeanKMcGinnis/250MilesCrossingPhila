@@ -1713,148 +1713,160 @@ class MilkMachine:
 
     def follow_apply(self):
         try:
-            self.fields = self.field_indices(self.ActiveLayer)
-            # make a dictionary of all of the camera parameters
-            camera = {'longitude': None, 'longitude_off': None, 'latitude': None, 'latitude_off': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'gxhoriz' : None,'heading' : None,'roll' : None,'tilt' : None, 'range': None, 'follow_angle': None, 'streetview': None, 'hoffset': None}
-            cameraAlpha = {'longitude': 'a', 'longitude_off': 'b', 'latitude': 'c', 'latitude_off': 'd', 'altitude' : 'e', 'altitudemode': 'f','gxaltitudemode' : 'g','gxhoriz' : 'h','heading' : 'i','roll' : 'j','tilt' : 'k', 'range': 'l', 'follow_angle': 'm', 'streetview': 'n', 'hoffset': 'o'}
-            cameraBack = {'a': 'longitude', 'b': 'longitude_off','c': 'latitude','d': 'latitude_off','e': 'altitude' ,'f': 'altitudemode', 'g': 'gxaltitudemode' ,'h': 'gxhoriz' ,'i': 'heading' ,'j': 'roll' ,'k': 'tilt' ,'l': 'range','m': 'follow_angle', 'n': 'streetview', 'o': 'hoffset'}
 
-            cameratemp = {}
-            flyto = {'name': None, 'flyToMode': None, 'duration': None}
+            features = self.ActiveLayer.selectedFeatures()
+            selcount = 0
+            for f in features:
+                selcount += 1
+
+            # there has to be more than 1
+            if selcount > 1:
+
+                self.fields = self.field_indices(self.ActiveLayer)
+                # make a dictionary of all of the camera parameters
+                camera = {'longitude': None, 'longitude_off': None, 'latitude': None, 'latitude_off': None, 'altitude' : None, 'altitudemode': None,'gxaltitudemode' : None,'gxhoriz' : None,'heading' : None,'roll' : None,'tilt' : None, 'range': None, 'follow_angle': None, 'streetview': None, 'hoffset': None}
+                cameraAlpha = {'longitude': 'a', 'longitude_off': 'b', 'latitude': 'c', 'latitude_off': 'd', 'altitude' : 'e', 'altitudemode': 'f','gxaltitudemode' : 'g','gxhoriz' : 'h','heading' : 'i','roll' : 'j','tilt' : 'k', 'range': 'l', 'follow_angle': 'm', 'streetview': 'n', 'hoffset': 'o'}
+                cameraBack = {'a': 'longitude', 'b': 'longitude_off','c': 'latitude','d': 'latitude_off','e': 'altitude' ,'f': 'altitudemode', 'g': 'gxaltitudemode' ,'h': 'gxhoriz' ,'i': 'heading' ,'j': 'roll' ,'k': 'tilt' ,'l': 'range','m': 'follow_angle', 'n': 'streetview', 'o': 'hoffset'}
+
+                cameratemp = {}
+                flyto = {'name': None, 'flyToMode': None, 'duration': None}
 
 
-            flyto['name'] = self.dlg.ui.lineEdit_tourname.text()
-            flyto['flyToMode'] = self.dlg.ui.comboBox_flyto_mode.currentText()
-            flyto['duration'] = self.dlg.ui.lineEdit_flyto_duration.text()
+                flyto['name'] = self.dlg.ui.lineEdit_tourname.text()
+                flyto['flyToMode'] = self.dlg.ui.comboBox_flyto_mode.currentText()
+                flyto['duration'] = self.dlg.ui.lineEdit_flyto_duration.text()
 
 
-            # check for 'relativeToModel' in model field 'altitude' key
-            camera['altitude'] = self.dlg.ui.lineEdit_visualization_follow_altitude.text()
-            camera['altitudemode'] = self.dlg.ui.comboBox_follow_altitudemode.currentText()
-            camera['gxaltitudemode'] = self.dlg.ui.comboBox_follow_gxaltitudemode.currentText()
-            camera['gxhoriz'] = self.dlg.ui.lineEdit__visualization_follow_gxhoriz.text()
-            camera['tilt'] = self.dlg.ui.lineEdit__visualization_follow_tilt.text()
-            camera['range'] = self.dlg.ui.lineEdit__visualization_follow_range.text()
-            camera['follow_angle'] = self.dlg.ui.lineEdit__visualization_follow_follow_angle.text()
-            if self.dlg.ui.checkBox_visualization_streetview.isChecked():
-                camera['streetview'] = True
+                # check for 'relativeToModel' in model field 'altitude' key
+                camera['altitude'] = self.dlg.ui.lineEdit_visualization_follow_altitude.text()
+                camera['altitudemode'] = self.dlg.ui.comboBox_follow_altitudemode.currentText()
+                camera['gxaltitudemode'] = self.dlg.ui.comboBox_follow_gxaltitudemode.currentText()
+                camera['gxhoriz'] = self.dlg.ui.lineEdit__visualization_follow_gxhoriz.text()
+                camera['tilt'] = self.dlg.ui.lineEdit__visualization_follow_tilt.text()
+                camera['range'] = self.dlg.ui.lineEdit__visualization_follow_range.text()
+                camera['follow_angle'] = self.dlg.ui.lineEdit__visualization_follow_follow_angle.text()
+                if self.dlg.ui.checkBox_visualization_streetview.isChecked():
+                    camera['streetview'] = True
 
-            # Calculate Heading !! Select All Features in the Current Layer !!
-            forward_int = int(self.dlg.ui.lineEdit__visualization_follow_smoother.text())  # default to 1
-            camera['hoffset'] = float(self.dlg.ui.lineEdit__visualization_follow_hoffset.text())
-            #self.selectList = self.ActiveLayer.selectedFeaturesIds()  #list of all the feature ids
-            layerlen = len(self.selectList)-1
-            #self.ActiveLayer.setSelectedFeatures(self.selectList)  # select everything
+                # Calculate Heading !! Select All Features in the Current Layer !!
+                forward_int = int(self.dlg.ui.lineEdit__visualization_follow_smoother.text())  # default to 1
+                camera['hoffset'] = float(self.dlg.ui.lineEdit__visualization_follow_hoffset.text())
+                #self.selectList = self.ActiveLayer.selectedFeaturesIds()  #list of all the feature ids
+                layerlen = len(self.selectList)-1
+                #self.ActiveLayer.setSelectedFeatures(self.selectList)  # select everything
 
-            # calculate heading
-            cordslist = []  # alist of tuples. [(x,y), (x,y)]
-            altitudelist = []
-            self.selectList = []  #[[id, (x,y), altitude]]
-            selectflyto = []
+                # calculate heading
+                cordslist = []  # alist of tuples. [(x,y), (x,y)]
+                altitudelist = []
+                self.selectList = []  #[[id, (x,y), altitude]]
+                selectflyto = []
 
-            try:
-                for f in self.ActiveLayer.selectedFeatures():          #getFeatures():
-                    geom = f.geometry()
+                try:
+                    for f in self.ActiveLayer.selectedFeatures():          #getFeatures():
+                        geom = f.geometry()
 
-                    try:
-                        if camera['altitudemode'] == 'relativeToModel':
-                            modelfield = eval(f.attributes()[self.fields['model']])
-                            if not camera['altitude']:
-                                alt = 0
+                        try:
+                            if camera['altitudemode'] == 'relativeToModel':
+                                modelfield = eval(f.attributes()[self.fields['model']])
+                                if not camera['altitude']:
+                                    alt = 0
+                                else:
+                                    alt = float(camera['altitude'])
+                                altitudelist.append(float(modelfield['altitude']) + alt)
+                                altinum = float(modelfield['altitude']) + alt
+                                self.selectList.append([f.id(), geom.asPoint(), altinum])
                             else:
-                                alt = float(camera['altitude'])
-                            altitudelist.append(float(modelfield['altitude']) + alt)
-                            altinum = float(modelfield['altitude']) + alt
-                            self.selectList.append([f.id(), geom.asPoint(), altinum])
-                        else:
-                            self.selectList.append([f.id(), geom.asPoint()])
-                    except:
-                        QMessageBox.warning( self.iface.mainWindow(),"Follow Behind Error", "Models have not been added. Please add models ('Placemarks' tab), and try again." )
+                                self.selectList.append([f.id(), geom.asPoint()])
+                        except:
+                            QMessageBox.warning( self.iface.mainWindow(),"Follow Behind Error", "Models have not been added. Please add models ('Placemarks' tab), and try again." )
 
-                    # get the time vector in order to calculate duration of the flyto
-                    currentatt = f.attributes()
-                    pointdate = currentatt[self.fields['datetime']].split(" ")[0]  #2014/06/06
-                    pointtime = currentatt[self.fields['datetime']].split(" ")[1]
-                    current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
-                    selectflyto.append([f.id(), flyto, current_dt])  # [[fid, {'name', 'flytomode', 'duration'}, dt], ...]
+                        # get the time vector in order to calculate duration of the flyto
+                        currentatt = f.attributes()
+                        pointdate = currentatt[self.fields['datetime']].split(" ")[0]  #2014/06/06
+                        pointtime = currentatt[self.fields['datetime']].split(" ")[1]
+                        current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
+                        selectflyto.append([f.id(), flyto, current_dt])  # [[fid, {'name', 'flytomode', 'duration'}, dt], ...]
 
-                # sort self.selectList by fid
-                def getKey(item):
-                    return item[0]
-                self.selectList = sorted(self.selectList, key=getKey)  #[[id, (x,y), altitude]]
-                selectflyto = sorted(selectflyto, key=getKey)  # [[fid, {'name', 'flytomode', 'duration'}, dt], ...]
-                selectflyto2 = selectflyto
-                newdiff = []
-                # calcualte duration of flyto and replace the dictionary value
-                for i,fly in enumerate(selectflyto):
-                    if i <= (len(selectflyto)-2):
-                        nexttime = selectflyto[i+1][2]
-                        thistime = fly[2]
-                        difftime = nexttime - thistime
-                        #self.logger.info('next {0}, this {1}, diff {2}'.format(nexttime, thistime, difftime.seconds))
-                        #if difftime.seconds > 1:
-                            #self.logger.info('larger by  {0}'.format(difftime.seconds))
-                            #selectflyto2[i][1]['duration'] = str(difftime.seconds)
-                        newdiff.append(difftime.seconds)
-                newdiff.append(1)
-                #self.logger.info(selectflyto2)
-                newlistwithflyto = []
-                for i,v in enumerate(newdiff):
-                    newlistwithflyto.append({'name': self.dlg.ui.lineEdit_tourname.text(), 'flyToMode': self.dlg.ui.comboBox_flyto_mode.currentText(), 'duration': v})
+                    # sort self.selectList by fid
+                    def getKey(item):
+                        return item[0]
+                    self.selectList = sorted(self.selectList, key=getKey)  #[[id, (x,y), altitude]]
+                    selectflyto = sorted(selectflyto, key=getKey)  # [[fid, {'name', 'flytomode', 'duration'}, dt], ...]
+                    selectflyto2 = selectflyto
 
-##                for bb in newlistwithflyto:
-##                    self.logger.info(bb)
+                    newdiff = []
+                    # calcualte duration of flyto and replace the dictionary value
+                    for i,fly in enumerate(selectflyto):
+                        if i <= (len(selectflyto)-2):
+                            nexttime = selectflyto[i+1][2]
+                            thistime = fly[2]
+                            difftime = nexttime - thistime
+                            #self.logger.info('next {0}, this {1}, diff {2}'.format(nexttime, thistime, difftime.seconds))
+                            #if difftime.seconds > 1:
+                                #self.logger.info('larger by  {0}'.format(difftime.seconds))
+                                #selectflyto2[i][1]['duration'] = str(difftime.seconds)
+                            newdiff.append(difftime.seconds)
+                    newdiff.append(1)
+                    #self.logger.info(selectflyto2)
+                    newlistwithflyto = []
+                    for i,v in enumerate(newdiff):
+                        newlistwithflyto.append({'name': self.dlg.ui.lineEdit_tourname.text(), 'flyToMode': self.dlg.ui.comboBox_flyto_mode.currentText(), 'duration': v})
 
-            except:
-                #QMessageBox.warning( self.iface.mainWindow(),"Camera Altitude Error", "Please make sure that the 'model' field has 'altitude' values. This can be calculated in the 'Placemarks' tab for Models." )
-                self.logger.exception(traceback.format_exc())
-                self.iface.messageBar().pushMessage("Error", "Failed to apply camera view parameters for Follow Tour. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+    ##                for bb in newlistwithflyto:
+    ##                    self.logger.info(bb)
 
-            headinglist = []
-            featurelen = len(self.selectList) - 1
-            forwardlen = featurelen - forward_int
-            #self.logger.info(self.selectList)
-            for i,v in enumerate(self.selectList):
-                if i >= 0 and i <= forwardlen:
-                    forwardlist = []
-                    for ii in range(forward_int):
-                        forwardlist.append(TeatDip.compass_bearing((v[1][1],v[1][0]),(self.selectList[i+ii+1][1][1] ,self.selectList[i+ii+1][1][0])))
-                    #self.logger.info('list: {0}, mean: {1}'.format(forwardlist,TeatDip.mean_angle(forwardlist) ))
-                    headinglist.append((TeatDip.mean_angle(forwardlist)) % 360)
-                    #headinglist.append(TeatDip.compass_bearing((cordslist[i-1][1] , cordslist[i-1][0]), (v[1],v[0])) )
-                else:
-                    headinglist.append(headinglist[i-1])
-            #self.logger.info('HEADINGLIST: {0}'.format(headinglist))
+                except:
+                    #QMessageBox.warning( self.iface.mainWindow(),"Camera Altitude Error", "Please make sure that the 'model' field has 'altitude' values. This can be calculated in the 'Placemarks' tab for Models." )
+                    self.logger.exception(traceback.format_exc())
+                    self.iface.messageBar().pushMessage("Error", "Failed to apply camera view parameters for Follow Tour. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
 
-            try:
-                if len(self.selectList) >= 1:
-                    self.ActiveLayer.startEditing()
-                    self.ActiveLayer.beginEditCommand("Camera Editing")
-                    for i,f in enumerate(self.selectList):   #[[id, (x,y), altitude]]
-                        #self.logger.info('enum {0} {1}'.format(i,f))
-                        if len(f) == 3:
-                            camera['altitude'] = f[2]
-                        camera['heading'] = round(headinglist[i],1)
-                        camera['longitude'] = f[1][0]; camera['latitude'] = f[1][1]
+                headinglist = []
+                featurelen = len(self.selectList) - 1
+                forwardlen = featurelen - forward_int
+                #self.logger.info(self.selectList)
+                for i,v in enumerate(self.selectList):
+                    if i >= 0 and i <= forwardlen:
+                        forwardlist = []
+                        for ii in range(forward_int):
+                            forwardlist.append(TeatDip.compass_bearing((v[1][1],v[1][0]),(self.selectList[i+ii+1][1][1] ,self.selectList[i+ii+1][1][0])))
+                        #self.logger.info('list: {0}, mean: {1}'.format(forwardlist,TeatDip.mean_angle(forwardlist) ))
+                        headinglist.append((TeatDip.mean_angle(forwardlist)) % 360)
+                        #headinglist.append(TeatDip.compass_bearing((cordslist[i-1][1] , cordslist[i-1][0]), (v[1],v[0])) )
+                    else:
+                        headinglist.append(headinglist[i-1])
+                #self.logger.info('HEADINGLIST: {0}'.format(headinglist))
 
-                        #convert to cameratemp
-                        for key,value in camera.iteritems():
-                            cameratemp[cameraAlpha[key]] = value
+                try:
+                    if len(self.selectList) >= 1:
+                        self.ActiveLayer.startEditing()
+                        self.ActiveLayer.beginEditCommand("Camera Editing")
+                        for i,f in enumerate(self.selectList):   #[[id, (x,y), altitude]]
+                            #self.logger.info('enum {0} {1}'.format(i,f))
+                            if len(f) == 3:
+                                camera['altitude'] = f[2]
+                            camera['heading'] = round(headinglist[i],1)
+                            camera['longitude'] = f[1][0]; camera['latitude'] = f[1][1]
 
-                        self.ActiveLayer.changeAttributeValue(f[0], self.fields['camera'], str(cameratemp))
-                        self.ActiveLayer.changeAttributeValue(f[0], self.fields['flyto'], str(newlistwithflyto[i]))
-                        self.ActiveLayer.changeAttributeValue(f[0], self.fields['lookat'], '') # get rid of lookats
-                    self.ActiveLayer.endEditCommand()
-                else:
-                    QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "Please select points in the active layer to be edited." )
-            except:
-                self.ActiveLayer.destroyEditCommand()
-                self.logger.error('follow_apply error.')
-                self.logger.exception(traceback.format_exc())
-                self.iface.messageBar().pushMessage("Error", "Failed to apply camera view parameters for Follow Tour. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
+                            #convert to cameratemp
+                            for key,value in camera.iteritems():
+                                cameratemp[cameraAlpha[key]] = value
 
-            self.iface.messageBar().pushMessage("Success", "Follow Behind applied, any conflicting Lookat removed", level=QgsMessageBar.INFO, duration=5)
+                            self.ActiveLayer.changeAttributeValue(f[0], self.fields['camera'], str(cameratemp))
+                            self.ActiveLayer.changeAttributeValue(f[0], self.fields['flyto'], str(newlistwithflyto[i]))
+                            self.ActiveLayer.changeAttributeValue(f[0], self.fields['lookat'], '') # get rid of lookats
+                        self.ActiveLayer.endEditCommand()
+                    else:
+                        QMessageBox.warning( self.iface.mainWindow(),"Active Layer Warning", "Please select points in the active layer to be edited." )
+                except:
+                    self.ActiveLayer.destroyEditCommand()
+                    self.logger.error('follow_apply error.')
+                    self.logger.exception(traceback.format_exc())
+                    self.iface.messageBar().pushMessage("Error", "Failed to apply camera view parameters for Follow Tour. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
 
+                self.iface.messageBar().pushMessage("Success", "Follow Behind applied, any conflicting Lookat removed", level=QgsMessageBar.INFO, duration=5)
+
+            else:
+                self.iface.messageBar().pushMessage("Error", "Please select more than 1 point.", level=QgsMessageBar.CRITICAL, duration=5)
 
         except:
             global NOW, pointid, ClockDateTime
@@ -3728,28 +3740,27 @@ class MilkMachine:
 
 
 
-
-
-
-
     def changeActive(self,state):
         if (state==Qt.Checked):
-            # connect to click signal
-            QObject.connect(self.clickTool, SIGNAL("canvasClicked(const QgsPoint &, Qt::MouseButton)"), self.handleMouseDown)
-            # connect our select function to the canvasClicked signal
-            QObject.connect(self.clickTool, SIGNAL("canvasClicked(const QgsPoint &, Qt::MouseButton)"), self.selectFeature)
+            self.ActiveLayer = self.iface.activeLayer()
+            if self.ActiveLayer:
+                # connect to click signal
+                self.canvas.setMapTool(self.clickTool)
+                QObject.connect(self.clickTool, SIGNAL("canvasClicked(const QgsPoint &, Qt::MouseButton)"), self.handleMouseDown)
+                # connect our select function to the canvasClicked signal
+                QObject.connect(self.clickTool, SIGNAL("canvasClicked(const QgsPoint &, Qt::MouseButton)"), self.selectFeature)
+            else:
+                QMessageBox.warning( self.iface.mainWindow(),"Active Layer", "Please select a layer in the table of contents")
         else:
             # disconnect from click signal
             QObject.disconnect(self.clickTool, SIGNAL("canvasClicked(const QgsPoint &, Qt::MouseButton)"), self.handleMouseDown)
             # disconnect our select function to the canvasClicked signal
             QObject.disconnect(self.clickTool, SIGNAL("canvasClicked(const QgsPoint &, Qt::MouseButton)"), self.selectFeature)
 
-
     def handleMouseDown(self, point, button):
         self.dlg.ui.txtFeedback.clear()
 
     def selectFeature(self, point, button):
-
         try:
             self.fields = self.field_indices(self.ActiveLayer)
             #QMessageBox.information( self.iface.mainWindow(),"Info", "in selectFeature function ININ" )
@@ -3785,18 +3796,6 @@ class MilkMachine:
             self.iface.messageBar().pushMessage("Error", "selectFeature error. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
 
 
-##
-
-
-##        layerlist = []
-##        layerdatasource = []
-##        for layer in self.iface.legendInterface().layers():
-##            layerlist.append(layer.name())
-##            layerdatasource.append(layer.source())
-
-        #QMessageBox.information( self.iface.mainWindow(),"Info", str(layerlist) + str(layerdatasource) )
-
-
     ############################################################################
     ############################################################################
     ## Top Level Functions
@@ -3823,13 +3822,12 @@ class MilkMachine:
     def run(self):
         global NOW, pointid, ClockDateTime
         # make our clickTool the tool that we'll use for now
-        self.canvas.setMapTool(self.clickTool)
+        #self.canvas.setMapTool(self.clickTool)
         # show the dialog
         self.dlg.show()
 
         #if a layer is active, put it in the viz entry
         self.active_layer()
-
 
         # Populate the Visualization Camera Combo boxes
         self.dlg.ui.comboBox_flyto_mode.clear()

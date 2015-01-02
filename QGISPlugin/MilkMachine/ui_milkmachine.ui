@@ -2276,6 +2276,9 @@ Sync Points</string>
       <property name="text">
        <string>1</string>
       </property>
+      <property name="placeholderText">
+       <string>1</string>
+      </property>
      </widget>
     </widget>
     <widget class="QGroupBox" name="groupBox_cameraview">

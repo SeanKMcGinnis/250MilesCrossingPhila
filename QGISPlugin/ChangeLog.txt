@@ -145,3 +145,12 @@ Bug Fix: When the audio and video have matching start times, the dialog box says
 --------------------------------------------
 Commit #46
 Bug Fix: The heading offset was doing the same function as the follow behind angle. This has been updated and tested, but should be tested further.
+--------------------------------------------
+Commit #51
+Bug Fix: The file browser in the "Export and Details" tab was not enabling .wav files due to a typo. This is fixed
+Bug Fix: Exporting a track with a .wav file was giving an error. This was because I broke it when changing the code to include .mp3. Fixed.
+--------------------------------------------
+Commit #52
+Bug Fix: The camera select checkbox was losing functionality when other button tools were clicked. This is fixed.
+Bug Fix: The camera select was throwing an error when no layer was selected in the table of contents. This is fixed to throw a message box error.
+Task Fix: If the has 0 or 1 points selected, follow behind apply will throw an error.
