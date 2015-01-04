@@ -10,6 +10,10 @@ a{
 a:hover, a:focus{
 	color: #1143F3; 
 }
+p{
+	font-size:12pt;
+	font-weight:400;
+}
 .title-block{
 	font-size: 44pt;
 	line-height: 28pt;
@@ -84,6 +88,9 @@ a:hover, a:focus{
 }
 .ui-dialog-titlebar-close{
 	display:none;
+}
+.ui-dialog-title{
+	font-size:14pt;
 }
 .block{
 	display:block
