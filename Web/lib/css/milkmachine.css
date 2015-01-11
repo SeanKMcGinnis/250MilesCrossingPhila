@@ -10,6 +10,10 @@ a{
 a:hover, a:focus{
 	color: #1143F3; 
 }
+p{
+	font-size:12pt;
+	font-weight:400;
+}
 .title-block{
 	font-size: 44pt;
 	line-height: 28pt;
@@ -59,13 +63,15 @@ a:hover, a:focus{
 .track-marker{
 	width: 38px;
 	height: auto;
+	opacity: 0.5;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
 }
 .track-padding{
 	padding-top:16px;
 }
-.incomplete{
-	opacity: 0.5;
-    filter: alpha(opacity=50); /* For IE8 and earlier */
+.complete:hover, .visited{
+	opacity: 0.9;
+    filter: alpha(opacity=90); /* For IE8 and earlier */
 }
 .first-cell{
 	padding-left: 8px
@@ -84,6 +90,9 @@ a:hover, a:focus{
 }
 .ui-dialog-titlebar-close{
 	display:none;
+}
+.ui-dialog-title{
+	font-size:14pt;
 }
 .block{
 	display:block
