@@ -130,6 +130,7 @@
     <script type="text/javascript" src="lib/css/supersized.shutter.min.js"></script>
     <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="lib/js/grids.js"></script>
+    <script type="text/javascript" src="lib/js/dialog-click-outside.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -203,7 +204,7 @@
         					if(trackCount === 3 && index === 2){cssVal += ' last-image';}
         					if(trackCount === 2 && index === 1){cssVal += ' last-image';}
 							if (trackCount !== 3) {cssVal += ' track-padding';}
-        					if(!status){cssVal += ' incomplete';}
+        					if(status){cssVal += ' complete';}
         					cssClass.value = cssVal;
         					atts.push(id);
         					atts.push(src);
@@ -242,6 +243,7 @@
 	        					// Set the dialog options now that they are in the page
 	        					$('#' + dlgIdVal).dialog({
 	        						  autoOpen: false,
+<<<<<<< HEAD
 	        						  modal: true,
 								      show: {effect: "linear",duration: 1000},
 								      hide: {effect: "linear",duration: 1000},
@@ -252,10 +254,18 @@
 								                jQuery('#' + dlgIdVal).dialog('close');
 								            });
 								        }
+=======
+	        						  show: {effect: "linear",duration: 1000},
+								      hide: {effect: "linear",duration: 1000},
+								      position: { my: "left-20 center+5", at: "right center", of: '#' + idVal },
+								      clickOutside: true,
+								      clickOutsideTrigger: "#" + idVal
+>>>>>>> 120207fe5c8026475731ec96112d734333479125
 	        					});
 	        					// Set the 'click' event of the image
 	        					$('#' + idVal).click(function(){
 	        						$('#' + dlgIdVal).dialog('open');
+	        						$(img).addClass('visited');
 	        					});
         					}
         					
