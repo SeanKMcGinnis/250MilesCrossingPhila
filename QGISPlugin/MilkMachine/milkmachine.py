@@ -2785,6 +2785,9 @@ class MilkMachine:
                                 break
                             cc += 1
 
+                        if not matchdict and self.audio_start > track_start_dt:
+                            QMessageBox.warning(self.iface.mainWindow(),"Audio File Sync Error", 'The audio start time occurs after the start of the track. However, there is no matching time for the start of the audio file. This may indicate a missing point.')
+
                         for f in self.aLayer.getFeatures(): #  QgsFeatureIterator #[u'2014/06/06 10:38:48', u'Time:10:38:48, Latitude: 39.965949, Longitude: -75.172239, Speed: 0.102851, Altitude: -3.756733']
                             currentatt = f.attributes()
                             pointdate = currentatt[self.fields['datetime']].split(" ")[0]  #2014/06/06

@@ -243,11 +243,24 @@
 	        					// Set the dialog options now that they are in the page
 	        					$('#' + dlgIdVal).dialog({
 	        						  autoOpen: false,
+<<<<<<< HEAD
+	        						  modal: true,
+								      show: {effect: "linear",duration: 1000},
+								      hide: {effect: "linear",duration: 1000},
+								      position: { my: "left-20 center+5", at: "right center", of: '#' + idVal },
+								      draggable: false,
+								       open: function() {
+								            jQuery('.ui-widget-overlay').bind('click', function() {
+								                jQuery('#' + dlgIdVal).dialog('close');
+								            });
+								        }
+=======
 	        						  show: {effect: "linear",duration: 1000},
 								      hide: {effect: "linear",duration: 1000},
 								      position: { my: "left-20 center+5", at: "right center", of: '#' + idVal },
 								      clickOutside: true,
 								      clickOutsideTrigger: "#" + idVal
+>>>>>>> 120207fe5c8026475731ec96112d734333479125
 	        					});
 	        					// Set the 'click' event of the image
 	        					$('#' + idVal).click(function(){
