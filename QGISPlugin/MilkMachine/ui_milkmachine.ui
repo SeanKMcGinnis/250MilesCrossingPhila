@@ -2200,7 +2200,7 @@ Sync Points</string>
       <rect>
        <x>230</x>
        <y>50</y>
-       <width>181</width>
+       <width>321</width>
        <height>71</height>
       </rect>
      </property>
@@ -2274,10 +2274,29 @@ Sync Points</string>
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Duration (seconds) of the FlyTo, for both Camera and LookAt views.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="text">
-       <string>1</string>
+       <string/>
       </property>
       <property name="placeholderText">
-       <string>1</string>
+       <string/>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_flyto_duration">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>41</y>
+        <width>131</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When creating a kml output, the duration of the FlyTo will be the time difference between the current point and the next point. If unchecked, please specify a duration for each of the points currently selected.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Time Stamp Duration</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>
