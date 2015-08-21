@@ -154,3 +154,11 @@ Commit #59
 Bug Fix: The camera select checkbox was losing functionality when other button tools were clicked. This is fixed.
 Bug Fix: The camera select was throwing an error when no layer was selected in the table of contents. This is fixed to throw a message box error.
 Task Fix: If the has 0 or 1 points selected, follow behind apply will throw an error.
+--------------------------------------------
+Commit #60
+Bug Fix: Time tab selected time values were incorrect. This is due to QGIS not keeping the selected points in order. The fix is to sort them by FID.
+Bug Fix: Time tab before and after times were not calculating correctly. Fixed by sorting selected features and converting time to use milliseconds.
+Enhancement: Time data do not need to be recorded at 1 second intervals. MM will now use the difference between time stamps to calculate KML durations and time stamp values.
+Enhancement: Check box added to Tour tab to enable user to choose setting a FlyTo duration, or use the difference between time stamps. 
+Enhancement: Time data are now stored down to microseconds. This increases accuracy and enables sub-second point measurements. 
+Enhancement: In progress. Started to work on a .csv import mechanism. 

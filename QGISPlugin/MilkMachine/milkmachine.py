@@ -175,6 +175,7 @@ class MilkMachine:
         QObject.connect(self.dlg.ui.pushButton_sync, SIGNAL("clicked()"), self.sync)
         QObject.connect(self.iface, SIGNAL("currentLayerChanged(QgsMapLayer *)"), self.active_layer)
         QObject.connect(self.dlg.ui.checkBox_visualization_edit,SIGNAL("stateChanged(int)"),self.vischeck)
+        QObject.connect(self.dlg.ui.checkBox_flyto_duration,SIGNAL("stateChanged(int)"),self.flytoduration_check)
         QObject.connect(self.dlg.ui.pushButton_camera_apply, SIGNAL("clicked()"), self.camera_apply)
         QObject.connect(self.dlg.ui.pushButton_TrackInfo, SIGNAL("clicked()"), self.trackdetails)
         QObject.connect(self.dlg.ui.checkBox_rendering_edit,SIGNAL("stateChanged(int)"),self.rendercheck)
@@ -230,9 +231,14 @@ class MilkMachine:
         import datetime
         pointdate = dt_string.split(" ")[0]  #2014/06/06
         pointtime = dt_string.split(" ")[1]
-        dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
+        # format for microseconds
+        sec_pieces = pointtime.split(':')[2].split('.')
+        if len(sec_pieces) == 1:
+            microsec = 0
+        elif len(sec_pieces) == 2:
+            microsec = int(float('0.' + sec_pieces[1]) * 1000000)
+        dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]), microsec)
         return dt
-        #fid_dt.append(current_dt.strftime("%Y/%m/%d %X"))
 
     def tiltpopulate(self):
         if self.dlg.ui.lineEdit_visualization_follow_altitude.text() and self.dlg.ui.lineEdit__visualization_follow_range.text() and not self.dlg.ui.lineEdit__visualization_follow_tilt.text():
@@ -759,16 +765,26 @@ class MilkMachine:
 
                             #populate
                             features = self.ActiveLayer.selectedFeatures()
-                            i = 0
+                            selectList = []
                             for f in features:
-                                if i == 0:
-                                    sel_start = f.attributes()[self.fields['datetime']]
-                                else:
-                                    sel_end = f.attributes()[self.fields['datetime']]
-                                i += 1
-                            qdt_start = QDateTime.fromString(sel_start, "yyyy/MM/dd hh:mm:ss")
+                                selectList.append([f.id(), f.attributes()[self.fields['datetime']]])
+                            def getKey(item):
+                                return item[0]
+                            selectList = sorted(selectList, key=getKey)
+                            sel_start = selectList[0][1]
+                            sel_end = selectList[-1][1]
+
+                            sel_start2 = sel_start.split(' ')
+                            sel_start2 = ' '.join(sel_start2[0:2])
+                            sel_end2 = sel_end.split(' ')
+                            sel_end2 = ' '.join(sel_end2[0:2])
+
+                            self.logger.info('sel start %s' % sel_start2)
+
+
+                            qdt_start = QDateTime.fromString(sel_start2, "yyyy/MM/dd hh:mm:ss")
                             self.dlg.ui.dateTimeEdit_start.setDateTime(qdt_start)
-                            qdt_end = QDateTime.fromString(sel_end, "yyyy/MM/dd hh:mm:ss")
+                            qdt_end = QDateTime.fromString(sel_end2, "yyyy/MM/dd hh:mm:ss")
                             self.dlg.ui.dateTimeEdit_end.setDateTime(qdt_end)
 
                             # Apply Buttons
@@ -813,7 +829,7 @@ class MilkMachine:
             Qstart_mm = self.dlg.ui.dateTimeEdit_start.dateTime().toString('m')
             Qstart_s = self.dlg.ui.dateTimeEdit_start.dateTime().toString('s')
 
-            dt_start = datetime.datetime(int(Qstart_y), int(Qstart_m), int(Qstart_d), int(Qstart_h), int(Qstart_mm), int(Qstart_s))
+            dt_start = datetime.datetime(int(Qstart_y), int(Qstart_m), int(Qstart_d), int(Qstart_h), int(Qstart_mm), int(Qstart_s), 0)
 
             # End Time
             Qend_y = self.dlg.ui.dateTimeEdit_end.dateTime().toString('yyyy') #Qdatetime object
@@ -823,127 +839,155 @@ class MilkMachine:
             Qend_mm = self.dlg.ui.dateTimeEdit_end.dateTime().toString('m')
             Qend_s = self.dlg.ui.dateTimeEdit_end.dateTime().toString('s')
 
-            dt_end = datetime.datetime(int(Qend_y), int(Qend_m), int(Qend_d), int(Qend_h), int(Qend_mm), int(Qend_s))
+            dt_end = datetime.datetime(int(Qend_y), int(Qend_m), int(Qend_d), int(Qend_h), int(Qend_mm), int(Qend_s), 0)
 
             # Find the starting and end fid for the layer, and the start and end fid for the selection
             allfids = self.ActiveLayer.allFeatureIds()
             selectfids = self.ActiveLayer.selectedFeaturesIds()
 
             features = self.ActiveLayer.getFeatures()
-            i = 0
+            FList = []
             for f in features:
-                if i == 0:
-                    layer_start = f.attributes()[self.fields['datetime']]
-                else:
-                    layer_end = f.attributes()[self.fields['datetime']]
-                i += 1
+
+                FList.append([f.id(), f.attributes()[self.fields['datetime']]])
+            def getKey(item):
+                return item[0]
+            FList = sorted(FList, key=getKey)
+            layer_start = FList[0][1]
+            layer_end = FList[-1][1]
+            ## calculate the time difference factor between each time stamp
+            FListDiff = []
+            FList_break = len(FList)-2
+            for i,v in enumerate(FList):
+                tdiff = self.to_dt(FList[i+1][1]) - self.to_dt(v[1])
+                tdiff_seconds = float(str(tdiff.seconds)+'.'+str(tdiff.microseconds))
+                FListDiff.append([v[0], v[1], tdiff_seconds])
+                if i == FList_break:
+                    FListDiff.append([FList[i+1][0], FList[i+1][1], tdiff_seconds])
+                    break
+
+            # self.logger.info('FListDiff: %s' % FListDiff)
+
 
             features = self.ActiveLayer.selectedFeatures()
-            i = 0
+            selectList = []
             for f in features:
-                if i == 0:
-                    sel_start = f.attributes()[self.fields['datetime']]
-                else:
-                    sel_end = f.attributes()[self.fields['datetime']]
-                i += 1
+                selectList.append([f.id(), f.attributes()[self.fields['datetime']]])
+            def getKey(item):
+                return item[0]
+            selectList = sorted(selectList, key=getKey)
+            sel_start = selectList[0][1]
+            sel_end = selectList[-1][1]
+            ## calculate the time difference factor between each time stamp
+            SListDiff = []
+            SList_break = len(selectList)-2
+            for i,v in enumerate(selectList):
+                tdiff = self.to_dt(selectList[i+1][1]) - self.to_dt(v[1])
+                tdiff_seconds = float(str(tdiff.seconds)+'.'+str(tdiff.microseconds))
+                SListDiff.append([v[0], v[1], tdiff_seconds])
+                if i == SList_break:
+                    SListDiff.append([selectList[i+1][0], selectList[i+1][1], tdiff_seconds])
+                    break
 
             layer_start_dt = self.to_dt(layer_start)
             layer_end_dt = self.to_dt(layer_end)
             sel_start_dt = self.to_dt(sel_start)
             sel_end_dt = self.to_dt(sel_end)
 
-##            self.logger.info(layer_start)
-##            self.logger.info(layer_end)
-##            self.logger.info(sel_start)
-##            self.logger.info(sel_end)
-
             seldiff = sel_end_dt - sel_start_dt
             newdiff = dt_end - dt_start
 
-            currentinterval = round(float(len(selectfids)) / seldiff.seconds, 3) # how many pts per time
-            newinterval = round(newdiff.seconds / float((len(selectfids)-1)),3)
+            newdiff_seconds = float(str(newdiff.seconds)+'.'+str(newdiff.microseconds))
+            seldiff_seconds = float(str(seldiff.seconds)+'.'+str(seldiff.microseconds))
+            newinterval = newdiff_seconds / float(seldiff_seconds)
 
-            newtimelist = [dt_start]
-            for i in range(len(selectfids)-1):
-                ct = newtimelist[i]
-                newtimelist.append(ct + datetime.timedelta(milliseconds = newinterval)) # add miliseconds to the time
+            newtimelist2 = [dt_start]
+            mill_interval = round(newinterval * 1000000)
+            for i,v in enumerate(SListDiff):
+                ct2 = newtimelist2[i]
+                newtimelist2.append(ct2 + datetime.timedelta(microseconds = (mill_interval * v[2])))
 
-            newtimelistround = [dt_start]
-            for i,t in enumerate(newtimelist):
-                if i > 0:
-                    estime = newtimelist[i]
-                    calcsec = int(round(float(estime.microsecond) /1000))
-                    rtime = dt_start + datetime.timedelta(seconds = calcsec)
-                    #rtime = datetime.datetime(estime.year, estime.month, estime.day, estime.hour, estime.minute, calcsec)
-                    newtimelistround.append(rtime)
+            # self.logger.info('XX %s, %s' % (len(newtimelist2), len(selectfids)))
 
             self.ActiveLayer.startEditing()
             self.ActiveLayer.beginEditCommand('datetime edit selected')
-            for i,v in enumerate(newtimelistround):
-                valstr = v.strftime("%Y/%m/%d %X")
-                self.ActiveLayer.changeAttributeValue(selectfids[i], self.fields['datetime'], valstr)
+            # for i,v in enumerate(newtimelist2):
+            #     valstr = v.strftime("%Y/%m/%d %H:%M:%S %f")
+            #     # self.logger.info('valstring %s' % v.strftime("%Y/%m/%d %H:%M:%S.%f"))
+            #     self.ActiveLayer.changeAttributeValue(selectfids[i], self.fields['datetime'], valstr)
+            for i,v in enumerate(SListDiff):
+                valstr = newtimelist2[i].strftime("%Y/%m/%d %H:%M:%S %f")
+                # self.logger.info('valstring %s' % v.strftime("%Y/%m/%d %H:%M:%S.%f"))
+                self.ActiveLayer.changeAttributeValue(v[0], self.fields['datetime'], valstr)
             self.ActiveLayer.endEditCommand()
-##            #self.ActiveLayer.commitChanges()
+
 
             # If the user wants to adjust the time beforehand by the chosen interval...
             if self.dlg.ui.checkBox_time_before.isChecked():
                 if layer_start_dt < sel_start_dt:
 
-                    difflen = selectfids[0] - allfids[0]  #sel_start_dt - layer_start_dt
+                    # get all of the FListDiff fids that are after sel_end_dt
+                    Fbefore = []
+                    for rec in FListDiff:
+                        if rec[0] < selectList[0][0]:
+                            Fbefore.append(rec)
+
+                    Fbefore.reverse()
                     newtimelist = [dt_start]
-                    for i in range(difflen):
+                    for i,v in enumerate(Fbefore):
                         ct = newtimelist[i]
-                        newtimelist.append(ct + datetime.timedelta(milliseconds = newinterval)) # add miliseconds to the time
-
-                    newtimelistround = [dt_start]
-                    for i,t in enumerate(newtimelist):
-                        if i > 0:
-                            estime = newtimelist[i]
-                            calcsec = int(round(float(estime.microsecond) /1000))
-                            rtime = dt_start - datetime.timedelta(seconds = calcsec)
-                            newtimelistround.append(rtime)
-
-                    newtimelistround.reverse() # revese the list
-                    newtimelistround.pop()
+                        newtimelist.append(ct - datetime.timedelta(microseconds = (mill_interval * v[2])))
+                    newtimelist.reverse()
+                    newtimelist.pop()
+                    newtimelist.reverse()
 
                     self.ActiveLayer.startEditing()
                     self.ActiveLayer.beginEditCommand('datetime edit before')
-                    for i,v in enumerate(newtimelistround):
-                        valstr = v.strftime("%Y/%m/%d %X")
-                        self.ActiveLayer.changeAttributeValue(i, self.fields['datetime'], valstr)
+                    for i,v in enumerate(Fbefore):
+                        valstr = newtimelist[i].strftime("%Y/%m/%d %H:%M:%S %f")
+                        self.ActiveLayer.changeAttributeValue(v[0], self.fields['datetime'], valstr)
                     self.ActiveLayer.endEditCommand()
-##                    self.ActiveLayer.endEditCommand()
+
+
+
+                    # newtimelist = [dt_start]
+                    # for i in range(len(selectfids)):
+                    #     ct = newtimelist[i]
+                    #     newtimelist.append(ct - datetime.timedelta(microseconds = mill_interval))
+                    #
+                    # self.logger.info('newtimelist %s' % newtimelist)
+                    # newtimelist.reverse() # reverse the list
+                    # self.ActiveLayer.startEditing()
+                    # self.ActiveLayer.beginEditCommand('datetime edit before')
+                    # for i,v in enumerate(newtimelist):
+                    #     valstr = v.strftime("%Y/%m/%d %H:%M:%S %f")
+                    #     self.ActiveLayer.changeAttributeValue(i, self.fields['datetime'], valstr)
+                    # self.ActiveLayer.endEditCommand()
 
             # If the user wants to adjust the time AFTER the chosen interval...
             if self.dlg.ui.checkBox_time_after.isChecked():
                 if layer_end_dt > sel_end_dt:
 
-                    difflen = allfids[-1] - selectfids[-1]
+                    # get all of the FListDiff fids that are after sel_end_dt
+                    Fafter = []
+                    for rec in FListDiff:
+                        if rec[0] > selectList[-1][0]:
+                            Fafter.append(rec)
+
                     newtimelist = [dt_end]
-                    for i in range(difflen):
+                    for i,v in enumerate(Fafter):
                         ct = newtimelist[i]
-                        newtimelist.append(ct + datetime.timedelta(milliseconds = newinterval)) # add miliseconds to the time
-
-                    newtimelistround = [dt_end]
-                    for i,t in enumerate(newtimelist):
-                        if i > 0:
-                            estime = newtimelist[i]
-                            calcsec = int(round(float(estime.microsecond) /1000))
-                            rtime = dt_end + datetime.timedelta(seconds = calcsec)
-                            newtimelistround.append(rtime)
-
-                    newtimelistround.reverse() # revese the list
-                    newtimelistround.pop()
-                    newtimelistround.reverse()
+                        newtimelist.append(ct + datetime.timedelta(microseconds = (mill_interval * v[2])))
+                    newtimelist.reverse()
+                    newtimelist.pop() # remove last item
+                    newtimelist.reverse()
 
                     self.ActiveLayer.startEditing()
                     self.ActiveLayer.beginEditCommand('datetime edit after')
-                    for i,v in enumerate(newtimelistround):
-                        valstr = v.strftime("%Y/%m/%d %X")
-                        fid = i+selectfids[-1]+1
-                        self.ActiveLayer.changeAttributeValue(allfids[fid], self.fields['datetime'], valstr)
+                    for i,v in enumerate(Fafter):
+                        valstr = newtimelist[i].strftime("%Y/%m/%d %H:%M:%S %f")
+                        self.ActiveLayer.changeAttributeValue(v[0], self.fields['datetime'], valstr)
                     self.ActiveLayer.endEditCommand()
-##                    self.ActiveLayer.endEditCommand()
 
             self.iface.messageBar().pushMessage("Success", "Time modification applied.", level=QgsMessageBar.INFO, duration=5)
 
@@ -1035,7 +1079,7 @@ class MilkMachine:
 ##                    except:
 ##                        self.logger.error('model_apply destroy edit session')
 ##                        self.logger.exception(traceback.format_exc())
-##                        self.logger.info('self.fields keys {0}'.format(self.fields.keys))
+##                        # self.logger.info('self.fields keys {0}'.format(self.fields.keys))
 ##                        self.iface.messageBar().pushMessage("Error", "Failed to apply model style parameters. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
 
             try:
@@ -1436,7 +1480,8 @@ class MilkMachine:
 
             flyto['name'] = self.dlg.ui.lineEdit_tourname.text()
             flyto['flyToMode'] = self.dlg.ui.comboBox_flyto_mode.currentText()
-            flyto['duration'] = self.dlg.ui.lineEdit_flyto_duration.text()
+            if not self.dlg.ui.checkBox_flyto_duration.isChecked():
+                flyto['duration'] = self.dlg.ui.lineEdit_flyto_duration.text()
 
             lookat['altitude'] = self.dlg.ui.lineEdit_visualization_lookat_altitude.text()
             lookat['altitudemode'] = self.dlg.ui.comboBox_lookat_altitudemode.currentText()
@@ -1734,7 +1779,8 @@ class MilkMachine:
 
                 flyto['name'] = self.dlg.ui.lineEdit_tourname.text()
                 flyto['flyToMode'] = self.dlg.ui.comboBox_flyto_mode.currentText()
-                flyto['duration'] = self.dlg.ui.lineEdit_flyto_duration.text()
+                if not self.dlg.ui.checkBox_flyto_duration.isChecked():
+                    flyto['duration'] = self.dlg.ui.lineEdit_flyto_duration.text()
 
 
                 # check for 'relativeToModel' in model field 'altitude' key
@@ -1794,26 +1840,20 @@ class MilkMachine:
                     selectflyto = sorted(selectflyto, key=getKey)  # [[fid, {'name', 'flytomode', 'duration'}, dt], ...]
                     selectflyto2 = selectflyto
 
-                    newdiff = []
-                    # calcualte duration of flyto and replace the dictionary value
-                    for i,fly in enumerate(selectflyto):
-                        if i <= (len(selectflyto)-2):
-                            nexttime = selectflyto[i+1][2]
-                            thistime = fly[2]
-                            difftime = nexttime - thistime
-                            #self.logger.info('next {0}, this {1}, diff {2}'.format(nexttime, thistime, difftime.seconds))
-                            #if difftime.seconds > 1:
-                                #self.logger.info('larger by  {0}'.format(difftime.seconds))
-                                #selectflyto2[i][1]['duration'] = str(difftime.seconds)
-                            newdiff.append(difftime.seconds)
-                    newdiff.append(1)
-                    #self.logger.info(selectflyto2)
-                    newlistwithflyto = []
-                    for i,v in enumerate(newdiff):
-                        newlistwithflyto.append({'name': self.dlg.ui.lineEdit_tourname.text(), 'flyToMode': self.dlg.ui.comboBox_flyto_mode.currentText(), 'duration': v})
+                    # newdiff = []
+                    # # calcualte duration of flyto and replace the dictionary value
+                    # for i,fly in enumerate(selectflyto):
+                    #     if i <= (len(selectflyto)-2):
+                    #         nexttime = selectflyto[i+1][2]
+                    #         thistime = fly[2]
+                    #         difftime = nexttime - thistime
+                    #         newdiff.append(difftime.seconds)
+                    # newdiff.append(1)
+                    # newlistwithflyto = []
+                    # for i,v in enumerate(newdiff):
+                    #     newlistwithflyto.append({'name': self.dlg.ui.lineEdit_tourname.text(), 'flyToMode': self.dlg.ui.comboBox_flyto_mode.currentText(), 'duration': v})
 
-    ##                for bb in newlistwithflyto:
-    ##                    self.logger.info(bb)
+
 
                 except:
                     #QMessageBox.warning( self.iface.mainWindow(),"Camera Altitude Error", "Please make sure that the 'model' field has 'altitude' values. This can be calculated in the 'Placemarks' tab for Models." )
@@ -1852,7 +1892,8 @@ class MilkMachine:
                                 cameratemp[cameraAlpha[key]] = value
 
                             self.ActiveLayer.changeAttributeValue(f[0], self.fields['camera'], str(cameratemp))
-                            self.ActiveLayer.changeAttributeValue(f[0], self.fields['flyto'], str(newlistwithflyto[i]))
+                            self.ActiveLayer.changeAttributeValue(f[0], self.fields['flyto'], str(flyto))
+                            # self.ActiveLayer.changeAttributeValue(f[0], self.fields['flyto'], str(newlistwithflyto[i]))
                             self.ActiveLayer.changeAttributeValue(f[0], self.fields['lookat'], '') # get rid of lookats
                         self.ActiveLayer.endEditCommand()
                     else:
@@ -1989,6 +2030,12 @@ class MilkMachine:
                 self.logger.exception(trace)
             self.iface.messageBar().pushMessage("Error", "Failed to update after the current layer was changed. Please see error log at: {0}".format(self.loggerpath), level=QgsMessageBar.CRITICAL, duration=5)
 
+    def flytoduration_check(self, state):
+        if state:
+            self.dlg.ui.lineEdit_flyto_duration.setEnabled(False)
+            self.dlg.ui.lineEdit_flyto_duration.setText('')
+        else:
+            self.dlg.ui.lineEdit_flyto_duration.setEnabled(True)
 
     def vischeck(self,state):  # the checkbox is checked or unchecked for vis Editing
         if self.dlg.ui.checkBox_visualization_edit.isChecked():  # the checkbox is check for vis Editing
@@ -2019,7 +2066,7 @@ class MilkMachine:
 
                 # FlyTo
                 self.dlg.ui.comboBox_flyto_mode.setEnabled(True)
-                self.dlg.ui.lineEdit_flyto_duration.setEnabled(True)
+                #self.dlg.ui.lineEdit_flyto_duration.setEnabled(True)
 
                 # Follow Behind
                 self.dlg.ui.lineEdit_visualization_follow_altitude.setEnabled(True)
@@ -2154,7 +2201,8 @@ class MilkMachine:
 
             flyto['name'] = self.dlg.ui.lineEdit_tourname.text()
             flyto['flyToMode'] = self.dlg.ui.comboBox_flyto_mode.currentText()
-            flyto['duration'] = self.dlg.ui.lineEdit_flyto_duration.text()
+            if not self.dlg.ui.checkBox_flyto_duration.isChecked():
+                flyto['duration'] = self.dlg.ui.lineEdit_flyto_duration.text()
 
 
             camera['longitude'] = self.dlg.ui.lineEdit_visualization_camera_longitude.text()
@@ -2219,23 +2267,29 @@ class MilkMachine:
 
 
     def browseOpen(self):
-        self.gpsfile = QFileDialog.getOpenFileName(None, "Import Raw GPS File", self.lastdirectory, "*.kml")  #C:\Users\Edward\Documents\Philly250\Scratch
+        self.gpsfile = QFileDialog.getOpenFileName(None, "Import Raw GPS File", self.lastdirectory, "(*.kml *.csv)")  #C:\Users\Edward\Documents\Philly250\Scratch
         if self.gpsfile:
             self.lastdirectory = os.path.dirname(self.gpsfile)
 
         try:
             if self.gpsfile:
-                ftype = self.gpsfile.split(".")[-1]
+                ftype = self.gpsfile.split(".")[-1].lower()
                 if ftype == 'kml':
                     #gpx = TeatDip.mmGPX(self.gpsfile)  # make the gpx class object
                     #gpx.tokml()  # convert the gpx to kml
                     self.dlg.ui.lineEdit_ImportGPS.setText(self.gpsfile) # set the text in the lineedit to the kml path
                     #self.gpx_to_kml = gpx.outfile # make a self variable for the path to the kml
                     #gpx.toGeoJSON()
-                    self.dlg.ui.lineEdit_ImportGPS.setText(self.gpsfile)
                     self.dlg.ui.buttonDrawTrack.setEnabled(True)
                     self.dlg.ui.checkBox_headoftrack.setEnabled(True)
                     self.iface.messageBar().pushMessage("Success", "kml file imported into Milk Machine: {0}".format(self.gpsfile), level=QgsMessageBar.INFO, duration=5)
+                if ftype == 'csv':
+                    self.dlg.ui.lineEdit_ImportGPS.setText(self.gpsfile) # set the text in the lineedit to the kml path
+                    self.dlg.ui.lineEdit_ImportGPS.setText(self.gpsfile)
+                    self.dlg.ui.buttonDrawTrack.setEnabled(True)
+                    self.dlg.ui.checkBox_headoftrack.setEnabled(True)
+                    self.iface.messageBar().pushMessage("Success", "csv file imported into Milk Machine: {0}".format(self.gpsfile), level=QgsMessageBar.INFO, duration=5)
+
         except:
             global NOW, pointid, ClockDateTime
             NOW = None; pointid = None; ClockDateTime = None
@@ -2248,126 +2302,190 @@ class MilkMachine:
     def drawtrack(self):
 
         try:
+            ftype = self.gpsfile.split(".")[-1].lower()
             if self.gpsfile:
-                self.dlg.ui.lineEdit_ImportGPS.setText("")  # clear the text of the input
+                if ftype == 'csv':
 
-                # make a qgs layer out of the kml, in memory. Then save it as a shapefile. The name of the shapefile will be the same as the kml
-                layername = self.gpsfile.split(".")[0].split('/')[-1]
-                kmllayer = QgsVectorLayer(self.gpsfile, layername, "ogr")
-                # save the kml layer as
-                shapepath = self.gpsfile.split(".")[0] + '.shp'
-                shapepath_line = self.gpsfile.split(".")[0] + '_line.shp'
-                shapepath_dup = self.gpsfile.split(".")[0] + '_duplicate.shp'
+                    fields = ['date', 'time', 'x', 'y', 'altitude']
+                    userfields = []
+                    import csv
+                    with open(self.gpsfile, 'rb') as csvfile:
+                        reader = csv.reader(csvfile, delimiter=',')
+                        i = 0
+                        for row in reader:
+                            if i == 0: #header row
+                                #check for x
+                                for f in fields:
+                                    Fre = re.search(f, str(row), re.I)
+                                    if Fre:
+                                        userfields.append(Fre.group())
+                                    else:
+                                        # hang an error
+                                        self.logger.error('CSV column names import error. Failed on: %s' % f)
+                                        QMessageBox.critical( self.iface.mainWindow(),"Column Name Error", "Missing column: %s\n\nPlease reformat csv file. Column headers should include: 'date', 'time', 'x', 'y', 'altitude'" %(f))
 
-                QgsVectorFileWriter.writeAsVectorFormat(kmllayer, shapepath, "utf-8", None, "ESRI Shapefile")  # working copy
-                QgsVectorFileWriter.writeAsVectorFormat(kmllayer, shapepath_dup, "utf-8", None, "ESRI Shapefile")  # duplicate of original
-                #bring the shapefile back in, and render it on the map
-                shaper = QgsVectorLayer(shapepath, layername, "ogr")
-                shaper.dataProvider().addAttributes( [QgsField("datetime",QVariant.String), QgsField("audio",QVariant.String), QgsField("camera",QVariant.String), QgsField("flyto",QVariant.String), QgsField("iconstyle", QVariant.String), QgsField("labelstyle", QVariant.String), QgsField("model", QVariant.String), QgsField("lookat", QVariant.String) , QgsField("symbtour", QVariant.String), QgsField("altitude",QVariant.Double)])
-                shaper.updateFields()
-                self.fields = self.field_indices(shaper)
-                # calculate the datetime field
-                idx = self.fields['datetime']  #feature.attributes()[idx]
-                fid_dt = []
-                model_altitude = []
-                cc = 0
-                for f in shaper.getFeatures():
-                    currentatt = f.attributes()[0]  # this should be self.fields['Name']
-                    pointdate = currentatt.split(" ")[0]  #2014/06/06
-                    pointtime = currentatt.split(" ")[1]
-                    current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
-                    fid_dt.append(current_dt.strftime("%Y/%m/%d %X"))
-                    try:
-                        model_altitude.append([f.id(), round(float(f.attributes()[self.fields['descriptio']].split(",")[4].split(': ')[1]),2) ])
-                    except:
-                        try:
-                            model_altitude.append([f.id(), round(float(f.attributes()[self.fields['Descriptio']].split(",")[4].split(': ')[1]),2)])
-                        except:
-                            model_altitude.append([f.id(),None])
+                            else:
+                                pass
+                            i += 1
 
-                    cc += 1
+                    if len(userfields) == 5:
+                        self.logger.info('headers %s' % userfields)
+                        self.iface.messageBar().pushMessage("Success", "User file column headers good: {0}".format(self.gpsfile), level=QgsMessageBar.INFO, duration=5)
 
-                shaper.startEditing()
-                shaper.beginEditCommand('datetime')
-                for i,v in enumerate(fid_dt):
-                    shaper.changeAttributeValue(i, idx, v)
-                shaper.endEditCommand()
-                shaper.commitChanges()
+                        #http://qgis.org/api/classQgsVectorLayer.html
+                        layername = self.gpsfile.split(".")[0].split('/')[-1]
+                        #crs = QgsCoordinateReferenceSystem(4326).toProj4()
+                        crs = 'EPSG:4326'
+                        uri = "file:/" + self.gpsfile + "?delimiter=%s&xField=%s&yField=%s&crs=%s" % (",", "x", "y", crs)
+                        self.logger.info('uri: %s' % uri)
+                        Qlayer = QgsVectorLayer(uri, layername, "delimitedtext")
 
-                shaper.startEditing()
-                shaper.beginEditCommand('altitude')
-                for i,v in enumerate(model_altitude):
-                    shaper.changeAttributeValue(v[0], self.fields['altitude'], v[1])
-                shaper.endEditCommand()
-                shaper.commitChanges()
+                        # check the rest of the fields. required are date, time, and z
+                        fdict = self.field_indices(Qlayer)
+                        self.logger.info('fdict : %s' %(fdict))
 
-                # make the line shapefile
-                ptlist = []
-                for f in shaper.getFeatures():
-                    ptlist.append(f.geometry().asPoint())
-                linelayer = QgsVectorLayer("LineString?crs=EPSG:4326", layername, "memory")
-                pr = linelayer.dataProvider()
-                seg = QgsFeature()
-                seg.setGeometry(QgsGeometry.fromPolyline(ptlist))
-                pr.addFeatures([seg])
-                QgsVectorFileWriter.writeAsVectorFormat(linelayer, shapepath_line, "utf-8", None, "ESRI Shapefile")
-                shaper_line = QgsVectorLayer(shapepath_line, layername, "ogr")
+                        # save the kml layer as
+                        shapepath = self.gpsfile.split(".")[0] + '.shp'
+                        shapepath_line = self.gpsfile.split(".")[0] + '_line.shp'
+                        #shapepath_dup = self.gpsfile.split(".")[0] + '_duplicate.shp'
 
-                # define the layer properties as a dict
-                properties = {'size': '3.0'}
-                # initalise a new symbol layer with those properties
-                symbol_layer = QgsSimpleMarkerSymbolLayerV2.create(properties)
-                # replace the default symbol layer with the new symbol layer
-                shaper.rendererV2().symbols()[0].changeSymbolLayer(0, symbol_layer)
-                shaper.commitChanges()
+                        QgsVectorFileWriter.writeAsVectorFormat(Qlayer, shapepath, "utf-8", None, "ESRI Shapefile")  # working copy
+                        #bring the shapefile back in, and render it on the map
+                        shaper = QgsVectorLayer(shapepath, layername, "ogr")
+                        #shaper.dataProvider().addAttributes( [QgsField("datetime",QVariant.String), QgsField("audio",QVariant.String), QgsField("camera",QVariant.String), QgsField("flyto",QVariant.String), QgsField("iconstyle", QVariant.String), QgsField("labelstyle", QVariant.String), QgsField("model", QVariant.String), QgsField("lookat", QVariant.String) , QgsField("symbtour", QVariant.String), QgsField("altitude",QVariant.Double)])
+                        #shaper.updateFields()
 
-                #kmllayer2 = self.iface.addVectorLayer(shapepath, layername, "ogr")
-                #kmlinpath = self.gpsfile + '|layername=WayPoints'
-                #kmllayer = self.iface.addVectorLayer(self.gpsfile, 'testkml', "ogr")
-                self.dlg.ui.buttonDrawTrack.setEnabled(False)
-                self.dlg.ui.checkBox_headoftrack.setEnabled(False)
-                #self.iface.QgsMapLayerRegistry.instance().addMapLayer(layer)
-                self.iface.messageBar().pushMessage("Track Rendering Success", "The track: {0} has been drawn.".format(self.gpsfile.split("/")[-1]), level=QgsMessageBar.INFO, duration=5)
-                self.gpsfile = None
+                        QgsMapLayerRegistry.instance().addMapLayer(shaper)
 
-                if self.dlg.ui.checkBox_headoftrack.isChecked(): # draw the head of track
-                    #QMessageBox.information(self.iface.mainWindow(),"Head of track", 'head of track yo' )
-                    headof = {}
+
+                if ftype == 'kml':
+
+                    self.dlg.ui.lineEdit_ImportGPS.setText("")  # clear the text of the input
+
+                    # make a qgs layer out of the kml, in memory. Then save it as a shapefile. The name of the shapefile will be the same as the kml
+                    layername = self.gpsfile.split(".")[0].split('/')[-1]
+                    kmllayer = QgsVectorLayer(self.gpsfile, layername, "ogr")
+                    # save the kml layer as
+                    shapepath = self.gpsfile.split(".")[0] + '.shp'
+                    shapepath_line = self.gpsfile.split(".")[0] + '_line.shp'
+                    shapepath_dup = self.gpsfile.split(".")[0] + '_duplicate.shp'
+
+                    QgsVectorFileWriter.writeAsVectorFormat(kmllayer, shapepath, "utf-8", None, "ESRI Shapefile")  # working copy
+                    QgsVectorFileWriter.writeAsVectorFormat(kmllayer, shapepath_dup, "utf-8", None, "ESRI Shapefile")  # duplicate of original
+                    #bring the shapefile back in, and render it on the map
+                    shaper = QgsVectorLayer(shapepath, layername, "ogr")
+                    shaper.dataProvider().addAttributes( [QgsField("datetime",QVariant.String), QgsField("audio",QVariant.String), QgsField("camera",QVariant.String), QgsField("flyto",QVariant.String), QgsField("iconstyle", QVariant.String), QgsField("labelstyle", QVariant.String), QgsField("model", QVariant.String), QgsField("lookat", QVariant.String) , QgsField("symbtour", QVariant.String), QgsField("altitude",QVariant.Double)])
+                    shaper.updateFields()
+                    self.fields = self.field_indices(shaper)
+                    # calculate the datetime field
+                    idx = self.fields['datetime']  #feature.attributes()[idx]
+                    fid_dt = []
+                    model_altitude = []
                     cc = 0
                     for f in shaper.getFeatures():
-                        if cc == 0:
-                            geom = f.geometry()
-                            if geom.type() == QGis.Point:
-                                headof['coordinates'] = geom.asPoint()
-                        cc += 1
-                        break
+                        currentatt = f.attributes()[0]  # this should be self.fields['Name']
+                        pointdate = currentatt.split(" ")[0]  #2014/06/06
+                        pointtime = currentatt.split(" ")[1]
+                        # format for microseconds
+                        sec_pieces = pointtime.split(':')[2].split('.')
+                        if len(sec_pieces) == 1:
+                            microsec = 0
+                        elif len(sec_pieces) == 2:
+                            microsec = int(float('0.' + sec_pieces[1]) * 1000000)
 
-                    # create layer
-                    lname = layername + '_head'
-                    head = QgsVectorLayer("Point?crs=EPSG:4326", lname, "memory")
-                    pr = head.dataProvider()
-                    # add a feature
-                    fet = QgsFeature()
-                    fet.setGeometry( QgsGeometry.fromPoint(QgsPoint(headof['coordinates'][0],headof['coordinates'][1])) )
-                    pr.addFeatures([fet])
+
+                        current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]), microsec)
+                        fid_dt.append(current_dt.strftime("%Y/%m/%d %H:%M:%S %f"))
+                        try:
+                            model_altitude.append([f.id(), round(float(f.attributes()[self.fields['descriptio']].split(",")[4].split(': ')[1]),2) ])
+                        except:
+                            try:
+                                model_altitude.append([f.id(), round(float(f.attributes()[self.fields['Descriptio']].split(",")[4].split(': ')[1]),2)])
+                            except:
+                                model_altitude.append([f.id(),None])
+
+                        cc += 1
+
+                    shaper.startEditing()
+                    shaper.beginEditCommand('datetime')
+                    for i,v in enumerate(fid_dt):
+                        shaper.changeAttributeValue(i, idx, v)
+                    shaper.endEditCommand()
+                    shaper.commitChanges()
+
+                    shaper.startEditing()
+                    shaper.beginEditCommand('altitude')
+                    for i,v in enumerate(model_altitude):
+                        shaper.changeAttributeValue(v[0], self.fields['altitude'], v[1])
+                    shaper.endEditCommand()
+                    shaper.commitChanges()
+
+                    # make the line shapefile
+                    ptlist = []
+                    for f in shaper.getFeatures():
+                        ptlist.append(f.geometry().asPoint())
+                    linelayer = QgsVectorLayer("LineString?crs=EPSG:4326", layername, "memory")
+                    pr = linelayer.dataProvider()
+                    seg = QgsFeature()
+                    seg.setGeometry(QgsGeometry.fromPolyline(ptlist))
+                    pr.addFeatures([seg])
+                    QgsVectorFileWriter.writeAsVectorFormat(linelayer, shapepath_line, "utf-8", None, "ESRI Shapefile")
+                    shaper_line = QgsVectorLayer(shapepath_line, layername, "ogr")
 
                     # define the layer properties as a dict
-                    properties = {'size': '5.0', 'color': '0,255,0,255'}
-
+                    properties = {'size': '3.0'}
                     # initalise a new symbol layer with those properties
                     symbol_layer = QgsSimpleMarkerSymbolLayerV2.create(properties)
-
                     # replace the default symbol layer with the new symbol layer
-                    head.rendererV2().symbols()[0].changeSymbolLayer(0, symbol_layer)
-                    head.setLayerTransparency(30)
-                    head.commitChanges()
-                    QgsMapLayerRegistry.instance().addMapLayer(head)
-                    self.dlg.ui.checkBox_headoftrack.setCheckState(0)
+                    shaper.rendererV2().symbols()[0].changeSymbolLayer(0, symbol_layer)
+                    shaper.commitChanges()
 
-                QgsMapLayerRegistry.instance().addMapLayer(shaper_line)
-                QgsMapLayerRegistry.instance().addMapLayer(shaper)
-                self.canvas.setExtent(shaper.extent())
-                self.canvas.refresh()
+                    #kmllayer2 = self.iface.addVectorLayer(shapepath, layername, "ogr")
+                    #kmlinpath = self.gpsfile + '|layername=WayPoints'
+                    #kmllayer = self.iface.addVectorLayer(self.gpsfile, 'testkml', "ogr")
+                    self.dlg.ui.buttonDrawTrack.setEnabled(False)
+                    self.dlg.ui.checkBox_headoftrack.setEnabled(False)
+                    #self.iface.QgsMapLayerRegistry.instance().addMapLayer(layer)
+                    self.iface.messageBar().pushMessage("Track Rendering Success", "The track: {0} has been drawn.".format(self.gpsfile.split("/")[-1]), level=QgsMessageBar.INFO, duration=5)
+                    self.gpsfile = None
+
+                    if self.dlg.ui.checkBox_headoftrack.isChecked(): # draw the head of track
+                        headof = {}
+                        cc = 0
+                        for f in shaper.getFeatures():
+                            if cc == 0:
+                                geom = f.geometry()
+                                if geom.type() == QGis.Point:
+                                    headof['coordinates'] = geom.asPoint()
+                            cc += 1
+                            break
+
+                        # create layer
+                        lname = layername + '_head'
+                        head = QgsVectorLayer("Point?crs=EPSG:4326", lname, "memory")
+                        pr = head.dataProvider()
+                        # add a feature
+                        fet = QgsFeature()
+                        fet.setGeometry( QgsGeometry.fromPoint(QgsPoint(headof['coordinates'][0],headof['coordinates'][1])) )
+                        pr.addFeatures([fet])
+
+                        # define the layer properties as a dict
+                        properties = {'size': '5.0', 'color': '0,255,0,255'}
+
+                        # initalise a new symbol layer with those properties
+                        symbol_layer = QgsSimpleMarkerSymbolLayerV2.create(properties)
+
+                        # replace the default symbol layer with the new symbol layer
+                        head.rendererV2().symbols()[0].changeSymbolLayer(0, symbol_layer)
+                        head.setLayerTransparency(30)
+                        head.commitChanges()
+                        QgsMapLayerRegistry.instance().addMapLayer(head)
+                        self.dlg.ui.checkBox_headoftrack.setCheckState(0)
+
+                    QgsMapLayerRegistry.instance().addMapLayer(shaper_line)
+                    QgsMapLayerRegistry.instance().addMapLayer(shaper)
+                    self.canvas.setExtent(shaper.extent())
+                    self.canvas.refresh()
             else:
                 self.iface.messageBar().pushMessage("No Input Track", "Please import a .gpx file or provide a file path (above)", level=QgsMessageBar.WARNING, duration=5)
         except:
@@ -2881,7 +2999,7 @@ class MilkMachine:
                             QgsMapLayerRegistry.instance().addMapLayer(vl)
                         self.iface.setActiveLayer(self.aLayer)
 
-                    self.logger.info('matchdict end {0}'.format(matchdict_end))
+                    # self.logger.info('matchdict end {0}'.format(matchdict_end))
                     if matchdict_end:
                         if self.dlg.ui.checkBox_sync_point.isChecked():
                             # create layer
@@ -3011,12 +3129,43 @@ class MilkMachine:
 
     def exportToFile(self):
 
+
         try:
+            self.fields = self.field_indices(self.ActiveLayer)
             self.utmzone = 26918 #UTM 18N
             cc = 0
             kml = simplekml.Kml()
 
-            self.fields = self.field_indices(self.ActiveLayer)
+            # run through the datetime field and get all of the durations. these will be used for FlyTo durations
+            allfids = self.ActiveLayer.allFeatureIds()
+            endRow = len(allfids) - 1
+            ttcount = 0
+            time1 = []
+            for fg in self.ActiveLayer.getFeatures(): #  QgsFeatureIterator #[u'2014/06/06 10:38:48', u'Time:10:38:48, Latitude: 39.965949, Longitude: -75.172239, Speed: 0.102851, Altitude: -3.756733']
+                currentatt = fg.attributes()
+                # Start time. Will be used for TimeSpan tags
+                pointdate = currentatt[self.fields['datetime']].split(" ")[0]  #2014/06/06
+                pointtime = currentatt[self.fields['datetime']].split(" ")[1] #10:38:48
+                pointtime_ms = currentatt[self.fields['datetime']].split(" ")[2]  # microsecond range(1000000)
+                current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]), int(pointtime_ms))
+                # time1.append(current_dt.second + round(current_dt.microsecond/float(1000000),6))
+                time1.append(current_dt)
+            # self.logger.info('time1: %s' % time1)
+            # iterate time1 and calculate the durations
+            Durations = []
+            for iii, vvv in enumerate(time1):
+                tdobj = time1[iii+1] - vvv
+                durstring = str(tdobj.seconds) + '.' + str(tdobj.microseconds)
+                Durations.append(durstring)
+                if (iii+1) == endRow:
+                    Durations.append(durstring)
+                    break
+            # self.logger.info('Durations: %s' % Durations)
+            # self.logger.info('Len Durations: %s' % len(Durations))
+
+
+
+
             #################################
             ## Tour and Camera
 
@@ -3054,8 +3203,9 @@ class MilkMachine:
                         # Start time. Will be used for TimeSpan tags
                         pointdate = currentatt[self.fields['datetime']].split(" ")[0]  #2014/06/06
                         pointtime = currentatt[self.fields['datetime']].split(" ")[1] #10:38:48
-                        current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]) )
-                        self.CamStartTime = current_dt.strftime('%Y-%m-%dT%XZ')
+                        pointtime_ms = currentatt[self.fields['datetime']].split(" ")[2]  # microsecond range(1000000)
+                        current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]), int(pointtime_ms))
+                        self.CamStartTime = current_dt.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
 
                         # Attach a gx:SoundCue to the playlist and delay playing by 2 second (sound clip is about 4 seconds long)
                         if self.dlg.ui.lineEdit_export_audio.text():
@@ -3073,9 +3223,11 @@ class MilkMachine:
                     # Start time. Will be used for TimeSpan tags
                     pointdate = currentatt[self.fields['datetime']].split(" ")[0]  #2014/06/06
                     pointtime = currentatt[self.fields['datetime']].split(" ")[1] #10:38:48
-                    current_dt_end = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]) ) #+ datetime.timedelta(seconds=5)
-                    camendtime = current_dt_end.strftime('%Y-%m-%dT%XZ')
+                    pointtime_ms = currentatt[self.fields['datetime']].split(" ")[2]  # microsecond range(1000000)
+                    current_dt_end = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]), int(pointtime_ms)) #+ datetime.timedelta(seconds=5)
+                    camendtime = current_dt_end.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
 
+                    ## Cirle Around
                     if lookatdict['startheading'] and lookatdict['rotations']:  # lookatdict['duration']  this is for a circle around
                         if lookatdict['longitude'] and lookatdict['latitude'] and lookatdict['altitude'] and lookatdict['tilt'] and lookatdict['range']:
                             circle_count = int(float(lookatdict['rotations']))
@@ -3136,7 +3288,7 @@ class MilkMachine:
                                     if lookatdict['direction'] == 'counterclockwise':
                                         heading = (heading - 10) % 360
 
-
+                    ## LookAt Custom
                     else:  # non circle around, just custom
                         if lookatdict['longitude'] and lookatdict['latitude'] and lookatdict['altitude'] and lookatdict['heading'] and lookatdict['tilt'] and lookatdict['range']:
                             if flytodict['duration']:
@@ -3212,10 +3364,11 @@ class MilkMachine:
                         # Start time. Will be used for TimeSpan tags
                         pointdate = currentatt[self.fields['datetime']].split(" ")[0]  #2014/06/06
                         pointtime = currentatt[self.fields['datetime']].split(" ")[1] #10:38:48
+                        pointtime_ms = currentatt[self.fields['datetime']].split(" ")[2]  # microsecond range(1000000)
                         current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]) )
-                        current_dt_end = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]) ) #+ datetime.timedelta(seconds=5)
-                        self.CamStartTime = current_dt.strftime('%Y-%m-%dT%XZ')
-                        camendtime = current_dt_end.strftime('%Y-%m-%dT%XZ')
+                        current_dt_end = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]), int(pointtime_ms)) #+ datetime.timedelta(seconds=5)
+                        self.CamStartTime = current_dt.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+                        camendtime = current_dt_end.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
 
 
                         # Attach a gx:SoundCue to the playlist and delay playing by 2 second (sound clip is about 4 seconds long)
@@ -3227,6 +3380,8 @@ class MilkMachine:
 
                         if flytodict['duration']:
                             flyto = playlist.newgxflyto(gxduration=float(flytodict['duration']))
+                        elif flytodict['duration'] is None:
+                            flyto = playlist.newgxflyto(gxduration=float(Durations[cc]))
                         else:
                             flyto = playlist.newgxflyto()
                         if flytodict['flyToMode']:
@@ -3376,11 +3531,14 @@ class MilkMachine:
                         # Start time. Will be used for TimeSpan tags
                         pointdate = currentatt[self.fields['datetime']].split(" ")[0]  #2014/06/06
                         pointtime = currentatt[self.fields['datetime']].split(" ")[1] #10:38:48
-                        current_dt_end = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))# + datetime.timedelta(seconds=5)
-                        camendtime = current_dt_end.strftime('%Y-%m-%dT%XZ')
+                        pointtime_ms = currentatt[self.fields['datetime']].split(" ")[2]  # microsecond range(1000000)
+                        current_dt_end = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]), int(pointtime_ms))# + datetime.timedelta(seconds=5)
+                        camendtime = current_dt_end.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
 
                         if flytodict['duration']:
                             flyto = playlist.newgxflyto(gxduration=float(flytodict['duration']))
+                        elif flytodict['duration'] is None:
+                            flyto = playlist.newgxflyto(gxduration=float(Durations[cc]))
                         else:
                             flyto = playlist.newgxflyto()
                         if flytodict['flyToMode']:
@@ -3514,10 +3672,11 @@ class MilkMachine:
 
                     pointdate = currentatt[self.fields['datetime']].split(" ")[0]  #2014/06/06
                     pointtime = currentatt[self.fields['datetime']].split(" ")[1] #10:38:48
-                    current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
+                    pointtime_ms = currentatt[self.fields['datetime']].split(" ")[2]  # microsecond range(1000000)
+                    current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]), int(pointtime_ms))
 
                     pnt = folder.newpoint(name=str(cc), coords=[(coords[0], coords[1])], description=str(currentatt[1]))
-                    pnt.timestamp.when = current_dt.strftime('%Y-%m-%dT%XZ')
+                    pnt.timestamp.when = current_dt.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
 
                     def transtokmlhex(trans):
                         dec = int(float(icondict['transparency']) * 2.55)
@@ -3575,7 +3734,8 @@ class MilkMachine:
 
                     pointdate = currentatt[self.fields['datetime']].split(" ")[0]  #2014/06/06
                     pointtime = currentatt[self.fields['datetime']].split(" ")[1] #10:38:48
-                    current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]))
+                    pointtime_ms = currentatt[self.fields['datetime']].split(" ")[2]  # microsecond range(1000000)
+                    current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]), int(pointtime_ms))
 
                     mdl.name = current_dt.strftime('%X %m/%d/%Y')
                     mdl.description = current_dt.strftime('%X %m/%d/%Y')
@@ -3623,7 +3783,7 @@ class MilkMachine:
                                 loc.altitude = modeldict['altitude']
                             mdl.altitudemode = 'relativeToGround'
                         mdl.location = loc
-                        mdl.timestamp = simplekml.TimeStamp(when=current_dt.strftime('%Y-%m-%dT%XZ'))
+                        mdl.timestamp = simplekml.TimeStamp(when=current_dt.strftime('%Y-%m-%dT%H:%M:%S.%fZ'))
 
 
 
