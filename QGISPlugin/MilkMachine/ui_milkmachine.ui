@@ -110,7 +110,7 @@
       </sizepolicy>
      </property>
      <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Browse to .gpx file. This will convert the .gpx to a .kml, then import the kml. Additionally, a GeoJSON file will also be created in the same directory.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Browse to a .csv file that is formatted for Milk Machine.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="text">
       <string>Import GPS</string>
@@ -184,7 +184,7 @@
       </sizepolicy>
      </property>
      <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the imported GPS track on the map. This will draw the .kml file that was imported (above) as a &amp;quot;shapefile&amp;quot; with the same name as the .kml. Two shapefiles will be produced from the original .kml; 1) one with the same name as the .kml which is rendered on the map and added to the table of contents, 2) another with &amp;quot;_duplicate&amp;quot; appended to the name, just to have a backup copy of the original.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the imported GPS track on the map. This will draw the file that was imported (above) as a &amp;quot;shapefile&amp;quot; with the same name as the imported file. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="text">
       <string>Draw Track</string>
@@ -510,7 +510,7 @@ Sync Points</string>
      <property name="geometry">
       <rect>
        <x>110</x>
-       <y>100</y>
+       <y>70</y>
        <width>194</width>
        <height>22</height>
       </rect>
@@ -591,9 +591,9 @@ Sync Points</string>
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>100</y>
+       <y>70</y>
        <width>81</width>
-       <height>20</height>
+       <height>22</height>
       </rect>
      </property>
      <property name="text">
@@ -607,7 +607,7 @@ Sync Points</string>
      <property name="geometry">
       <rect>
        <x>110</x>
-       <y>130</y>
+       <y>100</y>
        <width>194</width>
        <height>22</height>
       </rect>
@@ -640,9 +640,9 @@ Sync Points</string>
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>130</y>
+       <y>100</y>
        <width>81</width>
-       <height>20</height>
+       <height>22</height>
       </rect>
      </property>
      <property name="text">
@@ -656,7 +656,7 @@ Sync Points</string>
      <property name="geometry">
       <rect>
        <x>110</x>
-       <y>210</y>
+       <y>150</y>
        <width>61</width>
        <height>23</height>
       </rect>
@@ -670,38 +670,6 @@ Sync Points</string>
      <property name="icon">
       <iconset resource="resources.qrc">
        <normaloff>:/plugins/milkmachine/triangle.png</normaloff>:/plugins/milkmachine/triangle.png</iconset>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="checkBox_time_before">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>70</y>
-       <width>111</width>
-       <height>17</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Adjust Before?</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="checkBox_time_after">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>164</y>
-       <width>111</width>
-       <height>17</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Adjust After?</string>
      </property>
     </widget>
    </widget>
@@ -3970,10 +3938,8 @@ Sync Points</string>
   <tabstop>checkBox_import_indicator</tabstop>
   <tabstop>lineEdit_time_active</tabstop>
   <tabstop>checkBox_time_edit</tabstop>
-  <tabstop>checkBox_time_before</tabstop>
   <tabstop>dateTimeEdit_start</tabstop>
   <tabstop>dateTimeEdit_end</tabstop>
-  <tabstop>checkBox_time_after</tabstop>
   <tabstop>pushButton_time_apply_startend</tabstop>
   <tabstop>lineEdit_filtering_active</tabstop>
   <tabstop>checkBox_filtering_edit</tabstop>

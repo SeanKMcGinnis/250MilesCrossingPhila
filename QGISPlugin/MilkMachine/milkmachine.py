@@ -758,10 +758,10 @@ class MilkMachine:
                         if len(self.selectList) >= 1:
 
                             # inputs
-                            self.dlg.ui.checkBox_time_before.setEnabled(True)
+                            # self.dlg.ui.checkBox_time_before.setEnabled(True)
                             self.dlg.ui.dateTimeEdit_start.setEnabled(True)
                             self.dlg.ui.dateTimeEdit_end.setEnabled(True)
-                            self.dlg.ui.checkBox_time_after.setEnabled(True)
+                            # self.dlg.ui.checkBox_time_after.setEnabled(True)
 
                             #populate
                             features = self.ActiveLayer.selectedFeatures()
@@ -796,10 +796,10 @@ class MilkMachine:
             else:  # checkbox is false, clear shit out
 
                 # inputs
-                self.dlg.ui.checkBox_time_before.setEnabled(False)
+                # self.dlg.ui.checkBox_time_before.setEnabled(False)
                 self.dlg.ui.dateTimeEdit_start.setEnabled(False)
                 self.dlg.ui.dateTimeEdit_end.setEnabled(False)
-                self.dlg.ui.checkBox_time_after.setEnabled(False)
+                # self.dlg.ui.checkBox_time_after.setEnabled(False)
 
                 # Apply Buttons
                 self.dlg.ui.pushButton_time_apply_startend.setEnabled(False)
@@ -923,72 +923,56 @@ class MilkMachine:
 
 
             # If the user wants to adjust the time beforehand by the chosen interval...
-            if self.dlg.ui.checkBox_time_before.isChecked():
-                if layer_start_dt < sel_start_dt:
-
-                    # get all of the FListDiff fids that are after sel_end_dt
-                    Fbefore = []
-                    for rec in FListDiff:
-                        if rec[0] < selectList[0][0]:
-                            Fbefore.append(rec)
-
-                    Fbefore.reverse()
-                    newtimelist = [dt_start]
-                    for i,v in enumerate(Fbefore):
-                        ct = newtimelist[i]
-                        newtimelist.append(ct - datetime.timedelta(microseconds = (mill_interval * v[2])))
-                    newtimelist.reverse()
-                    newtimelist.pop()
-                    newtimelist.reverse()
-
-                    self.ActiveLayer.startEditing()
-                    self.ActiveLayer.beginEditCommand('datetime edit before')
-                    for i,v in enumerate(Fbefore):
-                        valstr = newtimelist[i].strftime("%Y/%m/%d %H:%M:%S %f")
-                        self.ActiveLayer.changeAttributeValue(v[0], self.fields['datetime'], valstr)
-                    self.ActiveLayer.endEditCommand()
-
-
-
-                    # newtimelist = [dt_start]
-                    # for i in range(len(selectfids)):
-                    #     ct = newtimelist[i]
-                    #     newtimelist.append(ct - datetime.timedelta(microseconds = mill_interval))
-                    #
-                    # self.logger.info('newtimelist %s' % newtimelist)
-                    # newtimelist.reverse() # reverse the list
-                    # self.ActiveLayer.startEditing()
-                    # self.ActiveLayer.beginEditCommand('datetime edit before')
-                    # for i,v in enumerate(newtimelist):
-                    #     valstr = v.strftime("%Y/%m/%d %H:%M:%S %f")
-                    #     self.ActiveLayer.changeAttributeValue(i, self.fields['datetime'], valstr)
-                    # self.ActiveLayer.endEditCommand()
-
-            # If the user wants to adjust the time AFTER the chosen interval...
-            if self.dlg.ui.checkBox_time_after.isChecked():
-                if layer_end_dt > sel_end_dt:
-
-                    # get all of the FListDiff fids that are after sel_end_dt
-                    Fafter = []
-                    for rec in FListDiff:
-                        if rec[0] > selectList[-1][0]:
-                            Fafter.append(rec)
-
-                    newtimelist = [dt_end]
-                    for i,v in enumerate(Fafter):
-                        ct = newtimelist[i]
-                        newtimelist.append(ct + datetime.timedelta(microseconds = (mill_interval * v[2])))
-                    newtimelist.reverse()
-                    newtimelist.pop() # remove last item
-                    newtimelist.reverse()
-
-                    self.ActiveLayer.startEditing()
-                    self.ActiveLayer.beginEditCommand('datetime edit after')
-                    for i,v in enumerate(Fafter):
-                        valstr = newtimelist[i].strftime("%Y/%m/%d %H:%M:%S %f")
-                        self.ActiveLayer.changeAttributeValue(v[0], self.fields['datetime'], valstr)
-                    self.ActiveLayer.endEditCommand()
-
+            # if self.dlg.ui.checkBox_time_before.isChecked():
+            #     if layer_start_dt < sel_start_dt:
+            #
+            #         # get all of the FListDiff fids that are after sel_end_dt
+            #         Fbefore = []
+            #         for rec in FListDiff:
+            #             if rec[0] < selectList[0][0]:
+            #                 Fbefore.append(rec)
+            #
+            #         Fbefore.reverse()
+            #         newtimelist = [dt_start]
+            #         for i,v in enumerate(Fbefore):
+            #             ct = newtimelist[i]
+            #             newtimelist.append(ct - datetime.timedelta(microseconds = (mill_interval * v[2])))
+            #         newtimelist.reverse()
+            #         newtimelist.pop()
+            #         newtimelist.reverse()
+            #
+            #         self.ActiveLayer.startEditing()
+            #         self.ActiveLayer.beginEditCommand('datetime edit before')
+            #         for i,v in enumerate(Fbefore):
+            #             valstr = newtimelist[i].strftime("%Y/%m/%d %H:%M:%S %f")
+            #             self.ActiveLayer.changeAttributeValue(v[0], self.fields['datetime'], valstr)
+            #         self.ActiveLayer.endEditCommand()
+            #
+            # # If the user wants to adjust the time AFTER the chosen interval...
+            # if self.dlg.ui.checkBox_time_after.isChecked():
+            #     if layer_end_dt > sel_end_dt:
+            #
+            #         # get all of the FListDiff fids that are after sel_end_dt
+            #         Fafter = []
+            #         for rec in FListDiff:
+            #             if rec[0] > selectList[-1][0]:
+            #                 Fafter.append(rec)
+            #
+            #         newtimelist = [dt_end]
+            #         for i,v in enumerate(Fafter):
+            #             ct = newtimelist[i]
+            #             newtimelist.append(ct + datetime.timedelta(microseconds = (mill_interval * v[2])))
+            #         newtimelist.reverse()
+            #         newtimelist.pop() # remove last item
+            #         newtimelist.reverse()
+            #
+            #         self.ActiveLayer.startEditing()
+            #         self.ActiveLayer.beginEditCommand('datetime edit after')
+            #         for i,v in enumerate(Fafter):
+            #             valstr = newtimelist[i].strftime("%Y/%m/%d %H:%M:%S %f")
+            #             self.ActiveLayer.changeAttributeValue(v[0], self.fields['datetime'], valstr)
+            #         self.ActiveLayer.endEditCommand()
+            #
             self.iface.messageBar().pushMessage("Success", "Time modification applied.", level=QgsMessageBar.INFO, duration=5)
 
 
@@ -1760,12 +1744,17 @@ class MilkMachine:
         try:
 
             features = self.ActiveLayer.selectedFeatures()
+            forward_int = int(self.dlg.ui.lineEdit__visualization_follow_smoother.text())
             selcount = 0
             for f in features:
                 selcount += 1
 
+            if selcount < forward_int:
+                self.logger.error('smoother error, user got message box')
+                QMessageBox.critical(self.iface.mainWindow(),"Smoother Error", "Smoother value cannot be larger than the number of selected points.")
+
             # there has to be more than 1
-            if selcount > 1:
+            if selcount >= 1 and selcount >= forward_int:
 
                 self.fields = self.field_indices(self.ActiveLayer)
                 # make a dictionary of all of the camera parameters
@@ -1907,7 +1896,7 @@ class MilkMachine:
                 self.iface.messageBar().pushMessage("Success", "Follow Behind applied, any conflicting Lookat removed", level=QgsMessageBar.INFO, duration=5)
 
             else:
-                self.iface.messageBar().pushMessage("Error", "Please select more than 1 point.", level=QgsMessageBar.CRITICAL, duration=5)
+                self.iface.messageBar().pushMessage("Error", "Please select more than 2 points, and make sure that the smoother value is less than the number of points selected", level=QgsMessageBar.CRITICAL, duration=10)
 
         except:
             global NOW, pointid, ClockDateTime
@@ -2323,7 +2312,6 @@ class MilkMachine:
                                         # hang an error
                                         self.logger.error('CSV column names import error. Failed on: %s' % f)
                                         QMessageBox.critical( self.iface.mainWindow(),"Column Name Error", "Missing column: %s\n\nPlease reformat csv file. Column headers should include: 'date', 'time', 'x', 'y', 'altitude'" %(f))
-
                             else:
                                 pass
                             i += 1
@@ -2352,8 +2340,41 @@ class MilkMachine:
                         QgsVectorFileWriter.writeAsVectorFormat(Qlayer, shapepath, "utf-8", None, "ESRI Shapefile")  # working copy
                         #bring the shapefile back in, and render it on the map
                         shaper = QgsVectorLayer(shapepath, layername, "ogr")
-                        #shaper.dataProvider().addAttributes( [QgsField("datetime",QVariant.String), QgsField("audio",QVariant.String), QgsField("camera",QVariant.String), QgsField("flyto",QVariant.String), QgsField("iconstyle", QVariant.String), QgsField("labelstyle", QVariant.String), QgsField("model", QVariant.String), QgsField("lookat", QVariant.String) , QgsField("symbtour", QVariant.String), QgsField("altitude",QVariant.Double)])
-                        #shaper.updateFields()
+                        shaper.dataProvider().addAttributes( [QgsField("datetime",QVariant.String), QgsField("camera",QVariant.String), QgsField("flyto",QVariant.String), QgsField("iconstyle", QVariant.String), QgsField("labelstyle", QVariant.String), QgsField("model", QVariant.String), QgsField("lookat", QVariant.String) , QgsField("symbtour", QVariant.String)])
+                        shaper.updateFields()
+
+                        self.fields = self.field_indices(shaper)
+                        # calculate the datetime field
+                        # idx = self.fields['datetime']  #feature.attributes()[idx]
+                        fid_dt = []
+                        # model_altitude = []
+                        try:
+                            for f in shaper.getFeatures():
+                                # currentatt = f.attributes()[self.fields['datetime']]  # this should be self.fields['Name']
+                                pointdate = f.attributes()[self.fields['date']]  #2014/06/06
+                                pointtime = f.attributes()[self.fields['time']]
+                                # format for microseconds
+                                sec_pieces = pointtime.split(':')[2].split('.')
+                                if len(sec_pieces) == 1:
+                                    microsec = 0
+                                elif len(sec_pieces) == 2:
+                                    microsec = int(float('0.' + sec_pieces[1]) * 1000000)
+
+                                current_dt = datetime.datetime(int(pointdate.split('/')[0]), int(pointdate.split('/')[1]), int(pointdate.split('/')[2]), int(pointtime.split(':')[0]), int(pointtime.split(':')[1]), int(pointtime.split(':')[2]), microsec)
+                                fid_dt.append([f.id(), current_dt.strftime("%Y/%m/%d %H:%M:%S %f")])
+
+                            shaper.startEditing()
+                            shaper.beginEditCommand('datetime')
+                            for i,v in enumerate(fid_dt):
+                                shaper.changeAttributeValue(v[0],self.fields['datetime'], v[1])
+                            shaper.endEditCommand()
+                            shaper.commitChanges()
+
+                        except:
+                            self.logger.error('Error writing time to datetime column, user presented with messagebox')
+                            self.logger.exception(traceback.format_exc())
+                            QMessageBox.critical( self.iface.mainWindow(),"Date & Time Import Error", "An error occured while converting the 'date' and 'time' fields into a Python datetime object. Please make sure that your date format is YYYY/MM/DD, and the time format is HH:MM:SS. If your seconds are fractional, then please express this as SS.xxxxxx")
+
 
                         QgsMapLayerRegistry.instance().addMapLayer(shaper)
 
@@ -3155,12 +3176,12 @@ class MilkMachine:
             Durations = []
             for iii, vvv in enumerate(time1):
                 tdobj = time1[iii+1] - vvv
-                durstring = str(tdobj.seconds) + '.' + str(tdobj.microseconds)
+                durstring = str(tdobj.seconds) + '.' + str(tdobj.microseconds/float(1000000)).split('.')[1]
                 Durations.append(durstring)
                 if (iii+1) == endRow:
                     Durations.append(durstring)
                     break
-            # self.logger.info('Durations: %s' % Durations)
+            self.logger.info('Durations: %s' % Durations)
             # self.logger.info('Len Durations: %s' % len(Durations))
 
 
@@ -4244,13 +4265,13 @@ class MilkMachine:
         # Time
         # Clear out
         self.dlg.ui.checkBox_time_edit.setChecked(False)
-        self.dlg.ui.checkBox_time_before.setChecked(False)
-        self.dlg.ui.checkBox_time_after.setChecked(False)
+        # self.dlg.ui.checkBox_time_before.setChecked(False)
+        # self.dlg.ui.checkBox_time_after.setChecked(False)
         # Disable
-        self.dlg.ui.checkBox_time_before.setEnabled(False)
-        self.dlg.ui.dateTimeEdit_start.setEnabled(False)
+        # self.dlg.ui.checkBox_time_before.setEnabled(False)
+        # self.dlg.ui.dateTimeEdit_start.setEnabled(False)
         self.dlg.ui.dateTimeEdit_end.setEnabled(False)
-        self.dlg.ui.checkBox_time_after.setEnabled(False)
+        # self.dlg.ui.checkBox_time_after.setEnabled(False)
 
         # Apply Buttons
         self.dlg.ui.pushButton_time_apply_startend.setEnabled(False)

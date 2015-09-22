@@ -162,3 +162,8 @@ Enhancement: Time data do not need to be recorded at 1 second intervals. MM will
 Enhancement: Check box added to Tour tab to enable user to choose setting a FlyTo duration, or use the difference between time stamps. 
 Enhancement: Time data are now stored down to microseconds. This increases accuracy and enables sub-second point measurements. 
 Enhancement: In progress. Started to work on a .csv import mechanism. 
+--------------------------------------------
+Commit #61
+Enhancement: Still working on .csv import mechanism and error handling
+Bug Fix: Time addition bug when creating kml. Times were being counted as milliseconds instead of microseconds. Still unclear exaclty how Google Earth handles fractional seconds. It appear that some rounding takes place and the time counter in GE is not in perfect sync with real time.
+Enhancement: Time adjustment before/after was removed. It is easier and more straightforward to have the user make this adjustment. If MM had to handle it, the UI components would have to enable a time gap between the end of the time adjustment period and the before/after start times. Easier for the user to make this change by selecting the points and changing it.
